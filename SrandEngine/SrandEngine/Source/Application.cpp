@@ -3,7 +3,6 @@
 
 int main(void)
 {
-    std::cout << "Collision Feature" << std::endl;
 
     GLFWwindow* window;
 
