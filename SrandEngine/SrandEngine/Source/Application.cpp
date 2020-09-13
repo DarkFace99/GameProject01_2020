@@ -1,7 +1,10 @@
+#include <iostream>
 #include <GLFW/glfw3.h>
 
 int main(void)
 {
+    std::cout << "Collision Feature" << std::endl;
+
     GLFWwindow* window;
 
     /* Initialize the library */
