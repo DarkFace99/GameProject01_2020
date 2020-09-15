@@ -147,9 +147,11 @@
   <ItemGroup>
     <ClCompile Include="Source\Application.cpp" />
     <ClCompile Include="Source\Shader.cpp" />
+    <ClCompile Include="Source\System.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Shader.h" />
+    <ClInclude Include="Source\System.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

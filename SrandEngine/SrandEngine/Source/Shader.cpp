@@ -30,7 +30,7 @@ std::string fragmentShader =
 "in vec3 Color;\n"
 "in vec2 TexCoord;\n"
 "\n"
-"uniform smapler2D tex1;\n"
+"uniform sampler2D tex1;\n"
 "uniform float alpha;\n"
 "uniform int mode;\n"
 "\n"
