@@ -1,5 +1,7 @@
 #pragma once
 
+#include <GL/glew.h>
+#include <GLM.hpp>
 #include <vector>
 
 /* Typdef for Texture */
@@ -7,13 +9,35 @@ typedef GLuint Texture;
 
 /* Vertex class declaration */
 class Vertex {
-	float x, y, z; // position
-	float r, g, b; // color
-	float u, v;    // corner
+protected:
+	glm::vec3 position;				// x, y, z
+	glm::vec3 color;				// r, g, b
+	glm::vec2 textureCoordinate;	// u, v
+
+public:
+	Vertex();
+
+	void setPositionX(float x);
+	void setPositionY(float y);
+	void setPositionZ(float z);
+	void SetPosition(glm::vec3 position);
+	glm::vec3 GetPosition();
+
+	void SetColorR(float r);
+	void SetColorg(float g);
+	void SetColorb(float b);
+	void SetColor(glm::vec3 color);
+	glm::vec3 GetColor();
+
+	void SetTextureCoordinateU(float u);
+	void SetTextureCoordinateV(float v);
+	void SetTextureCoordinate(glm::vec2 textureCoordinate);
+	glm::vec2 GetTextureCoordinate();
 };
 
 /* Mesh class declaration */
 class Mesh {
+public:
 	GLuint vao; // vertex array object
 	GLuint vertexBuffer;
 	glm::mat4 modelMatrix;
@@ -32,7 +56,7 @@ public:
 	Texture LoadTexture();
 	void UnloadTexture(Texture texture);
 
-	Mesh LoadMesh(std::vector<Vertex>);
+	Mesh LoadMesh(std::vector<Vertex> in_vertex);
 	void DrawMesh(Mesh mesh);
 	void UnloadMesh(Mesh mesh);
 
