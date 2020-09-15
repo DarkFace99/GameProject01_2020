@@ -145,7 +145,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Renderable.cpp" />
     <ClCompile Include="Source\Application.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Renderable.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
