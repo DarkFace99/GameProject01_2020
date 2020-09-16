@@ -9,9 +9,6 @@
 /*Initialize Window*/
 GLFWwindow* window;
 
-#define SCREEN_WIDTH    1920
-#define SCREEN_HEIGTH   1080
-
 double frameTime = 0.0;
 
 int main(void)
