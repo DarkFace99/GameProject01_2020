@@ -38,7 +38,7 @@ protected:
 
 public:
 	Vertex();
-
+	Vertex( glm::vec3 position, glm::vec3 color, glm::vec2 textureCoordinate);
 	void setPositionX(float x);
 	void setPositionY(float y);
 	void setPositionZ(float z);

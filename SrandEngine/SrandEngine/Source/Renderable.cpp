@@ -1,6 +1,45 @@
 #include "Renderable.h"
 
-/* Vertex function definition */
+/*----------------------------------------------------Set Vertex Function----------------------------------------------------------------*/
+
+/* Default constructor */
+Vertex::Vertex()
+{
+	Vertex::position = glm::vec3(0, 0, 0);
+	Vertex::color = glm::vec3(0, 0, 0);
+	Vertex::textureCoordinate = glm::vec2(0, 0);
+}
+
+/* Set constructor */
+Vertex::Vertex(glm::vec3 position, glm::vec3 color, glm::vec2 textureCoordinate) 
+{
+	Vertex::position = position;
+	Vertex::color = color;
+	Vertex::textureCoordinate = textureCoordinate;
+}
+
+/* Get & Set Position function */
+void Vertex::setPositionX(float x) { position.x = x; }
+void Vertex::setPositionY(float y) { position.y = y; }
+void Vertex::setPositionZ(float z) { position.z = z; }
+void Vertex::SetPosition(glm::vec3 position) { Vertex::position = position; }
+glm::vec3 Vertex::GetPosition() { return position; }
+
+/* Get & Set Color function */
+void Vertex::SetColorR(float r) { color.x = r; }
+void Vertex::SetColorg(float g) { color.y = g; }
+void Vertex::SetColorb(float b) { color.z = b; }
+void Vertex::SetColor(glm::vec3 color) { Vertex::color = color; }
+glm::vec3 Vertex::GetColor() { return color; }
+
+/* Get & Set TextureCoordinate function */
+void Vertex::SetTextureCoordinateU(float u) { Vertex::textureCoordinate.x = u; }
+void Vertex::SetTextureCoordinateV(float v) { Vertex::textureCoordinate.y = v; }
+void Vertex::SetTextureCoordinate(glm::vec2 textureCoordinate) { Vertex::textureCoordinate = textureCoordinate; }
+glm::vec2 Vertex::GetTextureCoordinate() { return textureCoordinate; }
+/*----------------------------------------------------Set Vertex Function----------------------------------------------------------------*/
+
+
 
 
 /*----------------------------------------------------Set Renderer Function----------------------------------------------------------------*/
