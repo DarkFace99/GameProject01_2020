@@ -46,8 +46,8 @@ public:
 	glm::vec3 GetPosition();
 
 	void SetColorR(float r);
-	void SetColorg(float g);
-	void SetColorb(float b);
+	void SetColorG(float g);
+	void SetColorB(float b);
 	void SetColor(glm::vec3 color);
 	glm::vec3 GetColor();
 

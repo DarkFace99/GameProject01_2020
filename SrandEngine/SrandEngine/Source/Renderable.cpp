@@ -27,8 +27,8 @@ glm::vec3 Vertex::GetPosition() { return position; }
 
 /* Get & Set Color function */
 void Vertex::SetColorR(float r) { color.x = r; }
-void Vertex::SetColorg(float g) { color.y = g; }
-void Vertex::SetColorb(float b) { color.z = b; }
+void Vertex::SetColorG(float g) { color.y = g; }
+void Vertex::SetColorB(float b) { color.z = b; }
 void Vertex::SetColor(glm::vec3 color) { Vertex::color = color; }
 glm::vec3 Vertex::GetColor() { return color; }
 
