@@ -147,6 +147,12 @@
   <ItemGroup>
     <ClCompile Include="Renderable.cpp" />
     <ClCompile Include="Source\Application.cpp" />
+    <ClCompile Include="Source\Shader.cpp" />
+    <ClCompile Include="Source\System.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Source\Shader.h" />
+    <ClInclude Include="Source\System.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Renderable.h" />

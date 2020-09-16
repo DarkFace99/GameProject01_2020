@@ -1,2 +1,7 @@
+<<<<<<< HEAD
 ﻿LINK : warning LNK4098: defaultlib 'MSVCRT' conflicts with use of other libs; use /NODEFAULTLIB:library
   SrandEngine.vcxproj -> D:\year2_1\DT230\GameProject\GameProject01_2020\SrandEngine\Debug\SrandEngine.exe
+=======
+﻿  Shader.cpp
+  SrandEngine.vcxproj -> D:\Projects\Project\GameProject01_2020\SrandEngine\Debug\SrandEngine.exe
+>>>>>>> System
