@@ -7,7 +7,7 @@ Vertex::Vertex()
 {
 	Vertex::position = glm::vec3(0, 0, 0);
 	Vertex::color = glm::vec3(0, 0, 0);
-	Vertex::textureCoordinate = glm::vec2(0, 0);
+	Vertex::texCoords = glm::vec2(0, 0);
 }
 
 /* Set constructor */
@@ -15,7 +15,7 @@ Vertex::Vertex(glm::vec3 position, glm::vec3 color, glm::vec2 textureCoordinate)
 {
 	Vertex::position = position;
 	Vertex::color = color;
-	Vertex::textureCoordinate = textureCoordinate;
+	Vertex::texCoords = textureCoordinate;
 }
 
 /* Get & Set Position function */
@@ -33,10 +33,10 @@ void Vertex::SetColor(glm::vec3 color) { Vertex::color = color; }
 glm::vec3 Vertex::GetColor() { return color; }
 
 /* Get & Set TextureCoordinate function */
-void Vertex::SetTextureCoordinateU(float u) { Vertex::textureCoordinate.x = u; }
-void Vertex::SetTextureCoordinateV(float v) { Vertex::textureCoordinate.y = v; }
-void Vertex::SetTextureCoordinate(glm::vec2 textureCoordinate) { Vertex::textureCoordinate = textureCoordinate; }
-glm::vec2 Vertex::GetTextureCoordinate() { return textureCoordinate; }
+void Vertex::SetTexCoordsU(float u) { Vertex::texCoords.x = u; }
+void Vertex::SetTexCoordsV(float v) { Vertex::texCoords.y = v; }
+void Vertex::SetTexCoords(glm::vec2 texCoords) { Vertex::texCoords = texCoords; }
+glm::vec2 Vertex::GetTexCoords() { return texCoords; }
 /*----------------------------------------------------Set Vertex Function----------------------------------------------------------------*/
 
 
