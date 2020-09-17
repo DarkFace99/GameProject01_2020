@@ -2,6 +2,7 @@
 
 #include <GL/glew.h>
 #include <GLM.hpp>
+#include <SOIL.h>
 #include <vector>
 
 /*Custom Header*/
@@ -11,6 +12,8 @@
 
 /* Typdef for Texture */
 typedef GLuint Texture;
+
+#define BUFFER_OFFSET(i) ((char *)NULL + (i))
 
 
 /*Global for all use*/
@@ -44,6 +47,7 @@ public:
 	void setPositionZ(float z);
 	void SetPosition(glm::vec3 position);
 	glm::vec3 GetPosition();
+	float getPositionX();
 
 	void SetColorR(float r);
 	void SetColorG(float g);
@@ -69,15 +73,17 @@ public:
 /* Renderable class declaration */
 class Renderable {
 private:
-	int width;
-	int height;
+	/*int width;	//Use the Global Defined Value instead
+	int height;*/
 	int renderMode; // 0 = color, 1 = texture
 	float transpareny; // Alpha value
 
 public:
-	Texture LoadTexture();
+	/*------------------- Texture Function -------------------*/
+	Texture LoadTexture(const char* filename);
 	void UnloadTexture(Texture texture);
 
+	/*------------------- Mesh Function -------------------*/
 	Mesh LoadMesh(std::vector<Vertex> in_vertex);
 	void DrawMesh(Mesh mesh);
 	void UnloadMesh(Mesh mesh);
