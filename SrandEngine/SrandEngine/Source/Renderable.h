@@ -32,9 +32,9 @@ glm::mat4				projectionMatrix;
 /* Vertex class declaration */
 class Vertex {
 protected:
-	glm::vec3 position;				// x, y, z
-	glm::vec3 color;				// r, g, b
-	glm::vec2 textureCoordinate;	// u, v
+	glm::vec3 position;		// x, y, z
+	glm::vec3 color;		// r, g, b
+	glm::vec2 texCoords;	// u, v
 
 public:
 	Vertex();
@@ -51,10 +51,10 @@ public:
 	void SetColor(glm::vec3 color);
 	glm::vec3 GetColor();
 
-	void SetTextureCoordinateU(float u);
-	void SetTextureCoordinateV(float v);
-	void SetTextureCoordinate(glm::vec2 textureCoordinate);
-	glm::vec2 GetTextureCoordinate();
+	void SetTexCoordsU(float u);
+	void SetTexCoordsV(float v);
+	void SetTexCoords(glm::vec2 TexCoords);
+	glm::vec2 GetTexCoords();
 };
 
 /* Mesh class declaration */
