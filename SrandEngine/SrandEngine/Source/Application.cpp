@@ -1,31 +1,28 @@
 #include <iostream>
-#include <GLFW/glfw3.h>
 #include <GL/glew.h>
+#include <GLFW/glfw3.h>
 #include <glm.hpp>
 
+/*Include Custom header files*/
+#include "System.h"
+
+/*Initialize Window*/
+GLFWwindow* window;
+
+double frameTime = 0.0;
 
 int main(void)
 {
-    GLFWwindow* window;
+    /*All System Initialize*/
+    SystemInit(SCREEN_WIDTH, SCREEN_HEIGTH, "Hello World");
+    FrameInit();
+    InitializeShader();
 
-    /* Initialize the library */
-    if (!glfwInit())
-        return -1;
-
-    /* Create a windowed mode window and its OpenGL context */
-    window = glfwCreateWindow(1920, 1080, "Hello World", NULL, NULL);
-    if (!window)
+    /* Loop until the user closes the window or user press escape key*/
+    while (!glfwWindowShouldClose(window) && glfwGetKey(window, GLFW_KEY_ESCAPE) != GLFW_PRESS)
     {
-        glfwTerminate();
-        return -1;
-    }
+        frameTime = FrameStart();
 
-    /* Make the window's context current */
-    glfwMakeContextCurrent(window);
-
-    /* Loop until the user closes the window */
-    while (!glfwWindowShouldClose(window))
-    {
         /* Render here */
         glClear(GL_COLOR_BUFFER_BIT);
 
@@ -36,6 +33,7 @@ int main(void)
         glfwPollEvents();
     }
 
-    glfwTerminate();
+    /*Shutdown all system*/
+    SystemShutdown();
     return 0;
 }
