@@ -3,6 +3,8 @@
 extern unsigned int		shader;
 glm::mat4				MVP;
 Texture					blankTex;
+int						renderMode; // 0 = color, 1 = texture
+float					transparency; // Alpha value
 
 //Camera-----------------------------------
 glm::vec3				campos;
@@ -12,6 +14,9 @@ float					camzoom;
 float					camdegree;
 glm::mat4				viewMatrix;
 glm::mat4				projectionMatrix;
+
+#define COLOR_MODE 0
+#define TEXTURE_MODE 1
 
 
 /*----------------------------------------------------Set Vertex Function----------------------------------------------------------------*/
@@ -39,7 +44,6 @@ void Vertex::setPositionY(float y) { position.y = y; }
 void Vertex::setPositionZ(float z) { position.z = z; }
 void Vertex::SetPosition(glm::vec3 position) { Vertex::position = position; }
 glm::vec3 Vertex::GetPosition() { return position; }
-float Vertex::getPositionX() { return position.x; }
 
 /* Get & Set Color function */
 void Vertex::SetColorR(float r) { color.x = r; }
@@ -56,8 +60,37 @@ glm::vec2 Vertex::GetTexCoords() { return texCoords; }
 /*----------------------------------------------------Set Vertex Function----------------------------------------------------------------*/
 
 
+void RendererInit() 
+{
+	srand(time(NULL));
+
+	int width = SCREEN_WIDTH;
+	int height = SCREEN_HEIGTH;
+
+	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+	glDisable(GL_DEPTH_TEST);
+	glDisable(GL_CULL_FACE);
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+	InitializeShader();
+	blankTex = LoadTexture("blank.png");
+	transparency = 1.0f;
+
+	// set cam, model view proj matrix
+	campos = glm::vec3(0.0f, 0.0f, 0.0f);
+	camdir = glm::vec3(0.0f, 0.0f, -1.0f);
+	camup = glm::vec3(0.0f, 1.0f, 0.0f);
+	camzoom = 1.0f;
+	camdegree = 0.0f;
+	projectionMatrix = glm::ortho(-(width / 2) * camzoom, (width / 2) * camzoom, -(height / 2) * camzoom, (height / 2) * camzoom, -10.0f, 10.0f);
+	viewMatrix = glm::lookAt(campos, campos + camdir, camup);
+}
+
+
 /*----------------------------------------------------Texture Function----------------------------------------------------------------*/
-Texture Renderable::LoadTexture(const char* filename) 
+//Texture Renderable::LoadTexture(const char* filename) 
+Texture LoadTexture(const char* filename)
 {
 	Texture		aTex;
 
@@ -81,7 +114,7 @@ Texture Renderable::LoadTexture(const char* filename)
 
 	return aTex;
 }
-void Renderable::UnloadTexture(Texture texture) 
+void UnloadTexture(Texture texture) 
 {
 	glDeleteTextures(1, &texture);
 }
@@ -89,14 +122,14 @@ void Renderable::UnloadTexture(Texture texture)
 
 
 /*----------------------------------------------------Mesh Function----------------------------------------------------------------*/
-Mesh Renderable::LoadMesh(std::vector<Vertex> in_vertex) 
+Mesh LoadMesh(std::vector<Vertex> in_vertex)
 {
 	Mesh aMesh;
 	aMesh.vertex = in_vertex;
 
 	glGenBuffers(1, &aMesh.vertexBuffer);
 	glBindBuffer(GL_ARRAY_BUFFER, aMesh.vertexBuffer);
-	glBufferData(GL_ARRAY_BUFFER, aMesh.vertex.size() * sizeof(Vertex), &aMesh.vertex[0].GetPosition(), GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, aMesh.vertex.size() * sizeof(Vertex), &aMesh.vertex[0].position.x, GL_STATIC_DRAW);
 
 	/*Put in Mesh data to buffer*/
 	glGenVertexArrays(1, &aMesh.vao);
@@ -113,14 +146,14 @@ Mesh Renderable::LoadMesh(std::vector<Vertex> in_vertex)
 
 	return aMesh;
 }
-void Renderable::DrawMesh(Mesh mesh)
+void DrawMesh(Mesh mesh)
 {
 	glBindVertexArray(mesh.vao);
 	glDrawArrays(GL_TRIANGLES, 0, mesh.vertex.size());
 
 	glBindVertexArray(0);
 }
-void Renderable::UnloadMesh(Mesh mesh)
+void UnloadMesh(Mesh mesh)
 {
 	glDeleteBuffers(1, &mesh.vertexBuffer);
 	glDeleteVertexArrays(1, &mesh.vao);
@@ -131,7 +164,7 @@ void Renderable::UnloadMesh(Mesh mesh)
 
 
 /*----------------------------------------------------Set Renderer Function----------------------------------------------------------------*/
-void Renderable::SetRendererMode(int mode, float alpha) 
+void SetRendererMode(int mode, float alpha) 
 {
 	/*Set the viewport of the screen. Lower Left coner will be (0,0) and the dimension will be SCREEN_WIDTH and SCREEN_HEIGTH*/
 	glViewport(0, 0, SCREEN_WIDTH, SCREEN_HEIGTH);
@@ -145,7 +178,7 @@ void Renderable::SetRendererMode(int mode, float alpha)
 	SetTexture(blankTex, 0.0f, 0.0f);
 	SetTransform(glm::mat4(1.0f));
 }
-void Renderable::SetTexture(Texture texture, float offsetX, float offsetY) 
+void SetTexture(Texture texture, float offsetX, float offsetY) 
 {
 	glUniform1f(glGetUniformLocation(shader, "offsetX"), offsetX);
 	glUniform1f(glGetUniformLocation(shader, "offsetY"), offsetY);
@@ -154,7 +187,7 @@ void Renderable::SetTexture(Texture texture, float offsetX, float offsetY)
 	glBindTexture(GL_TEXTURE_2D, texture);
 	glUniform1i(glGetUniformLocation(shader, "tex1"), 0);
 }
-void Renderable::SetTransform(const glm::mat4& modelMat) 
+void SetTransform(const glm::mat4& modelMat) 
 {
 	/*Set transform of the objects relative to camera*/
 	MVP = projectionMatrix * viewMatrix * modelMat;

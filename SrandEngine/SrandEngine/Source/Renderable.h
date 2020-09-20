@@ -2,8 +2,11 @@
 
 #include <GL/glew.h>
 #include <GLM.hpp>
+#include <gtc/matrix_transform.hpp>
+#include <gtc/random.hpp>
 #include <SOIL.h>
 #include <vector>
+#include <time.h>
 
 /* Custom Header */
 #include "System.h"
@@ -24,9 +27,6 @@ typedef GLuint Texture;
 /* Vertex class declaration */
 class Vertex {
 protected:
-	glm::vec3 position;		// x, y, z
-	glm::vec3 color;		// r, g, b
-	glm::vec2 texCoords;	// u, v
 
 public:
 	Vertex();
@@ -36,7 +36,6 @@ public:
 	void setPositionZ(float z);
 	void SetPosition(glm::vec3 position);
 	glm::vec3 GetPosition();
-	float getPositionX();
 
 	void SetColorR(float r);
 	void SetColorG(float g);
@@ -48,6 +47,10 @@ public:
 	void SetTexCoordsV(float v);
 	void SetTexCoords(glm::vec2 TexCoords);
 	glm::vec2 GetTexCoords();
+
+	glm::vec3 position;		// x, y, z
+	glm::vec3 color;		// r, g, b
+	glm::vec2 texCoords;	// u, v
 };
 
 /* Mesh class declaration */
@@ -60,25 +63,19 @@ public:
 };
 
 /* Renderable class declaration */
-class Renderable {
-private:
-	/*int width;	//Use the Global Defined Value instead
-	int height;*/
-	int renderMode; // 0 = color, 1 = texture
-	float transpareny; // Alpha value
 
-public:
-	/*------------------- Texture Function -------------------*/
-	Texture LoadTexture(const char* filename);
-	void UnloadTexture(Texture texture);
+void RendererInit();
 
-	/*------------------- Mesh Function -------------------*/
-	Mesh LoadMesh(std::vector<Vertex> in_vertex);
-	void DrawMesh(Mesh mesh);
-	void UnloadMesh(Mesh mesh);
+/*------------------- Texture Function -------------------*/
+Texture LoadTexture(const char* filename);
+void UnloadTexture(Texture texture);
 
-	/*-------------------Set Renderer Function-------------------*/
-	void SetRendererMode(int mode, float alpha);
-	void SetTexture(Texture texture, float offssetX, float offsetY);
-	void SetTransform(const glm::mat4& modelMat);
-};
+/*------------------- Mesh Function -------------------*/
+Mesh LoadMesh(std::vector<Vertex> in_vertex);
+void DrawMesh(Mesh mesh);
+void UnloadMesh(Mesh mesh);
+
+/*-------------------Set Renderer Function-------------------*/
+void SetRendererMode(int mode, float alpha);
+void SetTexture(Texture texture, float offssetX, float offsetY);
+void SetTransform(const glm::mat4& modelMat);

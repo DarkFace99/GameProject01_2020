@@ -150,12 +150,14 @@
     <ClCompile Include="Source\Renderable.cpp" />
     <ClCompile Include="Source\Shader.cpp" />
     <ClCompile Include="Source\System.cpp" />
+    <ClCompile Include="Source\TestRender.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\GameObject.h" />
     <ClInclude Include="Source\Renderable.h" />
     <ClInclude Include="Source\Shader.h" />
     <ClInclude Include="Source\System.h" />
+    <ClInclude Include="Source\TestRender.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
