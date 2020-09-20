@@ -93,7 +93,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)Dependency\GLW\lib-vc2019;$(SolutionDir)Dependency\GLEW\lib;$(SolutionDir)Dependency\SOIL\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)Dependency\GLW\lib-vc2019;$(SolutionDir)Dependency\GLEW\lib;$(SolutionDir)Dependency\SOIL\lib;$(SolutionDir)Dependency\GLM;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>glfw3.lib;opengl32.lib;User32.lib;Gdi32.lib;Shell32.lib;glew32.lib;glew32s.lib;SOIL.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -112,7 +112,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)Dependency\GLW\lib-vc2019;$(SolutionDir)Dependency\GLEW\lib;$(SolutionDir)Dependency\SOIL\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)Dependency\GLW\lib-vc2019;$(SolutionDir)Dependency\GLEW\lib;$(SolutionDir)Dependency\SOIL\lib;$(SolutionDir)Dependency\GLM;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>glfw3.lib;opengl32.lib;User32.lib;Gdi32.lib;Shell32.lib;glew32.lib;glew32s.lib;SOIL.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -146,11 +146,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Source\Application.cpp" />
+    <ClCompile Include="Source\GameObject.cpp" />
     <ClCompile Include="Source\Renderable.cpp" />
     <ClCompile Include="Source\Shader.cpp" />
     <ClCompile Include="Source\System.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Source\GameObject.h" />
     <ClInclude Include="Source\Renderable.h" />
     <ClInclude Include="Source\Shader.h" />
     <ClInclude Include="Source\System.h" />

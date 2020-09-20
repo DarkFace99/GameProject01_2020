@@ -5,7 +5,7 @@
 #include <SOIL.h>
 #include <vector>
 
-/*Custom Header*/
+/* Custom Header */
 #include "System.h"
 #include "Shader.h"
 
@@ -17,18 +17,7 @@ typedef GLuint Texture;
 
 
 /*Global for all use*/
-extern unsigned int		shader;
-glm::mat4				MVP;
-Texture					blankTex;
 
-//Camera-----------------------------------
-glm::vec3				campos;
-glm::vec3				camdir;
-glm::vec3				camup;
-float					camzoom;
-float					camdegree;
-glm::mat4				viewMatrix;
-glm::mat4				projectionMatrix;
 //-----------------------------------------
 
 

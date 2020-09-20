@@ -1,6 +1,21 @@
 #include "Renderable.h"
 
+extern unsigned int		shader;
+glm::mat4				MVP;
+Texture					blankTex;
+
+//Camera-----------------------------------
+glm::vec3				campos;
+glm::vec3				camdir;
+glm::vec3				camup;
+float					camzoom;
+float					camdegree;
+glm::mat4				viewMatrix;
+glm::mat4				projectionMatrix;
+
+
 /*----------------------------------------------------Set Vertex Function----------------------------------------------------------------*/
+
 
 /* Default constructor */
 Vertex::Vertex()
