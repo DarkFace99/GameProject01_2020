@@ -34,7 +34,7 @@ void GameStateLevel1Load(void)
 void GameStateLevel1Init(void) 
 {
 	testMesh.modelMatrix = glm::translate(testMesh.modelMatrix, glm::vec3(0.0f, 0.0f, 0.0f));
-	testMesh.modelMatrix = glm::scale(testMesh.modelMatrix, glm::vec3(2.0f, 2.0f, 1.0f));
+	testMesh.modelMatrix = glm::scale(testMesh.modelMatrix, glm::vec3(100.0f, 100.0f, 1.0f));
 
 	std::cout << "State Initialized" << std::endl;
 }
@@ -47,12 +47,14 @@ void GameStateLevel1Draw(void)
 	glClearColor(0.3f, 0.3f, 0.5f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	SetRendererMode(COLOR_MODE, 1.0f);
+	SetRendererMode(TEXTURE_MODE, 1.0f);
 	SetTexture(testTex, 0.0f, 0.0f);
 	SetTransform(testMesh.modelMatrix);
 	DrawMesh(testMesh);
 
 	glfwSwapBuffers(window);
+
+	//std::cout << "State Draw" << std::endl;
 }
 void GameStateLevel1Free(void) 
 {

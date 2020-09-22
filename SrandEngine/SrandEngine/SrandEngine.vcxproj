@@ -88,7 +88,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Dependency\GLW\include;$(SolutionDir)Dependency\GLEW\include;$(SolutionDir)Dependency\GLM;$(SolutionDir)Dependency\SOIL\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Dependency\GLW\include;$(SolutionDir)Dependency\GLEW\include;$(SolutionDir)Dependency\GLM;$(SolutionDir)SrandEngine</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -105,7 +105,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Dependency\GLW\include;$(SolutionDir)Dependency\GLEW\include;$(SolutionDir)Dependency\GLM;$(SolutionDir)Dependency\SOIL\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Dependency\GLW\include;$(SolutionDir)Dependency\GLEW\include;$(SolutionDir)Dependency\GLM;$(SolutionDir)SrandEngine</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -153,6 +153,7 @@
     <ClCompile Include="Source\TestRender.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="SOIL.h" />
     <ClInclude Include="Source\GameObject.h" />
     <ClInclude Include="Source\Renderable.h" />
     <ClInclude Include="Source\Shader.h" />

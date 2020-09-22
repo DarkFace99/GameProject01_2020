@@ -41,9 +41,10 @@ std::string fragmentShader =
 "   vec4 texColor = texture(tex1, TexCoord);\n"
 "   vec4 finalColor = vec4(0.0f, 0.0f, 0.0f, 1.0f);\n"
 "   if (mode == 0)\n"
-"       vec4(Color, alpha);\n"
-"   else\n "
+"       finalColor = vec4(Color, alpha);\n"
+"   else{\n "
 "       texColor.rgb *= alpha; finalColor = texColor;\n"
+"   }"  
 "   Color0 = finalColor;\n"
 "}\n";
 

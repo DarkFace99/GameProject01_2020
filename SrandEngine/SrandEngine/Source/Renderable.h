@@ -4,13 +4,13 @@
 #include <GLM.hpp>
 #include <gtc/matrix_transform.hpp>
 #include <gtc/random.hpp>
-#include <SOIL.h>
 #include <vector>
 #include <time.h>
 
 /* Custom Header */
 #include "System.h"
 #include "Shader.h"
+#include "SOIL.h"
 
 
 /* Typdef for Texture */
@@ -48,9 +48,12 @@ public:
 	void SetTexCoords(glm::vec2 TexCoords);
 	glm::vec2 GetTexCoords();
 
+	std::vector<float> GetDataArray();
+
 	glm::vec3 position;		// x, y, z
 	glm::vec3 color;		// r, g, b
 	glm::vec2 texCoords;	// u, v
+
 };
 
 /* Mesh class declaration */
@@ -58,12 +61,11 @@ class Mesh {
 public:
 	GLuint vao; // vertex array object
 	GLuint vertexBuffer;
-	glm::mat4 modelMatrix;
+	glm::mat4 modelMatrix = glm::mat4(1.0f);
 	std::vector<Vertex> vertex;
 };
 
 /* Renderable class declaration */
-
 void RendererInit();
 
 /*------------------- Texture Function -------------------*/

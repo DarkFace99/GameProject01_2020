@@ -57,6 +57,21 @@ void Vertex::SetTexCoordsU(float u) { Vertex::texCoords.x = u; }
 void Vertex::SetTexCoordsV(float v) { Vertex::texCoords.y = v; }
 void Vertex::SetTexCoords(glm::vec2 texCoords) { Vertex::texCoords = texCoords; }
 glm::vec2 Vertex::GetTexCoords() { return texCoords; }
+std::vector<float> Vertex::GetDataArray() 
+{
+	std::vector<float> data;
+
+	data.push_back(position.x);
+	data.push_back(position.y);
+	data.push_back(position.z);
+	data.push_back(color.r);
+	data.push_back(color.g);
+	data.push_back(color.b);
+	data.push_back(texCoords.x);
+	data.push_back(texCoords.y);
+
+	return data;
+}
 /*----------------------------------------------------Set Vertex Function----------------------------------------------------------------*/
 
 
@@ -89,7 +104,6 @@ void RendererInit()
 
 
 /*----------------------------------------------------Texture Function----------------------------------------------------------------*/
-//Texture Renderable::LoadTexture(const char* filename) 
 Texture LoadTexture(const char* filename)
 {
 	Texture		aTex;
@@ -126,21 +140,29 @@ Mesh LoadMesh(std::vector<Vertex> in_vertex)
 {
 	Mesh aMesh;
 	aMesh.vertex = in_vertex;
+	
+	std::vector<float> meshData;
+
+	for (int i = 0; i < in_vertex.size(); i++) 
+	{
+		std::vector<float> vertexData = in_vertex[i].GetDataArray();
+		meshData.insert(meshData.end(), vertexData.begin(), vertexData.end());
+	}
 
 	glGenBuffers(1, &aMesh.vertexBuffer);
 	glBindBuffer(GL_ARRAY_BUFFER, aMesh.vertexBuffer);
-	glBufferData(GL_ARRAY_BUFFER, aMesh.vertex.size() * sizeof(Vertex), &aMesh.vertex[0].position.x, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(float) * meshData.size(), &meshData[0], GL_STATIC_DRAW);
 
 	/*Put in Mesh data to buffer*/
 	glGenVertexArrays(1, &aMesh.vao);
 	glBindVertexArray(aMesh.vao);
 	glBindBuffer(GL_ARRAY_BUFFER, aMesh.vertexBuffer);
 	glEnableVertexAttribArray(0);
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), BUFFER_OFFSET(0));		//The starting point of the VBO, for the vertices
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 8, BUFFER_OFFSET(0));		//The starting point of the VBO, for the vertices
 	glEnableVertexAttribArray(1);
-	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), BUFFER_OFFSET(12));     //The starting point of color, 12 bytes away
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 8, BUFFER_OFFSET(12));     //The starting point of color, 12 bytes away
 	glEnableVertexAttribArray(2);
-	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), BUFFER_OFFSET(24));
+	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 8, BUFFER_OFFSET(24));
 
 	glBindVertexArray(0);
 
@@ -173,10 +195,6 @@ void SetRendererMode(int mode, float alpha)
 	/*Set the render mode between Texture and Solid Color*/
 	glUniform1i(glGetUniformLocation(shader, "mode"), mode);
 	glUniform1f(glGetUniformLocation(shader, "alpha"), alpha);
-
-	// default setting
-	SetTexture(blankTex, 0.0f, 0.0f);
-	SetTransform(glm::mat4(1.0f));
 }
 void SetTexture(Texture texture, float offsetX, float offsetY) 
 {
