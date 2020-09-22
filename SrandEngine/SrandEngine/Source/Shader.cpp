@@ -20,7 +20,7 @@ std::string vertexShader =
 "{\n"
 "   Color = VertexColor;\n"
 "   TexCoord.x = VertexTexCoord.x + offsetX;\n"
-"   TexCoord.y = 1.0 - (VertexTexCoord.x + offsetX);\n"
+"   TexCoord.y = 1.0 - (VertexTexCoord.y + offsetY);\n"
 "   gl_Position = MVP * vec4(VertexPosition, 1.0f);\n"
 "}\n";
 
@@ -40,9 +40,12 @@ std::string fragmentShader =
 "{\n"
 "   vec4 texColor = texture(tex1, TexCoord);\n"
 "   vec4 finalColor = vec4(0.0f, 0.0f, 0.0f, 1.0f);\n"
-"   if (mode == 0) { vec4(Color, alpha); }"
-"   else { texColor.rgb *= alpha; finalColor = texColor; }"
-"   Color0 = finalColor;"
+"   if (mode == 0)\n"
+"       finalColor = vec4(Color, alpha);\n"
+"   else{\n "
+"       texColor.rgb *= alpha; finalColor = texColor;\n"
+"   }"  
+"   Color0 = finalColor;\n"
 "}\n";
 
 static unsigned int CompileShader(unsigned int type, const std::string& source)

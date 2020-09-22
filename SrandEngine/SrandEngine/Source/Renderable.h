@@ -2,12 +2,15 @@
 
 #include <GL/glew.h>
 #include <GLM.hpp>
-#include <SOIL.h>
+#include <gtc/matrix_transform.hpp>
+#include <gtc/random.hpp>
 #include <vector>
+#include <time.h>
 
-/*Custom Header*/
+/* Custom Header */
 #include "System.h"
 #include "Shader.h"
+#include "SOIL.h"
 
 
 /* Typdef for Texture */
@@ -17,27 +20,13 @@ typedef GLuint Texture;
 
 
 /*Global for all use*/
-extern unsigned int		shader;
-glm::mat4				MVP;
-Texture					blankTex;
 
-//Camera-----------------------------------
-glm::vec3				campos;
-glm::vec3				camdir;
-glm::vec3				camup;
-float					camzoom;
-float					camdegree;
-glm::mat4				viewMatrix;
-glm::mat4				projectionMatrix;
 //-----------------------------------------
 
 
 /* Vertex class declaration */
 class Vertex {
 protected:
-	glm::vec3 position;		// x, y, z
-	glm::vec3 color;		// r, g, b
-	glm::vec2 texCoords;	// u, v
 
 public:
 	Vertex();
@@ -47,7 +36,6 @@ public:
 	void setPositionZ(float z);
 	void SetPosition(glm::vec3 position);
 	glm::vec3 GetPosition();
-	float getPositionX();
 
 	void SetColorR(float r);
 	void SetColorG(float g);
@@ -59,6 +47,13 @@ public:
 	void SetTexCoordsV(float v);
 	void SetTexCoords(glm::vec2 TexCoords);
 	glm::vec2 GetTexCoords();
+
+	std::vector<float> GetDataArray();
+
+	glm::vec3 position;		// x, y, z
+	glm::vec3 color;		// r, g, b
+	glm::vec2 texCoords;	// u, v
+
 };
 
 /* Mesh class declaration */
@@ -66,30 +61,23 @@ class Mesh {
 public:
 	GLuint vao; // vertex array object
 	GLuint vertexBuffer;
-	glm::mat4 modelMatrix;
+	glm::mat4 modelMatrix = glm::mat4(1.0f);
 	std::vector<Vertex> vertex;
 };
 
 /* Renderable class declaration */
-class Renderable {
-private:
-	/*int width;	//Use the Global Defined Value instead
-	int height;*/
-	int renderMode; // 0 = color, 1 = texture
-	float transpareny; // Alpha value
+void RendererInit();
 
-public:
-	/*------------------- Texture Function -------------------*/
-	Texture LoadTexture(const char* filename);
-	void UnloadTexture(Texture texture);
+/*------------------- Texture Function -------------------*/
+Texture LoadTexture(const char* filename);
+void UnloadTexture(Texture texture);
 
-	/*------------------- Mesh Function -------------------*/
-	Mesh LoadMesh(std::vector<Vertex> in_vertex);
-	void DrawMesh(Mesh mesh);
-	void UnloadMesh(Mesh mesh);
+/*------------------- Mesh Function -------------------*/
+Mesh LoadMesh(std::vector<Vertex> in_vertex);
+void DrawMesh(Mesh mesh);
+void UnloadMesh(Mesh mesh);
 
-	/*-------------------Set Renderer Function-------------------*/
-	void SetRendererMode(int mode, float alpha);
-	void SetTexture(Texture texture, float offssetX, float offsetY);
-	void SetTransform(const glm::mat4& modelMat);
-};
+/*-------------------Set Renderer Function-------------------*/
+void SetRendererMode(int mode, float alpha);
+void SetTexture(Texture texture, float offssetX, float offsetY);
+void SetTransform(const glm::mat4& modelMat);
