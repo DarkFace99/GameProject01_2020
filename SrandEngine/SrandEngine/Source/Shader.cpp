@@ -20,7 +20,7 @@ std::string vertexShader =
 "{\n"
 "   Color = VertexColor;\n"
 "   TexCoord.x = VertexTexCoord.x + offsetX;\n"
-"   TexCoord.y = 1.0 - (VertexTexCoord.x + offsetX);\n"
+"   TexCoord.y = 1.0 - (VertexTexCoord.y + offsetY);\n"
 "   gl_Position = MVP * vec4(VertexPosition, 1.0f);\n"
 "}\n";
 

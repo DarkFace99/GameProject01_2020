@@ -27,7 +27,7 @@ void GameStateLevel1Load(void)
 
 	testMesh = LoadMesh(vertices);
 
-	testTex = LoadTexture("blank.png");
+	testTex = LoadTexture("Assets/blank.png");
 
 	std::cout << "State Loaded" << std::endl;
 }

@@ -83,7 +83,7 @@ void RendererInit()
 	int height = SCREEN_HEIGTH;
 
 	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
-	glDisable(GL_DEPTH_TEST);
+	glEnable(GL_DEPTH_TEST);
 	glDisable(GL_CULL_FACE);
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
