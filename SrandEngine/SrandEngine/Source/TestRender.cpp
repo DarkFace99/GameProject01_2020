@@ -14,7 +14,7 @@ Texture		testTex;
 Mesh		testMesh;
 
 /* Test object */
-//GameObject* testGameObject;
+GameObject* testGameObject;
 
 void GameStateLevel1Load(void) 
 {
@@ -76,7 +76,7 @@ void GameStateLevel1Init(void)
 
 	/* Test gameObject here */
 
-	/*testGameObject = */GameObject::GameObject_Instance_CREATE(TEST, glm::vec3(100.0f, 100.0f, 0.0f), glm::vec3(150.0f, 150.0f, 1.0f), glm::vec3(0.0f, 0.0f, 0.0f), 0.0f);
+	testGameObject = GameObject::GameObject_Instance_CREATE(TEST, glm::vec3(100.0f, 100.0f, 0.0f), glm::vec3(150.0f, 150.0f, 1.0f), glm::vec3(0.0f, 0.0f, 0.0f), 0.0f);
 
 	/* Test gameObject end */
 
@@ -118,6 +118,8 @@ void GameStateLevel1Draw(void)
 		SetTexture(*instPtr->GetTexture(), 0.0f, 0.0f);
 		SetTransform(instPtr->GetModelMatrix());
 		DrawMesh(*instPtr->GetMesh());
+		//std::cout << "Texture: " <<*instPtr->GetTexture() << std::endl;
+		//std::cout << "ModelMat: " << glm::to_string(instPtr->GetModelMatrix()) << std::endl;
 
 		/* Test gameObject end */
 	}

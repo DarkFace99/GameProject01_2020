@@ -47,4 +47,11 @@ void GameObject::GameObject_Instance_DESTROY(GameObject& InstancePointer)
 int			GameObject::GetFlag() { return flag; }
 Mesh*		GameObject::GetMesh() { return mesh; }
 Texture*	GameObject::GetTexture() { return texture; }
-glm::mat4	GameObject::GetModelMatrix() { return modelMatrix; }
+glm::mat4	GameObject::GetModelMatrix() { 
+	
+	glm::mat4 resultMat = glm::mat4(1.0f);
+	resultMat = glm::translate(resultMat, position);
+	resultMat = glm::scale(resultMat, scale);
+	resultMat = glm::rotate(resultMat, orientation * 3.14f/180.0f, glm::vec3(0,0,1));
+	return resultMat;
+}
