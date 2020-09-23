@@ -1,4 +1,2 @@
-﻿  Renderable.cpp
-D:\Projects\Project\GameProject01_2020\SrandEngine\SrandEngine\Source\Renderable.cpp(80,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-D:\Projects\Project\GameProject01_2020\SrandEngine\SrandEngine\Source\Renderable.cpp(146,20): warning C4018: '<': signed/unsigned mismatch
-  SrandEngine.vcxproj -> D:\Projects\Project\GameProject01_2020\SrandEngine\Debug\SrandEngine.exe
+﻿  TestRender.cpp
+  SrandEngine.vcxproj -> D:\year2_1\DT230\GameProject\GameProject01_2020\SrandEngine\Debug\SrandEngine.exe

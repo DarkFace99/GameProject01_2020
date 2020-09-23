@@ -1,15 +1,15 @@
 #include "GameObject.h"
 
-static Mesh		    meshArray[MAX_MESH];							// Store all unique shape/mesh in your game
-static int			numMesh;
-static Texture		texArray[MAX_TEXTURE];							// Corresponding texture of the mesh
-static int			numTex;
-static GameObject	gameObjectInstance_Array[MAX_INSTANCE_GAMEOBJECTS];			// Store all game object instance
-static int			numGameObj;
+Mesh		    meshArray[MAX_MESH];							// Store all unique shape/mesh in your game
+int				numMesh;
+Texture			texArray[MAX_TEXTURE];							// Corresponding texture of the mesh
+int				numTex;
+GameObject		gameObjectInstance_Array[MAX_INSTANCE_GAMEOBJECTS];			// Store all game object instance
+int				numGameObj;
 
 
 
-GameObject* GameObject::gameObject_Instance_CREATE(int tag, glm::vec3 pos, glm::vec3 scale, glm::vec3 vel, float orient)
+GameObject* GameObject::GameObject_Instance_CREATE(int tag, glm::vec3 pos, glm::vec3 scale, glm::vec3 vel, float orient)
 {
 	for (int i = 0; i < MAX_INSTANCE_GAMEOBJECTS; i++) {
 		GameObject* InstancePointer = gameObjectInstance_Array + i;
@@ -33,7 +33,7 @@ GameObject* GameObject::gameObject_Instance_CREATE(int tag, glm::vec3 pos, glm::
 	// Cannot find empty slot => return 0
 	return NULL;
 }
-void GameObject::gameObject_Instance_DESTROY(GameObject& InstancePointer) 
+void GameObject::GameObject_Instance_DESTROY(GameObject& InstancePointer) 
 {
 	// Not deleting the object, just check if the component is Active or Inactive
 	if (InstancePointer.flag == FLAG_INACTIVE_GAMEOBJECT)
@@ -42,3 +42,9 @@ void GameObject::gameObject_Instance_DESTROY(GameObject& InstancePointer)
 	numGameObj--;
 	InstancePointer.flag = FLAG_INACTIVE_GAMEOBJECT;
 }
+
+/* For Draw f() */
+int			GameObject::GetFlag() { return flag; }
+Mesh*		GameObject::GetMesh() { return mesh; }
+Texture*	GameObject::GetTexture() { return texture; }
+glm::mat4	GameObject::GetModelMatrix() { return modelMatrix; }
