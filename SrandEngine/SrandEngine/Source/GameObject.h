@@ -28,11 +28,12 @@ enum Character_TAG									// Tag for GameObjects
 	PEAR,
 	BARTER,
 
-	NPC
+	NPC,
+	TEST	// for testing purpose
 };  	
 class GameObject 
 {
-public:
+private:
 	Mesh*			mesh;
 	Texture*		texture;
 
@@ -50,8 +51,15 @@ public:
 
 	double							counter;		// use in state machine, to countdown the time in order to pause some movement
 
-private:
+public:
 
-	static GameObject*			gameObject_Instance_CREATE(int tag, glm::vec3 pos, glm::vec3 scale, glm::vec3 vel, float orient);
-	static void					gameObject_Instance_DESTROY(GameObject &InstancePointer);
+	static GameObject*			GameObject_Instance_CREATE(int tag, glm::vec3 pos, glm::vec3 scale, glm::vec3 vel, float orient);
+	static void					GameObject_Instance_DESTROY(GameObject &InstancePointer);
+
+	/* For Draw f() */
+
+	int							GetFlag();
+	Mesh*						GetMesh();
+	Texture*					GetTexture();
+	glm::mat4					GetModelMatrix();
 };
