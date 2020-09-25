@@ -17,14 +17,15 @@ GameObject* GameObject::GameObject_Instance_CREATE(int tag, glm::vec3 pos, glm::
 
 			InstancePointer->mesh = meshArray + tag;
 			InstancePointer->texture = texArray + tag;
-			InstancePointer->c_tag = tag;
+			InstancePointer->tag = tag;
 			InstancePointer->flag = FLAG_ACTIVE_GAMEOBJECT;
 			InstancePointer->position = pos;
 			InstancePointer->velocity = vel;
 			InstancePointer->scale = scale;
 			InstancePointer->orientation = orient;
 			InstancePointer->modelMatrix = glm::mat4(1.0f);
-
+			
+			InstancePointer->position.z = InstancePointer->tag;		// assign layer according to game object tag
 			numGameObj++;
 			return InstancePointer;
 		}
