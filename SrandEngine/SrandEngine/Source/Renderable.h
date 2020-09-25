@@ -2,7 +2,8 @@
 
 #include <GL/glew.h>
 #include <GLM.hpp>
-#include <gtc/matrix_transform.hpp>
+#include <gtx/string_cast.hpp>
+#include <gtc/matrix_transform.hpp> 
 #include <gtc/random.hpp>
 #include <vector>
 #include <time.h>
