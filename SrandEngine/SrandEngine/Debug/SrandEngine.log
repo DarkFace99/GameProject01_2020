@@ -1,5 +1,6 @@
 ﻿  Application.cpp
 D:\GameProject_2020\GameProject01_2020\SrandEngine\SrandEngine\Source\Application.cpp(31,21): warning C4244: 'initializing': conversion from 'double' to 'long', possible loss of data
+  Collision.cpp
   GameObject.cpp
   Renderable.cpp
 D:\GameProject_2020\GameProject01_2020\SrandEngine\SrandEngine\Source\Renderable.cpp(80,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
@@ -9,6 +10,7 @@ D:\GameProject_2020\GameProject01_2020\SrandEngine\SrandEngine\Source\Renderable
   TestRender.cpp
   Generating Code...
 D:\GameProject_2020\GameProject01_2020\SrandEngine\SrandEngine\Source\System.cpp(46): warning C4715: 'SystemInit': not all control paths return a value
+D:\GameProject_2020\GameProject01_2020\SrandEngine\SrandEngine\Source\Collision.cpp(43): warning C4715: 'Collision::CollisionRvR': not all control paths return a value
 LINK : warning LNK4098: defaultlib 'MSVCRT' conflicts with use of other libs; use /NODEFAULTLIB:library
 SOIL.lib(image_DXT.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'SOIL.lib(image_DXT.obj)' or at 'D:\GameProject_2020\GameProject01_2020\SrandEngine\Debug\vc120.pdb'; linking object as if no debug info
 SOIL.lib(image_helper.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'SOIL.lib(image_helper.obj)' or at 'D:\GameProject_2020\GameProject01_2020\SrandEngine\Debug\vc120.pdb'; linking object as if no debug info

@@ -1,5 +1,6 @@
 #include "GameObject.h"
 
+
 Mesh		    meshArray[MAX_MESH];							// Store all unique shape/mesh in your game
 int				numMesh;
 Texture			texArray[MAX_TEXTURE];							// Corresponding texture of the mesh
@@ -9,7 +10,7 @@ int				numGameObj;
 
 
 
-GameObject* GameObject::GameObject_Instance_CREATE(int tag, glm::vec3 pos, glm::vec3 scale, glm::vec3 vel, float orient)
+GameObject* GameObject::GameObject_Instance_CREATE(int tag, glm::vec3 pos, glm::vec3 scale, glm::vec3 vel, float orient, int control)
 {
 	for (int i = 0; i < MAX_INSTANCE_GAMEOBJECTS; i++) {
 		GameObject* InstancePointer = gameObjectInstance_Array + i;
@@ -17,7 +18,8 @@ GameObject* GameObject::GameObject_Instance_CREATE(int tag, glm::vec3 pos, glm::
 
 			InstancePointer->mesh = meshArray + tag;
 			InstancePointer->texture = texArray + tag;
-			InstancePointer->c_tag = tag;
+			InstancePointer->g_tag = tag;
+			InstancePointer->controlling = control;
 			InstancePointer->flag = FLAG_ACTIVE_GAMEOBJECT;
 			InstancePointer->position = pos;
 			InstancePointer->velocity = vel;
@@ -44,9 +46,12 @@ void GameObject::GameObject_Instance_DESTROY(GameObject& InstancePointer)
 }
 
 /* For Draw f() */
-int			GameObject::GetFlag() { return flag; }
-Mesh*		GameObject::GetMesh() { return mesh; }
-Texture*	GameObject::GetTexture() { return texture; }
+int			GameObject::GetFlag()		{ return flag; }
+Mesh*		GameObject::GetMesh()		{ return mesh; }
+Texture*	GameObject::GetTexture()	{ return texture; }
+int			GameObject::GetTag()		{ return g_tag; }
+int			GameObject::GetControl()	{ return controlling; }
+
 glm::mat4	GameObject::GetModelMatrix() { 
 	
 	glm::mat4 resultMat = glm::mat4(1.0f);
@@ -54,4 +59,13 @@ glm::mat4	GameObject::GetModelMatrix() {
 	resultMat = glm::scale(resultMat, scale);
 	resultMat = glm::rotate(resultMat, orientation * 3.14f/180.0f, glm::vec3(0,0,1));
 	return resultMat;
+}
+
+glm::vec3 GameObject::GetPosition()
+{
+	return position;
+}
+glm::vec3 GameObject::GetScale() 
+{
+	return scale;
 }
