@@ -1,2 +1,6 @@
 ﻿  TestRender.cpp
+<<<<<<< HEAD
   SrandEngine.vcxproj -> D:\year2_1\DT230\GameProject\GameProject01_2020\SrandEngine\Debug\SrandEngine.exe
+=======
+  SrandEngine.vcxproj -> D:\Projects\Project\GameProject01_2020\SrandEngine\Debug\SrandEngine.exe
+>>>>>>> Renderer
