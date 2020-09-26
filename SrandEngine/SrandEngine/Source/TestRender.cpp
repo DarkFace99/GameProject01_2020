@@ -17,6 +17,7 @@ Mesh		testMesh;
 
 /* Test object */
 GameObject* testGameObject;
+GameObject* testAnim;
 
 void GameStateLevel1Load(void) 
 {
@@ -39,12 +40,33 @@ void GameStateLevel1Load(void)
 	numGameObj = 0;
 
 	// Set the object instance to NULL
-	//testGameObject = nullptr;
+	testGameObject = nullptr;
+	testAnim = nullptr;
 
 		/* Test gameObject end */
 
 	std::vector<Vertex> vertices;
 	Vertex v1, v2, v3, v4;
+
+	/*Benny Idle*/
+	vertices.clear();
+	v1.SetPosition(glm::vec3(-0.5f, -0.5f, 0.0f));	v1.SetColor(glm::vec3(1.0f, 0.0f, 0.0f)); v1.SetTexCoords(glm::vec2(0.0f, 0.0f));
+	v2.SetPosition(glm::vec3(0.5f, -0.5f, 0.0f));	v2.SetColor(glm::vec3(0.0f, 1.0f, 0.0f)); v2.SetTexCoords(glm::vec2(0.16f, 0.0f));
+	v3.SetPosition(glm::vec3(0.5f, 0.5f, 0.0f));	v3.SetColor(glm::vec3(0.0f, 0.0f, 1.0f)); v3.SetTexCoords(glm::vec2(0.16f, 1.0f));
+	v4.SetPosition(glm::vec3(-0.5f, 0.5f, 0.0f));	v4.SetColor(glm::vec3(1.0f, 1.0f, 0.0f)); v4.SetTexCoords(glm::vec2(0.0f, 1.0f));
+
+	vertices.push_back(v1);
+	vertices.push_back(v2);
+	vertices.push_back(v3);
+	vertices.push_back(v1);
+	vertices.push_back(v3);
+	vertices.push_back(v4);
+
+	meshPtr = meshArray + BENNY;
+	texPtr = texArray + BENNY;
+	/* Assign value */
+	*meshPtr = LoadMesh(vertices);					// PROBLEM
+	*texPtr = LoadTexture("Assets/Benny_Idle.png"); // PROBLEM
 
 	vertices.clear();
 	v1.SetPosition(glm::vec3(-0.5f, -0.5f, 0.0f)); v1.SetColor(glm::vec3(1.0f, 0.0f, 0.0f)); v1.SetTexCoords(glm::vec2(0.0f, 0.0f));
@@ -58,9 +80,6 @@ void GameStateLevel1Load(void)
 	vertices.push_back(v1);
 	vertices.push_back(v3);
 	vertices.push_back(v4);
-
-	testMesh = LoadMesh(vertices);
-	testTex = LoadTexture("Assets/Benny.png");
 
 	/* Point array to slot of the test GameObject mesh & array according to TYPE */
 	meshPtr = meshArray + BENNY;
@@ -122,13 +141,31 @@ void GameStateLevel1Init(void)
 	GameObject::GameObject_Instance_CREATE(BENNY, glm::vec3(-100.0f, 0.0f, 0.0f), glm::vec3(CHARACTER_SIZE, CHARACTER_SIZE, 1.0f), glm::vec3(0.0f, 0.0f, 0.0f), 0.0f);		// 1
 	
 
+	testGameObject = GameObject::GameObject_Instance_CREATE(TEST, glm::vec3(100.0f, 100.0f, 0.0f), glm::vec3(150.0f, 150.0f, 1.0f), glm::vec3(0.0f, 0.0f, 0.0f), 0.0f, false, 0);
+	testAnim = GameObject::GameObject_Instance_CREATE(BENNY, glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(150.0f, 150.0f, 1.0f), glm::vec3(0.0f, 0.0f, 0.0f), 0.0f, true, 6);
 	/* Test gameObject end */
 
 	std::cout << "State Initialized" << std::endl;
 }
 void GameStateLevel1Update(double dt, long frame, int& state) 
 {
-	
+	if (frame % 10 == 0) {
+		for (int i = 0; i < MAX_INSTANCE_GAMEOBJECTS; i++) {
+			GameObject* pInst = gameObjectInstance_Array + i;
+
+			// skip inactive object
+			if (pInst->GetFlag() == FLAG_INACTIVE_GAMEOBJECT)
+				continue;
+
+			// if this is an animated object
+			if (pInst->GetAnimStatus()) {
+
+				// increment frame
+				pInst->IncrementOffsetX();
+
+			}
+		}
+	}
 }
 void GameStateLevel1Draw(void)
 {
@@ -159,7 +196,7 @@ void GameStateLevel1Draw(void)
 		//	4. DrawMesh()
 
 		SetRendererMode(TEXTURE_MODE, 1.0f);
-		SetTexture(*instPtr->GetTexture(), 0.0f, 0.0f);
+		SetTexture(*instPtr->GetTexture(), instPtr->GetOffsetX(), 0.0f);
 		SetTransform(instPtr->GetModelMatrix());
 		DrawMesh(*instPtr->GetMesh());
 
