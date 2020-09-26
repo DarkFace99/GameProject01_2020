@@ -98,7 +98,7 @@ void RendererInit()
 	camup = glm::vec3(0.0f, 1.0f, 0.0f);
 	camzoom = 1.0f;
 	camdegree = 0.0f;
-	projectionMatrix = glm::ortho(-(width / 2) * camzoom, (width / 2) * camzoom, -(height / 2) * camzoom, (height / 2) * camzoom, -10.0f, 10.0f);
+	projectionMatrix = glm::ortho(-(width / 2) * camzoom, (width / 2) * camzoom, -(height / 2) * camzoom, (height / 2) * camzoom, -20.0f, 20.0f);
 	viewMatrix = glm::lookAt(campos, campos + camdir, camup);
 }
 
