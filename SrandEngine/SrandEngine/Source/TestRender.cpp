@@ -82,11 +82,11 @@ void GameStateLevel1Load(void)
 	vertices.push_back(v4);
 
 	/* Point array to slot of the test GameObject mesh & array according to TYPE */
-	meshPtr = meshArray + BENNY;
-	texPtr = texArray + BENNY;
+	//meshPtr = meshArray + BENNY;
+	//texPtr = texArray + BENNY;
 	/* Assign value */
-	*meshPtr = LoadMesh(vertices);
-	*texPtr = LoadTexture("Assets/Benny.png");
+	//*meshPtr = LoadMesh(vertices);
+	//*texPtr = LoadTexture("Assets/Benny.png");
 
 	meshPtr = meshArray + MACHO;
 	texPtr = texArray + MACHO;
@@ -108,6 +108,10 @@ void GameStateLevel1Load(void)
 	*meshPtr = LoadMesh(vertices);
 	*texPtr = LoadTexture("Assets/BARTER.png");
 
+	meshPtr = meshArray + TEST;
+	texPtr = texArray + TEST;
+	*meshPtr = LoadMesh(vertices);
+	*texPtr = LoadTexture("Assets/blank.png");
 	
 
 	std::cout << "State Loaded" << std::endl;
@@ -120,29 +124,29 @@ void GameStateLevel1Init(void)
 	/* Test gameObject here */
 	// NOT IN ORDER
 	/*
-	GameObject::GameObject_Instance_CREATE(BENNY, glm::vec3(-100.0f, 0.0f, 0.0f), glm::vec3(CHARACTER_SIZE, CHARACTER_SIZE, 1.0f), glm::vec3(0.0f, 0.0f, 0.0f), 0.0f);		// 1
-	GameObject::GameObject_Instance_CREATE(MACHO, glm::vec3(-50.0f, 0.0f, 0.0f), glm::vec3(CHARACTER_SIZE, CHARACTER_SIZE, 1.0f), glm::vec3(0.0f, 0.0f, 0.0f), 0.0f);		// 2
-	GameObject::GameObject_Instance_CREATE(CHERRY, glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(CHARACTER_SIZE, CHARACTER_SIZE, 1.0f), glm::vec3(0.0f, 0.0f, 0.0f), 0.0f);		// 3
-	GameObject::GameObject_Instance_CREATE(PEAR, glm::vec3(50.0f, 0.0f, 0.0f), glm::vec3(CHARACTER_SIZE, CHARACTER_SIZE, 1.0f), glm::vec3(0.0f, 0.0f, 0.0f), 0.0f);			// 4
-	GameObject::GameObject_Instance_CREATE(BARTER, glm::vec3(100.0f, 0.0f, 0.0f), glm::vec3(CHARACTER_SIZE, CHARACTER_SIZE, 1.0f), glm::vec3(0.0f, 0.0f, 0.0f), 0.0f);		// 5
+	//GameObject::GameObject_Instance_CREATE(BENNY, glm::vec3(-100.0f, 0.0f, 0.0f), glm::vec3(CHARACTER_SIZE, CHARACTER_SIZE, 1.0f), glm::vec3(0.0f, 0.0f, 0.0f), 0.0f, false, 0);		// 1
+	GameObject::GameObject_Instance_CREATE(MACHO, glm::vec3(-50.0f, 0.0f, 0.0f), glm::vec3(CHARACTER_SIZE, CHARACTER_SIZE, 1.0f), glm::vec3(0.0f, 0.0f, 0.0f), 0.0f, false, 0);			// 2
+	GameObject::GameObject_Instance_CREATE(CHERRY, glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(CHARACTER_SIZE, CHARACTER_SIZE, 1.0f), glm::vec3(0.0f, 0.0f, 0.0f), 0.0f, false, 0);			// 3
+	GameObject::GameObject_Instance_CREATE(PEAR, glm::vec3(50.0f, 0.0f, 0.0f), glm::vec3(CHARACTER_SIZE, CHARACTER_SIZE, 1.0f), glm::vec3(0.0f, 0.0f, 0.0f), 0.0f, false, 0);			// 4
+	GameObject::GameObject_Instance_CREATE(BARTER, glm::vec3(100.0f, 0.0f, 0.0f), glm::vec3(CHARACTER_SIZE, CHARACTER_SIZE, 1.0f), glm::vec3(0.0f, 0.0f, 0.0f), 0.0f, false, 0);		// 5
 	*/
 	/*
-	GameObject::GameObject_Instance_CREATE(BENNY, glm::vec3(-100.0f, 0.0f, 0.0f), glm::vec3(CHARACTER_SIZE, CHARACTER_SIZE, 1.0f), glm::vec3(0.0f, 0.0f, 0.0f), 0.0f);		// 1
-	GameObject::GameObject_Instance_CREATE(BARTER, glm::vec3(100.0f, 0.0f, 0.0f), glm::vec3(CHARACTER_SIZE, CHARACTER_SIZE, 1.0f), glm::vec3(0.0f, 0.0f, 0.0f), 0.0f);		// 5
-	GameObject::GameObject_Instance_CREATE(MACHO, glm::vec3(-50.0f, 0.0f, 0.0f), glm::vec3(CHARACTER_SIZE, CHARACTER_SIZE, 1.0f), glm::vec3(0.0f, 0.0f, 0.0f), 0.0f);		// 2
-	GameObject::GameObject_Instance_CREATE(PEAR, glm::vec3(50.0f, 0.0f, 0.0f), glm::vec3(CHARACTER_SIZE, CHARACTER_SIZE, 1.0f), glm::vec3(0.0f, 0.0f, 0.0f), 0.0f);			// 4
-	GameObject::GameObject_Instance_CREATE(CHERRY, glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(CHARACTER_SIZE, CHARACTER_SIZE, 1.0f), glm::vec3(0.0f, 0.0f, 0.0f), 0.0f);		// 3
+	//GameObject::GameObject_Instance_CREATE(BENNY, glm::vec3(-100.0f, 0.0f, 0.0f), glm::vec3(CHARACTER_SIZE, CHARACTER_SIZE, 1.0f), glm::vec3(0.0f, 0.0f, 0.0f), 0.0f, false, 0);		// 1
+	GameObject::GameObject_Instance_CREATE(BARTER, glm::vec3(100.0f, 0.0f, 0.0f), glm::vec3(CHARACTER_SIZE, CHARACTER_SIZE, 1.0f), glm::vec3(0.0f, 0.0f, 0.0f), 0.0f, false, 0);		// 5
+	GameObject::GameObject_Instance_CREATE(MACHO, glm::vec3(-50.0f, 0.0f, 0.0f), glm::vec3(CHARACTER_SIZE, CHARACTER_SIZE, 1.0f), glm::vec3(0.0f, 0.0f, 0.0f), 0.0f, false, 0);			// 2
+	GameObject::GameObject_Instance_CREATE(PEAR, glm::vec3(50.0f, 0.0f, 0.0f), glm::vec3(CHARACTER_SIZE, CHARACTER_SIZE, 1.0f), glm::vec3(0.0f, 0.0f, 0.0f), 0.0f, false, 0);			// 4
+	GameObject::GameObject_Instance_CREATE(CHERRY, glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(CHARACTER_SIZE, CHARACTER_SIZE, 1.0f), glm::vec3(0.0f, 0.0f, 0.0f), 0.0f, false, 0);			// 3
 	*/
 	
-	GameObject::GameObject_Instance_CREATE(BARTER, glm::vec3(100.0f, 0.0f, 0.0f), glm::vec3(CHARACTER_SIZE, CHARACTER_SIZE, 1.0f), glm::vec3(0.0f, 0.0f, 0.0f), 0.0f);		// 5
-	GameObject::GameObject_Instance_CREATE(PEAR, glm::vec3(50.0f, 0.0f, 0.0f), glm::vec3(CHARACTER_SIZE, CHARACTER_SIZE, 1.0f), glm::vec3(0.0f, 0.0f, 0.0f), 0.0f);			// 4
-	GameObject::GameObject_Instance_CREATE(CHERRY, glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(CHARACTER_SIZE, CHARACTER_SIZE, 1.0f), glm::vec3(0.0f, 0.0f, 0.0f), 0.0f);		// 3
-	GameObject::GameObject_Instance_CREATE(MACHO, glm::vec3(-50.0f, 0.0f, 0.0f), glm::vec3(CHARACTER_SIZE, CHARACTER_SIZE, 1.0f), glm::vec3(0.0f, 0.0f, 0.0f), 0.0f);		// 2
-	GameObject::GameObject_Instance_CREATE(BENNY, glm::vec3(-100.0f, 0.0f, 0.0f), glm::vec3(CHARACTER_SIZE, CHARACTER_SIZE, 1.0f), glm::vec3(0.0f, 0.0f, 0.0f), 0.0f);		// 1
+	GameObject::GameObject_Instance_CREATE(BARTER, glm::vec3(100.0f, 0.0f, 0.0f), glm::vec3(CHARACTER_SIZE, CHARACTER_SIZE, 1.0f), glm::vec3(0.0f, 0.0f, 0.0f), 0.0f, false, 0);		// 5
+	GameObject::GameObject_Instance_CREATE(PEAR, glm::vec3(50.0f, 0.0f, 0.0f), glm::vec3(CHARACTER_SIZE, CHARACTER_SIZE, 1.0f), glm::vec3(0.0f, 0.0f, 0.0f), 0.0f, false, 0);			// 4
+	GameObject::GameObject_Instance_CREATE(CHERRY, glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(CHARACTER_SIZE, CHARACTER_SIZE, 1.0f), glm::vec3(0.0f, 0.0f, 0.0f), 0.0f, false, 0);			// 3
+	GameObject::GameObject_Instance_CREATE(MACHO, glm::vec3(-50.0f, 0.0f, 0.0f), glm::vec3(CHARACTER_SIZE, CHARACTER_SIZE, 1.0f), glm::vec3(0.0f, 0.0f, 0.0f), 0.0f, false, 0);			// 2
+	//GameObject::GameObject_Instance_CREATE(BENNY, glm::vec3(-100.0f, 0.0f, 0.0f), glm::vec3(CHARACTER_SIZE, CHARACTER_SIZE, 1.0f), glm::vec3(0.0f, 0.0f, 0.0f), 0.0f, false, 0);		// 1
 	
 
-	testGameObject = GameObject::GameObject_Instance_CREATE(TEST, glm::vec3(100.0f, 100.0f, 0.0f), glm::vec3(150.0f, 150.0f, 1.0f), glm::vec3(0.0f, 0.0f, 0.0f), 0.0f, false, 0);
-	testAnim = GameObject::GameObject_Instance_CREATE(BENNY, glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(150.0f, 150.0f, 1.0f), glm::vec3(0.0f, 0.0f, 0.0f), 0.0f, true, 6);
+	testGameObject = GameObject::GameObject_Instance_CREATE(TEST, glm::vec3(0.0f, 150.0f, 0.0f), glm::vec3(100.0f, 100.0f, 1.0f), glm::vec3(0.0f, 0.0f, 0.0f), 0.0f, false, 0);
+	testAnim = GameObject::GameObject_Instance_CREATE(BENNY, glm::vec3(-100.0f, 0.0f, 0.0f), glm::vec3(CHARACTER_SIZE, CHARACTER_SIZE, 1.0f), glm::vec3(0.0f, 0.0f, 0.0f), 0.0f, true, 6);
 	/* Test gameObject end */
 
 	std::cout << "State Initialized" << std::endl;

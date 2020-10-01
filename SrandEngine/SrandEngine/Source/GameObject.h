@@ -21,10 +21,8 @@
 
 
 enum gameObject_TAG									// Tag for GameObjects
-{													// range [-9, 10] 
+{													
 	DEFAULT = 0,
-
-	BG,				// Background
 
 	PLATFORM,		// Object
 	ELEMENT,
