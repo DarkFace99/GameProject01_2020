@@ -1,10 +1,10 @@
 #pragma once
 
-#include <SDL.h>
+#include <GLFW/glfw3.h>
 
 #include<iostream>
 
-//extern SDL_Event sdlEvent;
+extern GLFWwindow* window;
 
 enum INPUT_MODE
 {
@@ -13,14 +13,6 @@ enum INPUT_MODE
 	TESTING_MODE
 };
 
-void HandleKeys(char key) 
-{
-	switch (key)
-	{
-		case 'a':
-			std::cout << "a" << std::endl;
-			break;
-		default:
-			break;
-	}
-}
+/*Use this in Game Update Function*/
+void SystemPollEvent(GLFWwindow* window);
+void HandleKeys(char key);

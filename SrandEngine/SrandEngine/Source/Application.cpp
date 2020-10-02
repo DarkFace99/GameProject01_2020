@@ -1,5 +1,3 @@
-#include <SDL.h>
-
 #include <iostream>
 
 #include <GL/glew.h>
@@ -13,9 +11,6 @@
 
 /*Initialize Window*/
 GLFWwindow* window;
-
-/*Initialize SDL Event*/
-SDL_Event sdlEvent;
 
 /*---------------------------------Temporary---------------------------------*/
 // variables to keep track the current, previous and next game state
@@ -62,26 +57,8 @@ int main(int argc, char* args[])
         framenumber++;
 
         /* Poll for and process events */
-        //glfwPollEvents();
-        SDL_PollEvent(&sdlEvent);
-        switch (sdlEvent.type)
-        {
-            case SDL_QUIT:
-                glfwWindowShouldClose(window);
-                break;
-            case SDL_KEYDOWN:
-                switch (sdlEvent.key.keysym.sym)
-                {
-                    case SDLK_a:
-                        printf("a\n");
-                        break;
-                }
-            default:
-                break;
-        }
-
-        //std::cout << "HERE" << std::endl;
-
+        //SystemPollEvent(window);
+        
         int state = 0;
         GameStateUpdate(frameTime, framenumber, state);
         GameStateDraw();

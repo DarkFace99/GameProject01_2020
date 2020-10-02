@@ -1,2 +1,6 @@
-﻿  TestRender.cpp
+﻿  Application.cpp
+D:\Projects\Project\GameProject01_2020\SrandEngine\SrandEngine\Source\Application.cpp(33,21): warning C4244: 'initializing': conversion from 'double' to 'long', possible loss of data
+  Input.cpp
+  TestRender.cpp
+  Generating Code...
   SrandEngine.vcxproj -> D:\Projects\Project\GameProject01_2020\SrandEngine\Debug\SrandEngine.exe

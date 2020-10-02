@@ -103,6 +103,8 @@ void GameStateLevel1Init(void)
 }
 void GameStateLevel1Update(double dt, long frame, int& state) 
 {
+	SystemPollEvent(window);
+
 	if (frame % 10 == 0) {
 		for (int i = 0; i < MAX_INSTANCE_GAMEOBJECTS; i++) {
 			GameObject* pInst = gameObjectInstance_Array + i;
