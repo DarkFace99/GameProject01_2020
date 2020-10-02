@@ -1,4 +1,7 @@
+#include <SDL.h>
+
 #include <iostream>
+
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 #include <glm.hpp>
@@ -6,9 +9,13 @@
 /*Include Custom header files*/
 #include "System.h"
 #include "TestRender.h"
+#include "Input.h"
 
 /*Initialize Window*/
 GLFWwindow* window;
+
+/*Initialize SDL Event*/
+SDL_Event sdlEvent;
 
 /*---------------------------------Temporary---------------------------------*/
 // variables to keep track the current, previous and next game state
@@ -30,7 +37,7 @@ void(*GameStateUnload)() = 0;
 double  frameTime = 0.0;
 long    framenumber = 0.0;
 
-int main(void)
+int main(int argc, char* args[])
 {
     /*All System Initialize*/
     SystemInit(SCREEN_WIDTH, SCREEN_HEIGTH, "Hello World");
@@ -55,7 +62,25 @@ int main(void)
         framenumber++;
 
         /* Poll for and process events */
-        glfwPollEvents();
+        //glfwPollEvents();
+        SDL_PollEvent(&sdlEvent);
+        switch (sdlEvent.type)
+        {
+            case SDL_QUIT:
+                glfwWindowShouldClose(window);
+                break;
+            case SDL_KEYDOWN:
+                switch (sdlEvent.key.keysym.sym)
+                {
+                    case SDLK_a:
+                        printf("a\n");
+                        break;
+                }
+            default:
+                break;
+        }
+
+        //std::cout << "HERE" << std::endl;
 
         int state = 0;
         GameStateUpdate(frameTime, framenumber, state);
