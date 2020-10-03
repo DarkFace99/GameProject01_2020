@@ -14,5 +14,5 @@ enum INPUT_MODE
 };
 
 /*Use this in Game Update Function*/
-void SystemPollEvent(GLFWwindow* window);
-void HandleKeys(char key);
+void SystemPollEvent(GLFWwindow* window, int& inputMode);
+void HandleKeys(std::string key);

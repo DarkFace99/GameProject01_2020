@@ -17,6 +17,10 @@ Mesh		testMesh;
 GameObject* testGameObject;
 GameObject* testAnim;
 
+/* Test input */
+int			inputMode = GAME_MODE;
+
+
 void GameStateLevel1Load(void) 
 {
 	/* for assign value in meshArray & texArray */
@@ -103,7 +107,8 @@ void GameStateLevel1Init(void)
 }
 void GameStateLevel1Update(double dt, long frame, int& state) 
 {
-	SystemPollEvent(window);
+	/*Testing Pool event*/
+	SystemPollEvent(window, inputMode);
 
 	if (frame % 10 == 0) {
 		for (int i = 0; i < MAX_INSTANCE_GAMEOBJECTS; i++) {

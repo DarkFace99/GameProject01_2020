@@ -56,9 +56,6 @@ int main(int argc, char* args[])
         frameTime = FrameStart();
         framenumber++;
 
-        /* Poll for and process events */
-        //SystemPollEvent(window);
-        
         int state = 0;
         GameStateUpdate(frameTime, framenumber, state);
         GameStateDraw();
