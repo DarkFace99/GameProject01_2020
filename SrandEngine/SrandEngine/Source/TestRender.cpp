@@ -1,5 +1,4 @@
 #include "TestRender.h"
-#include "GameObject.h"
 
 #define COLOR_MODE 0
 #define TEXTURE_MODE 1
@@ -153,6 +152,39 @@ void GameStateLevel1Init(void)
 }
 void GameStateLevel1Update(double dt, long frame, int& state) 
 {
+	/* ----------------------------Test Camera---------------------------- */
+	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS) 
+	{
+		MoveCamera(glm::vec3(0.0f, 3.0f, 0.0f));
+		std::cout << "Up" << std::endl;
+	}
+	else if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
+	{
+		MoveCamera(glm::vec3(-3.0f, 0.0f, 0.0f));
+		std::cout << "Left" << std::endl;
+	}
+	else if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
+	{
+		MoveCamera(glm::vec3(0.0f, -3.0f, 0.0f));
+		std::cout << "Down" << std::endl;
+	}
+	else if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
+	{
+		MoveCamera(glm::vec3(3.0f, 0.0f, 0.0f));
+		std::cout << "Right" << std::endl;
+	}
+	else if (glfwGetKey(window, GLFW_KEY_I) == GLFW_PRESS)
+	{
+		CamZoomIn(0.1f);
+		std::cout << "In" << std::endl;
+	}
+	else if (glfwGetKey(window, GLFW_KEY_O) == GLFW_PRESS)
+	{
+		CamZoomOut(0.1f);
+		std::cout << "Out" << std::endl;
+	}
+	/* ----------------------------Test Camera---------------------------- */
+
 	if (frame % 10 == 0) {
 		for (int i = 0; i < MAX_INSTANCE_GAMEOBJECTS; i++) {
 			GameObject* pInst = gameObjectInstance_Array + i;
