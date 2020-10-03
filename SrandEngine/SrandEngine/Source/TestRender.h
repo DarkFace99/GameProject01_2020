@@ -17,6 +17,7 @@ extern GLFWwindow* window;
 #include "Input.h"
 #include "Renderable.h"
 #include "GameObject.h"
+#include "Camera.h"
 
 // ---------------------------------------------------------------------------
 

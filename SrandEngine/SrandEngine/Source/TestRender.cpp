@@ -1,7 +1,8 @@
 #include "TestRender.h"
-#include "GameObject.h"
+
 #define COLOR_MODE 0
 #define TEXTURE_MODE 1
+#define CHARACTER_SIZE 96
 
 extern Mesh			meshArray[MAX_MESH];							// Store all unique shape/mesh in your game
 extern int			numMesh;
@@ -84,11 +85,37 @@ void GameStateLevel1Load(void)
 	vertices.push_back(v4);
 
 	/* Point array to slot of the test GameObject mesh & array according to TYPE */
+	//meshPtr = meshArray + BENNY;
+	//texPtr = texArray + BENNY;
+	/* Assign value */
+	//*meshPtr = LoadMesh(vertices);
+	//*texPtr = LoadTexture("Assets/Benny.png");
+
+	meshPtr = meshArray + MACHO;
+	texPtr = texArray + MACHO;
+	*meshPtr = LoadMesh(vertices);
+	*texPtr = LoadTexture("Assets/Macho.png");
+
+	meshPtr = meshArray + CHERRY;
+	texPtr = texArray + CHERRY;
+	*meshPtr = LoadMesh(vertices);
+	*texPtr = LoadTexture("Assets/Cherry.png");
+
+	meshPtr = meshArray + PEAR;
+	texPtr = texArray + PEAR;
+	*meshPtr = LoadMesh(vertices);
+	*texPtr = LoadTexture("Assets/Pear.png");
+
+	meshPtr = meshArray + BARTER;
+	texPtr = texArray + BARTER;
+	*meshPtr = LoadMesh(vertices);
+	*texPtr = LoadTexture("Assets/BARTER.png");
+
 	meshPtr = meshArray + TEST;
 	texPtr = texArray + TEST;
-	/* Assign value */
 	*meshPtr = LoadMesh(vertices);
 	*texPtr = LoadTexture("Assets/blank.png");
+	
 
 	std::cout << "State Loaded" << std::endl;
 }
@@ -98,9 +125,31 @@ void GameStateLevel1Init(void)
 	testMesh.modelMatrix = glm::scale(testMesh.modelMatrix, glm::vec3(100.0f, 100.0f, 1.0f));
 
 	/* Test gameObject here */
+	// NOT IN ORDER
+	/*
+	//GameObject::GameObject_Instance_CREATE(BENNY, glm::vec3(-100.0f, 0.0f, 0.0f), glm::vec3(CHARACTER_SIZE, CHARACTER_SIZE, 1.0f), glm::vec3(0.0f, 0.0f, 0.0f), 0.0f, false, 0);		// 1
+	GameObject::GameObject_Instance_CREATE(MACHO, glm::vec3(-50.0f, 0.0f, 0.0f), glm::vec3(CHARACTER_SIZE, CHARACTER_SIZE, 1.0f), glm::vec3(0.0f, 0.0f, 0.0f), 0.0f, false, 0);			// 2
+	GameObject::GameObject_Instance_CREATE(CHERRY, glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(CHARACTER_SIZE, CHARACTER_SIZE, 1.0f), glm::vec3(0.0f, 0.0f, 0.0f), 0.0f, false, 0);			// 3
+	GameObject::GameObject_Instance_CREATE(PEAR, glm::vec3(50.0f, 0.0f, 0.0f), glm::vec3(CHARACTER_SIZE, CHARACTER_SIZE, 1.0f), glm::vec3(0.0f, 0.0f, 0.0f), 0.0f, false, 0);			// 4
+	GameObject::GameObject_Instance_CREATE(BARTER, glm::vec3(100.0f, 0.0f, 0.0f), glm::vec3(CHARACTER_SIZE, CHARACTER_SIZE, 1.0f), glm::vec3(0.0f, 0.0f, 0.0f), 0.0f, false, 0);		// 5
+	*/
+	/*
+	//GameObject::GameObject_Instance_CREATE(BENNY, glm::vec3(-100.0f, 0.0f, 0.0f), glm::vec3(CHARACTER_SIZE, CHARACTER_SIZE, 1.0f), glm::vec3(0.0f, 0.0f, 0.0f), 0.0f, false, 0);		// 1
+	GameObject::GameObject_Instance_CREATE(BARTER, glm::vec3(100.0f, 0.0f, 0.0f), glm::vec3(CHARACTER_SIZE, CHARACTER_SIZE, 1.0f), glm::vec3(0.0f, 0.0f, 0.0f), 0.0f, false, 0);		// 5
+	GameObject::GameObject_Instance_CREATE(MACHO, glm::vec3(-50.0f, 0.0f, 0.0f), glm::vec3(CHARACTER_SIZE, CHARACTER_SIZE, 1.0f), glm::vec3(0.0f, 0.0f, 0.0f), 0.0f, false, 0);			// 2
+	GameObject::GameObject_Instance_CREATE(PEAR, glm::vec3(50.0f, 0.0f, 0.0f), glm::vec3(CHARACTER_SIZE, CHARACTER_SIZE, 1.0f), glm::vec3(0.0f, 0.0f, 0.0f), 0.0f, false, 0);			// 4
+	GameObject::GameObject_Instance_CREATE(CHERRY, glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(CHARACTER_SIZE, CHARACTER_SIZE, 1.0f), glm::vec3(0.0f, 0.0f, 0.0f), 0.0f, false, 0);			// 3
+	*/
+	
+	GameObject::GameObject_Instance_CREATE(BARTER, glm::vec3(100.0f, 0.0f, 0.0f), glm::vec3(CHARACTER_SIZE, CHARACTER_SIZE, 1.0f), glm::vec3(0.0f, 0.0f, 0.0f), 0.0f, false, 0);		// 5
+	GameObject::GameObject_Instance_CREATE(PEAR, glm::vec3(50.0f, 0.0f, 0.0f), glm::vec3(CHARACTER_SIZE, CHARACTER_SIZE, 1.0f), glm::vec3(0.0f, 0.0f, 0.0f), 0.0f, false, 0);			// 4
+	GameObject::GameObject_Instance_CREATE(CHERRY, glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(CHARACTER_SIZE, CHARACTER_SIZE, 1.0f), glm::vec3(0.0f, 0.0f, 0.0f), 0.0f, false, 0);			// 3
+	GameObject::GameObject_Instance_CREATE(MACHO, glm::vec3(-50.0f, 0.0f, 0.0f), glm::vec3(CHARACTER_SIZE, CHARACTER_SIZE, 1.0f), glm::vec3(0.0f, 0.0f, 0.0f), 0.0f, false, 0);			// 2
+	//GameObject::GameObject_Instance_CREATE(BENNY, glm::vec3(-100.0f, 0.0f, 0.0f), glm::vec3(CHARACTER_SIZE, CHARACTER_SIZE, 1.0f), glm::vec3(0.0f, 0.0f, 0.0f), 0.0f, false, 0);		// 1
+	
 
-	testGameObject = GameObject::GameObject_Instance_CREATE(TEST, glm::vec3(100.0f, 100.0f, 0.0f), glm::vec3(150.0f, 150.0f, 1.0f), glm::vec3(0.0f, 0.0f, 0.0f), 0.0f, false, 0);
-	testAnim = GameObject::GameObject_Instance_CREATE(BENNY, glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(150.0f, 150.0f, 1.0f), glm::vec3(0.0f, 0.0f, 0.0f), 0.0f, true, 6);
+	testGameObject = GameObject::GameObject_Instance_CREATE(TEST, glm::vec3(0.0f, 150.0f, 0.0f), glm::vec3(100.0f, 100.0f, 1.0f), glm::vec3(0.0f, 0.0f, 0.0f), 0.0f, false, 0);
+	testAnim = GameObject::GameObject_Instance_CREATE(BENNY, glm::vec3(-100.0f, 0.0f, 0.0f), glm::vec3(CHARACTER_SIZE, CHARACTER_SIZE, 1.0f), glm::vec3(0.0f, 0.0f, 0.0f), 0.0f, true, 6);
 	/* Test gameObject end */
 
 	std::cout << "State Initialized" << std::endl;
@@ -160,8 +209,6 @@ void GameStateLevel1Draw(void)
 		SetTexture(*instPtr->GetTexture(), instPtr->GetOffsetX(), 0.0f);
 		SetTransform(instPtr->GetModelMatrix());
 		DrawMesh(*instPtr->GetMesh());
-		//std::cout << "Texture: " <<*instPtr->GetTexture() << std::endl;
-		//std::cout << "ModelMat: " << glm::to_string(instPtr->GetModelMatrix()) << std::endl;
 
 		/* Test gameObject end */
 	}
@@ -198,3 +245,6 @@ void GameStateLevel1Unload(void)
 
 	std::cout << "State Unloaded" << std::endl;
 }
+
+
+/* This is Layer Branch */
