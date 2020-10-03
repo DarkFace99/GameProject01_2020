@@ -1,2 +1,11 @@
 ﻿  Application.cpp
-  SrandEngine.vcxproj -> D:\GameProject_2020\GameProject01_2020\SrandEngine\Debug\SrandEngine.exe
+D:\year2_1\DT230\GameProject\GameProject01_2020\SrandEngine\SrandEngine\Source\Application.cpp(31,21): warning C4244: 'initializing': conversion from 'double' to 'long', possible loss of data
+  GameObject.cpp
+D:\year2_1\DT230\GameProject\GameProject01_2020\SrandEngine\SrandEngine\Source\GameObject.cpp(33,49): warning C4244: '=': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+  TestRender.cpp
+  Generating Code...
+  SrandEngine.vcxproj -> D:\year2_1\DT230\GameProject\GameProject01_2020\SrandEngine\Debug\SrandEngine.exe

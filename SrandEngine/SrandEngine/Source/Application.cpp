@@ -1,39 +1,72 @@
 #include <iostream>
+#include <GL/glew.h>
 #include <GLFW/glfw3.h>
+#include <glm.hpp>
+
+/*Include Custom header files*/
+#include "System.h"
+#include "TestRender.h"
+
+/*Initialize Window*/
+GLFWwindow* window;
+
+/*---------------------------------Temporary---------------------------------*/
+// variables to keep track the current, previous and next game state
+unsigned int	gGameStateInit;
+unsigned int	gGameStateCurr;
+unsigned int	gGameStatePrev;
+unsigned int	gGameStateNext;
+
+// pointer to functions for game state levelX functions
+void(*GameStateLoad)() = 0;
+void(*GameStateInit)() = 0;
+void(*GameStateUpdate)(double, long, int&) = 0;
+void(*GameStateDraw)() = 0;
+void(*GameStateFree)() = 0;
+void(*GameStateUnload)() = 0;
+/*---------------------------------Temporary---------------------------------*/
+
+//Frame Rate
+double  frameTime = 0.0;
+long    framenumber = 0.0;
 
 int main(void)
 {
+    /*All System Initialize*/
+    SystemInit(SCREEN_WIDTH, SCREEN_HEIGTH, "Hello World");
+    RendererInit();
 
-    GLFWwindow* window;
+    GameStateLoad = GameStateLevel1Load;
+    GameStateInit = GameStateLevel1Init;
+    GameStateUpdate = GameStateLevel1Update;
+    GameStateDraw = GameStateLevel1Draw;
+    GameStateFree = GameStateLevel1Free;
+    GameStateUnload = GameStateLevel1Unload;
+    GameStateLoad();
 
-    /* Initialize the library */
-    if (!glfwInit())
-        return -1;
+    FrameInit();
+    GameStateInit();
+    framenumber = 0;
 
-    /* Create a windowed mode window and its OpenGL context */
-    window = glfwCreateWindow(1920, 1080, "Hello World", NULL, NULL);
-    if (!window)
+    /* Loop until the user closes the window or user press escape key*/
+    while (!glfwWindowShouldClose(window) && glfwGetKey(window, GLFW_KEY_ESCAPE) != GLFW_PRESS)
     {
-        glfwTerminate();
-        return -1;
-    }
-
-    /* Make the window's context current */
-    glfwMakeContextCurrent(window);
-
-    /* Loop until the user closes the window */
-    while (!glfwWindowShouldClose(window))
-    {
-        /* Render here */
-        glClear(GL_COLOR_BUFFER_BIT);
-
-        /* Swap front and back buffers */
-        glfwSwapBuffers(window);
+        frameTime = FrameStart();
+        framenumber++;
 
         /* Poll for and process events */
         glfwPollEvents();
+
+        int state = 0;
+        GameStateUpdate(frameTime, framenumber, state);
+        GameStateDraw();
+
     }
 
-    glfwTerminate();
+    GameStateFree();
+    GameStateUnload();
+
+    /*Shutdown all system*/
+    SystemShutdown();
     return 0;
 }
