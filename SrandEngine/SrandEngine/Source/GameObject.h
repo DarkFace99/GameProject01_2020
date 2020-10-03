@@ -20,24 +20,33 @@
 
 
 
-enum Character_TAG									// Tag for GameObjects
-{
-	BENNY = 0,
-	MACHO,
-	CHERRY,
-	PEAR,
-	BARTER,
+enum gameObject_TAG									// Tag for GameObjects
+{													
+	DEFAULT = 0,
 
-	NPC,
-	TEST	// for testing purpose
-};  	
+	PLATFORM,		// Object
+	ELEMENT,
+
+	NPC,			// Character
+	BARTER,
+	PEAR,
+	CHERRY,
+	MACHO,
+	BENNY,
+
+	UI,				// User Interface
+	TEST			// for testing purpose
+};
+
+
+
 class GameObject 
 {
 private:
 	Mesh*			mesh;
 	Texture*		texture;
 
-	int				c_tag;							// Characters Tag
+	int				tag;							// gameObject Tag
 	int				flag;
 	int				component_mode;					// Active or Inactive
 
