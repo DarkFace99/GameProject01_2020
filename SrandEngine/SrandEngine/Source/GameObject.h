@@ -13,7 +13,7 @@
 
 #define MAX_MESH					64				// The total number of Mesh (Shape)
 #define MAX_TEXTURE					64				// The total number of texture
-#define MAX_INSTANCE_GAMEOBJECTS	1024			// The total number of different game object instances
+#define MAX_INSTANCE_GAMEOBJECTS	50			// The total number of different game object instances
 
 #define FLAG_ACTIVE_GAMEOBJECT					1
 #define FLAG_INACTIVE_GAMEOBJECT				0
@@ -43,12 +43,16 @@ enum gameObject_TAG									// Tag for GameObjects
 class GameObject 
 {
 private:
+
+
+
 	Mesh*			mesh;
 	Texture*		texture;
 
 	int				tag;							// gameObject Tag
 	int				flag;
-	int				component_mode;					// Active or Inactive
+	int				controlling;
+
 
 	glm::vec3		position;						// For 2D use only X and Y, set Z to O
 	glm::vec3		scale;							// For 2D use only X and Y, set Z to 1
@@ -64,6 +68,7 @@ private:
 	int				gameObject_Direction;			// Facing: left = 0 and right = 1
 
 	double			counter;		// use in state machine, to countdown the time in order to pause some movement
+
 
 public:
 

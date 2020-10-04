@@ -1,5 +1,6 @@
 #include "GameObject.h"
 
+
 Mesh		    meshArray[MAX_MESH];							// Store all unique shape/mesh in your game
 int				numMesh;
 Texture			texArray[MAX_TEXTURE];							// Corresponding texture of the mesh
@@ -50,9 +51,12 @@ void GameObject::GameObject_Instance_DESTROY(GameObject& InstancePointer)
 }
 
 /* For Draw f() */
-int			GameObject::GetFlag() { return flag; }
-Mesh*		GameObject::GetMesh() { return mesh; }
-Texture*	GameObject::GetTexture() { return texture; }
+int			GameObject::GetFlag()		{ return flag; }
+Mesh*		GameObject::GetMesh()		{ return mesh; }
+Texture*	GameObject::GetTexture()	{ return texture; }
+int			GameObject::GetTag()		{ return g_tag; }
+int			GameObject::GetControl()	{ return controlling; }
+
 glm::mat4	GameObject::GetModelMatrix() { 
 	
 	glm::mat4 resultMat = glm::mat4(1.0f);
@@ -60,12 +64,12 @@ glm::mat4	GameObject::GetModelMatrix() {
 	resultMat = glm::scale(resultMat, scale);
 	resultMat = glm::rotate(resultMat, orientation * 3.14f/180.0f, glm::vec3(0,0,1));
 	return resultMat;
-}
-
-bool GameObject::GetAnimStatus()
-{
-	return animActivate;
-}
+}
+
+bool GameObject::GetAnimStatus()
+{
+	return animActivate;
+}
 void		GameObject::IncrementOffsetX()
 {
 	GameObject::offsetX += 1.0f / (float)GameObject::numFrame;
@@ -74,17 +78,17 @@ void		GameObject::IncrementOffsetX()
 		GameObject::offsetX = 0.0f;
 	}
 }
-//void		GameObject::SetOffsetY(float offsetY) 
-//{
-//	GameObject::offsetY = offsetY;
-//}
-float		GameObject::GetOffsetX()
-{
-	return offsetX;
-}
-//float		GameObject::GetOffsetY()
-//{
-//	return offsetY;
-//}
+//void		GameObject::SetOffsetY(float offsetY) 
+//{
+//	GameObject::offsetY = offsetY;
+//}
+float		GameObject::GetOffsetX()
+{
+	return offsetX;
+}
+//float		GameObject::GetOffsetY()
+//{
+//	return offsetY;
+//}
 
 		
