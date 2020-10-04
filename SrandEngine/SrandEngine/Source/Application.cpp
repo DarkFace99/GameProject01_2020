@@ -1,4 +1,5 @@
 #include <iostream>
+
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 #include <glm.hpp>
@@ -6,6 +7,7 @@
 /*Include Custom header files*/
 #include "System.h"
 #include "TestRender.h"
+#include "Input.h"
 
 /*Initialize Window*/
 GLFWwindow* window;
@@ -30,7 +32,7 @@ void(*GameStateUnload)() = 0;
 double  frameTime = 0.0;
 long    framenumber = 0.0;
 
-int main(void)
+int main(int argc, char* args[])
 {
     /*All System Initialize*/
     SystemInit(SCREEN_WIDTH, SCREEN_HEIGTH, "Hello World");
@@ -53,9 +55,6 @@ int main(void)
     {
         frameTime = FrameStart();
         framenumber++;
-
-        /* Poll for and process events */
-        glfwPollEvents();
 
         int state = 0;
         GameStateUpdate(frameTime, framenumber, state);

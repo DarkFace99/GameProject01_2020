@@ -10,7 +10,7 @@ int				numGameObj;
 
 
 
-GameObject* GameObject::GameObject_Instance_CREATE(int tag, glm::vec3 pos, glm::vec3 scale, glm::vec3 vel, float orient, int control)
+GameObject* GameObject::GameObject_Instance_CREATE(int tag, glm::vec3 pos, glm::vec3 scale, glm::vec3 vel, float orient, bool setAnim, int numFrame)
 {
 	for (int i = 0; i < MAX_INSTANCE_GAMEOBJECTS; i++) {
 		GameObject* InstancePointer = gameObjectInstance_Array + i;
@@ -18,15 +18,20 @@ GameObject* GameObject::GameObject_Instance_CREATE(int tag, glm::vec3 pos, glm::
 
 			InstancePointer->mesh = meshArray + tag;
 			InstancePointer->texture = texArray + tag;
-			InstancePointer->g_tag = tag;
-			InstancePointer->controlling = control;
+			InstancePointer->tag = tag;
 			InstancePointer->flag = FLAG_ACTIVE_GAMEOBJECT;
 			InstancePointer->position = pos;
 			InstancePointer->velocity = vel;
 			InstancePointer->scale = scale;
 			InstancePointer->orientation = orient;
 			InstancePointer->modelMatrix = glm::mat4(1.0f);
+			InstancePointer->animActivate = setAnim;
+			InstancePointer->numFrame = numFrame;
+			InstancePointer->offsetX = 0.0f;
+			//InstancePointer->offsetY = 0.0f;
 
+			
+			InstancePointer->position.z = InstancePointer->tag;		// assign layer according to game object tag
 			numGameObj++;
 			return InstancePointer;
 		}
@@ -59,13 +64,31 @@ glm::mat4	GameObject::GetModelMatrix() {
 	resultMat = glm::scale(resultMat, scale);
 	resultMat = glm::rotate(resultMat, orientation * 3.14f/180.0f, glm::vec3(0,0,1));
 	return resultMat;
+}
+
+bool GameObject::GetAnimStatus()
+{
+	return animActivate;
+}
+void		GameObject::IncrementOffsetX()
+{
+	GameObject::offsetX += 1.0f / (float)GameObject::numFrame;
+	if (GameObject::offsetX > ((float)GameObject::numFrame - 0.9f) / (float)GameObject::numFrame) 
+	{
+		GameObject::offsetX = 0.0f;
+	}
 }
+//void		GameObject::SetOffsetY(float offsetY) 
+//{
+//	GameObject::offsetY = offsetY;
+//}
+float		GameObject::GetOffsetX()
+{
+	return offsetX;
+}
+//float		GameObject::GetOffsetY()
+//{
+//	return offsetY;
+//}
 
-glm::vec3 GameObject::GetPosition()
-{
-	return position;
-}
-glm::vec3 GameObject::GetScale() 
-{
-	return scale;
-}
+		
