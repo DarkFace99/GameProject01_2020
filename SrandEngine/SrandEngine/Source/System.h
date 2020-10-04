@@ -6,8 +6,8 @@
 
 /* Initialize Window */
 extern GLFWwindow* window;
-#define SCREEN_WIDTH    1920
-#define SCREEN_HEIGTH   1080
+#define SCREEN_WIDTH    1280
+#define SCREEN_HEIGTH   720
 
 /* Standard C/C++ */
 #include <iostream>

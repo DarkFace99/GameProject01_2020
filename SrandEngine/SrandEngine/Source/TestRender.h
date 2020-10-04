@@ -14,10 +14,8 @@ extern GLFWwindow* window;
 // Include GLM
 #include <glm.hpp>
 
-#include "Input.h"
 #include "Renderable.h"
 #include "GameObject.h"
-#include "Camera.h"
 
 // ---------------------------------------------------------------------------
 
