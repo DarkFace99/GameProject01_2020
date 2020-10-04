@@ -12,7 +12,6 @@
 #include "System.h"
 #include "Shader.h"
 #include "SOIL.h"
-#include "Camera.h"
 
 
 /* Typdef for Texture */
