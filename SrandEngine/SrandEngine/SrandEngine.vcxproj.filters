@@ -38,4 +38,9 @@
       <UniqueIdentifier>{ca40bbc0-2e05-43b0-a5e1-ee9b95494a41}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Source\ECS.h">
+      <Filter>ECS\Header File</Filter>
+    </ClInclude>
+  </ItemGroup>
 </Project>
