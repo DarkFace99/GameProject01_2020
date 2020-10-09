@@ -7,13 +7,13 @@ int						renderMode; // 0 = color, 1 = texture
 float					transparency; // Alpha value
 
 //Camera-----------------------------------
-//glm::vec3				campos;
-//glm::vec3				camdir;
-//glm::vec3				camup;
-//float					camzoom;
-//float					camdegree;
-//glm::mat4				viewMatrix;
-//glm::mat4				projectionMatrix;
+glm::vec3				campos;
+glm::vec3				camdir;
+glm::vec3				camup;
+float					camzoom;
+float					camdegree;
+glm::mat4				viewMatrix;
+glm::mat4				projectionMatrix;
 
 #define COLOR_MODE 0
 #define TEXTURE_MODE 1
@@ -93,15 +93,13 @@ void RendererInit()
 	transparency = 1.0f;
 
 	// set cam, model view proj matrix
-	CameraInit(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, -1.0f), glm::vec3(0.0f, 1.0f, 0.0f), 1.0f, 0.0f);
-
-	/*campos = glm::vec3(0.0f, 0.0f, 0.0f);
+	campos = glm::vec3(0.0f, 0.0f, 0.0f);
 	camdir = glm::vec3(0.0f, 0.0f, -1.0f);
 	camup = glm::vec3(0.0f, 1.0f, 0.0f);
 	camzoom = 1.0f;
 	camdegree = 0.0f;
-	projectionMatrix = glm::ortho(-(width / 2) * camzoom, (width / 2) * camzoom, -(height / 2) * camzoom, (height / 2) * camzoom, -20.0f, 20.0f);
-	viewMatrix = glm::lookAt(campos, campos + camdir, camup);*/
+	projectionMatrix = glm::ortho(-(width / 2) * camzoom, (width / 2) * camzoom, -(height / 2) * camzoom, (height / 2) * camzoom, -10.0f, 10.0f);
+	viewMatrix = glm::lookAt(campos, campos + camdir, camup);
 }
 
 
@@ -209,11 +207,8 @@ void SetTexture(Texture texture, float offsetX, float offsetY)
 }
 void SetTransform(const glm::mat4& modelMat) 
 {
-	glm::mat4 projectionMat = GetProjectionMat();
-	glm::mat4 viewMatrix = GetViewMatrix();
-
 	/*Set transform of the objects relative to camera*/
-	MVP = projectionMat * viewMatrix * modelMat;
+	MVP = projectionMatrix * viewMatrix * modelMat;
 	glUniformMatrix4fv(glGetUniformLocation(shader, "MVP"), 1, GL_FALSE, &MVP[0][0]);
 }
 /*----------------------------------------------------Set Renderer Function----------------------------------------------------------------*/

@@ -146,9 +146,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Source\Application.cpp" />
-    <ClCompile Include="Source\Camera.cpp" />
+    <ClCompile Include="Source\Collision.cpp" />
     <ClCompile Include="Source\GameObject.cpp" />
-    <ClCompile Include="Source\Input.cpp" />
     <ClCompile Include="Source\Renderable.cpp" />
     <ClCompile Include="Source\Shader.cpp" />
     <ClCompile Include="Source\System.cpp" />
@@ -156,9 +155,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SOIL.h" />
-    <ClInclude Include="Source\Camera.h" />
+    <ClInclude Include="Source\Collision.h" />
     <ClInclude Include="Source\GameObject.h" />
-    <ClInclude Include="Source\Input.h" />
     <ClInclude Include="Source\Renderable.h" />
     <ClInclude Include="Source\Shader.h" />
     <ClInclude Include="Source\System.h" />
