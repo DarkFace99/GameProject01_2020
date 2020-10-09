@@ -1,63 +1,41 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;c++;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    <Filter Include="Old Source">
+      <UniqueIdentifier>{852a6f2a-fa73-49d5-bd7e-b08a07d817e5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    <Filter Include="ECS">
+      <UniqueIdentifier>{206a4e1d-11e6-4e5d-ac9d-7320da700d25}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    <Filter Include="ECS\Header File">
+      <UniqueIdentifier>{ba9c9f99-f9bc-4d84-b2d9-af71eecc0202}</UniqueIdentifier>
     </Filter>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="Source\Application.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Shader.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\System.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Renderable.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\GameObject.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\TestRender.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Collision.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Source\Shader.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\System.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Renderable.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\GameObject.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\TestRender.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SOIL.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Collision.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
+    <Filter Include="ECS\Source File">
+      <UniqueIdentifier>{a35c2bbd-29ab-4ea2-8e00-9dfc680d2ffe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Old Source\Header File">
+      <UniqueIdentifier>{987e448f-27e1-43e5-892d-52ed73c32a25}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Old Source\Source File">
+      <UniqueIdentifier>{0ed5becd-574b-489b-b493-5adf818ae552}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Asset Manager">
+      <UniqueIdentifier>{9c3a07ee-b9a4-4ea2-90fd-dad35da0f8c7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Asset Manager\Header File">
+      <UniqueIdentifier>{a221fbf1-f1a9-47dc-914b-1ceeefea1f24}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Asset Manager\Source File">
+      <UniqueIdentifier>{33a5dafd-eb8b-430b-aaa4-87e902bde448}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game">
+      <UniqueIdentifier>{8ab40bc7-1778-4d2a-bd66-0376288f7d03}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Header File">
+      <UniqueIdentifier>{91522728-915a-4643-afdc-49b2f0fdbd2f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Source FIle">
+      <UniqueIdentifier>{ca40bbc0-2e05-43b0-a5e1-ee9b95494a41}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>
