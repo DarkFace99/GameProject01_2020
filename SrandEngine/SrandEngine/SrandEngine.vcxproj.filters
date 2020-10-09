@@ -42,5 +42,8 @@
     <ClInclude Include="Source\ECS.h">
       <Filter>ECS\Header File</Filter>
     </ClInclude>
+    <ClInclude Include="Source\GameObject.h">
+      <Filter>ECS\Header File</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
