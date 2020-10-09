@@ -68,33 +68,27 @@ void HandleKeys(std::string key)
 	}
 	else if (key == "Camera_w")
 	{
-		MoveCamera(glm::vec3(0.0f, 3.0f, 0.0f));
-		//std::cout << key << std::endl;
+		std::cout << key << std::endl;
 	}
 	else if (key == "Camera_a")
 	{
-		MoveCamera(glm::vec3(-3.0f, 0.0f, 0.0f));
-		//std::cout << key << std::endl;
+		std::cout << key << std::endl;
 	}
 	else if (key == "Camera_s")
 	{
-		MoveCamera(glm::vec3(0.0f, -3.0f, 0.0f));
-		//std::cout << key << std::endl;
+		std::cout << key << std::endl;
 	}
 	else if (key == "Camera_d")
 	{
-		MoveCamera(glm::vec3(3.0f, 0.0f, 0.0f));
-		//std::cout << key << std::endl;
+		std::cout << key << std::endl;
 	}
 	else if (key == "Camera_i")
 	{
-		CamZoomIn(0.05f);
-		//std::cout << key << std::endl;
+		std::cout << key << std::endl;
 	}
 	else if (key == "Camera_o")
 	{
-		CamZoomOut(0.05f);
-		//std::cout << key << std::endl;
+		std::cout << key << std::endl;
 	}
 	else if (key == "Tab")
 	{
