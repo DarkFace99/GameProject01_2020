@@ -13,14 +13,14 @@
 
 #define MAX_MESH					64				// The total number of Mesh (Shape)
 #define MAX_TEXTURE					64				// The total number of texture
-#define MAX_INSTANCE_GAMEOBJECTS	1024			// The total number of different game object instances
+#define MAX_INSTANCE_GAMEOBJECTS	50			// The total number of different game object instances
 
 #define FLAG_ACTIVE_GAMEOBJECT					1
 #define FLAG_INACTIVE_GAMEOBJECT				0
 
 
 
-enum Character_TAG									// Tag for GameObjects
+enum Game_TAG									// Tag for GameObjects
 {
 	BENNY = 0,
 	MACHO,
@@ -28,18 +28,29 @@ enum Character_TAG									// Tag for GameObjects
 	PEAR,
 	BARTER,
 
+	OBSTACLES, // Obticle
+
 	NPC,
 	TEST	// for testing purpose
 };  	
+enum Controlled_TAG
+{
+	OUT_CONTROLLED = 0,
+	IN_CONTROLLED
+};
 class GameObject 
 {
 private:
+
+
+
 	Mesh*			mesh;
 	Texture*		texture;
 
-	int				c_tag;							// Characters Tag
+	int				g_tag;							// Characters Tag
 	int				flag;
-	int				component_mode;					// Active or Inactive
+	int				controlling;
+
 
 	glm::vec3		position;						// For 2D use only X and Y, set Z to O
 	glm::vec3		scale;							// For 2D use only X and Y, set Z to 1
@@ -51,9 +62,10 @@ private:
 
 	double							counter;		// use in state machine, to countdown the time in order to pause some movement
 
+
 public:
 
-	static GameObject*			GameObject_Instance_CREATE(int tag, glm::vec3 pos, glm::vec3 scale, glm::vec3 vel, float orient);
+	static GameObject*			GameObject_Instance_CREATE(int tag, glm::vec3 pos, glm::vec3 scale, glm::vec3 vel, float orient, int control);
 	static void					GameObject_Instance_DESTROY(GameObject &InstancePointer);
 
 	/* For Draw f() */
@@ -62,4 +74,9 @@ public:
 	Mesh*						GetMesh();
 	Texture*					GetTexture();
 	glm::mat4					GetModelMatrix();
+	int							GetTag();
+	int							GetControl();
+
+	glm::vec3					GetPosition();
+	glm::vec3					GetScale();
 };

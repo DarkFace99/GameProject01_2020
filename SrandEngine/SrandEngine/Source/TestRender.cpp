@@ -76,7 +76,7 @@ void GameStateLevel1Init(void)
 
 	/* Test gameObject here */
 
-	testGameObject = GameObject::GameObject_Instance_CREATE(TEST, glm::vec3(100.0f, 100.0f, 0.0f), glm::vec3(150.0f, 150.0f, 1.0f), glm::vec3(0.0f, 0.0f, 0.0f), 0.0f);
+	testGameObject = GameObject::GameObject_Instance_CREATE(TEST, glm::vec3(100.0f, 100.0f, 0.0f), glm::vec3(150.0f, 150.0f, 1.0f), glm::vec3(0.0f, 0.0f, 0.0f), 0.0f, OUT_CONTROLLED);
 
 	/* Test gameObject end */
 
