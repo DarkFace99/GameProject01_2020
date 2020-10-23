@@ -7,23 +7,24 @@
 class GameObject;
 class Component;
 
-constexpr std::size_t MAX_GAMEOBJECT = 2000;    // just a normal define with make it unsigned and const
-constexpr std::size_t MAX_GAMECOMPONENT = 30;   // just a normal define with make it unsigned and const
+constexpr std::size_t MAX_GAMEOBJECTS = 2000;    // just a normal define with make it unsigned and const
+constexpr std::size_t MAX_COMPONENTS = 30;   // just a normal define with make it unsigned and const
 
-using GameObjectList = std::bitset<MAX_GAMEOBJECT>;
-using ComponentList = std::bitset<MAX_GAMECOMPONENT>;
-using ComponentTypeID = std::size_t;
+using ComponentBitSet = std::bitset<MAX_COMPONENTS>;
+using ComponentList = std::array<Component* , MAX_COMPONENTS>;
 
-inline ComponentTypeID GetComponentID()
+using ComponentID = std::size_t; // store the size of the array
+
+inline ComponentID GetComponentUniqueID()
 {
-    static ComponentTypeID lastID = 0u;
+    static ComponentID lastID = 0u;
     return lastID++;
 }
 
 template <typename T>
-inline ComponentTypeID GetComponentTypeID() noexcept
+inline ComponentID GetComponentID() noexcept
 {
-    static_assert(std::is_base_of<GameComponent, T>::value, "Not Based on GameComponent!");
-    static const ComponentTypeID typeID = GetComponentID(); // To get the component ID as a const
-    return typeID;
+    static_assert(std::is_base_of<GameComponent, T>::value, "Not Based on GameComponent!"); // To check if the class that is using the function is a base class of GameComponent or not
+    static const ComponentID ID = GetComponentUniqueID(); // To get the component ID as a const
+    return ID;
 }
