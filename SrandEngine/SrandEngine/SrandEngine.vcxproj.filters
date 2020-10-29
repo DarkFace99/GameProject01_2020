@@ -45,11 +45,15 @@
     <ClInclude Include="Source\GameObject.h">
       <Filter>ECS\Header File</Filter>
     </ClInclude>
-    <ClInclude Include="Component.h">
+    <ClInclude Include="Source\Component.h">
       <Filter>ECS\Header File</Filter>
     </ClInclude>
-    <ClInclude Include="Transform.h">
+    <ClInclude Include="Source\Transform.h">
       <Filter>ECS\Header File</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Vector2D.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Source\Source.cpp" />
   </ItemGroup>
 </Project>
