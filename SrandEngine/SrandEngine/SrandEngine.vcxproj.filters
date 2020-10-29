@@ -51,9 +51,32 @@
     <ClInclude Include="Source\Transform.h">
       <Filter>ECS\Header File</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Vector2D.h" />
+    <ClInclude Include="Source\Vector2D.h">
+      <Filter>ECS\Header File</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Engine.h">
+      <Filter>ECS\Header File</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Vertex.h">
+      <Filter>ECS\Header File</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\AssetManager.h">
+      <Filter>ECS\Header File</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Mesh.h">
+      <Filter>ECS\Header File</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Source.cpp" />
+    <ClCompile Include="Source\AssetManager.cpp">
+      <Filter>ECS\Source File</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Engine.cpp">
+      <Filter>ECS\Source File</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Vertex.cpp">
+      <Filter>ECS\Source File</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
