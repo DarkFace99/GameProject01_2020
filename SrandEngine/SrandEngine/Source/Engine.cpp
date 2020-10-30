@@ -50,13 +50,12 @@ void Engine::Init() {
 
 void Engine::Draw(){
 
-    glClearColor(0.3f, 0.3f, 0.5f, 1.0f);
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
 }
 
 void Engine::Update() {
-
+    glClearColor(0.3f, 0.3f, 0.5f, 1.0f);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    glfwSwapBuffers(window);
 }
 
 void Engine::FixedUpdate() {
@@ -65,6 +64,11 @@ void Engine::FixedUpdate() {
 
 void Engine::Event() {
     // input
+    glfwPollEvents();
+    if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS) {
+        Quit();
+    }
+
 }
 
 void Engine::Clean() {
