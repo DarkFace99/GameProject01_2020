@@ -66,9 +66,11 @@
     <ClInclude Include="Source\Mesh.h">
       <Filter>ECS\Header File</Filter>
     </ClInclude>
+    <ClInclude Include="Source\SpriteRenderer.h">
+      <Filter>ECS\Source File</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Source\Source.cpp" />
     <ClCompile Include="Source\AssetManager.cpp">
       <Filter>ECS\Source File</Filter>
     </ClCompile>
@@ -76,6 +78,9 @@
       <Filter>ECS\Source File</Filter>
     </ClCompile>
     <ClCompile Include="Source\Vertex.cpp">
+      <Filter>ECS\Source File</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Application.cpp">
       <Filter>ECS\Source File</Filter>
     </ClCompile>
   </ItemGroup>

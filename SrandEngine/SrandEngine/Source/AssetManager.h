@@ -38,5 +38,6 @@ public:
 		if (s_instance == nullptr) {
 			s_instance = new AssetManager();
 		}
+		return *s_instance;
 	}
 };

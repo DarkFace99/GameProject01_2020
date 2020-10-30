@@ -32,6 +32,7 @@ public:
 	void Draw();
 	void Update();
 	void FixedUpdate();
+	void Event();
 
 	inline static Engine& get() {
 		if (s_instance == nullptr) {

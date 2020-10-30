@@ -63,6 +63,10 @@ void Engine::FixedUpdate() {
 
 }
 
+void Engine::Event() {
+    // input
+}
+
 void Engine::Clean() {
     AssetManager::get().Clean();
 
