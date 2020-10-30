@@ -45,11 +45,43 @@
     <ClInclude Include="Source\GameObject.h">
       <Filter>ECS\Header File</Filter>
     </ClInclude>
-    <ClInclude Include="Component.h">
+    <ClInclude Include="Source\Component.h">
       <Filter>ECS\Header File</Filter>
     </ClInclude>
-    <ClInclude Include="Transform.h">
+    <ClInclude Include="Source\Transform.h">
       <Filter>ECS\Header File</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Vector2D.h">
+      <Filter>ECS\Header File</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Engine.h">
+      <Filter>ECS\Header File</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Vertex.h">
+      <Filter>ECS\Header File</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\AssetManager.h">
+      <Filter>ECS\Header File</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Mesh.h">
+      <Filter>ECS\Header File</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\SpriteRenderer.h">
+      <Filter>ECS\Source File</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Source\AssetManager.cpp">
+      <Filter>ECS\Source File</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Engine.cpp">
+      <Filter>ECS\Source File</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Vertex.cpp">
+      <Filter>ECS\Source File</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Application.cpp">
+      <Filter>ECS\Source File</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
