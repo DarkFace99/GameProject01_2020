@@ -65,9 +65,9 @@ void Engine::FixedUpdate() {
 void Engine::Event() {
     // input
     glfwPollEvents();
-    if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS) {
-        Quit();
-    }
+    if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS) { Quit(); }
+    keyUpdate(window);
+    glfwSetKeyCallback(window, key_callBack);
 
 }
 
@@ -80,4 +80,32 @@ void Engine::Clean() {
 
 void Engine::Quit() {
     running = false;
+}
+
+
+void key_callBack(GLFWwindow* window, int key, int scancode, int action, int mods)
+{
+    if (key == GLFW_KEY_TAB && action == GLFW_PRESS)
+    {
+        std::cout << key << std::endl;   
+    }
+}
+void keyUpdate(GLFWwindow* window)
+{
+    if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS) 
+    {
+        std::cout << "W" << std::endl;
+    }
+    if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
+    {
+        std::cout << "A" << std::endl;
+    }
+    if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
+    {
+        std::cout << "S" << std::endl;
+    }
+    if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
+    {
+        std::cout << "D" << std::endl;
+    }
 }

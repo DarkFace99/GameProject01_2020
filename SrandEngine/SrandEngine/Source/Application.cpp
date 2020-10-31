@@ -15,5 +15,8 @@ int main(int argc, char** argv) {
 		engine.FixedUpdate();
 		engine.Draw();
 	}
+
+	engine.Clean();
+
 	return 0;
 }
