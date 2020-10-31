@@ -37,6 +37,15 @@
     <Filter Include="Game\Source FIle">
       <UniqueIdentifier>{ca40bbc0-2e05-43b0-a5e1-ee9b95494a41}</UniqueIdentifier>
     </Filter>
+    <Filter Include="System File">
+      <UniqueIdentifier>{82be2c74-873b-45b8-a73e-ed2b1679fedf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="System File\Header File">
+      <UniqueIdentifier>{db700d8f-ea56-4a0a-ac54-fc4a280cbab2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="System File\Source File">
+      <UniqueIdentifier>{18f860e2-f709-4cd2-be49-181b275b891d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\ECS.h">
@@ -54,9 +63,6 @@
     <ClInclude Include="Source\Vector2D.h">
       <Filter>ECS\Header File</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Engine.h">
-      <Filter>ECS\Header File</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Vertex.h">
       <Filter>ECS\Header File</Filter>
     </ClInclude>
@@ -66,15 +72,15 @@
     <ClInclude Include="Source\Mesh.h">
       <Filter>ECS\Header File</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Engine.h">
+      <Filter>System File\Header File</Filter>
+    </ClInclude>
     <ClInclude Include="Source\SpriteRenderer.h">
-      <Filter>ECS\Source File</Filter>
+      <Filter>ECS\Header File</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\AssetManager.cpp">
-      <Filter>ECS\Source File</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Engine.cpp">
       <Filter>ECS\Source File</Filter>
     </ClCompile>
     <ClCompile Include="Source\Vertex.cpp">
@@ -82,6 +88,9 @@
     </ClCompile>
     <ClCompile Include="Source\Application.cpp">
       <Filter>ECS\Source File</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Engine.cpp">
+      <Filter>System File\Source File</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
