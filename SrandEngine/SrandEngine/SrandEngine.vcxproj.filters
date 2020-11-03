@@ -51,9 +51,13 @@
     <ClInclude Include="Source\Transform.h">
       <Filter>ECS\Header File</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Vector2D.h" />
+    <ClInclude Include="Source\Vector2D.h">
+      <Filter>ECS\Header File</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Source\Source.cpp" />
+    <ClCompile Include="Source\TestMain.cpp">
+      <Filter>ECS\Source File</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
