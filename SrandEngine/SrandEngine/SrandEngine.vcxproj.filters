@@ -60,16 +60,7 @@
     <ClInclude Include="Source\Transform.h">
       <Filter>ECS\Header File</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Vector2D.h">
-      <Filter>ECS\Header File</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Vertex.h">
-      <Filter>ECS\Header File</Filter>
-    </ClInclude>
     <ClInclude Include="Source\AssetManager.h">
-      <Filter>ECS\Header File</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Mesh.h">
       <Filter>ECS\Header File</Filter>
     </ClInclude>
     <ClInclude Include="Source\Engine.h">
@@ -77,6 +68,18 @@
     </ClInclude>
     <ClInclude Include="Source\SpriteRenderer.h">
       <Filter>ECS\Header File</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Shader.h">
+      <Filter>System File\Header File</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Vertex.h">
+      <Filter>System File\Header File</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Mesh.h">
+      <Filter>System File\Header File</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Vector2D.h">
+      <Filter>System File\Header File</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -91,6 +94,12 @@
     </ClCompile>
     <ClCompile Include="Source\Engine.cpp">
       <Filter>System File\Source File</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Shader.cpp">
+      <Filter>System File\Source File</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\TestMain.cpp">
+      <Filter>ECS\Source File</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

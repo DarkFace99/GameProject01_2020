@@ -24,7 +24,7 @@ inline ComponentID GetComponentUniqueID()
 template <typename T>
 inline ComponentID GetComponentID() noexcept
 {
-    static_assert(std::is_base_of<GameComponent, T>::value, "Not Based on GameComponent!");     // To check if the class that is using the function is a base class of GameComponent or not
+    static_assert(std::is_base_of<Component, T>::value, "Not Based on Component!");     // To check if the class that is using the function is a base class of Component or not
     static const ComponentID ID = GetComponentUniqueID();                                       // To get the component ID as a const
     return ID;
 }

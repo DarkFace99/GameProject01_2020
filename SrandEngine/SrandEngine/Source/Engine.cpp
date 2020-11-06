@@ -68,7 +68,6 @@ void Engine::Event() {
     if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS) { Quit(); }
     keyUpdate(window);
     glfwSetKeyCallback(window, key_callBack);
-
 }
 
 void Engine::Clean() {
@@ -82,7 +81,11 @@ void Engine::Quit() {
     running = false;
 }
 
+/*---------------------------------*/
+/*		     Input Test		       */
+/*---------------------------------*/
 
+// Once
 void key_callBack(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
     if (key == GLFW_KEY_TAB && action == GLFW_PRESS)
@@ -90,6 +93,8 @@ void key_callBack(GLFWwindow* window, int key, int scancode, int action, int mod
         std::cout << key << std::endl;   
     }
 }
+
+// Continuous
 void keyUpdate(GLFWwindow* window)
 {
     if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS) 
