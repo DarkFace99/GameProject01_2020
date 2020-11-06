@@ -1,2 +1,4 @@
 
-SrandEngine/.vs/SrandEngine/v16/Browse.VC.opendb
+SrandEngine/.vs/SrandEngine/v16/Browse.VC.opendb 
+ 
+*.ipch 
