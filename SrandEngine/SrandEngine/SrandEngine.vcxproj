@@ -27,6 +27,7 @@
     <ClInclude Include="Source\GameObject.h" />
     <ClInclude Include="Source\Mesh.h" />
     <ClInclude Include="Source\Shader.h" />
+    <ClInclude Include="Source\RigidBody.h" />
     <ClInclude Include="Source\SpriteRenderer.h" />
     <ClInclude Include="Source\Transform.h" />
     <ClInclude Include="Source\Vector2D.h" />
