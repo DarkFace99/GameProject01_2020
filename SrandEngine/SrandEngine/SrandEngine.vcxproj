@@ -22,6 +22,7 @@
     <ClInclude Include="Source\AssetManager.h" />
     <ClInclude Include="Source\Component.h" />
     <ClInclude Include="Source\ECS.h" />
+    <ClInclude Include="Source\EntityManager.h" />
     <ClInclude Include="Source\Engine.h" />
     <ClInclude Include="Source\GameObject.h" />
     <ClInclude Include="Source\Mesh.h" />
@@ -31,6 +32,8 @@
     <ClInclude Include="Source\Vertex.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Source\EntityManager.cpp" />
+    <ClCompile Include="Source\TestMain.cpp" />
     <ClCompile Include="Source\Application.cpp" />
     <ClCompile Include="Source\AssetManager.cpp" />
     <ClCompile Include="Source\Engine.cpp" />
