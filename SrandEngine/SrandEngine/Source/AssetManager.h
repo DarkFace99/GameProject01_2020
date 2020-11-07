@@ -5,10 +5,9 @@
 #include <iostream>
 
 /* Custom Header */
-#include "Engine.h"
 #include "Mesh.h"
-#include "SOIL.h" 
-
+#include "SOIL.h"
+#include "Engine.h"
 
 /* Typdef for Texture */
 typedef GLuint Texture;

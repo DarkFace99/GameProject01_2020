@@ -12,7 +12,7 @@
 /* Initialize Window */
 #define SCREEN_WIDTH    1280
 #define SCREEN_HEIGTH   720
-#define WINDOW_NAME		"BENNY - Everyone is Happy"
+#define WINDOW_NAME		"BENNY: Everyone is Happy"
 #define FULLSCREEN		false
 
 class Engine {

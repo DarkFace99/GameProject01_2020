@@ -13,8 +13,7 @@ int main(int argc, char** argv) {
 	while (engine.IsRunning()) {
 		engine.Event();
 		engine.Update();
-		// need to impliment time later
-		engine.FixedUpdate();
+		engine.FixedUpdate();	// need to impliment time later
 		engine.Draw();
 	}
 

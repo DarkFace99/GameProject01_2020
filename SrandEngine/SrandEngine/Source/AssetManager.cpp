@@ -20,6 +20,10 @@ void AssetManager::Clean() {
 	meshes.clear();
 }
 
+/*---------------------------------*/
+/*		   Texture Function		   */	
+/*---------------------------------*/
+
 Texture* AssetManager::GetTexture(std::string id) {
 
 	// check if id exists in container, then return according to the result
@@ -57,10 +61,14 @@ void AssetManager::LoadTexture(std::string id, const char* filename) {
 			std::cout << "texture: [" << filename << "] loaded!" << std::endl;
 		}
 		else {
-			std::cout << "texture: [" << filename << "] **Load failed**" << std::endl;
+			std::cout << "//Error// texture: [" << filename << "] Load failed!" << std::endl;
 		}
 	}
 }
+
+/*---------------------------------*/
+/*		   Mesh Function		   */
+/*---------------------------------*/
 
 Mesh* AssetManager::GetMesh(std::string id) {
 	
@@ -122,7 +130,7 @@ void AssetManager::LoadMesh(std::string id, int frameCount) {
 			std::cout << "mesh: [" << id << "] Created!" << std::endl;
 		}
 		else {
-			std::cout << "mesh: [" << id << "] **Create failed**" << std::endl;
+			std::cout << "//Error// mesh: [" << id << "] Create failed!" << std::endl;
 		}
 	}
 	
