@@ -2,3 +2,21 @@
 SrandEngine/.vs/SrandEngine/v16/Browse.VC.opendb 
  
 *.ipch 
+
+*.ipch
+
+*.obj
+
+*.log
+
+*.tlog
+
+*.exe
+
+*.recipe
+
+*.lastbuildstate
+
+*.idb
+
+*.pdb
