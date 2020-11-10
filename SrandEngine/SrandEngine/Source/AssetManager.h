@@ -7,6 +7,8 @@
 /* Custom Header */
 #include "Mesh.h"
 #include "SOIL.h"
+
+#include "Shader.h"
 #include "Engine.h"
 
 /* Typdef for Texture */

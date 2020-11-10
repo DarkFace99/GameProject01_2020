@@ -45,6 +45,11 @@ void Engine::Init() {
     std::cout << "                          Version: " << glGetString(GL_VERSION) << std::endl;
     std::cout << "--------------------------------------------------------------------------------" << std::endl;
 
+
+    /* Initialize Shader */
+    Shader::get()->InitializeShader();
+    
+
     running = true;
 }
 
@@ -72,6 +77,7 @@ void Engine::Event() {
 
 void Engine::Clean() {
     AssetManager::get().Clean();
+    Shader::get()->DeleteShader();
 
     std::cout << "Closing window..." << std::endl << "System Shutdown" << std::endl;
     glfwTerminate();

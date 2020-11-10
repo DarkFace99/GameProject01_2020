@@ -1,52 +1,9 @@
 #include "Shader.h"
 
-std::string vertexShader =
-"#version 330 core\n"
-"\n"
-"layout(location = 0) in vec3 VertexPosition;\n"
-"layout(location = 1) in vec3 VertexColor;\n"
-"layout(location = 2) in vec2 VertexTexCoord;\n"
-"\n"
-"uniform mat4 MVP;\n"
-"uniform float offsetX;\n"
-"uniform float offsetY;\n"
-"\n"
-"out vec3 Color;\n"
-"out vec2 TexCoord;\n"
-"\n"
-"void main()\n"
-"{\n"
-"   Color = VertexColor;\n"
-"   TexCoord.x = VertexTexCoord.x + offsetX;\n"
-"   TexCoord.y = 1.0 - (VertexTexCoord.y + offsetY);\n"
-"   gl_Position = MVP * vec4(VertexPosition, 1.0f);\n"
-"}\n";
+Shader* Shader::s_instance = nullptr;
+unsigned int Shader::shader = 0;
 
-std::string fragmentShader =
-"#version 330 core\n"
-"\n"
-"in vec3 Color;\n"
-"in vec2 TexCoord;\n"
-"\n"
-"uniform sampler2D tex1;\n"
-"uniform float alpha;\n"
-"uniform int mode;\n"
-"\n"
-"out vec4 Color0;"
-"\n"
-"void main()\n"
-"{\n"
-"   vec4 texColor = texture(tex1, TexCoord);\n"
-"   vec4 finalColor = vec4(0.0f, 0.0f, 0.0f, 1.0f);\n"
-"   if (mode == 0)\n"
-"       finalColor = vec4(Color, alpha);\n"
-"   else{\n "
-"       texColor.rgb *= alpha; finalColor = texColor;\n"
-"   }"
-"   Color0 = finalColor;\n"
-"}\n";
-
-static unsigned int CompileShader(unsigned int type, const std::string& source)
+unsigned int Shader::CompileShader(unsigned int type, const std::string& source)
 {
     unsigned int id = glCreateShader(type);
     const char* src = source.c_str();
@@ -78,7 +35,7 @@ static unsigned int CompileShader(unsigned int type, const std::string& source)
     return id;
 }
 
-static unsigned int CreateShader(const std::string& vertexShader, const std::string& fragmentShader)
+unsigned int Shader::CreateShader(const std::string& vertexShader, const std::string& fragmentShader)
 {
     unsigned int program = glCreateProgram();
     unsigned int vs = CompileShader(GL_VERTEX_SHADER, vertexShader);
@@ -95,13 +52,59 @@ static unsigned int CreateShader(const std::string& vertexShader, const std::str
     return program;
 }
 
-void InitializeShader()
+void Shader::InitializeShader()
 {
+	std::string vertexShader =
+		"#version 330 core\n"
+		"\n"
+		"layout(location = 0) in vec3 VertexPosition;\n"
+		"layout(location = 1) in vec3 VertexColor;\n"
+		"layout(location = 2) in vec2 VertexTexCoord;\n"
+		"\n"
+		"uniform mat4 MVP;\n"
+		"uniform float offsetX;\n"
+		"uniform float offsetY;\n"
+		"\n"
+		"out vec3 Color;\n"
+		"out vec2 TexCoord;\n"
+		"\n"
+		"void main()\n"
+		"{\n"
+		"   Color = VertexColor;\n"
+		"   TexCoord.x = VertexTexCoord.x + offsetX;\n"
+		"   TexCoord.y = 1.0 - (VertexTexCoord.y + offsetY);\n"
+		"   gl_Position = MVP * vec4(VertexPosition, 1.0f);\n"
+		"}\n";
+
+	std::string fragmentShader =
+		"#version 330 core\n"
+		"\n"
+		"in vec3 Color;\n"
+		"in vec2 TexCoord;\n"
+		"\n"
+		"uniform sampler2D tex1;\n"
+		"uniform float alpha;\n"
+		"uniform int mode;\n"
+		"\n"
+		"out vec4 Color0;"
+		"\n"
+		"void main()\n"
+		"{\n"
+		"   vec4 texColor = texture(tex1, TexCoord);\n"
+		"   vec4 finalColor = vec4(0.0f, 0.0f, 0.0f, 1.0f);\n"
+		"   if (mode == 0)\n"
+		"       finalColor = vec4(Color, alpha);\n"
+		"   else{\n "
+		"       texColor.rgb *= alpha; finalColor = texColor;\n"
+		"   }"
+		"   Color0 = finalColor;\n"
+		"}\n";
+
     shader = CreateShader(vertexShader, fragmentShader);
     glUseProgram(shader);
 }
 
-void DeleteShader()
+void Shader::DeleteShader()
 {
     glDeleteProgram(shader);
 }

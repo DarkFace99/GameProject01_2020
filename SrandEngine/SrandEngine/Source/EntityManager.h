@@ -24,10 +24,10 @@ private:
 
 };
 
-EntityManager::EntityManager()
-{
-}
-
-EntityManager::~EntityManager()
-{
-}
+//EntityManager::EntityManager()
+//{
+//}
+//
+//EntityManager::~EntityManager()
+//{
+//}

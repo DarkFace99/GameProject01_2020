@@ -8,6 +8,7 @@
 
 /* Custom Header */
 #include "AssetManager.h"
+#include "Shader.h"
 
 /* Initialize Window */
 #define SCREEN_WIDTH    1280
