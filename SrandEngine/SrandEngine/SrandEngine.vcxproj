@@ -37,12 +37,10 @@
   <ItemGroup>
     <ClCompile Include="Source\Camera.cpp" />
     <ClCompile Include="Source\EntityManager.cpp" />
-    <ClCompile Include="Source\TestMain.cpp" />
     <ClCompile Include="Source\Application.cpp" />
     <ClCompile Include="Source\AssetManager.cpp" />
     <ClCompile Include="Source\Engine.cpp" />
     <ClCompile Include="Source\Shader.cpp" />
-    <ClCompile Include="Source\TestMain.cpp" />
     <ClCompile Include="Source\Vertex.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
