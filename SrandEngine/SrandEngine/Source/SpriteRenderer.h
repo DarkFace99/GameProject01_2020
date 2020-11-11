@@ -42,7 +42,7 @@ public:
 		glUseProgram(Shader::get()->shader);
 
 		//Set the render mode between Texture and Solid Color
-		glUniform1i(glGetUniformLocation(Shader::get()->shader, "mode"), mode);
+		glUniform1i(glGetUniformLocation(Shader::get()->shader, "mode"), 1);
 		glUniform1f(glGetUniformLocation(Shader::get()->shader, "alpha"), alpha);
 
 		glUniform1f(glGetUniformLocation(Shader::get()->shader, "offsetX"), 0.0f);
