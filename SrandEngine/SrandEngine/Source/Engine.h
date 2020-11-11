@@ -24,7 +24,7 @@ private:
 	
 public:
 	Engine();
-	~Engine() = default;
+	virtual ~Engine() = default;
 
 	void Init();
 	void Clean();

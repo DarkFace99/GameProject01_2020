@@ -19,5 +19,9 @@ int main(int argc, char** argv) {
 
 	engine.Clean();
 
+	// Clear Singleton Instance
+	delete &AssetManager::get();
+	delete& Engine::get();
+
 	return 0;
 }
