@@ -96,9 +96,6 @@
     <ClInclude Include="Source\Camera.h">
       <Filter>System File\Header File</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Sprite.h">
-      <Filter>ECS\Header File</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\AssetManager.cpp">
@@ -119,7 +116,6 @@
     <ClCompile Include="Source\Shader.cpp">
       <Filter>System File\Source File</Filter>
     </ClCompile>
-    <ClCompile Include="Source\TestMain.cpp" />
     <ClCompile Include="Source\TestMain.cpp" />
     <ClCompile Include="Source\Camera.cpp">
       <Filter>System File\Source File</Filter>

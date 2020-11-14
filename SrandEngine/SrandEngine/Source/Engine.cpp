@@ -1,5 +1,13 @@
 #include "Engine.h"
 
+/* TEST */
+#include "EntityManager.h"
+#include "SpriteRenderer.h"
+#include "Camera.h"
+EntityManager* manager;
+GameObject* gameObject;
+Camera camera;
+
 Engine* Engine::s_instance = nullptr;
 
 Engine::Engine() {
@@ -48,18 +56,36 @@ void Engine::Init() {
 
     /* Initialize Shader */
     Shader::get()->InitializeShader();
+
+
+    /* Test */
+    manager = new EntityManager();
+    gameObject = new GameObject();
     
+    manager->AddEntity(gameObject);
+    std::cout << gameObject->GetComponent<Transform>().position << std::endl;
+
+    AssetManager::get().LoadMesh("TEST_MESH", 1);
+    AssetManager::get().LoadTexture("TEST_TEX", "Benny.png");
+    
+    gameObject->AddComponent<Transform>(100, 100, 100, 100);
+    gameObject->AddComponent<SpriteRenderer>("TEST_MESH", "TEST_TEX", 1.0f, camera);
+    std::cout << gameObject->GetComponent<Transform>().position << std::endl;
+    std::cout << gameObject->GetComponent<Transform>().scale << std::endl;
 
     running = true;
 }
 
 void Engine::Draw(){
-
+    manager->Draw();
 }
 
 void Engine::Update() {
     glClearColor(0.3f, 0.3f, 0.5f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+    manager->Update();
+
     glfwSwapBuffers(window);
 }
 

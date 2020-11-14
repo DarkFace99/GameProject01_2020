@@ -26,17 +26,18 @@ public:
 	SpriteRenderer() = default;
 	virtual ~SpriteRenderer() = default;
 
-	SpriteRenderer(std::string meshID, std::string textureID, int mode, float alpha, Camera camera) 
-		: meshID(meshID), textureID(textureID), mode(mode), alpha(alpha) {}
+	SpriteRenderer(std::string meshID, std::string textureID, float alpha, Camera camera) 
+		: meshID(meshID), textureID(textureID), alpha(alpha), camera(camera){}
 
 	bool Init() override final {
-		transform = &gameObject->GetComponent<Transform>();
+		/*transform = &gameObject->GetComponent<Transform>();*/			// problem !!
 		texture = AssetManager::get().GetTexture(textureID);
 		mesh = AssetManager::get().GetMesh(meshID);
+		return true;
 	}
 
 	void Draw() override final {
-		
+
 		// Set the viewport of the screen. Lower Left coner will be (0,0) and the dimension will be SCREEN_WIDTH and SCREEN_HEIGTH
 		glViewport(0, 0, SCREEN_WIDTH, SCREEN_HEIGTH);
 		glUseProgram(Shader::get()->shader);
