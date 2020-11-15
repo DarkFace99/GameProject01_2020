@@ -120,5 +120,6 @@
     <ClCompile Include="Source\Camera.cpp">
       <Filter>System File\Source File</Filter>
     </ClCompile>
+    <ClCompile Include="Source\TestMain.cpp" />
   </ItemGroup>
 </Project>
