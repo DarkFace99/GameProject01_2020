@@ -101,6 +101,7 @@ void Shader::InitializeShader()
 		"}\n";
 
     shader = CreateShader(vertexShader, fragmentShader);
+	std::cout << "Shader: " << shader << std::endl;
     glUseProgram(shader);
 }
 

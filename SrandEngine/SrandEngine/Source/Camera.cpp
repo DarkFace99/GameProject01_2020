@@ -12,7 +12,7 @@ Camera::Camera(glm::vec3 camPos, glm::vec3 camDir, glm::vec3 camUp, float camZoo
 }
 Camera::~Camera()
 {
-
+	
 }
 
 void Camera::SetCamPos(glm::vec3 camPos)

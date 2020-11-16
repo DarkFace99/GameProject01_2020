@@ -57,7 +57,7 @@ void Engine::Init() {
     /* Initialize Shader */
     Shader::get()->InitializeShader();
 
-    glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
     glDisable(GL_CULL_FACE);
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -72,12 +72,13 @@ void Engine::Init() {
     std::cout << std::endl;
 
     AssetManager::get().LoadMesh("TEST_MESH", 1);
-    AssetManager::get().LoadTexture("TEST_TEX", "Benny.png");
+    AssetManager::get().LoadTexture("TEST_TEX", "Assets/Benny.png");
     std::cout << std::endl;
     
-    gameObject->AddComponent<Transform>(100, 100, 100, 100);
+    gameObject->AddComponent<Transform>(100, 100, 150, 150);
     gameObject->AddComponent<SpriteRenderer>("TEST_MESH", "TEST_TEX", 1.0f, camera);
 
+    std::cout << std::endl;
     std::cout << "position: " << gameObject->GetComponent<Transform>().position << std::endl;
     std::cout << "scale: " << gameObject->GetComponent<Transform>().scale << std::endl;
 
