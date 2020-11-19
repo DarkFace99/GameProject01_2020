@@ -22,6 +22,7 @@ int main(int argc, char** argv) {
 	// Clear Singleton Instance
 	delete &AssetManager::get();
 	delete& Engine::get();
+	delete Shader::get();
 
 	return 0;
 }
