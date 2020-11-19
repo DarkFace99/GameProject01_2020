@@ -1,12 +1,9 @@
 #include "Engine.h"
 
 /* TEST */
-#include "EntityManager.h"
 #include "SpriteRenderer.h"
 #include "Camera.h"
-//EntityManager* manager;
-//GameObject* gameObject;
-GameObject gameObject;
+
 Camera camera(glm::vec3(0, 0, 0), glm::vec3(0, 0, -1), glm::vec3(0, 1, 0), 1.0f, 0.0f);
 
 Engine* Engine::s_instance = nullptr;
@@ -54,6 +51,7 @@ void Engine::Init() {
     std::cout << "                          Version: " << glGetString(GL_VERSION) << std::endl;
     std::cout << "--------------------------------------------------------------------------------" << std::endl;
 
+    manager = new EntityManager();
 
     /* Initialize Shader */
     Shader::get()->InitializeShader();
@@ -65,36 +63,52 @@ void Engine::Init() {
 
 
     /* Test */
-    std::cout << "initial position: " << gameObject.GetComponent<Transform>().position << std::endl;
+    GameObject* gameObject = new GameObject();
+    manager->AddEntity(gameObject);
+    std::cout << "initial position: " << gameObject->GetComponent<Transform>().position << std::endl;
     std::cout << std::endl;
 
     AssetManager::get().LoadMesh("TEST_MESH", 1);
     AssetManager::get().LoadMesh("TEST_MESH", 1);
-    AssetManager::get().LoadMesh("TEST2_MESH", 2);
+    AssetManager::get().LoadMesh("TEST2_MESH", 1);
     AssetManager::get().LoadTexture("TEST_TEX", "Assets/Benny.png");
     AssetManager::get().LoadTexture("TEST_TEX", "Assets/!!Benny??.png");
     AssetManager::get().LoadTexture("TEST_TEX", "Assets/Cherry.png");
-    AssetManager::get().LoadTexture("TEST_TEX2", "Assets/Cherry.png");
+    AssetManager::get().LoadTexture("TEST2_TEX", "Assets/Cherry.png");
+    std::cout << std::endl;
+
+    gameObject->GetComponent<Transform>().position = Vector2D_float(-100.0f,0.0f);
+    gameObject->GetComponent<Transform>().scale = Vector2D_float(96.0f, 96.0f);
+    std::cout << "Set transform:" <<std::endl;
+    std::cout << "position: " << gameObject->GetComponent<Transform>().position << std::endl;
+    std::cout << "scale: " << gameObject->GetComponent<Transform>().scale << std::endl;
+    std::cout << std::endl;
+
+    gameObject->AddComponent<SpriteRenderer>("TEST_MESH", "TEST_TEX", 0.3f, camera);
     std::cout << std::endl;
     
-    gameObject.AddComponent<Transform>(0, 0, 96, 96);
-   /* gameObject.AddComponent<SpriteRenderer>("TEST_MESH", "TEST_TEX", 0.1f, camera);*/
-
-    std::cout << std::endl;
-    std::cout << "position: " << gameObject.GetComponent<Transform>().position << std::endl;
-    std::cout << "scale: " << gameObject.GetComponent<Transform>().scale << std::endl;
+    // gameObj2
+    std::cout << "Obj 2:" << std::endl;
+    gameObject = new GameObject();
+    manager->AddEntity(gameObject);
+    gameObject->GetComponent<Transform>().position = Vector2D_float(0.0f, 0.0f);
+    gameObject->GetComponent<Transform>().scale = Vector2D_float(96.0f, 96.0f);
+    gameObject->AddComponent<SpriteRenderer>("TEST2_MESH", "TEST2_TEX", 0.8f, camera);
+    
+    
 
     running = true;
 }
 
 void Engine::Draw(){
+    manager->Draw();
     glfwSwapBuffers(window);
 }
 
 void Engine::Update() {
     glClearColor(0.3f, 0.3f, 0.5f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
+    manager->Update();
 }
 
 void Engine::FixedUpdate() {
@@ -112,6 +126,7 @@ void Engine::Event() {
 void Engine::Clean() {
     AssetManager::get().Clean();
     Shader::get()->DeleteShader();
+    delete manager;
 
     std::cout << "Closing window..." << std::endl << "System Shutdown" << std::endl;
     glfwTerminate();

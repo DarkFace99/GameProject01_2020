@@ -52,7 +52,7 @@ public:
 		glViewport(0, 0, SCREEN_WIDTH, SCREEN_HEIGTH);
 		glUseProgram(Shader::get()->shader);
 
-		//Set the render mode between Texture and Solid Color
+		//Set the render mode between Texture and Solid Color						// glGetUniformLocation called every frame is not efficient
 		glUniform1i(glGetUniformLocation(Shader::get()->shader, "mode"), 1);
 		glUniform1f(glGetUniformLocation(Shader::get()->shader, "alpha"), alpha);
 

@@ -9,6 +9,7 @@
 /* Custom Header */
 #include "AssetManager.h"
 #include "Shader.h"
+#include "EntityManager.h"
 
 /* Initialize Window */
 #define SCREEN_WIDTH    1280
@@ -21,6 +22,8 @@ private:
 	GLFWwindow* window;
 	static Engine* s_instance;
 	bool running;
+
+	EntityManager* manager;
 	
 public:
 	Engine();
