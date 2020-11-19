@@ -4,8 +4,9 @@
 #include "EntityManager.h"
 #include "SpriteRenderer.h"
 #include "Camera.h"
-EntityManager* manager;
-GameObject* gameObject;
+//EntityManager* manager;
+//GameObject* gameObject;
+GameObject gameObject;
 Camera camera(glm::vec3(0, 0, 0), glm::vec3(0, 0, -1), glm::vec3(0, 1, 0), 1.0f, 0.0f);
 
 Engine* Engine::s_instance = nullptr;
@@ -64,38 +65,36 @@ void Engine::Init() {
 
 
     /* Test */
-    manager = new EntityManager();
-    gameObject = new GameObject();
-    
-    manager->AddEntity(gameObject);
-    std::cout << "initial position: " << gameObject->GetComponent<Transform>().position << std::endl;
+    std::cout << "initial position: " << gameObject.GetComponent<Transform>().position << std::endl;
     std::cout << std::endl;
 
     AssetManager::get().LoadMesh("TEST_MESH", 1);
+    AssetManager::get().LoadMesh("TEST_MESH", 1);
+    AssetManager::get().LoadMesh("TEST2_MESH", 2);
     AssetManager::get().LoadTexture("TEST_TEX", "Assets/Benny.png");
+    AssetManager::get().LoadTexture("TEST_TEX", "Assets/!!Benny??.png");
+    AssetManager::get().LoadTexture("TEST_TEX", "Assets/Cherry.png");
+    AssetManager::get().LoadTexture("TEST_TEX2", "Assets/Cherry.png");
     std::cout << std::endl;
     
-    gameObject->AddComponent<Transform>(100, 100, 150, 150);
-    gameObject->AddComponent<SpriteRenderer>("TEST_MESH", "TEST_TEX", 1.0f, camera);
+    gameObject.AddComponent<Transform>(0, 0, 96, 96);
+   /* gameObject.AddComponent<SpriteRenderer>("TEST_MESH", "TEST_TEX", 0.1f, camera);*/
 
     std::cout << std::endl;
-    std::cout << "position: " << gameObject->GetComponent<Transform>().position << std::endl;
-    std::cout << "scale: " << gameObject->GetComponent<Transform>().scale << std::endl;
+    std::cout << "position: " << gameObject.GetComponent<Transform>().position << std::endl;
+    std::cout << "scale: " << gameObject.GetComponent<Transform>().scale << std::endl;
 
     running = true;
 }
 
 void Engine::Draw(){
-    manager->Draw();
+    glfwSwapBuffers(window);
 }
 
 void Engine::Update() {
     glClearColor(0.3f, 0.3f, 0.5f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-    manager->Update();
-
-    glfwSwapBuffers(window);
 }
 
 void Engine::FixedUpdate() {

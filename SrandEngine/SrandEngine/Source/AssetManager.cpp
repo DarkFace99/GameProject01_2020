@@ -6,17 +6,17 @@ AssetManager* AssetManager::s_instance = nullptr;
 void AssetManager::Clean() {
 	
 	// textures
-	/*for (auto it = textures.begin(); it != textures.end(); it++) {		// problem!!
+	for (auto it = textures.begin(); it != textures.end(); ++it) {		// problem!!
 		delete it->second;
-		textures.erase(it);
-	}*/
+		/*textures.erase(it);*/
+	}
 	textures.clear();
 
 	// meshes
-	/*for (auto it = meshes.begin(); it != meshes.end(); it++) {			// problem!!
+	for (auto it = meshes.begin(); it != meshes.end(); it++) {			// problem!!
 		delete it->second;
-		meshes.erase(it);
-	}*/
+		/*meshes.erase(it);*/
+	}
 	meshes.clear();
 }
 
@@ -42,7 +42,8 @@ void AssetManager::LoadTexture(std::string id, const char* filename) {
 	pData = SOIL_load_image(filename, &texWidth, &texHeight, &channels, SOIL_LOAD_AUTO);
 
 	if (pData == nullptr) { 
-		std::cout << "Cannot find texture" << filename << std::endl;
+		std::cout << "texture: Cannot find texture [" << filename << "]" << std::endl;
+		delete aTex;
 		return;
 	}
 
@@ -60,15 +61,19 @@ void AssetManager::LoadTexture(std::string id, const char* filename) {
 	SOIL_free_image_data(pData);
 
 	/* store texture pointer to textures */
-	if (textures.count(id) <= 0) {
-		
-		if (aTex) {
+	if (aTex) {
+		if (textures.count(id) <= 0) {
 			textures[id] = aTex;
 			std::cout << "texture: [" << filename << "] loaded!" << std::endl;
 		}
 		else {
-			std::cout << "//Error// texture: [" << filename << "] Load failed!" << std::endl;
+			delete aTex;
+			std::cout << "texture: //Error// id [" << id << "] was already used!" << std::endl;
 		}
+	}
+	else { 
+		delete aTex;
+		std::cout << "texture: //Error// [" << filename << "] load failed!!" << std::endl; 
 	}
 }
 
@@ -130,14 +135,18 @@ void AssetManager::LoadMesh(std::string id, int frameCount) {
 	glBindVertexArray(0);
 
 	/* store mesh pointer to meshes */
-	if (textures.count(id) <= 0) {
-		if (aMesh) {
+	if (aMesh) {
+		if (meshes.count(id) <= 0) {
 			meshes[id] = aMesh;
 			std::cout << "mesh: [" << id << "] Created!" << std::endl;
 		}
 		else {
-			std::cout << "//Error// mesh: [" << id << "] Create failed!" << std::endl;
+			delete aMesh;
+			std::cout << "mesh: //Error// id [" << id << "] was already used!" << std::endl;
 		}
 	}
-	
+	else {
+		delete aMesh;
+		std::cout << "mesh: //Error// [" << id << "] create failed!!" << std::endl; 
+	}
 }
