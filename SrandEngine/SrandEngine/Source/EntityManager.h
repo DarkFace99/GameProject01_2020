@@ -1,9 +1,10 @@
 #pragma once
+#include "GameObject.h"
 
 #include <vector>
 #include <memory>
 
-class Entity;
+class GameObject;
 
 class EntityManager
 {
@@ -14,20 +15,12 @@ public:
 	void Draw();
 	void Update();
 	void Refresh();
+	
+	void AddEntity(GameObject* _gameObj);
+	void DestroyEntity(GameObject* _gameObj);
 
-	void AddEntity(Entity* _gameObj);
-	void DestroyEntity(Entity* _gameObj);
-
-	Entity* CloneEntity(Entity* _gameObj);
+	GameObject* CloneEntity(GameObject* _gameObj);
 
 private:
-
+	std::vector<std::unique_ptr<GameObject>> gameObjects;
 };
-
-EntityManager::EntityManager()
-{
-}
-
-EntityManager::~EntityManager()
-{
-}

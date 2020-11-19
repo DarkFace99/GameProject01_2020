@@ -93,6 +93,9 @@
     <ClInclude Include="Source\RigidBody.h">
       <Filter>ECS\Header File</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Camera.h">
+      <Filter>System File\Header File</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\AssetManager.cpp">
@@ -107,17 +110,16 @@
     <ClCompile Include="Source\Engine.cpp">
       <Filter>System File\Source File</Filter>
     </ClCompile>
-    <ClCompile Include="Source\TestMain.cpp">
-      <Filter>ECS\Source File</Filter>
-    </ClCompile>
     <ClCompile Include="Source\EntityManager.cpp">
       <Filter>ECS\Source File</Filter>
     </ClCompile>
     <ClCompile Include="Source\Shader.cpp">
       <Filter>System File\Source File</Filter>
     </ClCompile>
-    <ClCompile Include="Source\TestMain.cpp">
-      <Filter>ECS\Source File</Filter>
+    <ClCompile Include="Source\TestMain.cpp" />
+    <ClCompile Include="Source\Camera.cpp">
+      <Filter>System File\Source File</Filter>
     </ClCompile>
+    <ClCompile Include="Source\TestMain.cpp" />
   </ItemGroup>
 </Project>

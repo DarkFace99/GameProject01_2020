@@ -6,16 +6,16 @@ AssetManager* AssetManager::s_instance = nullptr;
 void AssetManager::Clean() {
 	
 	// textures
-	for (auto it = textures.begin(); it != textures.end(); it++) {
+	for (auto it = textures.begin(); it != textures.end(); ++it) {		// problem!!
 		delete it->second;
-		textures.erase(it);
+		/*textures.erase(it);*/
 	}
 	textures.clear();
 
 	// meshes
-	for (auto it = meshes.begin(); it != meshes.end(); it++) {
+	for (auto it = meshes.begin(); it != meshes.end(); it++) {			// problem!!
 		delete it->second;
-		meshes.erase(it);
+		/*meshes.erase(it);*/
 	}
 	meshes.clear();
 }
@@ -25,14 +25,15 @@ void AssetManager::Clean() {
 /*---------------------------------*/
 
 Texture* AssetManager::GetTexture(std::string id) {
-
 	// check if id exists in container, then return according to the result
+	if (textures.count(id) <= 0) { std::cout << "AssestManager: Cannot find texture " << id << std::endl; }
+	else { std::cout << "AssestManager: Get texture " << id << std::endl; }
 	return (textures.count(id) > 0) ? textures[id] : nullptr;
 }
 
 void AssetManager::LoadTexture(std::string id, const char* filename) {
 	
-	Texture		aTex;
+	Texture* aTex = new Texture();
 
 	GLubyte*	pData;
 	int			texWidth, texHeight, channels;
@@ -40,9 +41,15 @@ void AssetManager::LoadTexture(std::string id, const char* filename) {
 	/* load texture using SOIL */
 	pData = SOIL_load_image(filename, &texWidth, &texHeight, &channels, SOIL_LOAD_AUTO);
 
-	glGenTextures(1, &aTex);
+	if (pData == nullptr) { 
+		std::cout << "texture: Cannot find texture [" << filename << "]" << std::endl;
+		delete aTex;
+		return;
+	}
+
+	glGenTextures(1, aTex);
 	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, aTex);
+	glBindTexture(GL_TEXTURE_2D, *aTex);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
@@ -54,15 +61,19 @@ void AssetManager::LoadTexture(std::string id, const char* filename) {
 	SOIL_free_image_data(pData);
 
 	/* store texture pointer to textures */
-	if (textures.count(id) <= 0) {
-		Texture* texture = &aTex;
-		if (texture) {
-			textures[id] = texture;
+	if (aTex) {
+		if (textures.count(id) <= 0) {
+			textures[id] = aTex;
 			std::cout << "texture: [" << filename << "] loaded!" << std::endl;
 		}
 		else {
-			std::cout << "//Error// texture: [" << filename << "] Load failed!" << std::endl;
+			delete aTex;
+			std::cout << "texture: //Error// id [" << id << "] was already used!" << std::endl;
 		}
+	}
+	else { 
+		delete aTex;
+		std::cout << "texture: //Error// [" << filename << "] load failed!!" << std::endl; 
 	}
 }
 
@@ -71,8 +82,9 @@ void AssetManager::LoadTexture(std::string id, const char* filename) {
 /*---------------------------------*/
 
 Mesh* AssetManager::GetMesh(std::string id) {
-	
 	// check if id exists in container, then return according to the result
+	if (meshes.count(id) <= 0) { std::cout << "Cannot find mesh " << id << std::endl; }
+	else { std::cout << "AssestManager: Get texture " << id << std::endl; }
 	return (meshes.count(id) > 0) ? meshes[id] : nullptr;
 }
 
@@ -94,8 +106,8 @@ void AssetManager::LoadMesh(std::string id, int frameCount) {
 	vertices.push_back(v3);
 	vertices.push_back(v4);
 
-	Mesh aMesh;
-	aMesh.vertex = vertices;
+	Mesh *aMesh = new Mesh();
+	aMesh->vertex = vertices;
 
 	std::vector<float> meshData;
 
@@ -105,14 +117,14 @@ void AssetManager::LoadMesh(std::string id, int frameCount) {
 		meshData.insert(meshData.end(), vertexData.begin(), vertexData.end());
 	}
 
-	glGenBuffers(1, &aMesh.vertexBuffer);
-	glBindBuffer(GL_ARRAY_BUFFER, aMesh.vertexBuffer);
+	glGenBuffers(1, &aMesh->vertexBuffer);
+	glBindBuffer(GL_ARRAY_BUFFER, aMesh->vertexBuffer);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(float) * meshData.size(), &meshData[0], GL_STATIC_DRAW);
 
 	/*Put in Mesh data to buffer*/
-	glGenVertexArrays(1, &aMesh.vao);
-	glBindVertexArray(aMesh.vao);
-	glBindBuffer(GL_ARRAY_BUFFER, aMesh.vertexBuffer);
+	glGenVertexArrays(1, &aMesh->vao);
+	glBindVertexArray(aMesh->vao);
+	glBindBuffer(GL_ARRAY_BUFFER, aMesh->vertexBuffer);
 	glEnableVertexAttribArray(0);
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 8, BUFFER_OFFSET(0));		//The starting point of the VBO, for the vertices
 	glEnableVertexAttribArray(1);
@@ -123,15 +135,18 @@ void AssetManager::LoadMesh(std::string id, int frameCount) {
 	glBindVertexArray(0);
 
 	/* store mesh pointer to meshes */
-	if (textures.count(id) <= 0) {
-		Mesh* mesh = &aMesh;
-		if (mesh) {
-			meshes[id] = mesh;
+	if (aMesh) {
+		if (meshes.count(id) <= 0) {
+			meshes[id] = aMesh;
 			std::cout << "mesh: [" << id << "] Created!" << std::endl;
 		}
 		else {
-			std::cout << "//Error// mesh: [" << id << "] Create failed!" << std::endl;
+			delete aMesh;
+			std::cout << "mesh: //Error// id [" << id << "] was already used!" << std::endl;
 		}
 	}
-	
+	else {
+		delete aMesh;
+		std::cout << "mesh: //Error// [" << id << "] create failed!!" << std::endl; 
+	}
 }
