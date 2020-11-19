@@ -27,8 +27,8 @@ public:
 	SpriteRenderer() = default;
 	virtual ~SpriteRenderer() = default;
 
-	SpriteRenderer(std::string meshID, std::string textureID, float alpha, Camera &camera) 
-		: meshID(meshID), textureID(textureID), alpha(alpha), camera(camera){
+	SpriteRenderer(std::string meshID, std::string textureID, float alpha, Camera& camera, bool flip)
+		: meshID(meshID), textureID(textureID), alpha(alpha), camera(camera), flip(flip) {
 		std::cout << "Create Sprite Renderer: " << std::endl;
 		std::cout << "meshID: " <<meshID << std::endl;
 		std::cout << "textureID: " << textureID << std::endl;
@@ -64,10 +64,11 @@ public:
 		glBindTexture(GL_TEXTURE_2D, *texture);
 		glUniform1i(glGetUniformLocation(Shader::get()->shader, "tex1"), 0);
 
-		/*Set transform of the objects relative to camera*/
+		/*Set transform of the objects relative to camera*/		
+		// If there's no changing in scale and rotate on run time, move the modelMat to Init() and only calculate position here.
 		glm::mat4 modelMat = glm::mat4(1.0f);
 		modelMat = glm::translate(modelMat, glm::vec3(transform->position.x, transform->position.y,0));
-		modelMat = glm::scale(modelMat, glm::vec3(transform->scale.x, transform->scale.y,1));
+		modelMat = glm::scale(modelMat, glm::vec3((flip) ? -transform->scale.x : transform->scale.x, transform->scale.y,1));
 		modelMat = glm::rotate(modelMat, transform->rotationAngle * 3.14f / 180.0f, glm::vec3(0, 0, 1) /* rotate z-axis */ );
 		glm::mat4 MVP = camera.GetProjectionMat() * camera.GetViewMatrix() * modelMat;
 		glUniformMatrix4fv(glGetUniformLocation(Shader::get()->shader, "MVP"), 1, GL_FALSE, &MVP[0][0]);

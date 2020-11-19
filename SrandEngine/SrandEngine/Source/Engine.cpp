@@ -84,7 +84,7 @@ void Engine::Init() {
     std::cout << "scale: " << gameObject->GetComponent<Transform>().scale << std::endl;
     std::cout << std::endl;
 
-    gameObject->AddComponent<SpriteRenderer>("TEST_MESH", "TEST_TEX", 0.3f, camera);
+    gameObject->AddComponent<SpriteRenderer>("TEST_MESH", "TEST_TEX", 1.0f, camera, true);
     std::cout << std::endl;
     
     // gameObj2
@@ -93,7 +93,7 @@ void Engine::Init() {
     manager->AddEntity(gameObject);
     gameObject->GetComponent<Transform>().position = Vector2D_float(0.0f, 0.0f);
     gameObject->GetComponent<Transform>().scale = Vector2D_float(96.0f, 96.0f);
-    gameObject->AddComponent<SpriteRenderer>("TEST2_MESH", "TEST2_TEX", 0.8f, camera);
+    gameObject->AddComponent<SpriteRenderer>("TEST2_MESH", "TEST2_TEX", 1.0f, camera, false);
     
     
 
