@@ -96,6 +96,9 @@
     <ClInclude Include="Source\Camera.h">
       <Filter>System File\Header File</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Input.h">
+      <Filter>System File\Header File</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\AssetManager.cpp">
@@ -117,9 +120,9 @@
       <Filter>System File\Source File</Filter>
     </ClCompile>
     <ClCompile Include="Source\TestMain.cpp" />
+    <ClCompile Include="Source\TestMain.cpp" />
     <ClCompile Include="Source\Camera.cpp">
       <Filter>System File\Source File</Filter>
     </ClCompile>
-    <ClCompile Include="Source\TestMain.cpp" />
   </ItemGroup>
 </Project>

@@ -20,13 +20,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\AssetManager.h" />
-    <ClInclude Include="Source\Camera.h" />
     <ClInclude Include="Source\Component.h" />
-    <ClInclude Include="Source\Camera.h" />
     <ClInclude Include="Source\ECS.h" />
     <ClInclude Include="Source\EntityManager.h" />
     <ClInclude Include="Source\Engine.h" />
     <ClInclude Include="Source\GameObject.h" />
+    <ClInclude Include="Source\Input.h" />
     <ClInclude Include="Source\Mesh.h" />
     <ClInclude Include="Source\Shader.h" />
     <ClInclude Include="Source\RigidBody.h" />
@@ -44,9 +43,6 @@
     <ClCompile Include="Source\Shader.cpp" />
     <ClCompile Include="Source\TestMain.cpp" />
     <ClCompile Include="Source\Vertex.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="Source\Camera.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

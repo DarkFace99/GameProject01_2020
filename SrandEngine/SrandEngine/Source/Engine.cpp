@@ -3,8 +3,11 @@
 /* TEST */
 #include "SpriteRenderer.h"
 #include "Camera.h"
+#include "Input.h"
 
 Camera camera(glm::vec3(0, 0, 0), glm::vec3(0, 0, -1), glm::vec3(0, 1, 0), 1.0f, 0.0f);
+
+IOSystem::Input ioSystem;
 
 Engine* Engine::s_instance = nullptr;
 
@@ -117,10 +120,8 @@ void Engine::FixedUpdate() {
 
 void Engine::Event() {
     // input
-    glfwPollEvents();
+    ioSystem.IOUpdate(window);
     if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS) { Quit(); }
-    keyUpdate(window);
-    glfwSetKeyCallback(window, key_callBack);
 }
 
 void Engine::Clean() {
@@ -134,68 +135,4 @@ void Engine::Clean() {
 
 void Engine::Quit() {
     running = false;
-}
-
-/*---------------------------------*/
-/*		     Input Test		       */
-/*---------------------------------*/
-
-// Once
-void key_callBack(GLFWwindow* window, int key, int scancode, int action, int mods)
-{
-    if (key == GLFW_KEY_TAB && action == GLFW_PRESS)
-    {
-        std::cout << key << std::endl;   
-    }
-}
-
-// Continuous
-void keyUpdate(GLFWwindow* window)
-{
-    if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS) 
-    {
-        std::cout << "W" << std::endl;
-        camera.MoveCamera(glm::vec3(0.0f, 1.5f, 0.0f));
-        std::cout << "Camera Position: " << glm::to_string(camera.GetCamPos()) << std::endl;
-        std::cout << "Camera View Matrix: " << glm::to_string(camera.GetViewMatrix()) << std::endl;
-        std::cout << "Camera Proj Matrix: " << glm::to_string(camera.GetProjectionMat()) << std::endl;
-    }
-    if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
-    {
-        std::cout << "A" << std::endl;
-        camera.MoveCamera(glm::vec3(-1.5f, 0.0f, 0.0f));
-        std::cout << "Camera Position: " << glm::to_string(camera.GetCamPos()) << std::endl;
-        std::cout << "Camera View Matrix: " << glm::to_string(camera.GetViewMatrix()) << std::endl;
-        std::cout << "Camera Proj Matrix: " << glm::to_string(camera.GetProjectionMat()) << std::endl;
-    }
-    if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
-    {
-        std::cout << "S" << std::endl;
-        camera.MoveCamera(glm::vec3(0.0f, -1.5f, 0.0f));
-        std::cout << "Camera Position: " << glm::to_string(camera.GetCamPos()) << std::endl;
-        std::cout << "Camera View Matrix: " << glm::to_string(camera.GetViewMatrix()) << std::endl;
-        std::cout << "Camera Proj Matrix: " << glm::to_string(camera.GetProjectionMat()) << std::endl;
-    }
-    if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
-    {
-        std::cout << "D" << std::endl;
-        camera.MoveCamera(glm::vec3(1.5f, 0.0f, 0.0f));
-        std::cout << "Camera Position: " << glm::to_string(camera.GetCamPos()) << std::endl;
-        std::cout << "Camera View Matrix: " << glm::to_string(camera.GetViewMatrix()) << std::endl;
-        std::cout << "Camera Proj Matrix: " << glm::to_string(camera.GetProjectionMat()) << std::endl;
-    }
-    if (glfwGetKey(window, GLFW_KEY_I) == GLFW_PRESS)
-    {
-        std::cout << "I" << std::endl;
-        camera.CamZoomIn(0.2f);
-        std::cout << "Camera View Matrix: " << glm::to_string(camera.GetViewMatrix()) << std::endl;
-        std::cout << "Camera Proj Matrix: " << glm::to_string(camera.GetProjectionMat()) << std::endl;
-    }
-    if (glfwGetKey(window, GLFW_KEY_O) == GLFW_PRESS)
-    {
-        std::cout << "O" << std::endl;
-        camera.CamZoomOut(0.2f);
-        std::cout << "Camera View Matrix: " << glm::to_string(camera.GetViewMatrix()) << std::endl;
-        std::cout << "Camera Proj Matrix: " << glm::to_string(camera.GetProjectionMat()) << std::endl;
-    }
 }
