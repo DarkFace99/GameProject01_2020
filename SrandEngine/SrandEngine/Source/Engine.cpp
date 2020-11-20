@@ -7,7 +7,7 @@
 
 Camera camera(glm::vec3(0, 0, 0), glm::vec3(0, 0, -1), glm::vec3(0, 1, 0), 1.0f, 0.0f);
 
-IOSystem::Input ioSystem;
+IOSystem::Input ioSystem(&camera);
 
 Engine* Engine::s_instance = nullptr;
 
@@ -88,6 +88,7 @@ void Engine::Init() {
     std::cout << std::endl;
 
     gameObject->AddComponent<SpriteRenderer>("TEST_MESH", "TEST_TEX", 1.0f, &camera, true);
+    ioSystem.SetControl(gameObject);
     std::cout << std::endl;
     
     // gameObj2
@@ -98,8 +99,7 @@ void Engine::Init() {
     gameObject->GetComponent<Transform>().scale = Vector2D_float(96.0f, 96.0f);
     gameObject->AddComponent<SpriteRenderer>("TEST2_MESH", "TEST2_TEX", 1.0f, &camera, false);
     
-    
-
+ 
     running = true;
 }
 
