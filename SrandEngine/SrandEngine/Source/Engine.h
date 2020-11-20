@@ -23,7 +23,7 @@ private:
 	static Engine* s_instance;
 	bool running;
 
-	EntityManager* manager;
+	EntityManager* manager = nullptr;
 	
 public:
 	Engine();

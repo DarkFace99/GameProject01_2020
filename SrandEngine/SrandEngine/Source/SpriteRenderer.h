@@ -12,23 +12,27 @@
 class SpriteRenderer : public Component {
 private:
 
-	Transform* transform;
+	Transform* transform = nullptr;
 	std::string textureID = "";
 	std::string meshID = "";
 
-	Texture* texture;
-	Mesh* mesh;
+	Texture* texture = nullptr;
+	Mesh* mesh = nullptr;
 	float alpha;
 	bool flip = false;
-
+	float offsetX = 0.0f;
 	Camera camera;
 	
 public:
 	SpriteRenderer() = default;
 	virtual ~SpriteRenderer() = default;
 
+	float* GetOffSetX_Ptr() {
+		return &offsetX;
+	}
+
 	SpriteRenderer(std::string meshID, std::string textureID, float alpha, Camera& camera, bool flip)
-		: meshID(meshID), textureID(textureID), alpha(alpha), camera(camera), flip(flip) {
+		: meshID(meshID), textureID(textureID), alpha(alpha), camera(camera), flip(flip){
 		std::cout << "Create Sprite Renderer: " << std::endl;
 		std::cout << "meshID: " <<meshID << std::endl;
 		std::cout << "textureID: " << textureID << std::endl;
@@ -56,7 +60,7 @@ public:
 		glUniform1i(glGetUniformLocation(Shader::get()->shader, "mode"), 1);
 		glUniform1f(glGetUniformLocation(Shader::get()->shader, "alpha"), alpha);
 
-		glUniform1f(glGetUniformLocation(Shader::get()->shader, "offsetX"), 0.0f);
+		glUniform1f(glGetUniformLocation(Shader::get()->shader, "offsetX"), offsetX);
 		glUniform1f(glGetUniformLocation(Shader::get()->shader, "offsetY"), 0.0f);
 
 		// Set texture

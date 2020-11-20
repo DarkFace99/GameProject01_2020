@@ -96,6 +96,9 @@
     <ClInclude Include="Source\Camera.h">
       <Filter>System File\Header File</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Animator.h">
+      <Filter>ECS\Header File</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\AssetManager.cpp">

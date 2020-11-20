@@ -25,14 +25,16 @@ public:
 
 	bool Init() override final 
 	{
-		transform = &gameObject->GetComponent<Transform>();
+		return true;
 	}
 
 	void Update() override final 
 	{
+		transform = &gameObject->GetComponent<Transform>();
+
 		velocity.x = force.x - drag.x;
-		velocity.y = force.x + drag.y + gravityScale * GRAVITY;
-		//transform->
+		velocity.y = force.x + drag.y + -(gravityScale * GRAVITY);
+		transform->Translate(velocity);
 	}
 
 	void SetForce(const Vector2D_float force) 

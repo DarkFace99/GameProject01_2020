@@ -90,7 +90,7 @@ template<typename T>
 inline T& GameObject::GetComponent() const
 {
 	auto ptr(compList[GetComponentID<T>()]);
-
+	
 	return *static_cast<T*>(ptr);
 }
 

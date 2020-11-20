@@ -2,6 +2,8 @@
 
 /* TEST */
 #include "SpriteRenderer.h"
+#include "RigidBody.h"
+#include "Animator.h"
 #include "Camera.h"
 
 Camera camera(glm::vec3(0, 0, 0), glm::vec3(0, 0, -1), glm::vec3(0, 1, 0), 1.0f, 0.0f);
@@ -86,6 +88,8 @@ void Engine::Init() {
 
     gameObject->AddComponent<SpriteRenderer>("TEST_MESH", "TEST_TEX", 1.0f, camera, true);
     std::cout << std::endl;
+
+    gameObject->AddComponent<RigidBody>(0.2f);
     
     // gameObj2
     std::cout << "Obj 2:" << std::endl;
@@ -93,7 +97,7 @@ void Engine::Init() {
     manager->AddEntity(gameObject);
     gameObject->GetComponent<Transform>().position = Vector2D_float(0.0f, 0.0f);
     gameObject->GetComponent<Transform>().scale = Vector2D_float(96.0f, 96.0f);
-    gameObject->AddComponent<SpriteRenderer>("TEST2_MESH", "TEST2_TEX", 1.0f, camera, false);
+    gameObject->AddComponent<SpriteRenderer>("TEST2_MESH", "TEST2_TEX", 0.5f, camera, false);
     
     
 
