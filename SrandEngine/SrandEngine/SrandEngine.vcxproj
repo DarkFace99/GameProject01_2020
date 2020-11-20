@@ -31,6 +31,7 @@
     <ClInclude Include="Source\Shader.h" />
     <ClInclude Include="Source\RigidBody.h" />
     <ClInclude Include="Source\SpriteRenderer.h" />
+    <ClInclude Include="Source\TimeStep.h" />
     <ClInclude Include="Source\Transform.h" />
     <ClInclude Include="Source\Vector2D.h" />
     <ClInclude Include="Source\Vertex.h" />
@@ -44,6 +45,7 @@
     <ClCompile Include="Source\Shader.cpp" />
     <ClCompile Include="Source\TestMain.cpp" />
     <ClCompile Include="Source\Vertex.cpp" />
+    <ClCompile Include="Source\TimeStep.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

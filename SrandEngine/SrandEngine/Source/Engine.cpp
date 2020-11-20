@@ -79,6 +79,10 @@ void Engine::Init() {
     AssetManager::get().LoadTexture("TEST2_TEX", "Assets/Cherry.png");
     std::cout << std::endl;
 
+    /* Anim_Test */
+    AssetManager::get().LoadMesh("ANIM_TEST_MESH", 6);
+    AssetManager::get().LoadTexture("ANIM_TEST_TEX", "Assets/Benny_Idle.png");
+
     gameObject->GetComponent<Transform>().position = Vector2D_float(-100.0f,0.0f);
     gameObject->GetComponent<Transform>().scale = Vector2D_float(96.0f, 96.0f);
     std::cout << "Set transform:" <<std::endl;
@@ -98,8 +102,17 @@ void Engine::Init() {
     gameObject->GetComponent<Transform>().position = Vector2D_float(0.0f, 0.0f);
     gameObject->GetComponent<Transform>().scale = Vector2D_float(96.0f, 96.0f);
     gameObject->AddComponent<SpriteRenderer>("TEST2_MESH", "TEST2_TEX", 0.5f, camera, false);
-    
-    
+
+    // gameObj3 Anim_Test
+    gameObject = new GameObject();
+    manager->AddEntity(gameObject);
+    gameObject->GetComponent<Transform>().position = Vector2D_float(-150.0f, 100.0f);
+    gameObject->GetComponent<Transform>().scale = Vector2D_float(96.0f, 96.0f);
+    gameObject->AddComponent<SpriteRenderer>("ANIM_TEST_MESH", "ANIM_TEST_TEX", 1.0f, camera, false);
+    // anim_set
+    gameObject->AddComponent<Animator>(6, 100);
+    gameObject->GetComponent<Animator>().SetState("BENNY_IDLE", 0, 5);
+    gameObject->GetComponent<Animator>().PlayState("BENNY_IDLE");
 
     running = true;
 }
@@ -115,7 +128,8 @@ void Engine::Update() {
     manager->Update();
 }
 
-void Engine::FixedUpdate() {
+void Engine::FixedUpdate(TimeStep ts) {
+    //std::cout << "FPS: " << 1.0f/ts.GetSeconds() << "\t GetMilliseconds: " << ts.GetMilliseconds() << std::endl;
 
 }
 

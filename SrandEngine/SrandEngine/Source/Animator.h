@@ -18,12 +18,13 @@ private:
 	std::string nextState = "";
 
 	float* offSetX_Ptr = nullptr;
+	float AccumulateTime = 0;
 
 public:
-	Animator(int totalFrames, float timeInterval) 
+	Animator(int totalFrames, float timeInterval) /* in ms */
 		:totalFrames(totalFrames), timeInterval(timeInterval){
 		
-		offSetX_Ptr = gameObject->GetComponent<SpriteRenderer>().GetOffSetX_Ptr();
+		/*offSetX_Ptr = gameObject->GetComponent<SpriteRenderer>().GetOffSetX();*/
 	}
 
 	
@@ -48,21 +49,28 @@ public:
 	}
 
 	void Update() override final {
+		// for some reason
+		offSetX_Ptr = gameObject->GetComponent<SpriteRenderer>().GetOffSetX();
+
+		// Update Acc Time
+		AccumulateTime += TimeStep::get().GetMilliseconds();
+
 		// detect change
 		if (currentState != nextState){
 			currentState = nextState;	//	update state
 			*offSetX_Ptr = (float)(states[currentState].x /* start frame */ / totalFrames);
 		}
 
-		// TODO: Implement time acoording to timeInterval
-		// increment offset
-		//if...{
-		*offSetX_Ptr += (float)(1.0f / totalFrames);
+		// increment offset in time step
+		if(AccumulateTime >= timeInterval){
+			AccumulateTime -= timeInterval;
+			*offSetX_Ptr += (float)(1.0f / totalFrames); // increment frame
+			
 			if (*offSetX_Ptr > (float)(states[currentState].y /* end frame */ + 0.5f) / (float)totalFrames) {
-				// reset to start frame
-				*offSetX_Ptr = (float)(states[currentState].x /* start frame */ / totalFrames);
+					// reset to start frame
+					*offSetX_Ptr = (float)(states[currentState].x /* start frame */ / totalFrames);
 			}
-		//}
+		}
 	}
 	
 };

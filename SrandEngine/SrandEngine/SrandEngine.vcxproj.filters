@@ -99,6 +99,9 @@
     <ClInclude Include="Source\Animator.h">
       <Filter>ECS\Header File</Filter>
     </ClInclude>
+    <ClInclude Include="Source\TimeStep.h">
+      <Filter>System File\Header File</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\AssetManager.cpp">
@@ -124,5 +127,8 @@
       <Filter>System File\Source File</Filter>
     </ClCompile>
     <ClCompile Include="Source\TestMain.cpp" />
+    <ClCompile Include="Source\TimeStep.cpp">
+      <Filter>System File\Source File</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

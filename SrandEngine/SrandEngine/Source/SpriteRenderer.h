@@ -18,7 +18,7 @@ private:
 
 	Texture* texture = nullptr;
 	Mesh* mesh = nullptr;
-	float alpha;
+	float alpha = 1;
 	bool flip = false;
 	float offsetX = 0.0f;
 	Camera camera;
@@ -27,7 +27,7 @@ public:
 	SpriteRenderer() = default;
 	virtual ~SpriteRenderer() = default;
 
-	float* GetOffSetX_Ptr() {
+	float* GetOffSetX() {
 		return &offsetX;
 	}
 

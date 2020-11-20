@@ -10,6 +10,7 @@
 #include "AssetManager.h"
 #include "Shader.h"
 #include "EntityManager.h"
+#include "TimeStep.h"
 
 /* Initialize Window */
 #define SCREEN_WIDTH    1280
@@ -35,7 +36,7 @@ public:
 
 	void Draw();
 	void Update();
-	void FixedUpdate();
+	void FixedUpdate(TimeStep ts);
 	void Event();
 
 	inline static Engine& get() {
