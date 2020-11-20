@@ -19,9 +19,31 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Source\AssetManager.h" />
+    <ClInclude Include="Source\Camera.h" />
+    <ClInclude Include="Source\Component.h" />
     <ClInclude Include="Source\Camera.h" />
     <ClInclude Include="Source\ECS.h" />
+    <ClInclude Include="Source\EntityManager.h" />
+    <ClInclude Include="Source\Engine.h" />
     <ClInclude Include="Source\GameObject.h" />
+    <ClInclude Include="Source\Mesh.h" />
+    <ClInclude Include="Source\Shader.h" />
+    <ClInclude Include="Source\RigidBody.h" />
+    <ClInclude Include="Source\SpriteRenderer.h" />
+    <ClInclude Include="Source\Transform.h" />
+    <ClInclude Include="Source\Vector2D.h" />
+    <ClInclude Include="Source\Vertex.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Source\Camera.cpp" />
+    <ClCompile Include="Source\EntityManager.cpp" />
+    <ClCompile Include="Source\Application.cpp" />
+    <ClCompile Include="Source\AssetManager.cpp" />
+    <ClCompile Include="Source\Engine.cpp" />
+    <ClCompile Include="Source\Shader.cpp" />
+    <ClCompile Include="Source\TestMain.cpp" />
+    <ClCompile Include="Source\Vertex.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Camera.cpp" />

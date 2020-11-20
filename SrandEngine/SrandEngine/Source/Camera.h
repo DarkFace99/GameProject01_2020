@@ -8,6 +8,8 @@
 #include <gtc/matrix_transform.hpp>
 #include <gtc/random.hpp>
 
+#include "Engine.h"
+
 class Camera 
 {
 private:

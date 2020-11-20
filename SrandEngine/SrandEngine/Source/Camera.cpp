@@ -12,7 +12,7 @@ Camera::Camera(glm::vec3 camPos, glm::vec3 camDir, glm::vec3 camUp, float camZoo
 }
 Camera::~Camera()
 {
-
+	
 }
 
 void Camera::SetCamPos(glm::vec3 camPos)
@@ -92,8 +92,8 @@ void Camera::SetViewMatrix()
 }
 void Camera::SetProjectionMat()
 {
-	int width = 1280;	//Need to use global Variable from system
-	int height = 720;	//Need to use global Variable from system
+	int width = SCREEN_WIDTH;	//Need to use global Variable from system
+	int height = SCREEN_HEIGTH;	//Need to use global Variable from system
 
 	projectionMatrix = glm::ortho(	-(width / 2) * GetCamZoom(), (width / 2) * GetCamZoom(), 
 									-(height / 2) * GetCamZoom(), (height / 2) * GetCamZoom(),
