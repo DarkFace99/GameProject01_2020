@@ -31,6 +31,8 @@ public:
 		return &offsetX;
 	}
 
+	void SetFlip(bool condition) { flip = condition; }
+
 	SpriteRenderer(std::string meshID, std::string textureID, float alpha, Camera& camera, bool flip)
 		: meshID(meshID), textureID(textureID), alpha(alpha), camera(camera), flip(flip){
 		std::cout << "Create Sprite Renderer: " << std::endl;

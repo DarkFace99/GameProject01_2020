@@ -41,7 +41,7 @@ public:
 	
 	void PlayState(std::string stateName) {
 		if (states.count(stateName) > 0) {
-			nextState = stateName;
+			if (nextState != stateName) { nextState = stateName; }
 		}
 		else {
 			std::cout << "Animator: //Error// state name [" << stateName << "] is not found!" << std::endl;
@@ -58,7 +58,7 @@ public:
 		// detect change
 		if (currentState != nextState){
 			currentState = nextState;	//	update state
-			*offSetX_Ptr = (float)(states[currentState].x /* start frame */ / totalFrames);
+			*offSetX_Ptr = (float)states[currentState].x /* start frame */ / (float)totalFrames;
 		}
 
 		// increment offset in time step
@@ -68,7 +68,7 @@ public:
 			
 			if (*offSetX_Ptr > (float)(states[currentState].y /* end frame */ + 0.5f) / (float)totalFrames) {
 					// reset to start frame
-					*offSetX_Ptr = (float)(states[currentState].x /* start frame */ / totalFrames);
+				*offSetX_Ptr = (float)states[currentState].x /* start frame */ / (float)totalFrames;
 			}
 		}
 	}

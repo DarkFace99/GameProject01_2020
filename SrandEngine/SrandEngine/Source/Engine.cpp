@@ -5,6 +5,7 @@
 #include "RigidBody.h"
 #include "Animator.h"
 #include "Camera.h"
+GameObject* gameObject;
 
 Camera camera(glm::vec3(0, 0, 0), glm::vec3(0, 0, -1), glm::vec3(0, 1, 0), 1.0f, 0.0f);
 
@@ -65,7 +66,7 @@ void Engine::Init() {
 
 
     /* Test */
-    GameObject* gameObject = new GameObject();
+    gameObject = new GameObject();
     manager->AddEntity(gameObject);
     std::cout << "initial position: " << gameObject->GetComponent<Transform>().position << std::endl;
     std::cout << std::endl;
@@ -80,8 +81,8 @@ void Engine::Init() {
     std::cout << std::endl;
 
     /* Anim_Test */
-    AssetManager::get().LoadMesh("ANIM_TEST_MESH", 6);
-    AssetManager::get().LoadTexture("ANIM_TEST_TEX", "Assets/Benny_Idle.png");
+    AssetManager::get().LoadMesh("ANIM_TEST_MESH", 21);
+    AssetManager::get().LoadTexture("ANIM_TEST_TEX", "Assets/Benny_Animations-Sheet.png");
 
     gameObject->GetComponent<Transform>().position = Vector2D_float(-100.0f,0.0f);
     gameObject->GetComponent<Transform>().scale = Vector2D_float(96.0f, 96.0f);
@@ -110,10 +111,11 @@ void Engine::Init() {
     gameObject->GetComponent<Transform>().scale = Vector2D_float(96.0f, 96.0f);
     gameObject->AddComponent<SpriteRenderer>("ANIM_TEST_MESH", "ANIM_TEST_TEX", 1.0f, camera, false);
     // anim_set
-    gameObject->AddComponent<Animator>(6, 100);
-    gameObject->GetComponent<Animator>().SetState("BENNY_IDLE", 0, 5);
-    gameObject->GetComponent<Animator>().PlayState("BENNY_IDLE");
-
+    gameObject->AddComponent<Animator>(21, 100);
+    gameObject->GetComponent<Animator>().SetState("BENNY_IDLE", 0, 6);
+    gameObject->GetComponent<Animator>().SetState("BENNY_RUN", 8, 16);
+    gameObject->GetComponent<Animator>().SetState("BENNY_JUMP", 18, 18);
+    gameObject->GetComponent<Animator>().SetState("BENNY_FALL", 19, 19);
     running = true;
 }
 
@@ -170,20 +172,28 @@ void key_callBack(GLFWwindow* window, int key, int scancode, int action, int mod
 // Continuous
 void keyUpdate(GLFWwindow* window)
 {
+    gameObject->GetComponent<Animator>().PlayState("BENNY_IDLE");
     if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS) 
     {
         std::cout << "W" << std::endl;
+        gameObject->GetComponent<Animator>().PlayState("BENNY_JUMP");
     }
     if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
     {
         std::cout << "A" << std::endl;
+        gameObject->GetComponent<Animator>().PlayState("BENNY_RUN");
+        gameObject->GetComponent<SpriteRenderer>().SetFlip(true);
     }
     if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
     {
         std::cout << "S" << std::endl;
+        gameObject->GetComponent<Animator>().PlayState("BENNY_FALL");
     }
     if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
     {
         std::cout << "D" << std::endl;
+        gameObject->GetComponent<Animator>().PlayState("BENNY_RUN");
+        gameObject->GetComponent<SpriteRenderer>().SetFlip(false);
     }
+
 }
