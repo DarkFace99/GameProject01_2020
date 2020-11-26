@@ -5,7 +5,10 @@
 #include "RigidBody.h"
 #include "Animator.h"
 #include "Camera.h"
+#include "Collision.h"
 GameObject* gameObject;
+GameObject* testEntity;
+GameObject* player;
 
 Camera camera(glm::vec3(0, 0, 0), glm::vec3(0, 0, -1), glm::vec3(0, 1, 0), 1.0f, 0.0f);
 
@@ -84,7 +87,7 @@ void Engine::Init() {
     AssetManager::get().LoadMesh("ANIM_TEST_MESH", 21);
     AssetManager::get().LoadTexture("ANIM_TEST_TEX", "Assets/Benny_Animations-Sheet.png");
 
-    gameObject->GetComponent<Transform>().position = Vector2D_float(-100.0f,0.0f);
+    gameObject->GetComponent<Transform>().position = Vector2D_float(-150.0f, 200.0f);
     gameObject->GetComponent<Transform>().scale = Vector2D_float(96.0f, 96.0f);
     std::cout << "Set transform:" <<std::endl;
     std::cout << "position: " << gameObject->GetComponent<Transform>().position << std::endl;
@@ -94,8 +97,11 @@ void Engine::Init() {
     gameObject->AddComponent<SpriteRenderer>("TEST_MESH", "TEST_TEX", 1.0f, camera, true);
     std::cout << std::endl;
 
-    gameObject->AddComponent<RigidBody>(0.2f);
-    
+    gameObject->AddComponent<RigidBody>(0.2f); // rigidBody
+    gameObject->AddComponent<BoxCollider2D>(gameObject->GetComponent<Transform>().scale.x, gameObject->GetComponent<Transform>().scale.y);
+    testEntity = gameObject;
+
+
     // gameObj2
     std::cout << "Obj 2:" << std::endl;
     gameObject = new GameObject();
@@ -107,7 +113,7 @@ void Engine::Init() {
     // gameObj3 Anim_Test
     gameObject = new GameObject();
     manager->AddEntity(gameObject);
-    gameObject->GetComponent<Transform>().position = Vector2D_float(-150.0f, 100.0f);
+    gameObject->GetComponent<Transform>().position = Vector2D_float(-150.0f, 0.0f);
     gameObject->GetComponent<Transform>().scale = Vector2D_float(96.0f, 96.0f);
     gameObject->AddComponent<SpriteRenderer>("ANIM_TEST_MESH", "ANIM_TEST_TEX", 1.0f, camera, false);
     // anim_set
@@ -116,6 +122,10 @@ void Engine::Init() {
     gameObject->GetComponent<Animator>().SetState("BENNY_RUN", 8, 16);
     gameObject->GetComponent<Animator>().SetState("BENNY_JUMP", 18, 18);
     gameObject->GetComponent<Animator>().SetState("BENNY_FALL", 19, 19);
+    gameObject->AddComponent<BoxCollider2D>(gameObject->GetComponent<Transform>().scale.x, gameObject->GetComponent<Transform>().scale.y);
+
+    player = gameObject; // check collision
+
     running = true;
 }
 
@@ -128,6 +138,7 @@ void Engine::Update() {
     glClearColor(0.3f, 0.3f, 0.5f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     manager->Update();
+    std::cout << "Collision:" << Collision::AABB(player->GetComponent<BoxCollider2D>(), testEntity->GetComponent<BoxCollider2D>()) << std::endl;
 }
 
 void Engine::FixedUpdate(TimeStep ts) {

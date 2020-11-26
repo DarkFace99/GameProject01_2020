@@ -102,6 +102,8 @@
     <ClInclude Include="Source\TimeStep.h">
       <Filter>System File\Header File</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Collision.h" />
+    <ClInclude Include="Source\BoxCollider2D.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\AssetManager.cpp">
@@ -130,5 +132,6 @@
     <ClCompile Include="Source\TimeStep.cpp">
       <Filter>System File\Source File</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Collision.cpp" />
   </ItemGroup>
 </Project>

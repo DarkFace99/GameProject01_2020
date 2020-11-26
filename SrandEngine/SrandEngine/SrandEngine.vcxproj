@@ -21,7 +21,9 @@
   <ItemGroup>
     <ClInclude Include="Source\Animator.h" />
     <ClInclude Include="Source\AssetManager.h" />
+    <ClInclude Include="Source\BoxCollider2D.h" />
     <ClInclude Include="Source\Camera.h" />
+    <ClInclude Include="Source\Collision.h" />
     <ClInclude Include="Source\Component.h" />
     <ClInclude Include="Source\ECS.h" />
     <ClInclude Include="Source\EntityManager.h" />
@@ -38,6 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Camera.cpp" />
+    <ClCompile Include="Source\Collision.cpp" />
     <ClCompile Include="Source\EntityManager.cpp" />
     <ClCompile Include="Source\Application.cpp" />
     <ClCompile Include="Source\AssetManager.cpp" />
