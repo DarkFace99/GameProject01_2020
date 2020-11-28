@@ -104,6 +104,9 @@
     </ClInclude>
     <ClInclude Include="Source\Collision.h" />
     <ClInclude Include="Source\BoxCollider2D.h" />
+    <ClInclude Include="Source\Input.h">
+      <Filter>System File\Header File</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\AssetManager.cpp">
@@ -124,6 +127,7 @@
     <ClCompile Include="Source\Shader.cpp">
       <Filter>System File\Source File</Filter>
     </ClCompile>
+    <ClCompile Include="Source\TestMain.cpp" />
     <ClCompile Include="Source\TestMain.cpp" />
     <ClCompile Include="Source\Camera.cpp">
       <Filter>System File\Source File</Filter>

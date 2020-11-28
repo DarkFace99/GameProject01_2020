@@ -24,8 +24,9 @@ public:
 		rotationAngle = rotation;
 	}
 
-	void Translate(const Vector2D_float v) {
-		position += v;
+	void Translate(Vector2D_float v) 
+	{
+		this->position += v;
 	}
 
 	virtual ~Transform() = default;

@@ -50,6 +50,3 @@ public:
 		return running;
 	}
 };
-
-void key_callBack(GLFWwindow* window, int key, int scancode, int action, int mods);
-void keyUpdate(GLFWwindow* window);

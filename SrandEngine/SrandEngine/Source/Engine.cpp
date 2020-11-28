@@ -12,6 +12,8 @@ GameObject* player;
 
 Camera camera(glm::vec3(0, 0, 0), glm::vec3(0, 0, -1), glm::vec3(0, 1, 0), 1.0f, 0.0f);
 
+IOSystem::Input ioSystem(&camera);
+
 Engine* Engine::s_instance = nullptr;
 
 Engine::Engine() {
@@ -94,7 +96,8 @@ void Engine::Init() {
     std::cout << "scale: " << gameObject->GetComponent<Transform>().scale << std::endl;
     std::cout << std::endl;
 
-    gameObject->AddComponent<SpriteRenderer>("TEST_MESH", "TEST_TEX", 1.0f, camera, true);
+    gameObject->AddComponent<SpriteRenderer>("TEST_MESH", "TEST_TEX", 1.0f, &camera, true);
+    ioSystem.SetControl(gameObject);
     std::cout << std::endl;
 
     gameObject->AddComponent<RigidBody>(0.2f); // rigidBody
@@ -148,10 +151,8 @@ void Engine::FixedUpdate(TimeStep ts) {
 
 void Engine::Event() {
     // input
-    glfwPollEvents();
+    ioSystem.IOUpdate(window);
     if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS) { Quit(); }
-    keyUpdate(window);
-    glfwSetKeyCallback(window, key_callBack);
 }
 
 void Engine::Clean() {

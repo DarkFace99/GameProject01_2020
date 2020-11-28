@@ -76,7 +76,7 @@ public:
 		modelMat = glm::translate(modelMat, glm::vec3(transform->position.x, transform->position.y,0));
 		modelMat = glm::scale(modelMat, glm::vec3((flip) ? -transform->scale.x : transform->scale.x, transform->scale.y,1));
 		modelMat = glm::rotate(modelMat, transform->rotationAngle * 3.14f / 180.0f, glm::vec3(0, 0, 1) /* rotate z-axis */ );
-		glm::mat4 MVP = camera.GetProjectionMat() * camera.GetViewMatrix() * modelMat;
+		glm::mat4 MVP = camera->GetProjectionMat() * camera->GetViewMatrix() * modelMat;
 		glUniformMatrix4fv(glGetUniformLocation(Shader::get()->shader, "MVP"), 1, GL_FALSE, &MVP[0][0]);
 
 		// Draw using mesh

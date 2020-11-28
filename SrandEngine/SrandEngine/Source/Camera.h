@@ -66,6 +66,7 @@ public:
 	glm::vec3	GetCamPos();
 	float		GetCamPosX();
 	float		GetCamPosY();
+	float		GetCamPosZ();
 
 	/// <summary>
 	///		Get Camera Current Direction
@@ -108,7 +109,7 @@ public:
 	///		Set Camera Position and Update to View Matrix
 	/// </summary>
 	/// <param name="camPos"> : Vec3 Value to set Camera Position </param>
-	void		SetCamPosition(glm::vec3 camPos);
+	void		SetCamPosition();
 
 	/// <summary>
 	///		Set Camera Zoom and Update to Projection Matrix
