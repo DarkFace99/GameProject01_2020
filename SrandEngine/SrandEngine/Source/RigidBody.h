@@ -33,7 +33,7 @@ public:
 		transform = &gameObject->GetComponent<Transform>();
 
 		velocity.x = force.x - drag.x;
-		velocity.y = force.x + drag.y + -(gravityScale * GRAVITY);
+		velocity.y += force.x + drag.y + -(gravityScale * GRAVITY);
 		transform->Translate(velocity);
 	}
 

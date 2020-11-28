@@ -6,6 +6,8 @@
 /* Custom Headers */
 #include "Engine.h"
 #include "Camera.h"
+#include "Animator.h"
+#include "SpriteRenderer.h"
 
 namespace IOSystem 
 {
@@ -33,6 +35,8 @@ namespace IOSystem
 
         void keyUpdate(GLFWwindow* window)
         {
+            player->GetComponent<Animator>().PlayState("BENNY_IDLE");
+
             if (glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS && glfwGetKey(window, GLFW_KEY_1) == GLFW_PRESS) 
             {
                 SetInputMode(DEBUG);
@@ -81,21 +85,27 @@ namespace IOSystem
                 {
                     std::cout << "W" << std::endl;
                     player->GetComponent<Transform>().Translate(Vector2D_float(0.0f, 2.0f));
+                    player->GetComponent<Animator>().PlayState("BENNY_JUMP");
                 }
                 if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
                 {
                     std::cout << "A" << std::endl;
                     player->GetComponent<Transform>().Translate(Vector2D_float(-2.0f, 0.0f));
+                    player->GetComponent<Animator>().PlayState("BENNY_RUN");
+                    player->GetComponent<SpriteRenderer>().SetFlip(true);
                 }
                 if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
                 {
                     std::cout << "S" << std::endl;
                     player->GetComponent<Transform>().Translate(Vector2D_float(0.0f, -2.0f));
+                    player->GetComponent<Animator>().PlayState("BENNY_FALL");
                 }
                 if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
                 {
                     std::cout << "D" << std::endl;
                     player->GetComponent<Transform>().Translate(Vector2D_float(2.0f, 0.0f));
+                    player->GetComponent<Animator>().PlayState("BENNY_RUN");
+                    player->GetComponent<SpriteRenderer>().SetFlip(false);
                 }
                 break;
             default:

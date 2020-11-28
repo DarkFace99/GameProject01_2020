@@ -21,7 +21,7 @@ private:
 	float alpha = 1;
 	bool flip = false;
 	float offsetX = 0.0f;
-	Camera camera;
+	Camera* camera;
 	
 public:
 	SpriteRenderer() = default;
@@ -33,7 +33,7 @@ public:
 
 	void SetFlip(bool condition) { flip = condition; }
 
-	SpriteRenderer(std::string meshID, std::string textureID, float alpha, Camera& camera, bool flip)
+	SpriteRenderer(std::string meshID, std::string textureID, float alpha, Camera* camera, bool flip)
 		: meshID(meshID), textureID(textureID), alpha(alpha), camera(camera), flip(flip){
 		std::cout << "Create Sprite Renderer: " << std::endl;
 		std::cout << "meshID: " <<meshID << std::endl;
