@@ -227,10 +227,10 @@ void Engine::Update() {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     manager->Update();
     Collision::AABB(player->GetComponent<BoxCollider2D>(), colTest1->GetComponent<BoxCollider2D>());
-    /*Collision::AABB(player->GetComponent<BoxCollider2D>(), colTest2->GetComponent<BoxCollider2D>());
+    Collision::AABB(player->GetComponent<BoxCollider2D>(), colTest2->GetComponent<BoxCollider2D>());
     Collision::AABB(player->GetComponent<BoxCollider2D>(), colTest3->GetComponent<BoxCollider2D>());
     Collision::AABB(player->GetComponent<BoxCollider2D>(), colTest4->GetComponent<BoxCollider2D>());
-    Collision::AABB(player->GetComponent<BoxCollider2D>(), colTest5->GetComponent<BoxCollider2D>());*/
+    Collision::AABB(player->GetComponent<BoxCollider2D>(), colTest5->GetComponent<BoxCollider2D>());
     //std::cout << "Collision:" << Collision::AABB(player->GetComponent<BoxCollider2D>(), testEntity->GetComponent<BoxCollider2D>()) << std::endl;
 }
 

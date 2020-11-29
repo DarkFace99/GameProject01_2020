@@ -34,6 +34,7 @@ public:
 
 		velocity.x = force.x - drag.x;
 		velocity.y += force.x + drag.y + -(gravityScale * GRAVITY);
+		if (velocity.y < -20) { velocity.y = -20; } // hard code
 		transform->Translate(velocity);
 	}
 
