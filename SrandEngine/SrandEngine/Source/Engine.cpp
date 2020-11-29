@@ -100,8 +100,9 @@ void Engine::Init() {
     gameObject->AddComponent<SpriteRenderer>("TEST_MESH", "TEST_TEX", 1.0f, &camera, true);
     std::cout << std::endl;
 
-    gameObject->AddComponent<RigidBody>(0.2f); // rigidBody
-    gameObject->AddComponent<BoxCollider2D>(gameObject->GetComponent<Transform>().scale.x, gameObject->GetComponent<Transform>().scale.y);
+    //gameObject->AddComponent<RigidBody>(0.2f); // rigidBody
+    gameObject->AddComponent<BoxCollider2D>(gameObject->GetComponent<Transform>().scale.x, gameObject->GetComponent<Transform>().scale.y,
+                                            false /* overlap */, true /* movable */);
     testEntity = gameObject;
 
 
@@ -125,7 +126,8 @@ void Engine::Init() {
     gameObject->GetComponent<Animator>().SetState("BENNY_RUN", 8, 16);
     gameObject->GetComponent<Animator>().SetState("BENNY_JUMP", 18, 18);
     gameObject->GetComponent<Animator>().SetState("BENNY_FALL", 19, 19);
-    gameObject->AddComponent<BoxCollider2D>(gameObject->GetComponent<Transform>().scale.x, gameObject->GetComponent<Transform>().scale.y);
+    gameObject->AddComponent<BoxCollider2D>(gameObject->GetComponent<Transform>().scale.x, gameObject->GetComponent<Transform>().scale.y,
+        false /* overlap */, true /* movable */);
 
     player = gameObject; // check collision
     ioSystem.SetControl(player);
@@ -142,7 +144,8 @@ void Engine::Update() {
     glClearColor(0.3f, 0.3f, 0.5f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     manager->Update();
-    std::cout << "Collision:" << Collision::AABB(player->GetComponent<BoxCollider2D>(), testEntity->GetComponent<BoxCollider2D>()) << std::endl;
+    Collision::AABB(player->GetComponent<BoxCollider2D>(), testEntity->GetComponent<BoxCollider2D>());
+    //std::cout << "Collision:" << Collision::AABB(player->GetComponent<BoxCollider2D>(), testEntity->GetComponent<BoxCollider2D>()) << std::endl;
 }
 
 void Engine::FixedUpdate(TimeStep ts) {

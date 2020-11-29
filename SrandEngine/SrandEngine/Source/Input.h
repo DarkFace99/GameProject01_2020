@@ -51,58 +51,58 @@ namespace IOSystem
             case DEBUG:
                 if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
                 {
-                    std::cout << "W" << std::endl;
+                    //std::cout << "W" << std::endl;
                     camera->MoveCamera(glm::vec3(0.0f, 1.5f, 0.0f));
                 }
                 if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
                 {
-                    std::cout << "A" << std::endl;
+                    //std::cout << "A" << std::endl;
                     camera->MoveCamera(glm::vec3(-1.5f, 0.0f, 0.0f));
                 }
                 if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
                 {
-                    std::cout << "S" << std::endl;
+                    //std::cout << "S" << std::endl;
                     camera->MoveCamera(glm::vec3(0.0f, -1.5f, 0.0f));
                 }
                 if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
                 {
-                    std::cout << "D" << std::endl;
+                    //std::cout << "D" << std::endl;
                     camera->MoveCamera(glm::vec3(1.5f, 0.0f, 0.0f));
                 }
                 if (glfwGetKey(window, GLFW_KEY_I) == GLFW_PRESS)
                 {
-                    std::cout << "I" << std::endl;
+                    //std::cout << "I" << std::endl;
                     camera->CamZoomIn(0.05f);
                 }
                 if (glfwGetKey(window, GLFW_KEY_O) == GLFW_PRESS)
                 {
-                    std::cout << "O" << std::endl;
+                    //std::cout << "O" << std::endl;
                     camera->CamZoomOut(0.05f);
                 }
                 break;
             case GAME:
                 if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
                 {
-                    std::cout << "W" << std::endl;
+                    //std::cout << "W" << std::endl;
                     player->GetComponent<Transform>().Translate(Vector2D_float(0.0f, 2.0f));
                     player->GetComponent<Animator>().PlayState("BENNY_JUMP");
                 }
                 if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
                 {
-                    std::cout << "A" << std::endl;
+                    //std::cout << "A" << std::endl;
                     player->GetComponent<Transform>().Translate(Vector2D_float(-2.0f, 0.0f));
                     player->GetComponent<Animator>().PlayState("BENNY_RUN");
                     player->GetComponent<SpriteRenderer>().SetFlip(true);
                 }
                 if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
                 {
-                    std::cout << "S" << std::endl;
+                    //std::cout << "S" << std::endl;
                     player->GetComponent<Transform>().Translate(Vector2D_float(0.0f, -2.0f));
                     player->GetComponent<Animator>().PlayState("BENNY_FALL");
                 }
                 if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
                 {
-                    std::cout << "D" << std::endl;
+                    //std::cout << "D" << std::endl;
                     player->GetComponent<Transform>().Translate(Vector2D_float(2.0f, 0.0f));
                     player->GetComponent<Animator>().PlayState("BENNY_RUN");
                     player->GetComponent<SpriteRenderer>().SetFlip(false);

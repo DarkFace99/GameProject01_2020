@@ -4,5 +4,6 @@
 
 class Collision{
 public: 
-	static bool AABB(const BoxCollider2D& colA, const BoxCollider2D& colB);
+	static bool AABB(BoxCollider2D& colA,BoxCollider2D& colB);
+	static void CollisionPush(BoxCollider2D& colA, BoxCollider2D& colB);
 };
