@@ -90,7 +90,7 @@ namespace IOSystem
                 if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
                 {
                     //std::cout << "A" << std::endl;
-                    player->GetComponent<Transform>().Translate(Vector2D_float(-2.0f, 0.0f));
+                    player->GetComponent<Transform>().Translate(Vector2D_float(-.10f, 0.0f));
                     player->GetComponent<Animator>().PlayState("BENNY_RUN");
                     player->GetComponent<SpriteRenderer>().SetFlip(true);
                 }
@@ -103,7 +103,7 @@ namespace IOSystem
                 if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
                 {
                     //std::cout << "D" << std::endl;
-                    player->GetComponent<Transform>().Translate(Vector2D_float(2.0f, 0.0f));
+                    player->GetComponent<Transform>().Translate(Vector2D_float(.10f, 0.0f));
                     player->GetComponent<Animator>().PlayState("BENNY_RUN");
                     player->GetComponent<SpriteRenderer>().SetFlip(false);
                 }

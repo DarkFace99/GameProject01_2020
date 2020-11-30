@@ -231,11 +231,11 @@ void Engine::Update() {
     Collision::AABB(player->GetComponent<BoxCollider2D>(), colTest3->GetComponent<BoxCollider2D>());
     Collision::AABB(player->GetComponent<BoxCollider2D>(), colTest4->GetComponent<BoxCollider2D>());
     Collision::AABB(player->GetComponent<BoxCollider2D>(), colTest5->GetComponent<BoxCollider2D>());
-    //std::cout << "Collision:" << Collision::AABB(player->GetComponent<BoxCollider2D>(), testEntity->GetComponent<BoxCollider2D>()) << std::endl;
+
+    //std::cout << "PlayerPos: " << player->GetComponent<Transform>().position << std::endl;
 }
 
 void Engine::FixedUpdate(TimeStep ts) {
-    //std::cout << "FPS: " << 1.0f/ts.GetSeconds() << "\t GetMilliseconds: " << ts.GetMilliseconds() << std::endl;
 
 }
 
