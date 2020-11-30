@@ -30,6 +30,8 @@ public:
 	Engine();
 	virtual ~Engine() = default;
 
+	GameObject* objManager[1024];
+
 	void Init();
 	void Clean();
 	void Quit();

@@ -92,100 +92,30 @@ void Engine::Init() {
     AssetManager::get().LoadMesh("ANIM_TEST_MESH", 21);
     AssetManager::get().LoadTexture("ANIM_TEST_TEX", "Assets/Benny_Animations-Sheet.png");
 
-    gameObject = new GameObject();
-    manager->AddEntity(gameObject);
-   /* std::cout << "initial position: " << gameObject->GetComponent<Transform>().position << std::endl;
-    std::cout << std::endl;*/
+    float posX = -128.0f;
+    for (int i = 0; i < 10; i++)
+    {
+        gameObject = new GameObject();
+        manager->AddEntity(gameObject);
+        /* std::cout << "initial position: " << gameObject->GetComponent<Transform>().position << std::endl;
+         std::cout << std::endl;*/
 
-    gameObject->GetComponent<Transform>().position = Vector2D_float(0.0f, -296.0f);
-    gameObject->GetComponent<Transform>().scale = Vector2D_float(64.0f, 64.0f);
-    std::cout << "Set transform:" << std::endl;
-    std::cout << "position: " << gameObject->GetComponent<Transform>().position << std::endl;
-    std::cout << "scale: " << gameObject->GetComponent<Transform>().scale << std::endl;
-    std::cout << std::endl;
+        posX += 64;
 
-    gameObject->AddComponent<SpriteRenderer>("TILEMESH", "TILETEX", 1.0f, &camera, true);
-    std::cout << std::endl;
+        gameObject->GetComponent<Transform>().position = Vector2D_float(posX, -296.0f);
+        gameObject->GetComponent<Transform>().scale = Vector2D_float(64.0f, 64.0f);
+        std::cout << "Set transform:" << std::endl;
+        std::cout << "position: " << gameObject->GetComponent<Transform>().position << std::endl;
+        std::cout << "scale: " << gameObject->GetComponent<Transform>().scale << std::endl;
+        std::cout << std::endl;
 
-    gameObject->AddComponent<BoxCollider2D>(gameObject->GetComponent<Transform>().scale.x, gameObject->GetComponent<Transform>().scale.y,
-        false /* overlap */, false /* movable */);
-    colTest1 = gameObject;
+        gameObject->AddComponent<SpriteRenderer>("TILEMESH", "TILETEX", 1.0f, &camera, true);
+        std::cout << std::endl;
 
-    //====================================================================================================
-
-    gameObject = new GameObject();
-    manager->AddEntity(gameObject);
-
-    gameObject->GetComponent<Transform>().position = Vector2D_float(64.0f, -296.0f);
-    gameObject->GetComponent<Transform>().scale = Vector2D_float(64.0f, 64.0f);
-    std::cout << "Set transform:" << std::endl;
-    std::cout << "position: " << gameObject->GetComponent<Transform>().position << std::endl;
-    std::cout << "scale: " << gameObject->GetComponent<Transform>().scale << std::endl;
-    std::cout << std::endl;
-
-    gameObject->AddComponent<SpriteRenderer>("TILEMESH", "TILETEX", 1.0f, &camera, true);
-    std::cout << std::endl;
-
-    gameObject->AddComponent<BoxCollider2D>(gameObject->GetComponent<Transform>().scale.x, gameObject->GetComponent<Transform>().scale.y,
-        false /* overlap */, false /* movable */);
-    colTest2 = gameObject;
-
-    //====================================================================================================
-
-    gameObject = new GameObject();
-    manager->AddEntity(gameObject);
-
-    gameObject->GetComponent<Transform>().position = Vector2D_float(128.0f, -296.0f);
-    gameObject->GetComponent<Transform>().scale = Vector2D_float(64.0f, 64.0f);
-    std::cout << "Set transform:" << std::endl;
-    std::cout << "position: " << gameObject->GetComponent<Transform>().position << std::endl;
-    std::cout << "scale: " << gameObject->GetComponent<Transform>().scale << std::endl;
-    std::cout << std::endl;
-
-    gameObject->AddComponent<SpriteRenderer>("TILEMESH", "TILETEX", 1.0f, &camera, true);
-    std::cout << std::endl;
-
-    gameObject->AddComponent<BoxCollider2D>(gameObject->GetComponent<Transform>().scale.x, gameObject->GetComponent<Transform>().scale.y,
-        false /* overlap */, false /* movable */);
-    colTest3 = gameObject;
-
-    //====================================================================================================
-
-    gameObject = new GameObject();
-    manager->AddEntity(gameObject);
-
-    gameObject->GetComponent<Transform>().position = Vector2D_float(192.0f, -296.0f);
-    gameObject->GetComponent<Transform>().scale = Vector2D_float(64.0f, 64.0f);
-    std::cout << "Set transform:" << std::endl;
-    std::cout << "position: " << gameObject->GetComponent<Transform>().position << std::endl;
-    std::cout << "scale: " << gameObject->GetComponent<Transform>().scale << std::endl;
-    std::cout << std::endl;
-
-    gameObject->AddComponent<SpriteRenderer>("TILEMESH", "TILETEX", 1.0f, &camera, true);
-    std::cout << std::endl;
-
-    gameObject->AddComponent<BoxCollider2D>(gameObject->GetComponent<Transform>().scale.x, gameObject->GetComponent<Transform>().scale.y,
-        false /* overlap */, false /* movable */);
-    colTest4 = gameObject;
-
-    //====================================================================================================
-
-    gameObject = new GameObject();
-    manager->AddEntity(gameObject);
-
-    gameObject->GetComponent<Transform>().position = Vector2D_float(256.0f, -296.0f);
-    gameObject->GetComponent<Transform>().scale = Vector2D_float(64.0f, 64.0f);
-    std::cout << "Set transform:" << std::endl;
-    std::cout << "position: " << gameObject->GetComponent<Transform>().position << std::endl;
-    std::cout << "scale: " << gameObject->GetComponent<Transform>().scale << std::endl;
-    std::cout << std::endl;
-
-    gameObject->AddComponent<SpriteRenderer>("TILEMESH", "TILETEX", 1.0f, &camera, true);
-    std::cout << std::endl;
-
-    gameObject->AddComponent<BoxCollider2D>(gameObject->GetComponent<Transform>().scale.x, gameObject->GetComponent<Transform>().scale.y,
-        false /* overlap */, false /* movable */);
-    colTest5 = gameObject;
+        gameObject->AddComponent<BoxCollider2D>(gameObject->GetComponent<Transform>().scale.x, gameObject->GetComponent<Transform>().scale.y,
+            false /* overlap */, false /* movable */);
+        objManager[i] = gameObject;
+    }
 
     // gameObj2
     std::cout << "Obj 2:" << std::endl;
@@ -226,11 +156,11 @@ void Engine::Update() {
     glClearColor(0.3f, 0.3f, 0.5f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     manager->Update();
-    Collision::AABB(player->GetComponent<BoxCollider2D>(), colTest1->GetComponent<BoxCollider2D>());
-    Collision::AABB(player->GetComponent<BoxCollider2D>(), colTest2->GetComponent<BoxCollider2D>());
-    Collision::AABB(player->GetComponent<BoxCollider2D>(), colTest3->GetComponent<BoxCollider2D>());
-    Collision::AABB(player->GetComponent<BoxCollider2D>(), colTest4->GetComponent<BoxCollider2D>());
-    Collision::AABB(player->GetComponent<BoxCollider2D>(), colTest5->GetComponent<BoxCollider2D>());
+
+    for (int i = 0; i < 10; i++)
+    {
+        Collision::AABB(player->GetComponent<BoxCollider2D>(), objManager[i]->GetComponent<BoxCollider2D>());
+    }
 
     //std::cout << "PlayerPos: " << player->GetComponent<Transform>().position << std::endl;
 }
