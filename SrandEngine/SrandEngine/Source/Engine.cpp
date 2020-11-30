@@ -131,7 +131,7 @@ void Engine::Init() {
     gameObject->GetComponent<Transform>().position = Vector2D_float(0.0f, 0.0f);
     gameObject->GetComponent<Transform>().scale = Vector2D_float(96.0f, 96.0f);
     gameObject->AddComponent<SpriteRenderer>("ANIM_TEST_MESH", "ANIM_TEST_TEX", 1.0f, &camera, false);
-    //gameObject->AddComponent<RigidBody>(0.01f);
+    gameObject->AddComponent<RigidBody>(0.01f);
     // anim_set
     gameObject->AddComponent<Animator>(21, 100);
     gameObject->GetComponent<Animator>().SetState("BENNY_IDLE", 0, 6);
@@ -162,6 +162,10 @@ void Engine::Update() {
         Collision::AABB(player->GetComponent<BoxCollider2D>(), objManager[i]->GetComponent<BoxCollider2D>());
     }
 
+    if (Collision::IsOnGround(*player)) {
+        player->GetComponent<RigidBody>().SetVelocityY(0.0f);
+    }
+    
     //std::cout << "PlayerPos: " << player->GetComponent<Transform>().position << std::endl;
 }
 

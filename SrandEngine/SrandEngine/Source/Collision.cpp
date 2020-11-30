@@ -42,6 +42,8 @@ void Collision::CollisionPush(BoxCollider2D& colA, BoxCollider2D& colB) {
 		if (isAxis_Y) {
 			/*std::cout << "Axis Y" << std::endl;
 			std::cout << "PlayerPos_Before: " << colA.transform->position << std::endl;
+			std::cout << "Thresh_X: " << abs(colA.transform->position.x - colB.transform->position.x)
+				<< " Thresh_Y: " << abs(colA.transform->position.y - colB.transform->position.y) << std::endl;
 			std::cout << "NewPos: " << colB.transform->position.y << " + " << (colA.height + colB.height) / 2.0f << std::endl;*/
 			colA.transform->position.y = colB.transform->position.y + (((colA.height+ colB.height) / 2.0f)  * ((isDir_P) ? 1 : -1));
 			/*std::cout << "PlayerPos_After/: " << colA.transform->position << std::endl << std::endl;*/
@@ -49,6 +51,8 @@ void Collision::CollisionPush(BoxCollider2D& colA, BoxCollider2D& colB) {
 		else {
 			/*std::cout << "Axis X" << std::endl;
 			std::cout << "PlayerPos_Before: " << colA.transform->position << std::endl;
+			std::cout << "Thresh_X: " << abs(colA.transform->position.x - colB.transform->position.x)
+				<< " Thresh_Y: " << abs(colA.transform->position.y - colB.transform->position.y) << std::endl;
 			std::cout << "PlayerScale: (" << colA.width << ", " << colA.height << ") CollideObj_Scale: (" << colB.width << ", " << colB.height << ")" << std::endl;
 			std::cout << "Pos_A: " << colA.transform->position << "\tPos_B: " << colB.transform->position << std::endl;*/
 			colA.transform->position.x = colB.transform->position.x + (((colA.width + colB.width) / 2.0f) * ((isDir_P) ? 1 : -1));
@@ -64,5 +68,26 @@ void Collision::CollisionPush(BoxCollider2D& colA, BoxCollider2D& colB) {
 		else {
 			colB.transform->position.x = colA.transform->position.x + (((colA.width + colB.width) / 2.0f) * ((!isDir_P) /* invert direction */ ? 1 : -1));
 		}
+	}
+}
+
+
+/* HardCoding */
+bool Collision::IsOnGround(GameObject& checkObj) {
+	if (!checkObj.HasComponent<BoxCollider2D>()) {  // check component
+		std::cout << "Collision: <BoxCollider2D> component is not found." << std::endl;
+		return false;
+	}
+	else {	// hard coding for checking
+		for (int i = 0; i < 10; i++) {
+			if (Engine::get().objManager[i]->HasComponent<BoxCollider2D>() 
+			&& AABB(checkObj.GetComponent<BoxCollider2D>(), Engine::get().objManager[i]->GetComponent<BoxCollider2D>()) ) {
+				if (checkObj.GetComponent<BoxCollider2D>().transform->position.y == Engine::get().objManager[i]->GetComponent<BoxCollider2D>().transform->position.y
+					+ (checkObj.GetComponent<BoxCollider2D>().height + Engine::get().objManager[i]->GetComponent<BoxCollider2D>().height) / 2.0f) {
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 }

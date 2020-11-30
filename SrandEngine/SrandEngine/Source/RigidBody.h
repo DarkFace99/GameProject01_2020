@@ -43,4 +43,12 @@ public:
 		this->force = force;
 	}
 
+	void SetVelocityX(float v_X) {
+		velocity.x = v_X;
+	}
+
+	void SetVelocityY(float v_Y) {
+		velocity.y = v_Y;
+	}
+
 };
