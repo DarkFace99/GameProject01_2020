@@ -19,7 +19,8 @@ void Collision::CollisionPush(BoxCollider2D& colA, BoxCollider2D& colB) {
 	
 	// acoording to ColA
 
-	bool isAxis_Y = abs(colA.transform->position.x - colB.transform->position.x) < abs(colA.transform->position.y - colB.transform->position.y);
+	bool isAxis_Y = abs(colA.transform->position.x - colB.transform->position.x) / ((colA.width + colB.width)/2.0f)
+					< abs(colA.transform->position.y - colB.transform->position.y) / ((colA.height + colB.height) / 2.0f);
 	bool isDir_P;
 	if (isAxis_Y) { isDir_P = (colA.transform->position.y > colB.transform->position.y); }
 	else{ isDir_P = (colA.transform->position.x > colB.transform->position.x); }
