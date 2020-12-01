@@ -12,8 +12,12 @@
 #include "Elevator.h"
 
 GameObject* gameObject;
+
 GameObject* button;
 GameObject* door;
+
+GameObject* benny;
+GameObject* macho;
 
 Camera camera(glm::vec3(0, 0, 0), glm::vec3(0, 0, -1), glm::vec3(0, 1, 0), 1.0f, 0.0f);
 
@@ -91,9 +95,12 @@ void Engine::Init() {
     std::cout << std::endl;
 
     /* Anim_Test */
-    AssetManager::get().LoadMesh("ANIM_TEST_MESH", 21);
-    AssetManager::get().LoadTexture("ANIM_TEST_TEX", "Assets/Benny_Animations-Sheet.png");
+    AssetManager::get().LoadMesh("BENNY_ANIM_MESH", 21);
+    AssetManager::get().LoadTexture("BENNY_ANIM_TEX", "Assets/Benny_Animations-Sheet.png");
+    AssetManager::get().LoadMesh("MACHO_ANIM_MESH", 20);
+    AssetManager::get().LoadTexture("MACHO_ANIM_TEX", "Assets/Macho_Animation-Sheet.png");
 
+    // Tile=================================================================================================================================
     float posX = -128.0f;
     for (int i = 0; i < 10; i++)
     {
@@ -119,6 +126,7 @@ void Engine::Init() {
         objManager.push_back(gameObject);
     }
 
+    // Button===============================================================================================================================
     gameObject = new GameObject();
     manager->AddEntity(gameObject);
     gameObject->GetComponent<Transform>().position = Vector2D_float(128.0f, -232.0f);
@@ -133,10 +141,8 @@ void Engine::Init() {
             true, false, "BUTTONMESH", &camera);
 
     button = gameObject;
-    //objManager.push_back(gameObject);
-    
 
-    // gameObj2
+    // Test Obstacle========================================================================================================================
     std::cout << "Obj 2:" << std::endl;
     gameObject = new GameObject();
     manager->AddEntity(gameObject);
@@ -154,12 +160,12 @@ void Engine::Init() {
     door = gameObject;
     objManager.push_back(gameObject);
 
-    // gameObj3 Anim_Test
+    // Benny================================================================================================================================
     gameObject = new GameObject();
     manager->AddEntity(gameObject);
     gameObject->GetComponent<Transform>().position = Vector2D_float(0.0f, 0.0f);
     gameObject->GetComponent<Transform>().scale = Vector2D_float(96.0f, 96.0f);
-    gameObject->AddComponent<SpriteRenderer>("ANIM_TEST_MESH", "ANIM_TEST_TEX", 1.0f, &camera, false);
+    gameObject->AddComponent<SpriteRenderer>("BENNY_ANIM_MESH", "BENNY_ANIM_TEX", 1.0f, &camera, false);
     gameObject->AddComponent<RigidBody>(0.01f);
     // anim_set
     gameObject->AddComponent<Animator>(21, 100);
@@ -168,11 +174,31 @@ void Engine::Init() {
     gameObject->GetComponent<Animator>().SetState("BENNY_JUMP", 18, 18);
     gameObject->GetComponent<Animator>().SetState("BENNY_FALL", 19, 19);
     gameObject->AddComponent<BoxCollider2D>(gameObject->GetComponent<Transform>().scale.x, gameObject->GetComponent<Transform>().scale.y,
-        false /* overlap */, true /* movable */, "ANIM_TEST_MESH", &camera);
+        false /* overlap */, true /* movable */, "BENNY_ANIM_MESH", &camera);
 
     player = gameObject; // check collision
-    ioSystem.SetControl(player);
+    benny = player;
+    ioSystem.AddCharacterList("Benny", benny);
 
+    // Macho================================================================================================================================
+    gameObject = new GameObject();
+    manager->AddEntity(gameObject);
+    gameObject->GetComponent<Transform>().position = Vector2D_float(0.0f, 0.0f);
+    gameObject->GetComponent<Transform>().scale = Vector2D_float(96.0f, 96.0f);
+    gameObject->AddComponent<SpriteRenderer>("MACHO_ANIM_MESH", "MACHO_ANIM_TEX", 1.0f, &camera, false);
+    gameObject->AddComponent<RigidBody>(0.01f);
+    // anim_set
+    gameObject->AddComponent<Animator>(20, 100);
+    gameObject->GetComponent<Animator>().SetState("MACHO_IDLE", 0, 5);
+    gameObject->GetComponent<Animator>().SetState("MACHO_RUN", 13, 19);
+
+    gameObject->AddComponent<BoxCollider2D>(gameObject->GetComponent<Transform>().scale.x, gameObject->GetComponent<Transform>().scale.y,
+        false /* overlap */, true /* movable */, "MACHO_ANIM_MESH", &camera);
+    
+    macho = gameObject;
+    ioSystem.AddCharacterList("Macho", macho);
+
+    ioSystem.SetControl("Benny");
 
     running = true;
 }
@@ -189,7 +215,8 @@ void Engine::Update() {
 
     for (int i = 0; i < objManager.size(); i++)
     {
-        Collision::AABB(player->GetComponent<BoxCollider2D>(), objManager[i]->GetComponent<BoxCollider2D>());
+        Collision::AABB(benny->GetComponent<BoxCollider2D>(), objManager[i]->GetComponent<BoxCollider2D>());
+        Collision::AABB(macho->GetComponent<BoxCollider2D>(), objManager[i]->GetComponent<BoxCollider2D>());
     }
 
     if (Collision::IsOnGround(*player)) {
