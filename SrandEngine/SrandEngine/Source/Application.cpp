@@ -17,11 +17,12 @@ int main(int argc, char** argv) {
 		float time = (float)glfwGetTime();
 		timeStep = time - lastFrameTime;
 		lastFrameTime = time;
-		
 
 		engine.Event();
 		engine.Update();
+
 		engine.FixedUpdate(timeStep);	// need to impliment time later
+
 		engine.Draw();
 	}
 
