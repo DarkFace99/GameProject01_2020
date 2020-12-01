@@ -158,7 +158,7 @@ void Engine::Init() {
     manager->AddEntity(gameObject);
     gameObject->GetComponent<Transform>().position = Vector2D_float(0.0f, 0.0f);
     gameObject->GetComponent<Transform>().scale = Vector2D_float(96.0f, 96.0f);
-    gameObject->AddComponent<SpriteRenderer>("ANIM_TEST_MESH", "ANIM_TEST_TEX", 1.0f, &camera, false);
+    gameObject->AddComponent<SpriteRenderer>(SpriteRenderer::TEST_LAYER,"ANIM_TEST_MESH", "ANIM_TEST_TEX", 1.0f, &camera, false);
     gameObject->AddComponent<RigidBody>(0.01f);
     // anim_set
     gameObject->AddComponent<Animator>(21, 100);

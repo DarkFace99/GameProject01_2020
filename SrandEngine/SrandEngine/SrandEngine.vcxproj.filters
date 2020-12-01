@@ -105,8 +105,6 @@
     <ClInclude Include="Source\TimeStep.h">
       <Filter>System File\Header File</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Collision.h" />
-    <ClInclude Include="Source\BoxCollider2D.h" />
     <ClInclude Include="Source\Input.h">
       <Filter>System File\Header File</Filter>
     </ClInclude>
@@ -118,6 +116,12 @@
     </ClInclude>
     <ClInclude Include="Source\Elevator.h">
       <Filter>Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\BoxCollider2D.h">
+      <Filter>ECS\Header File</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Collision.h">
+      <Filter>System File\Header File</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -148,6 +152,8 @@
     <ClCompile Include="Source\TimeStep.cpp">
       <Filter>System File\Source File</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Collision.cpp" />
+    <ClCompile Include="Source\Collision.cpp">
+      <Filter>System File\Source File</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
