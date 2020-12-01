@@ -7,11 +7,15 @@
 #include "AssetManager.h"
 #include "Camera.h"
 
+enum CollisionTag {
+	DEFAULT = 0
+};
+
 class BoxCollider2D : public Component{
 private:
 	friend class Collision;
 	float width, height;
-	std::string collisionTag = "";
+	CollisionTag tag;
 	Transform* transform = nullptr;
 
 	bool allowOverlap = false;
@@ -22,13 +26,13 @@ private:
 	Camera* camera;
 
 public:
-	BoxCollider2D(std::string tag, float width, float height, bool overlap = false, bool movable = false, std::string meshID = "", Camera* camera = nullptr)
-		: collisionTag(tag), width(width), height(height), allowOverlap(overlap), movable(movable), meshID(meshID), camera(camera) {}
+	BoxCollider2D(CollisionTag tag, float width, float height, bool overlap = false, bool movable = false, std::string meshID = "", Camera* camera = nullptr)
+		: tag(tag), width(width), height(height), allowOverlap(overlap), movable(movable), meshID(meshID), camera(camera) {}
 
 	BoxCollider2D(float width, float height, bool overlap = false, bool movable = false, std::string meshID = "", Camera* camera = nullptr)
 		: width(width), height(height), allowOverlap(overlap), movable(movable), meshID(meshID), camera(camera) {}
 
-	std::string GetTag() { return collisionTag; }
+	int GetTag() { return tag; }
 
 	bool Init() override final {
 		transform = &gameObject->GetComponent<Transform>();
