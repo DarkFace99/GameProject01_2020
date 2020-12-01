@@ -9,6 +9,7 @@
 #include "Input.h"
 #include "Button.h"
 #include "Door.h"
+#include "Elevator.h"
 
 GameObject* gameObject;
 GameObject* button;
@@ -147,8 +148,8 @@ void Engine::Init() {
     gameObject->AddComponent<BoxCollider2D>(gameObject->GetComponent<Transform>().scale.x, gameObject->GetComponent<Transform>().scale.y,
             false, false, "TEST2_MESH", &camera);
 
-    gameObject->AddComponent<Door>();
-    gameObject->GetComponent<Door>().AddConnectedButtons(button);
+    gameObject->AddComponent<Elevator>(3);
+    gameObject->GetComponent<Elevator>().AddConnectedButtons(button);
 
     door = gameObject;
     objManager.push_back(gameObject);

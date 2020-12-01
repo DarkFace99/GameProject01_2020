@@ -53,13 +53,13 @@ public:
 		{
 			if (connectedButtons[i]->GetComponent<Button>().CheckCollideActivate()) 
 			{
-				gameObject->GetComponent<BoxCollider2D>().SetOverlap(true);
-				std::cout << gameObject->GetComponent<BoxCollider2D>().GetOverlap() << std::endl;
+				collider->SetOverlap(true);
+				std::cout << collider->GetOverlap() << std::endl;
 			}
 			else
 			{
-				gameObject->GetComponent<BoxCollider2D>().SetOverlap(false);
-				std::cout << gameObject->GetComponent<BoxCollider2D>().GetOverlap() << std::endl;
+				collider->SetOverlap(false);
+				std::cout << collider->GetOverlap() << std::endl;
 			}
 		}
 	}
