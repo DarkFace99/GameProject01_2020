@@ -83,7 +83,7 @@ namespace IOSystem
                 }
                 break;
             case GAME:
-                std::cout << player->GetComponent<RigidBody>().GetVelocityY() << std::endl;
+                //std::cout << player->GetComponent<RigidBody>().GetVelocityY() << std::endl;
                 if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS && Collision::IsOnGround(*player))
                 {
                     //std::cout << "W" << std::endl;
