@@ -7,15 +7,18 @@
 #include "AssetManager.h"
 #include "Camera.h"
 
-enum CollisionTag {
-	DEFAULT = 0
-};
-
 class BoxCollider2D : public Component{
+public:
+	enum CollisionTag {
+		COLLISION_START = 0,
+		TEST_COLLISION,
+		COLLISION_END
+	};
+
 private:
 	friend class Collision;
 	float width, height;
-	CollisionTag tag;
+	CollisionTag tag = COLLISION_START;
 	Transform* transform = nullptr;
 
 	bool allowOverlap = false;
