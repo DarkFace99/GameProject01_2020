@@ -79,7 +79,7 @@ bool Collision::IsOnGround(GameObject& checkObj) {
 		return false;
 	}
 	else {	// hard coding for checking
-		for (int i = 0; i < 10; i++) {
+		for (int i = 0; i < Engine::get().objManager.size(); i++) {
 			if (Engine::get().objManager[i]->HasComponent<BoxCollider2D>() 
 			&& AABB(checkObj.GetComponent<BoxCollider2D>(), Engine::get().objManager[i]->GetComponent<BoxCollider2D>()) ) {
 				if (checkObj.GetComponent<BoxCollider2D>().transform->position.y == Engine::get().objManager[i]->GetComponent<BoxCollider2D>().transform->position.y
