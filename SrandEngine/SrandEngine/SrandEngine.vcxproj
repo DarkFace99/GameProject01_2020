@@ -22,9 +22,11 @@
     <ClInclude Include="Source\Animator.h" />
     <ClInclude Include="Source\AssetManager.h" />
     <ClInclude Include="Source\BoxCollider2D.h" />
+    <ClInclude Include="Source\Button.h" />
     <ClInclude Include="Source\Camera.h" />
     <ClInclude Include="Source\Collision.h" />
     <ClInclude Include="Source\Component.h" />
+    <ClInclude Include="Source\Door.h" />
     <ClInclude Include="Source\ECS.h" />
     <ClInclude Include="Source\EntityManager.h" />
     <ClInclude Include="Source\Engine.h" />
