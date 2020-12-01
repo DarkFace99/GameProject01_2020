@@ -9,6 +9,8 @@
 /* Custom Header */
 #include "AssetManager.h"
 #include "Shader.h"
+#include "EntityManager.h"
+#include "TimeStep.h"
 
 /* Initialize Window */
 #define SCREEN_WIDTH    1280
@@ -21,10 +23,14 @@ private:
 	GLFWwindow* window;
 	static Engine* s_instance;
 	bool running;
+
+	EntityManager* manager = nullptr;
 	
 public:
 	Engine();
 	virtual ~Engine() = default;
+
+	std::vector<GameObject*> objManager;
 
 	void Init();
 	void Clean();
@@ -32,7 +38,7 @@ public:
 
 	void Draw();
 	void Update();
-	void FixedUpdate();
+	void FixedUpdate(TimeStep ts);
 	void Event();
 
 	inline static Engine& get() {
@@ -46,6 +52,3 @@ public:
 		return running;
 	}
 };
-
-void key_callBack(GLFWwindow* window, int key, int scancode, int action, int mods);
-void keyUpdate(GLFWwindow* window);

@@ -6,16 +6,16 @@ AssetManager* AssetManager::s_instance = nullptr;
 void AssetManager::Clean() {
 	
 	// textures
-	for (auto it = textures.begin(); it != textures.end(); ++it) {		// problem!!
+	for (auto it = textures.begin(); it != textures.end(); ++it) {		
 		delete it->second;
-		/*textures.erase(it);*/
+		/*textures.erase(it);*/											// problem!!
 	}
 	textures.clear();
 
 	// meshes
-	for (auto it = meshes.begin(); it != meshes.end(); it++) {			// problem!!
+	for (auto it = meshes.begin(); it != meshes.end(); it++) {			
 		delete it->second;
-		/*meshes.erase(it);*/
+		/*meshes.erase(it);*/											// problem!!
 	}
 	meshes.clear();
 }

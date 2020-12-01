@@ -62,6 +62,8 @@ inline T& GameObject::AddComponent(TArgs&&... args)
 	std::unique_ptr<Component> unique_ptr { comp };								// Convert comp as a unique pointer so we can store
 	components.emplace_back(std::move(unique_ptr));
 
+	comp->gameObject = this; 
+
 	if (comp->Init())															// If is created properly 
 	{
 		//std::cout << "Component Initiated: SUCCEED" << std::endl;
@@ -69,7 +71,7 @@ inline T& GameObject::AddComponent(TArgs&&... args)
 		compList[GetComponentID<T>()] = comp;
 		compBitSet[GetComponentID<T>()] = true;
 
-		comp->gameObject = this;												// Attached the component to the gameObject
+		/*comp->gameObject = this;*/												// Attached the component to the gameObject
 
 		return *comp;
 	}
@@ -90,7 +92,7 @@ template<typename T>
 inline T& GameObject::GetComponent() const
 {
 	auto ptr(compList[GetComponentID<T>()]);
-
+	
 	return *static_cast<T*>(ptr);
 }
 

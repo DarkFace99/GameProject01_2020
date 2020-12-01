@@ -96,6 +96,17 @@
     <ClInclude Include="Source\Camera.h">
       <Filter>System File\Header File</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Animator.h">
+      <Filter>ECS\Header File</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\TimeStep.h">
+      <Filter>System File\Header File</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Collision.h" />
+    <ClInclude Include="Source\BoxCollider2D.h" />
+    <ClInclude Include="Source\Input.h">
+      <Filter>System File\Header File</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\AssetManager.cpp">
@@ -117,9 +128,14 @@
       <Filter>System File\Source File</Filter>
     </ClCompile>
     <ClCompile Include="Source\TestMain.cpp" />
+    <ClCompile Include="Source\TestMain.cpp" />
     <ClCompile Include="Source\Camera.cpp">
       <Filter>System File\Source File</Filter>
     </ClCompile>
     <ClCompile Include="Source\TestMain.cpp" />
+    <ClCompile Include="Source\TimeStep.cpp">
+      <Filter>System File\Source File</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Collision.cpp" />
   </ItemGroup>
 </Project>

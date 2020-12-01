@@ -43,6 +43,10 @@ float Camera::GetCamPosY()
 {
 	return camPosition.y;
 }
+float Camera::GetCamPosZ()
+{
+	return camPosition.z;
+}
 glm::vec3 Camera::GetCamDir()
 {
 	return camDirection;
@@ -60,44 +64,49 @@ void Camera::MoveCamera(glm::vec3 moveVec)
 {
 	float tempX = GetCamPosX();
 	float tempY = GetCamPosY();
+	float tempZ = GetCamPosZ();
 
 	tempX += moveVec.x;
 	tempY += moveVec.y;
+	tempZ += moveVec.z;
 
-	SetCamPosition(GetCamPos());
+	SetCamPos(glm::vec3(tempX, tempY, tempZ));
+
+	SetViewMatrix();
 }
 void Camera::CamZoomIn(float zoomFactor)
 {
 	float zoomAmount = GetCamZoom() - zoomFactor;
-	SetCamZoom(zoomAmount);
+	SetCameraZoom(zoomAmount);
 }
 void Camera::CamZoomOut(float zoomFactor)
 {
 	CamZoomIn(-zoomFactor);
 }
-void Camera::SetCamPosition(glm::vec3 camPos)
-{
-	SetViewMatrix();
-}
+//void Camera::SetCamPosition()
+//{
+//	SetViewMatrix();
+//}
 void Camera::SetCameraZoom(float zoomFactor)
 {
-	if (GetCamZoom() < 0.1f) { SetCameraZoom(0.1f); }
+	SetCamZoom(zoomFactor);
+	if (GetCamZoom() < 0.1f) { SetCamZoom(0.1f); }
 	SetProjectionMat();
 	SetViewMatrix();
 }
 
 void Camera::SetViewMatrix()
 {
-	viewMatrix = glm::lookAt(GetCamPos(), GetCamPos() + GetCamDir(), GetCamUp());
+	Camera::viewMatrix = glm::lookAt(GetCamPos(), GetCamPos() + GetCamDir(), GetCamUp());
 }
 void Camera::SetProjectionMat()
 {
-	int width = SCREEN_WIDTH;	//Need to use global Variable from system
-	int height = SCREEN_HEIGTH;	//Need to use global Variable from system
+	//int width = SCREEN_WIDTH;	//Need to use global Variable from system
+	//int height = SCREEN_HEIGTH;	//Need to use global Variable from system
 
-	projectionMatrix = glm::ortho(	-(width / 2) * GetCamZoom(), (width / 2) * GetCamZoom(), 
-									-(height / 2) * GetCamZoom(), (height / 2) * GetCamZoom(),
-									-20.0f, 20.0f);
+	Camera::projectionMatrix = glm::ortho(	-(SCREEN_WIDTH / 2) * GetCamZoom(), (SCREEN_WIDTH / 2) * GetCamZoom(),
+											-(SCREEN_HEIGTH / 2) * GetCamZoom(), (SCREEN_HEIGTH / 2) * GetCamZoom(),
+											-20.0f, 20.0f);
 }
 glm::mat4 Camera::GetViewMatrix()
 {
