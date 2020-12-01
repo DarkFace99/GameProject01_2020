@@ -30,7 +30,7 @@ public:
 	Engine();
 	virtual ~Engine() = default;
 
-	GameObject* objManager[1024];
+	std::vector<GameObject*> objManager;
 
 	void Init();
 	void Clean();

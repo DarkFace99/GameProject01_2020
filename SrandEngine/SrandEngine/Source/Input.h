@@ -35,6 +35,8 @@ namespace IOSystem
 
         void keyUpdate(GLFWwindow* window)
         {
+            bool isJumping = false;
+
             player->GetComponent<Animator>().PlayState("BENNY_IDLE");
 
             if (glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS && glfwGetKey(window, GLFW_KEY_1) == GLFW_PRESS) 
@@ -81,11 +83,17 @@ namespace IOSystem
                 }
                 break;
             case GAME:
-                if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
+                std::cout << player->GetComponent<RigidBody>().GetVelocityY() << std::endl;
+                if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS && Collision::IsOnGround(*player))
                 {
                     //std::cout << "W" << std::endl;
-                    player->GetComponent<Transform>().Translate(Vector2D_float(0.0f, 2.0f));
-                    player->GetComponent<Animator>().PlayState("BENNY_JUMP");
+                    player->GetComponent<RigidBody>().SetVelocityY(5.0f);
+                    /*player->GetComponent<Animator>().PlayState("BENNY_JUMP");
+                    if (player->GetComponent<RigidBody>().GetVelocityY() < 0) 
+                    {
+                        player->GetComponent<Animator>().PlayState("BENNY_FALL");
+                    }*/
+                    isJumping = true;
                 }
                 if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
                 {
@@ -93,12 +101,6 @@ namespace IOSystem
                     player->GetComponent<Transform>().Translate(Vector2D_float(-2.0f, 0.0f));
                     player->GetComponent<Animator>().PlayState("BENNY_RUN");
                     player->GetComponent<SpriteRenderer>().SetFlip(true);
-                }
-                if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
-                {
-                    //std::cout << "S" << std::endl;
-                    player->GetComponent<Transform>().Translate(Vector2D_float(0.0f, -2.0f));
-                    player->GetComponent<Animator>().PlayState("BENNY_FALL");
                 }
                 if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
                 {
@@ -111,6 +113,20 @@ namespace IOSystem
             default:
                 break;
             }
+
+            /*if (isJumping) 
+            {
+                player->GetComponent<Animator>().PlayState("BENNY_JUMP");
+                if (player->GetComponent<RigidBody>().GetVelocityY() < 0)
+                {
+                    player->GetComponent<Animator>().PlayState("BENNY_FALL");
+                }
+                if (Collision::IsOnGround(*player)) 
+                {
+                    isJumping = false;
+                }
+            }*/
+
         }
 
 

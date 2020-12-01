@@ -51,4 +51,9 @@ public:
 		velocity.y = v_Y;
 	}
 
+	float GetVelocityY() 
+	{
+		return velocity.y;
+	}
+
 };

@@ -114,7 +114,8 @@ void Engine::Init() {
 
         gameObject->AddComponent<BoxCollider2D>(gameObject->GetComponent<Transform>().scale.x, gameObject->GetComponent<Transform>().scale.y,
             false /* overlap */, false /* movable */);
-        objManager[i] = gameObject;
+
+        objManager.push_back(gameObject);
     }
 
     // gameObj2
