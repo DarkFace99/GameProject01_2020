@@ -42,7 +42,7 @@ public:
 	}
 
 	bool Init() override final {
-		/*transform = &gameObject->GetComponent<Transform>();*/			// problem !!
+		transform = &gameObject->GetComponent<Transform>();			
 		texture = AssetManager::get().GetTexture(textureID);
 		mesh = AssetManager::get().GetMesh(meshID);
 
@@ -87,7 +87,7 @@ public:
 	}
 
 	void Update() override final {
-		transform = &gameObject->GetComponent<Transform>();
+		/*transform = &gameObject->GetComponent<Transform>();*/
 	}
 
 };

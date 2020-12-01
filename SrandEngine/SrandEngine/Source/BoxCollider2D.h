@@ -24,11 +24,11 @@ public:
 	std::string GetTag() { return collisionTag; }
 
 	bool Init() override final {
+		transform = &gameObject->GetComponent<Transform>();
 		return true;
 	}
 
 	void Update() override final {
-		transform = &gameObject->GetComponent<Transform>();
 	}
 
 	void Draw() override final {
