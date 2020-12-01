@@ -7,13 +7,11 @@
 #include "Camera.h"
 #include "Collision.h"
 #include "Input.h"
+#include "Button.h"
+
 GameObject* gameObject;
-GameObject* colTest1;
-GameObject* colTest2;
-GameObject* colTest3;
-GameObject* colTest4;
-GameObject* colTest5;
 GameObject* player;
+GameObject* button;
 
 Camera camera(glm::vec3(0, 0, 0), glm::vec3(0, 0, -1), glm::vec3(0, 1, 0), 1.0f, 0.0f);
 
@@ -81,11 +79,13 @@ void Engine::Init() {
     AssetManager::get().LoadMesh("TEST_MESH", 1);
     AssetManager::get().LoadMesh("TEST2_MESH", 1);
     AssetManager::get().LoadMesh("TILEMESH", 1);
+    AssetManager::get().LoadMesh("BUTTONMESH", 1);
     AssetManager::get().LoadTexture("TEST_TEX", "Assets/Benny.png");
     AssetManager::get().LoadTexture("TEST_TEX", "Assets/!!Benny??.png");
     AssetManager::get().LoadTexture("TEST_TEX", "Assets/Cherry.png");
     AssetManager::get().LoadTexture("TEST2_TEX", "Assets/Cherry.png");
     AssetManager::get().LoadTexture("TILETEX", "Assets/blank.png");
+    AssetManager::get().LoadTexture("BUTTONTEX", "Assets/b.png");
     std::cout << std::endl;
 
     /* Anim_Test */
@@ -118,6 +118,23 @@ void Engine::Init() {
         objManager.push_back(gameObject);
     }
 
+    gameObject = new GameObject();
+    manager->AddEntity(gameObject);
+    gameObject->GetComponent<Transform>().position = Vector2D_float(64.0f, -232.0f);
+    gameObject->GetComponent<Transform>().scale = Vector2D_float(64.0f, 64.0f);
+
+    gameObject->AddComponent<SpriteRenderer>("BUTTONMESH", "BUTTONTEX", 1.0f, &camera, true);
+    std::cout << std::endl;
+
+    gameObject->AddComponent<Button>();
+
+    gameObject->AddComponent<BoxCollider2D>(gameObject->GetComponent<Transform>().scale.x, gameObject->GetComponent<Transform>().scale.y, "BUTTONMESH", &camera,
+            true, false);
+
+    button = gameObject;
+    //objManager.push_back(gameObject);
+    
+
     // gameObj2
     std::cout << "Obj 2:" << std::endl;
     gameObject = new GameObject();
@@ -145,6 +162,7 @@ void Engine::Init() {
     player = gameObject; // check collision
     ioSystem.SetControl(player);
 
+
     running = true;
 }
 
@@ -158,7 +176,7 @@ void Engine::Update() {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     manager->Update();
 
-    for (int i = 0; i < 10; i++)
+    for (int i = 0; i < objManager.size(); i++)
     {
         Collision::AABB(player->GetComponent<BoxCollider2D>(), objManager[i]->GetComponent<BoxCollider2D>());
     }
@@ -166,6 +184,8 @@ void Engine::Update() {
     if (Collision::IsOnGround(*player)) {
         player->GetComponent<RigidBody>().SetVelocityY(0.0f);
     }
+
+    button->GetComponent<Button>().CheckCollideActivate(player);
     
     //std::cout << "PlayerPos: " << player->GetComponent<Transform>().position << std::endl;
 }
