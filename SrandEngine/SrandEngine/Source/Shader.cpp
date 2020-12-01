@@ -95,7 +95,7 @@ void Shader::InitializeShader()
 		"   if (mode == 0)\n"
 		"       finalColor = vec4(Color, alpha);\n"
 		"   else{\n "
-		"       texColor.rgb *= alpha; finalColor = texColor;\n"
+		"       texColor.a *= alpha; finalColor = texColor;\n"
 		"   }"
 		"   Color0 = finalColor;\n"
 		"}\n";
