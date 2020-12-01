@@ -112,8 +112,7 @@ void Engine::Init() {
         gameObject->AddComponent<SpriteRenderer>("TILEMESH", "TILETEX", 1.0f, &camera, true);
         std::cout << std::endl;
 
-        gameObject->AddComponent<BoxCollider2D>(gameObject->GetComponent<Transform>().scale.x, gameObject->GetComponent<Transform>().scale.y, "TILEMESH", &camera,
-            false /* overlap */, false /* movable */);
+        gameObject->AddComponent<BoxCollider2D>(gameObject->GetComponent<Transform>().scale.x, gameObject->GetComponent<Transform>().scale.y);
 
         objManager.push_back(gameObject);
     }
@@ -156,8 +155,8 @@ void Engine::Init() {
     gameObject->GetComponent<Animator>().SetState("BENNY_RUN", 8, 16);
     gameObject->GetComponent<Animator>().SetState("BENNY_JUMP", 18, 18);
     gameObject->GetComponent<Animator>().SetState("BENNY_FALL", 19, 19);
-    gameObject->AddComponent<BoxCollider2D>(gameObject->GetComponent<Transform>().scale.x, gameObject->GetComponent<Transform>().scale.y, "ANIM_TEST_MESH", &camera,
-        false /* overlap */, true /* movable */);
+    gameObject->AddComponent<BoxCollider2D>(gameObject->GetComponent<Transform>().scale.x, gameObject->GetComponent<Transform>().scale.y,
+        false /* overlap */, true /* movable */, "ANIM_TEST_MESH", &camera);
 
     player = gameObject; // check collision
     ioSystem.SetControl(player);
