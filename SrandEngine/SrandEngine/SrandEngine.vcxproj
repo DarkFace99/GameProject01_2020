@@ -28,6 +28,7 @@
     <ClInclude Include="Source\Component.h" />
     <ClInclude Include="Source\Door.h" />
     <ClInclude Include="Source\ECS.h" />
+    <ClInclude Include="Source\Elevator.h" />
     <ClInclude Include="Source\EntityManager.h" />
     <ClInclude Include="Source\Engine.h" />
     <ClInclude Include="Source\GameObject.h" />

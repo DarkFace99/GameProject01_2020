@@ -1,9 +1,13 @@
 #pragma once
 
+#include "Engine.h"
 #include "Component.h"
 #include "GameObject.h"
 #include "Transform.h"
 #include "BoxCollider2D.h"
+#include "Button.h"
+
+//class Button;
 
 class Door : public Component 
 {
@@ -29,24 +33,35 @@ public:
 	}
 	void Update() override final
 	{
-		
+		OpenDoor();
 	}
 
-	/*void AddConnectedButtons(GameObject* _gameObj) 
+	void AddConnectedButtons(GameObject* _gameObj) 
 	{
-		if (_gameObj->HasComponent<Button>()) 
+		if (!_gameObj->HasComponent<Button>()) 
 		{
-			connectedButtons.push_back(_gameObj);
+			std::cout << "Door: <BoxCollider2D> component is not found." << std::endl;
 		}
 		else 
 		{
-			std::cout << "This Object do not have Button Component" << std::endl;
+			connectedButtons.push_back(_gameObj);
 		}
-	}*/
-	void MoveDoor(Vector2D_float v) 
+	}
+	void OpenDoor() 
 	{
-		Vector2D_float* tempPos = &gameObject->GetComponent<Transform>().position;
-		gameObject->GetComponent<Transform>().Translate(v);
+		for (int i = 0; i < connectedButtons.size(); i++) 
+		{
+			if (connectedButtons[i]->GetComponent<Button>().CheckCollideActivate()) 
+			{
+				gameObject->GetComponent<BoxCollider2D>().SetOverlap(true);
+				std::cout << gameObject->GetComponent<BoxCollider2D>().GetOverlap() << std::endl;
+			}
+			else
+			{
+				gameObject->GetComponent<BoxCollider2D>().SetOverlap(false);
+				std::cout << gameObject->GetComponent<BoxCollider2D>().GetOverlap() << std::endl;
+			}
+		}
 	}
 
 };

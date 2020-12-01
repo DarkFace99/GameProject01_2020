@@ -1,10 +1,10 @@
 #pragma once
 
 #include <vector>
+#include "Engine.h"
 #include "Component.h"
 #include "Collision.h"
 #include "BoxCollider2D.h"
-#include "Door.h"
 
 class Button : public Component 
 {
@@ -21,12 +21,14 @@ public:
 		return true;
 	}
 
-	void CheckCollideActivate(GameObject* player) 
+	bool CheckCollideActivate() 
 	{
-		if (Collision::AABB(player->GetComponent<BoxCollider2D>(), gameObject->GetComponent<BoxCollider2D>())) 
+		if (Collision::AABB(Engine::get().player->GetComponent<BoxCollider2D>(), gameObject->GetComponent<BoxCollider2D>())) 
 		{
 			std::cout << "Collide with button" << std::endl;
+			return true;
 		}
+		return false;
 	}
 
 };

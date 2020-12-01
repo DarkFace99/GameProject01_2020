@@ -46,6 +46,9 @@
     <Filter Include="System File\Source File">
       <UniqueIdentifier>{18f860e2-f709-4cd2-be49-181b275b891d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Entity">
+      <UniqueIdentifier>{24d5bd54-53ac-444c-995d-059f5805a995}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\ECS.h">
@@ -108,10 +111,13 @@
       <Filter>System File\Header File</Filter>
     </ClInclude>
     <ClInclude Include="Source\Button.h">
-      <Filter>ECS\Header File</Filter>
+      <Filter>Entity</Filter>
     </ClInclude>
     <ClInclude Include="Source\Door.h">
-      <Filter>ECS\Header File</Filter>
+      <Filter>Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Elevator.h">
+      <Filter>Entity</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

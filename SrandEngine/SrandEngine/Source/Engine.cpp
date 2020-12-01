@@ -8,10 +8,11 @@
 #include "Collision.h"
 #include "Input.h"
 #include "Button.h"
+#include "Door.h"
 
 GameObject* gameObject;
-GameObject* player;
 GameObject* button;
+GameObject* door;
 
 Camera camera(glm::vec3(0, 0, 0), glm::vec3(0, 0, -1), glm::vec3(0, 1, 0), 1.0f, 0.0f);
 
@@ -119,7 +120,7 @@ void Engine::Init() {
 
     gameObject = new GameObject();
     manager->AddEntity(gameObject);
-    gameObject->GetComponent<Transform>().position = Vector2D_float(64.0f, -232.0f);
+    gameObject->GetComponent<Transform>().position = Vector2D_float(128.0f, -232.0f);
     gameObject->GetComponent<Transform>().scale = Vector2D_float(64.0f, 64.0f);
 
     gameObject->AddComponent<SpriteRenderer>("BUTTONMESH", "BUTTONTEX", 1.0f, &camera, true);
@@ -127,8 +128,8 @@ void Engine::Init() {
 
     gameObject->AddComponent<Button>();
 
-    gameObject->AddComponent<BoxCollider2D>(gameObject->GetComponent<Transform>().scale.x, gameObject->GetComponent<Transform>().scale.y, "BUTTONMESH", &camera,
-            true, false);
+    gameObject->AddComponent<BoxCollider2D>(gameObject->GetComponent<Transform>().scale.x, gameObject->GetComponent<Transform>().scale.y,
+            true, false, "BUTTONMESH", &camera);
 
     button = gameObject;
     //objManager.push_back(gameObject);
@@ -138,9 +139,19 @@ void Engine::Init() {
     std::cout << "Obj 2:" << std::endl;
     gameObject = new GameObject();
     manager->AddEntity(gameObject);
-    gameObject->GetComponent<Transform>().position = Vector2D_float(0.0f, 0.0f);
+    gameObject->GetComponent<Transform>().position = Vector2D_float(256.0f, -200.0f);
     gameObject->GetComponent<Transform>().scale = Vector2D_float(96.0f, 96.0f);
     gameObject->AddComponent<SpriteRenderer>("TEST2_MESH", "TEST2_TEX", 0.1f, &camera, false);
+    std::cout << std::endl;
+
+    gameObject->AddComponent<BoxCollider2D>(gameObject->GetComponent<Transform>().scale.x, gameObject->GetComponent<Transform>().scale.y,
+            false, false, "TEST2_MESH", &camera);
+
+    gameObject->AddComponent<Door>();
+    gameObject->GetComponent<Door>().AddConnectedButtons(button);
+
+    door = gameObject;
+    objManager.push_back(gameObject);
 
     // gameObj3 Anim_Test
     gameObject = new GameObject();
@@ -183,8 +194,6 @@ void Engine::Update() {
     if (Collision::IsOnGround(*player)) {
         player->GetComponent<RigidBody>().SetVelocityY(0.0f);
     }
-
-    button->GetComponent<Button>().CheckCollideActivate(player);
     
     //std::cout << "PlayerPos: " << player->GetComponent<Transform>().position << std::endl;
 }

@@ -32,7 +32,10 @@ public:
 	BoxCollider2D(float width, float height, bool overlap = false, bool movable = false, std::string meshID = "", Camera* camera = nullptr)
 		: width(width), height(height), allowOverlap(overlap), movable(movable), meshID(meshID), camera(camera) {}
 
+	void SetOverlap(bool overlap) { allowOverlap = overlap; }
+
 	int GetTag() { return tag; }
+	bool GetOverlap() { return allowOverlap; }
 
 	bool Init() override final {
 		transform = &gameObject->GetComponent<Transform>();
