@@ -5,23 +5,38 @@
 #include "Component.h"
 #include "Transform.h"
 #include "BoxCollider2D.h"
+#include "Button.h"
 
 class Elevator : public Component 
 {
 private:
+	int elevatedHeight = 0;
+
 	Transform* transform = nullptr;
 	BoxCollider2D* collider = nullptr;
+
+	Vector2D_float max_height = Vector2D_float();
+	Vector2D_float ground_height = Vector2D_float();
+
+	float max_elevation = 0.0f;
+	float ground_elevation = 0.0f;
 
 	std::vector<GameObject*> connectedButtons;
 
 public:
-	Elevator() = default;
+	Elevator(int elevatedHeight) : elevatedHeight(elevatedHeight) {}
 	virtual ~Elevator() = default;
 
 	bool Init() override final 
 	{
 		transform = &gameObject->GetComponent<Transform>();
 		collider = &gameObject->GetComponent<BoxCollider2D>();
+
+		max_elevation = transform->position.y + (transform->scale.y * elevatedHeight);
+		ground_elevation = transform->position.y;
+
+		max_height = Vector2D_float(transform->position.x, max_elevation);
+		ground_height = transform->position;
 
 		return true;
 	}
@@ -31,7 +46,35 @@ public:
 	}
 	void Update() override final 
 	{
-		
+		Elevated();
+	}
+
+	void AddConnectedButtons(GameObject* _gameObj)
+	{
+		if (!_gameObj->HasComponent<Button>())
+		{
+			std::cout << "Button: <BoxCollider2D> component is not found." << std::endl;
+		}
+		else
+		{
+			connectedButtons.push_back(_gameObj);
+		}
+	}
+	void Elevated() 
+	{
+		for (int i = 0; i < connectedButtons.size(); i++)
+		{
+			if (connectedButtons[i]->GetComponent<Button>().CheckCollideActivate())
+			{
+				transform->Translate(Vector2D_float(0.0f, 1.0f));
+				if (transform->position.y > max_elevation) { transform->SetPosition(max_height); }
+			}
+			else
+			{
+				transform->Translate(Vector2D_float(0.0f, -1.0f));
+				if (transform->position.y <= ground_elevation) { transform->SetPosition(ground_height); }
+			}
+		}
 	}
 
 };
