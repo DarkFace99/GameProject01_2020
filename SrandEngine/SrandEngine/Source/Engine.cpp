@@ -350,6 +350,31 @@ void Engine::Init() {
 
         objManager.push_back(gameObject);
     }
+
+    // ELEVATOR_STAND
+    {
+        // 1
+        gameObject = new GameObject();
+        manager->AddEntity(gameObject);
+
+        gameObject->GetComponent<Transform>().position = Vector2D_float((-240.0f + (7 * 16)) * RATIO, (-135.0f + 8) * RATIO);
+        gameObject->GetComponent<Transform>().scale = Vector2D_float(32.0f * RATIO, 16.0f * RATIO);
+
+        gameObject->AddComponent<SpriteRenderer>(SpriteRenderer::ASSET_LAYER, "ELEVATOR_STAND_MESH", "LEVEL_ASSET_TEX", 1.0f, &camera, false);
+        gameObject->AddComponent<TileSelector>(10, 13);
+        gameObject->GetComponent<TileSelector>().SetTile(1, 3);
+
+        // 2
+        gameObject = new GameObject();
+        manager->AddEntity(gameObject);
+
+        gameObject->GetComponent<Transform>().position = Vector2D_float((-240.0f + (25 * 16)) * RATIO, (-135.0f + 72) * RATIO);
+        gameObject->GetComponent<Transform>().scale = Vector2D_float(32.0f * RATIO, 16.0f * RATIO);
+
+        gameObject->AddComponent<SpriteRenderer>(SpriteRenderer::ASSET_LAYER, "ELEVATOR_STAND_MESH", "LEVEL_ASSET_TEX", 1.0f, &camera, false);
+        gameObject->AddComponent<TileSelector>(10, 13);
+        gameObject->GetComponent<TileSelector>().SetTile(4, 3);
+    }
     
     /* Character */
 

@@ -27,7 +27,7 @@ public:
 			if (Engine::get().objManager[i]->GetComponent<BoxCollider2D>().GetTag() == BoxCollider2D::CHARACTER_COLLISION)
 			{
 				if (Collision::AABB(*collider, Engine::get().objManager[i]->GetComponent<BoxCollider2D>())) {
-					std::cout << "Collide with button" << std::endl;
+					//std::cout << "Collide with button" << std::endl;
 					return true;
 				}
 			}
