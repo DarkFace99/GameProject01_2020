@@ -32,7 +32,7 @@ public:
 	void LoadTexture(std::string id, const char* filename);
 
 	Mesh* GetMesh(std::string id);
-	void LoadMesh(std::string id, int frameCount);
+	void LoadMesh(std::string id, int frameCountX = 1, int frameCountY = 1, int frameSpaceX = 1, int frameSpaceY = 1);
 
 	/* singleton */
 	inline static AssetManager& get() {

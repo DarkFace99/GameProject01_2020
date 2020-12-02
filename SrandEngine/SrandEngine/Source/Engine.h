@@ -31,6 +31,7 @@ public:
 	virtual ~Engine() = default;
 
 	std::vector<GameObject*> objManager;
+	GameObject* player;
 
 	void Init();
 	void Clean();

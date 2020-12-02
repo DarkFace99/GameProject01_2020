@@ -1,10 +1,14 @@
 #include "EntityManager.h"
-
+#include "SpriteRenderer.h"
 void EntityManager::Draw() 
 {
-	for (auto& gameObject : gameObjects) 
-	{
-		gameObject->Draw();
+	for (int i = SpriteRenderer::LAYER_START; i < SpriteRenderer::LAYER_END; i++) { // loop through each layer
+		for (auto& gameObject : gameObjects)
+		{
+			if (gameObject->GetComponent<SpriteRenderer>().GetTag() == i) {
+				gameObject->Draw();
+			}
+		}
 	}
 }
 

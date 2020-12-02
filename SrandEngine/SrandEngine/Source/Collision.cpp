@@ -1,10 +1,10 @@
 #include "Collision.h"
 
 bool Collision::AABB(BoxCollider2D& colA, BoxCollider2D& colB) {
-	bool isCollide = (colA.transform->position.x + (colA.width / 2.0f) >= colB.transform->position.x - (colB.width / 2.0f)) &&
-					 (colB.transform->position.x + (colB.width / 2.0f) >= colA.transform->position.x - (colA.width / 2.0f)) &&
-					 (colA.transform->position.y + (colA.height / 2.0f) >= colB.transform->position.y - (colB.height / 2.0f)) &&
-					 (colB.transform->position.y + (colB.height / 2.0f) >= colA.transform->position.y - (colA.height / 2.0f));
+	bool isCollide = (colA.modifyPosition.x + (colA.width / 2.0f) >= colB.modifyPosition.x - (colB.width / 2.0f)) &&
+					 (colB.modifyPosition.x + (colB.width / 2.0f) >= colA.modifyPosition.x - (colA.width / 2.0f)) &&
+					 (colA.modifyPosition.y + (colA.height / 2.0f) >= colB.modifyPosition.y - (colB.height / 2.0f)) &&
+					 (colB.modifyPosition.y + (colB.height / 2.0f) >= colA.modifyPosition.y - (colA.height / 2.0f));
 	
 	if (isCollide) {
 		if ((colA.allowOverlap || colB.allowOverlap) == false) {
@@ -19,11 +19,11 @@ void Collision::CollisionPush(BoxCollider2D& colA, BoxCollider2D& colB) {
 	
 	// acoording to ColA
 
-	bool isAxis_Y = abs(colA.transform->position.x - colB.transform->position.x) / ((colA.width + colB.width)/2.0f)
-					< abs(colA.transform->position.y - colB.transform->position.y) / ((colA.height + colB.height) / 2.0f);
+	bool isAxis_Y = abs(colA.modifyPosition.x - colB.modifyPosition.x) / ((colA.width + colB.width)/2.0f)
+					< abs(colA.modifyPosition.y - colB.modifyPosition.y) / ((colA.height + colB.height) / 2.0f);
 	bool isDir_P;
-	if (isAxis_Y) { isDir_P = (colA.transform->position.y > colB.transform->position.y); }
-	else{ isDir_P = (colA.transform->position.x > colB.transform->position.x); }
+	if (isAxis_Y) { isDir_P = (colA.modifyPosition.y > colB.modifyPosition.y); }
+	else{ isDir_P = (colA.modifyPosition.x > colB.modifyPosition.x); }
 	
 
 	if (colA.movable && colB.movable) {		// both
@@ -45,7 +45,8 @@ void Collision::CollisionPush(BoxCollider2D& colA, BoxCollider2D& colB) {
 			std::cout << "Thresh_X: " << abs(colA.transform->position.x - colB.transform->position.x)
 				<< " Thresh_Y: " << abs(colA.transform->position.y - colB.transform->position.y) << std::endl;
 			std::cout << "NewPos: " << colB.transform->position.y << " + " << (colA.height + colB.height) / 2.0f << std::endl;*/
-			colA.transform->position.y = colB.transform->position.y + (((colA.height+ colB.height) / 2.0f)  * ((isDir_P) ? 1 : -1));
+			colA.modifyPosition.y = colB.modifyPosition.y + (((colA.height+ colB.height) / 2.0f)  * ((isDir_P) ? 1 : -1));
+			colA.transform->position.y = colA.modifyPosition.y - colA.offsetY;
 			/*std::cout << "PlayerPos_After/: " << colA.transform->position << std::endl << std::endl;*/
 		}
 		else {
@@ -55,18 +56,20 @@ void Collision::CollisionPush(BoxCollider2D& colA, BoxCollider2D& colB) {
 				<< " Thresh_Y: " << abs(colA.transform->position.y - colB.transform->position.y) << std::endl;
 			std::cout << "PlayerScale: (" << colA.width << ", " << colA.height << ") CollideObj_Scale: (" << colB.width << ", " << colB.height << ")" << std::endl;
 			std::cout << "Pos_A: " << colA.transform->position << "\tPos_B: " << colB.transform->position << std::endl;*/
-			colA.transform->position.x = colB.transform->position.x + (((colA.width + colB.width) / 2.0f) * ((isDir_P) ? 1 : -1));
+			colA.modifyPosition.x = colB.modifyPosition.x + (((colA.width + colB.width) / 2.0f) * ((isDir_P) ? 1 : -1));
+			colA.transform->position.x = colA.modifyPosition.x - colA.offsetX;
 			/*std::cout << "PlayerPos_After/: " << colA.transform->position << std::endl << std::endl;*/
 		}	
 	}
 	else if(colB.movable){					// Move B
 		/*std::cout << "B(TestObj) Movable " << colB.height << " " << colB.width << std::endl;*/
 		if (isAxis_Y) { 
-			
 			colB.transform->position.y = colA.transform->position.y + (((colA.height + colB.height) / 2.0f) * ((!isDir_P) /* invert direction */ ? 1 : -1));
+			colB.transform->position.y = colB.modifyPosition.y - colB.offsetY;
 		}
 		else {
 			colB.transform->position.x = colA.transform->position.x + (((colA.width + colB.width) / 2.0f) * ((!isDir_P) /* invert direction */ ? 1 : -1));
+			colB.transform->position.x = colB.modifyPosition.x - colB.offsetX;
 		}
 	}
 }
@@ -79,10 +82,10 @@ bool Collision::IsOnGround(GameObject& checkObj) {
 		return false;
 	}
 	else {	// hard coding for checking
-		for (int i = 0; i < 10; i++) {
+		for (int i = 0; i < Engine::get().objManager.size(); i++) {
 			if (Engine::get().objManager[i]->HasComponent<BoxCollider2D>() 
 			&& AABB(checkObj.GetComponent<BoxCollider2D>(), Engine::get().objManager[i]->GetComponent<BoxCollider2D>()) ) {
-				if (checkObj.GetComponent<BoxCollider2D>().transform->position.y == Engine::get().objManager[i]->GetComponent<BoxCollider2D>().transform->position.y
+				if (checkObj.GetComponent<BoxCollider2D>().modifyPosition.y == Engine::get().objManager[i]->GetComponent<BoxCollider2D>().modifyPosition.y
 					+ (checkObj.GetComponent<BoxCollider2D>().height + Engine::get().objManager[i]->GetComponent<BoxCollider2D>().height) / 2.0f) {
 					return true;
 				}

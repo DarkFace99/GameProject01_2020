@@ -88,16 +88,16 @@ Mesh* AssetManager::GetMesh(std::string id) {
 	return (meshes.count(id) > 0) ? meshes[id] : nullptr;
 }
 
-void AssetManager::LoadMesh(std::string id, int frameCount) {
+void AssetManager::LoadMesh(std::string id, int frameCountX, int frameCountY, int frameSpaceX, int frameSpaceY) {
 	
 	std::vector<Vertex> vertices;
 	Vertex v1, v2, v3, v4;
 
 	vertices.clear();
 	v1.SetPosition(glm::vec3(-0.5f, -0.5f, 0.0f)); v1.SetColor(glm::vec3(1.0f, 0.0f, 0.0f)); v1.SetTexCoords(glm::vec2(0.0f, 0.0f));
-	v2.SetPosition(glm::vec3(0.5f, -0.5f, 0.0f)); v2.SetColor(glm::vec3(0.0f, 1.0f, 0.0f)); v2.SetTexCoords(glm::vec2(1.0f/frameCount, 0.0f));
-	v3.SetPosition(glm::vec3(0.5f, 0.5f, 0.0f)); v3.SetColor(glm::vec3(0.0f, 0.0f, 1.0f)); v3.SetTexCoords(glm::vec2(1.0f/frameCount, 1.0f));
-	v4.SetPosition(glm::vec3(-0.5f, 0.5f, 0.0f)); v4.SetColor(glm::vec3(1.0f, 1.0f, 0.0f)); v4.SetTexCoords(glm::vec2(0.0f, 1.0f));
+	v2.SetPosition(glm::vec3(0.5f, -0.5f, 0.0f)); v2.SetColor(glm::vec3(0.0f, 1.0f, 0.0f)); v2.SetTexCoords(glm::vec2((float)frameSpaceX /frameCountX, 0.0f));
+	v3.SetPosition(glm::vec3(0.5f, 0.5f, 0.0f)); v3.SetColor(glm::vec3(0.0f, 0.0f, 1.0f)); v3.SetTexCoords(glm::vec2((float)frameSpaceX /frameCountX, (float)frameSpaceY / frameCountY));
+	v4.SetPosition(glm::vec3(-0.5f, 0.5f, 0.0f)); v4.SetColor(glm::vec3(1.0f, 1.0f, 0.0f)); v4.SetTexCoords(glm::vec2(0.0f, (float)frameSpaceY / frameCountY));
 
 	vertices.push_back(v1);
 	vertices.push_back(v2);

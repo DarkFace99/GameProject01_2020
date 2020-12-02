@@ -9,7 +9,16 @@
 // for checking glm::mat
 #include <gtx/string_cast.hpp>
 
+
+
 class SpriteRenderer : public Component {
+public:
+	enum LayerTag {
+		LAYER_START = 0,
+		TEST_LAYER,
+		LAYER_END
+	};
+
 private:
 
 	Transform* transform = nullptr;
@@ -20,8 +29,13 @@ private:
 	Mesh* mesh = nullptr;
 	float alpha = 1;
 	bool flip = false;
+
 	float offsetX = 0.0f;
+	float offsetY = 0.0f;
+
 	Camera* camera;
+
+	LayerTag tag = LAYER_START;
 	
 public:
 	SpriteRenderer() = default;
@@ -31,23 +45,32 @@ public:
 		return &offsetX;
 	}
 
+	float* GetOffSetY() {
+		return &offsetY;
+	}
+
 	void SetFlip(bool condition) { flip = condition; }
 
 	SpriteRenderer(std::string meshID, std::string textureID, float alpha, Camera* camera, bool flip)
 		: meshID(meshID), textureID(textureID), alpha(alpha), camera(camera), flip(flip){
-		std::cout << "Create Sprite Renderer: " << std::endl;
+		/*std::cout << "Create Sprite Renderer: " << std::endl;
 		std::cout << "meshID: " <<meshID << std::endl;
 		std::cout << "textureID: " << textureID << std::endl;
-		std::cout << "alpha: " << alpha << std::endl;
+		std::cout << "alpha: " << alpha << std::endl;*/
 	}
+
+	SpriteRenderer(LayerTag tag, std::string meshID, std::string textureID, float alpha, Camera* camera, bool flip)
+		: tag(tag), meshID(meshID), textureID(textureID), alpha(alpha), camera(camera), flip(flip) {}
+
+	int GetTag() { return tag; }
 
 	bool Init() override final {
 		transform = &gameObject->GetComponent<Transform>();			
 		texture = AssetManager::get().GetTexture(textureID);
 		mesh = AssetManager::get().GetMesh(meshID);
 
-		std::cout << "Sprite: texture load " << texture << std::endl;
-		std::cout << "Sprite: mesh load " << mesh << std::endl;
+		/*std::cout << "Sprite: texture load " << texture << std::endl;
+		std::cout << "Sprite: mesh load " << mesh << std::endl;*/
 
 		return true;
 	}
@@ -63,7 +86,7 @@ public:
 		glUniform1f(glGetUniformLocation(Shader::get()->shader, "alpha"), alpha);
 
 		glUniform1f(glGetUniformLocation(Shader::get()->shader, "offsetX"), offsetX);
-		glUniform1f(glGetUniformLocation(Shader::get()->shader, "offsetY"), 0.0f);
+		glUniform1f(glGetUniformLocation(Shader::get()->shader, "offsetY"), offsetY);
 
 		// Set texture
 		glActiveTexture(GL_TEXTURE0);

@@ -10,7 +10,7 @@
 
 class Animator : public Component {
 private:
-	int totalFrames = 0;
+	int totalFrames = 1;
 	float timeInterval = 1;
 
 	std::map<std::string, Vector2D_Int> states;
@@ -48,9 +48,14 @@ public:
 		}
 	}
 
-	void Update() override final {
+	bool Init() override final {
 		// for some reason
 		offSetX_Ptr = gameObject->GetComponent<SpriteRenderer>().GetOffSetX();
+		return true;
+	}
+
+	void Update() override final {
+		
 
 		// Update Acc Time
 		AccumulateTime += TimeStep::get().GetMilliseconds();

@@ -28,6 +28,7 @@
     <ClInclude Include="Source\Component.h" />
     <ClInclude Include="Source\Door.h" />
     <ClInclude Include="Source\ECS.h" />
+    <ClInclude Include="Source\Elevator.h" />
     <ClInclude Include="Source\EntityManager.h" />
     <ClInclude Include="Source\Engine.h" />
     <ClInclude Include="Source\GameObject.h" />
@@ -40,6 +41,7 @@
     <ClInclude Include="Source\Transform.h" />
     <ClInclude Include="Source\Vector2D.h" />
     <ClInclude Include="Source\Vertex.h" />
+    <ClInclude Include="Source\TileSelector.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Camera.cpp" />

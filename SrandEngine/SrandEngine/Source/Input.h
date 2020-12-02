@@ -2,6 +2,7 @@
 
 /* C/C++ Headers */
 #include <iostream>
+#include <map>
 
 /* Custom Headers */
 #include "Engine.h"
@@ -17,25 +18,24 @@ namespace IOSystem
 		GAME
 	};
 
-	void key_callBack(GLFWwindow* window, int key, int scancode, int action, int mods)
-	{
-		if (key == GLFW_KEY_TAB && action == GLFW_PRESS)
-		{
-			std::cout << key << std::endl;
-		}
-	}
+    void key_callBack(GLFWwindow* window, int key, int scancode, int action, int mods)
+    {
+
+    }
 
 	class Input
 	{
     private:
-        
-        int currentInputMode;
+        int currentInputMode = GAME;
+        std::string currentPlayer = "";
         Camera* camera = nullptr;
         GameObject* player = nullptr;
 
+        std::map<std::string, GameObject*> characterList;
+
         void keyUpdate(GLFWwindow* window)
         {
-            bool isJumping = false;
+            bool C_DOWN = false;
 
             player->GetComponent<Animator>().PlayState("BENNY_IDLE");
 
@@ -83,17 +83,16 @@ namespace IOSystem
                 }
                 break;
             case GAME:
-                //std::cout << player->GetComponent<RigidBody>().GetVelocityY() << std::endl;
+                //std::cout << player->GetComponent<RigidBody>().GetVelocityX() << std::endl;
                 if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS && Collision::IsOnGround(*player))
                 {
                     //std::cout << "W" << std::endl;
-                    player->GetComponent<RigidBody>().SetVelocityY(5.0f);
+                    player->GetComponent<RigidBody>().SetVelocityY(20.0f);
                     /*player->GetComponent<Animator>().PlayState("BENNY_JUMP");
                     if (player->GetComponent<RigidBody>().GetVelocityY() < 0) 
                     {
                         player->GetComponent<Animator>().PlayState("BENNY_FALL");
                     }*/
-                    isJumping = true;
                 }
                 if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
                 {
@@ -109,23 +108,28 @@ namespace IOSystem
                     player->GetComponent<Animator>().PlayState("BENNY_RUN");
                     player->GetComponent<SpriteRenderer>().SetFlip(false);
                 }
+                if ((glfwGetKey(window, GLFW_KEY_C) == GLFW_PRESS) && (!C_DOWN)) 
+                {
+                    if (currentPlayer == "Benny") 
+                    {
+                        SetControl("Macho");
+                        Engine::get().player = characterList.at("Macho");
+                    }
+                    else if (currentPlayer == "Macho")
+                    {
+                        SetControl("Benny");
+                        Engine::get().player = characterList.at("Benny");
+                    }
+                    C_DOWN = true;
+                }
+                if ((glfwGetKey(window, GLFW_KEY_C) == GLFW_RELEASE) && (C_DOWN)) 
+                {
+                    C_DOWN = false;
+                }
                 break;
             default:
                 break;
             }
-
-            /*if (isJumping) 
-            {
-                player->GetComponent<Animator>().PlayState("BENNY_JUMP");
-                if (player->GetComponent<RigidBody>().GetVelocityY() < 0)
-                {
-                    player->GetComponent<Animator>().PlayState("BENNY_FALL");
-                }
-                if (Collision::IsOnGround(*player)) 
-                {
-                    isJumping = false;
-                }
-            }*/
 
         }
 
@@ -147,13 +151,22 @@ namespace IOSystem
         {
             this->currentInputMode = mode;
         }
-        void SetControl(GameObject* gameObj) 
+        void SetControl(std::string name) 
         {
-            this->player = gameObj;
+            this->player = characterList.at(name);
+            currentPlayer = name;
+            std::cout << "Current Control: " << name << std::endl;
         }
+        void AddCharacterList(std::string name, GameObject* _gameObj) 
+        {
+            characterList.insert(std::pair<std::string, GameObject*>(name, _gameObj));
+        }
+
         int GetInputMode() 
         {
             return currentInputMode;
         }
 	};
+
 }
+
