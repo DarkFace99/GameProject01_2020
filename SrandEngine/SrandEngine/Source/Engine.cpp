@@ -169,7 +169,7 @@ void Engine::Init() {
     
     gameObject = new GameObject();
     manager->AddEntity(gameObject);
-    gameObject->GetComponent<Transform>().position = Vector2D_float(0.0f, 0.0f);
+    gameObject->GetComponent<Transform>().position = Vector2D_float(0.0f, 300.0f);
     gameObject->GetComponent<Transform>().scale = Vector2D_float(24.0f * RATIO, 24.0f * RATIO);
     gameObject->AddComponent<SpriteRenderer>("BENNY_ANIM_MESH", "BENNY_ANIM_TEX", 1.0f, &camera, false);
     gameObject->AddComponent<RigidBody>(0.01f);
@@ -179,7 +179,7 @@ void Engine::Init() {
     gameObject->GetComponent<Animator>().SetState("BENNY_RUN", 8, 16);
     gameObject->GetComponent<Animator>().SetState("BENNY_JUMP", 18, 18);
     gameObject->GetComponent<Animator>().SetState("BENNY_FALL", 19, 19);
-    gameObject->AddComponent<BoxCollider2D>(gameObject->GetComponent<Transform>().scale.x, gameObject->GetComponent<Transform>().scale.y,
+    gameObject->AddComponent<BoxCollider2D>(BoxCollider2D::CHARACTER_COLLISION, gameObject->GetComponent<Transform>().scale.x, gameObject->GetComponent<Transform>().scale.y,
         false /* overlap */, true /* movable */, "BENNY_ANIM_MESH", &camera);
 
     player = gameObject; // check collision
@@ -210,13 +210,16 @@ void Engine::Update() {
 
         for (int j = 0; j < objManager.size(); j++) 
         {
-            Collision::AABB(objManager[i]->GetComponent<BoxCollider2D>(), objManager[j]->GetComponent<BoxCollider2D>());
+            if (Collision::AABB(objManager[i]->GetComponent<BoxCollider2D>(), objManager[j]->GetComponent<BoxCollider2D>())
+                && objManager[i]->GetComponent<BoxCollider2D>().GetTag() == BoxCollider2D::CHARACTER_COLLISION) 
+            {
+                if (Collision::IsOnGround(*objManager[i], *objManager[j])) {
+                    objManager[i]->GetComponent<RigidBody>().SetVelocityY(0.0f);
+                }
+            }
         }
     }
 
-    if (Collision::IsOnGround(*benny)) {
-        benny->GetComponent<RigidBody>().SetVelocityY(0.0f);
-    }
 }
 
 void Engine::FixedUpdate(TimeStep ts) {

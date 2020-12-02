@@ -12,6 +12,7 @@ public:
 	enum CollisionTag {
 		COLLISION_START = 0,
 		TILE_COLLISION,
+		CHARACTER_COLLISION,
 		COLLISION_END
 	};
 
@@ -30,6 +31,8 @@ private:
 
 	float offsetX = 0.0f;
 	float offsetY = 0.0f;
+
+	bool isGround;
 	
 	glm::vec2 modifyPosition;
 
@@ -44,6 +47,7 @@ public:
 		: width(width), height(height), meshID(meshID), camera(camera) {}
 
 	void SetOverlap(bool overlap) { allowOverlap = overlap; }
+	void SetIsGround(bool isGround) { this->isGround = isGround; }
 
 	int GetTag() { return tag; }
 	bool GetOverlap() { return allowOverlap; }

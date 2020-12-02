@@ -76,21 +76,12 @@ void Collision::CollisionPush(BoxCollider2D& colA, BoxCollider2D& colB) {
 
 
 /* HardCoding */
-bool Collision::IsOnGround(GameObject& checkObj) {
-	if (!checkObj.HasComponent<BoxCollider2D>()) {  // check component
-		std::cout << "Collision: <BoxCollider2D> component is not found." << std::endl;
-		return false;
+bool Collision::IsOnGround(GameObject& objA, GameObject& objB) {
+	// hard coding for checking
+	if (objA.GetComponent<BoxCollider2D>().modifyPosition.y == objB.GetComponent<BoxCollider2D>().modifyPosition.y
+		+ (objA.GetComponent<BoxCollider2D>().height + objB.GetComponent<BoxCollider2D>().height) / 2.0f) {
+		return true;
 	}
-	else {	// hard coding for checking
-		for (int i = 0; i < Engine::get().objManager.size(); i++) {
-			if (Engine::get().objManager[i]->HasComponent<BoxCollider2D>() 
-			&& AABB(checkObj.GetComponent<BoxCollider2D>(), Engine::get().objManager[i]->GetComponent<BoxCollider2D>()) ) {
-				if (checkObj.GetComponent<BoxCollider2D>().modifyPosition.y == Engine::get().objManager[i]->GetComponent<BoxCollider2D>().modifyPosition.y
-					+ (checkObj.GetComponent<BoxCollider2D>().height + Engine::get().objManager[i]->GetComponent<BoxCollider2D>().height) / 2.0f) {
-					return true;
-				}
-			}
-		}
-		return false;
-	}
+
+	return false;
 }

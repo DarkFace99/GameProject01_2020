@@ -96,7 +96,7 @@ namespace IOSystem
                 break;
             case GAME:
                 //std::cout << player->GetComponent<RigidBody>().GetVelocityX() << std::endl;
-                if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS && Collision::IsOnGround(*player))
+                if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
                 {
                     //std::cout << "W" << std::endl;
                     player->GetComponent<RigidBody>().SetVelocityY(20.0f);
@@ -105,14 +105,18 @@ namespace IOSystem
                 {
                     //std::cout << "A" << std::endl;
                     player->GetComponent<Transform>().Translate(Vector2D_float(-2.0f, 0.0f));
-                    player->GetComponent<Animator>().PlayState("BENNY_RUN");
+                   
+                     player->GetComponent<Animator>().PlayState("BENNY_RUN");
+                    
                     player->GetComponent<SpriteRenderer>().SetFlip(true);
                 }
                 if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
                 {
                     //std::cout << "D" << std::endl;
                     player->GetComponent<Transform>().Translate(Vector2D_float(2.0f, 0.0f));
+                   
                     player->GetComponent<Animator>().PlayState("BENNY_RUN");
+                    
                     player->GetComponent<SpriteRenderer>().SetFlip(false);
                 }
                 if ((glfwGetKey(window, GLFW_KEY_C) == GLFW_PRESS) && (!C_DOWN)) 
