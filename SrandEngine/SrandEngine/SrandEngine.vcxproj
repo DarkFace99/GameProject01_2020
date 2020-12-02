@@ -41,6 +41,7 @@
     <ClInclude Include="Source\Transform.h" />
     <ClInclude Include="Source\Vector2D.h" />
     <ClInclude Include="Source\Vertex.h" />
+    <ClInclude Include="Source\TileSelector.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Camera.cpp" />

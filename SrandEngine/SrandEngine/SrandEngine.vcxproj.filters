@@ -123,6 +123,9 @@
     <ClInclude Include="Source\Collision.h">
       <Filter>System File\Header File</Filter>
     </ClInclude>
+    <ClInclude Include="Source\TileSelector.h">
+      <Filter>ECS\Header File</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\AssetManager.cpp">

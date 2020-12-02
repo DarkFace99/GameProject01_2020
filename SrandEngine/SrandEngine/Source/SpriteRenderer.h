@@ -29,7 +29,10 @@ private:
 	Mesh* mesh = nullptr;
 	float alpha = 1;
 	bool flip = false;
+
 	float offsetX = 0.0f;
+	float offsetY = 0.0f;
+
 	Camera* camera;
 
 	LayerTag tag = LAYER_START;
@@ -40,6 +43,10 @@ public:
 
 	float* GetOffSetX() {
 		return &offsetX;
+	}
+
+	float* GetOffSetY() {
+		return &offsetY;
 	}
 
 	void SetFlip(bool condition) { flip = condition; }
@@ -79,7 +86,7 @@ public:
 		glUniform1f(glGetUniformLocation(Shader::get()->shader, "alpha"), alpha);
 
 		glUniform1f(glGetUniformLocation(Shader::get()->shader, "offsetX"), offsetX);
-		glUniform1f(glGetUniformLocation(Shader::get()->shader, "offsetY"), 0.0f);
+		glUniform1f(glGetUniformLocation(Shader::get()->shader, "offsetY"), offsetY);
 
 		// Set texture
 		glActiveTexture(GL_TEXTURE0);
