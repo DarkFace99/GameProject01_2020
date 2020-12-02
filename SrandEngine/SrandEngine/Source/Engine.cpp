@@ -198,7 +198,7 @@ void Engine::Init() {
         gameObject->AddComponent<BoxCollider2D>(BoxCollider2D::ASSET_COLLISION, gameObject->GetComponent<Transform>().scale.x , gameObject->GetComponent<Transform>().scale.y / 2.0f,
             true, false, "DOOR_MESH", &camera);
         gameObject->GetComponent<BoxCollider2D>().SetOffset(0.0f, -8);
-        gameObject->AddComponent<Button>();
+        gameObject->AddComponent<Button>(1,1);
         
         button1 = gameObject;
         objManager.push_back(gameObject);
@@ -217,7 +217,7 @@ void Engine::Init() {
         gameObject->AddComponent<BoxCollider2D>(BoxCollider2D::ASSET_COLLISION, gameObject->GetComponent<Transform>().scale.x, gameObject->GetComponent<Transform>().scale.y / 2.0f,
             true, false, "DOOR_MESH", &camera);
         gameObject->GetComponent<BoxCollider2D>().SetOffset(0.0f, -8);
-        gameObject->AddComponent<Button>();
+        gameObject->AddComponent<Button>(4,1);
 
         button2 = gameObject;
         objManager.push_back(gameObject);
@@ -236,7 +236,7 @@ void Engine::Init() {
         gameObject->AddComponent<BoxCollider2D>(BoxCollider2D::ASSET_COLLISION, gameObject->GetComponent<Transform>().scale.x, gameObject->GetComponent<Transform>().scale.y / 2.0f,
             true, false, "DOOR_MESH", &camera);
         gameObject->GetComponent<BoxCollider2D>().SetOffset(0.0f, -8);
-        gameObject->AddComponent<Button>();
+        gameObject->AddComponent<Button>(4,1);
 
         button3 = gameObject;
         objManager.push_back(gameObject);
