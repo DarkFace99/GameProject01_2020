@@ -207,17 +207,22 @@ void Engine::Update() {
     {
         if (objManager[i]->GetComponent<BoxCollider2D>().GetTag() == BoxCollider2D::TILE_COLLISION)
             continue;
+        bool isCollide = false;
 
         for (int j = 0; j < objManager.size(); j++) 
         {
+            if (i == j) { break; }
             if (Collision::AABB(objManager[i]->GetComponent<BoxCollider2D>(), objManager[j]->GetComponent<BoxCollider2D>())
                 && objManager[i]->GetComponent<BoxCollider2D>().GetTag() == BoxCollider2D::CHARACTER_COLLISION) 
             {
                 if (Collision::IsOnGround(*objManager[i], *objManager[j])) {
+                    isCollide = true;
+                    objManager[i]->GetComponent<BoxCollider2D>().SetIsGround(true);
                     objManager[i]->GetComponent<RigidBody>().SetVelocityY(0.0f);
                 }
             }
         }
+        if (isCollide == false) { objManager[i]->GetComponent<BoxCollider2D>().SetIsGround(false); }
     }
 
 }

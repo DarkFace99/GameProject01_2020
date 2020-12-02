@@ -75,13 +75,9 @@ void Collision::CollisionPush(BoxCollider2D& colA, BoxCollider2D& colB) {
 }
 
 
-/* HardCoding */
 bool Collision::IsOnGround(GameObject& objA, GameObject& objB) {
-	// hard coding for checking
-	if (objA.GetComponent<BoxCollider2D>().modifyPosition.y == objB.GetComponent<BoxCollider2D>().modifyPosition.y
+	if (objA.GetComponent<BoxCollider2D>().modifyPosition.y == objB.GetComponent<BoxCollider2D>().modifyPosition.y 
 		+ (objA.GetComponent<BoxCollider2D>().height + objB.GetComponent<BoxCollider2D>().height) / 2.0f) {
 		return true;
 	}
-
-	return false;
 }

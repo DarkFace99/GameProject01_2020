@@ -47,7 +47,9 @@ public:
 		: width(width), height(height), meshID(meshID), camera(camera) {}
 
 	void SetOverlap(bool overlap) { allowOverlap = overlap; }
+
 	void SetIsGround(bool isGround) { this->isGround = isGround; }
+	bool GetIsGround() { return isGround; }
 
 	int GetTag() { return tag; }
 	bool GetOverlap() { return allowOverlap; }
