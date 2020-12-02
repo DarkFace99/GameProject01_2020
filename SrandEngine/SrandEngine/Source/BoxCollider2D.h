@@ -11,7 +11,7 @@ class BoxCollider2D : public Component{
 public:
 	enum CollisionTag {
 		COLLISION_START = 0,
-		TEST_COLLISION,
+		TILE_COLLISION,
 		COLLISION_END
 	};
 

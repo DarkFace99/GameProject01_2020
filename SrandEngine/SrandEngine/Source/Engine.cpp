@@ -2,6 +2,7 @@
 
 /* TEST */
 #include "SpriteRenderer.h"
+#include "TileSelector.h"
 #include "RigidBody.h"
 #include "Animator.h"
 #include "Camera.h"
@@ -10,6 +11,8 @@
 #include "Button.h"
 #include "Door.h"
 #include "Elevator.h"
+
+#define RATIO 1280.0f / 480.0f
 
 GameObject* gameObject;
 
@@ -23,6 +26,8 @@ Camera camera(glm::vec3(0, 0, 0), glm::vec3(0, 0, -1), glm::vec3(0, 1, 0), 1.0f,
 
 IOSystem::Input ioSystem(&camera);
 
+std::vector<glm::vec4> tile_info;
+
 Engine* Engine::s_instance = nullptr;
 
 Engine::Engine() {
@@ -31,7 +36,7 @@ Engine::Engine() {
 }
 
 void Engine::Init() {
-    
+
     /* Initialize the library */
     std::cout << "Initializing GLFW..." << std::endl;
     if (!glfwInit())
@@ -78,95 +83,94 @@ void Engine::Init() {
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-
-    /* Test */
-
-    AssetManager::get().LoadMesh("TEST_MESH", 1);
-    AssetManager::get().LoadMesh("TEST_MESH", 1);
-    AssetManager::get().LoadMesh("TEST2_MESH", 1);
-    AssetManager::get().LoadMesh("TILEMESH", 1);
-    AssetManager::get().LoadMesh("BUTTONMESH", 1);
-    AssetManager::get().LoadTexture("TEST_TEX", "Assets/Benny.png");
-    AssetManager::get().LoadTexture("TEST_TEX", "Assets/!!Benny??.png");
-    AssetManager::get().LoadTexture("TEST_TEX", "Assets/Cherry.png");
-    AssetManager::get().LoadTexture("TEST2_TEX", "Assets/Cherry.png");
-    AssetManager::get().LoadTexture("TILETEX", "Assets/blank.png");
-    AssetManager::get().LoadTexture("BUTTONTEX", "Assets/b.png");
+    AssetManager::get().LoadMesh("TILESET_MESH", 8, 8);
+    AssetManager::get().LoadTexture("TILESET_TEX", "Assets/TILESET.png");
     std::cout << std::endl;
 
-    /* Anim_Test */
     AssetManager::get().LoadMesh("BENNY_ANIM_MESH", 21);
     AssetManager::get().LoadTexture("BENNY_ANIM_TEX", "Assets/Benny_Animations-Sheet.png");
-    AssetManager::get().LoadMesh("MACHO_ANIM_MESH", 20);
-    AssetManager::get().LoadTexture("MACHO_ANIM_TEX", "Assets/Macho_Animation-Sheet.png");
 
-    // Tile=================================================================================================================================
-    float posX = -128.0f;
-    for (int i = 0; i < 10; i++)
+    /* Tile Set */
+    {
+        /* First Row */
+        for (int i = 0; i < 30; i++)
+        {
+            if (i > 5 && i < 29) { tile_info.push_back(glm::vec4(8 + (i * 16), 8, 2, 6)); }
+            else { tile_info.push_back(glm::vec4(8 + (i * 16), 8, 2, 5)); }
+
+        }
+        /* Second Row */
+        for (int i = 0; i < 7; i++)
+        {
+            if (i > 5) { tile_info.push_back(glm::vec4(8 + (29 * 16), 24, 1, 5)); }
+            else if (i == 5) { tile_info.push_back(glm::vec4(8 + (i * 16), 24, 3, 5)); }
+            else { tile_info.push_back(glm::vec4(8 + (i * 16), 24, 2, 5)); }
+        }
+        /* Third Row */
+        for (int i = 0; i < 7; i++)
+        {
+            if (i > 5) { tile_info.push_back(glm::vec4(8 + (29 * 16), 40, 1, 5)); }
+            else if (i == 5) { tile_info.push_back(glm::vec4(8 + (i * 16), 40, 3, 6)); }
+            else { tile_info.push_back(glm::vec4(8 + (i * 16), 40, 2, 6)); }
+        }
+        /* Forth Row */
+        tile_info.push_back(glm::vec4(8 + (29 * 16), 56, 1, 5));
+        /* Fifth Row */
+        for (int i = 8; i < 14; i++)
+        {
+            if (i == 8) { tile_info.push_back(glm::vec4(8 + (i * 16), 72, 1, 2)); }
+            else { tile_info.push_back(glm::vec4(8 + (i * 16), 72, 2, 2)); }
+        }
+        for (int i = 18; i < 30; i++)
+        {
+            if (i == 29) { tile_info.push_back(glm::vec4(8 + (i * 16), 72, 2, 6)); }
+            else { tile_info.push_back(glm::vec4(8 + (i * 16), 72, 2, 2)); }
+        }
+        /* Tenth Row */
+        for (int i = 15; i < 24; i++)
+        {
+            if (i == 23) { tile_info.push_back(glm::vec4(8 + (i * 16), 148, 3, 2)); }
+            else if (i == 15) { tile_info.push_back(glm::vec4(8 + (i * 16), 148, 1, 4)); }
+            else if (i == 16) { tile_info.push_back(glm::vec4(8 + (i * 16), 148, 2, 4)); }
+            else { tile_info.push_back(glm::vec4(8 + (i * 16), 148, 2, 2)); }
+        }
+        /* Eleventh Row */
+        for (int i = 9; i < 17; i++)
+        {
+            if (i == 9) { tile_info.push_back(glm::vec4(8 + (i * 16), 164, 1, 4)); }
+            else if (i == 15) { tile_info.push_back(glm::vec4(8 + (i * 16), 164, 2, 6)); }
+            else if (i == 16) { tile_info.push_back(glm::vec4(8 + (i * 16), 164, 3, 6)); }
+            else { tile_info.push_back(glm::vec4(8 + (i * 16), 164, 2, 2)); }
+        }
+        /* Remaining Row */
+        for (int i = 1; i < 6; i++)
+        {
+            if (i < 5) { tile_info.push_back(glm::vec4(152, 164 + (i * 16), 6, 5)); }
+            else { tile_info.push_back(glm::vec4(152, 164 + (i * 16), 6, 6)); }
+        }
+    }
+
+    for (int i = 0; i < tile_info.size(); i++) 
     {
         gameObject = new GameObject();
         manager->AddEntity(gameObject);
-        /* std::cout << "initial position: " << gameObject->GetComponent<Transform>().position << std::endl;
-         std::cout << std::endl;*/
 
-        posX += 64;
+        gameObject->GetComponent<Transform>().position = Vector2D_float((-240.0f + tile_info[i].x) * RATIO, (-135.0f + tile_info[i].y) * RATIO);
+        gameObject->GetComponent<Transform>().scale = Vector2D_float(16.0f * RATIO, 16.0f * RATIO);
 
-        gameObject->GetComponent<Transform>().position = Vector2D_float(posX, -296.0f);
-        gameObject->GetComponent<Transform>().scale = Vector2D_float(64.0f, 64.0f);
-        std::cout << "Set transform:" << std::endl;
-        std::cout << "position: " << gameObject->GetComponent<Transform>().position << std::endl;
-        std::cout << "scale: " << gameObject->GetComponent<Transform>().scale << std::endl;
-        std::cout << std::endl;
-
-        gameObject->AddComponent<SpriteRenderer>("TILEMESH", "TILETEX", 1.0f, &camera, true);
-        std::cout << std::endl;
-
-        gameObject->AddComponent<BoxCollider2D>(gameObject->GetComponent<Transform>().scale.x, gameObject->GetComponent<Transform>().scale.y);
+        gameObject->AddComponent<SpriteRenderer>(SpriteRenderer::TILE_LAYER, "TILESET_MESH", "TILESET_TEX", 1.0f, &camera, false);
+        gameObject->AddComponent<TileSelector>(8, 8);
+        
+        gameObject->GetComponent<TileSelector>().SetTile(tile_info[i].z, tile_info[i].w);
+        gameObject->AddComponent<BoxCollider2D>(BoxCollider2D::TILE_COLLISION, gameObject->GetComponent<Transform>().scale.x, gameObject->GetComponent<Transform>().scale.y);
 
         objManager.push_back(gameObject);
     }
-
-    // Button===============================================================================================================================
-    gameObject = new GameObject();
-    manager->AddEntity(gameObject);
-    gameObject->GetComponent<Transform>().position = Vector2D_float(128.0f, -232.0f);
-    gameObject->GetComponent<Transform>().scale = Vector2D_float(64.0f, 64.0f);
-
-    gameObject->AddComponent<SpriteRenderer>("BUTTONMESH", "BUTTONTEX", 1.0f, &camera, true);
-    std::cout << std::endl;
-
-    gameObject->AddComponent<Button>();
-
-    gameObject->AddComponent<BoxCollider2D>(gameObject->GetComponent<Transform>().scale.x, gameObject->GetComponent<Transform>().scale.y/2.0f,
-            true, false, "BUTTONMESH", &camera);
-    gameObject->GetComponent<BoxCollider2D>().SetOffset(0, -20);
-
-    button = gameObject;
-
-    // Test Obstacle========================================================================================================================
-    std::cout << "Obj 2:" << std::endl;
-    gameObject = new GameObject();
-    manager->AddEntity(gameObject);
-    gameObject->GetComponent<Transform>().position = Vector2D_float(256.0f, -200.0f);
-    gameObject->GetComponent<Transform>().scale = Vector2D_float(96.0f, 96.0f);
-    gameObject->AddComponent<SpriteRenderer>("TEST2_MESH", "TEST2_TEX", 0.1f, &camera, false);
-    std::cout << std::endl;
-
-    gameObject->AddComponent<BoxCollider2D>(gameObject->GetComponent<Transform>().scale.x, gameObject->GetComponent<Transform>().scale.y / 2.0f,
-            false, false, "TEST2_MESH", &camera);
-    gameObject->GetComponent<BoxCollider2D>().SetOffset(0, -gameObject->GetComponent<Transform>().scale.y * (float)1/2);
-
-    gameObject->AddComponent<Elevator>(3);
-    gameObject->GetComponent<Elevator>().AddConnectedButtons(button);
-
-    door = gameObject;
-    objManager.push_back(gameObject);
-
-    // Benny================================================================================================================================
+    
     gameObject = new GameObject();
     manager->AddEntity(gameObject);
     gameObject->GetComponent<Transform>().position = Vector2D_float(0.0f, 0.0f);
-    gameObject->GetComponent<Transform>().scale = Vector2D_float(96.0f, 96.0f);
+    gameObject->GetComponent<Transform>().scale = Vector2D_float(24.0f * RATIO, 24.0f * RATIO);
     gameObject->AddComponent<SpriteRenderer>("BENNY_ANIM_MESH", "BENNY_ANIM_TEX", 1.0f, &camera, false);
     gameObject->AddComponent<RigidBody>(0.01f);
     // anim_set
@@ -180,28 +184,12 @@ void Engine::Init() {
 
     player = gameObject; // check collision
     benny = player;
+
+    objManager.push_back(gameObject);
+
     ioSystem.AddCharacterList("Benny", benny);
-
-    // Macho================================================================================================================================
-    gameObject = new GameObject();
-    manager->AddEntity(gameObject);
-    gameObject->GetComponent<Transform>().position = Vector2D_float(0.0f, 0.0f);
-    gameObject->GetComponent<Transform>().scale = Vector2D_float(96.0f, 96.0f);
-    gameObject->AddComponent<SpriteRenderer>("MACHO_ANIM_MESH", "MACHO_ANIM_TEX", 1.0f, &camera, false);
-    gameObject->AddComponent<RigidBody>(0.01f);
-    // anim_set
-    gameObject->AddComponent<Animator>(20, 100);
-    gameObject->GetComponent<Animator>().SetState("MACHO_IDLE", 0, 5);
-    gameObject->GetComponent<Animator>().SetState("MACHO_RUN", 13, 19);
-
-    gameObject->AddComponent<BoxCollider2D>(gameObject->GetComponent<Transform>().scale.x, gameObject->GetComponent<Transform>().scale.y,
-        false /* overlap */, true /* movable */, "MACHO_ANIM_MESH", &camera);
-    
-    macho = gameObject;
-    ioSystem.AddCharacterList("Macho", macho);
-
     ioSystem.SetControl("Benny");
-
+   
     running = true;
 }
 
@@ -215,21 +203,20 @@ void Engine::Update() {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     manager->Update();
 
-    for (int i = 0; i < objManager.size(); i++)
+    for (int i = 0; i < objManager.size(); i++) 
     {
-        Collision::AABB(benny->GetComponent<BoxCollider2D>(), objManager[i]->GetComponent<BoxCollider2D>());
-        Collision::AABB(macho->GetComponent<BoxCollider2D>(), objManager[i]->GetComponent<BoxCollider2D>());
+        if (objManager[i]->GetComponent<BoxCollider2D>().GetTag() == BoxCollider2D::TILE_COLLISION)
+            continue;
+
+        for (int j = 0; j < objManager.size(); j++) 
+        {
+            Collision::AABB(objManager[i]->GetComponent<BoxCollider2D>(), objManager[j]->GetComponent<BoxCollider2D>());
+        }
     }
 
     if (Collision::IsOnGround(*benny)) {
         benny->GetComponent<RigidBody>().SetVelocityY(0.0f);
     }
-
-    if (Collision::IsOnGround(*macho)) {
-        macho->GetComponent<RigidBody>().SetVelocityY(0.0f);
-    }
-    
-    //std::cout << "PlayerPos: " << player->GetComponent<Transform>().position << std::endl;
 }
 
 void Engine::FixedUpdate(TimeStep ts) {

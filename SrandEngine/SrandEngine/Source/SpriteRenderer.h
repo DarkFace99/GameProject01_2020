@@ -15,7 +15,7 @@ class SpriteRenderer : public Component {
 public:
 	enum LayerTag {
 		LAYER_START = 0,
-		TEST_LAYER,
+		TILE_LAYER,
 		LAYER_END
 	};
 
