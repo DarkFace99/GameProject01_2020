@@ -32,8 +32,8 @@ public:
 	void Update() override final 
 	{
 
-		velocity.x = (force.x - drag.x) * TimeStep::get().GetMilliseconds();
-		velocity.y += (force.x + drag.y + -(gravityScale * GRAVITY)) * TimeStep::get().GetMilliseconds();
+		velocity.x = (force.x - drag.x) * TimeStep::get().GetSeconds();
+		velocity.y += (force.x + drag.y + -(gravityScale * GRAVITY)) * TimeStep::get().GetSeconds();
 		if (velocity.y < -20) { velocity.y = -20; } // hard code
 		transform->Translate(velocity);
 	}

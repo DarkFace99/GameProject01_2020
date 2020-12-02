@@ -167,19 +167,21 @@ void Engine::Init() {
         objManager.push_back(gameObject);
     }
     
+    /* Character */
+
     gameObject = new GameObject();
     manager->AddEntity(gameObject);
     gameObject->GetComponent<Transform>().position = Vector2D_float(0.0f, 300.0f);
     gameObject->GetComponent<Transform>().scale = Vector2D_float(24.0f * RATIO, 24.0f * RATIO);
     gameObject->AddComponent<SpriteRenderer>("BENNY_ANIM_MESH", "BENNY_ANIM_TEX", 1.0f, &camera, false);
-    gameObject->AddComponent<RigidBody>(0.01f);
+    gameObject->AddComponent<RigidBody>(2.0f);
     // anim_set
     gameObject->AddComponent<Animator>(21, 100);
     gameObject->GetComponent<Animator>().SetState("BENNY_IDLE", 0, 6);
     gameObject->GetComponent<Animator>().SetState("BENNY_RUN", 8, 16);
     gameObject->GetComponent<Animator>().SetState("BENNY_JUMP", 18, 18);
     gameObject->GetComponent<Animator>().SetState("BENNY_FALL", 19, 19);
-    gameObject->AddComponent<BoxCollider2D>(BoxCollider2D::CHARACTER_COLLISION, gameObject->GetComponent<Transform>().scale.x, gameObject->GetComponent<Transform>().scale.y,
+    gameObject->AddComponent<BoxCollider2D>(BoxCollider2D::CHARACTER_COLLISION, gameObject->GetComponent<Transform>().scale.x - 20, gameObject->GetComponent<Transform>().scale.y,
         false /* overlap */, true /* movable */, "BENNY_ANIM_MESH", &camera);
 
     player = gameObject; // check collision
