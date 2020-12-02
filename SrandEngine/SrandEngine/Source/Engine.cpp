@@ -203,26 +203,28 @@ void Engine::Update() {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     manager->Update();
 
-    for (int i = 0; i < objManager.size(); i++) 
+    for (int i = 0; i < objManager.size(); i++)
     {
-        if (objManager[i]->GetComponent<BoxCollider2D>().GetTag() == BoxCollider2D::TILE_COLLISION)
-            continue;
-        bool isCollide = false;
-
-        for (int j = 0; j < objManager.size(); j++) 
-        {
-            if (i == j) { break; }
-            if (Collision::AABB(objManager[i]->GetComponent<BoxCollider2D>(), objManager[j]->GetComponent<BoxCollider2D>())
-                && objManager[i]->GetComponent<BoxCollider2D>().GetTag() == BoxCollider2D::CHARACTER_COLLISION) 
+        if (objManager[i]->GetComponent<BoxCollider2D>().GetTag() != BoxCollider2D::TILE_COLLISION){
+            bool isGroundCheck = false;
+            for (int j = 0; j < objManager.size(); j++)
             {
-                if (Collision::IsOnGround(*objManager[i], *objManager[j])) {
-                    isCollide = true;
-                    objManager[i]->GetComponent<BoxCollider2D>().SetIsGround(true);
-                    objManager[i]->GetComponent<RigidBody>().SetVelocityY(0.0f);
+                if (i == j) { break; } // Always Collide with itself
+
+                if (Collision::AABB(objManager[i]->GetComponent<BoxCollider2D>(), objManager[j]->GetComponent<BoxCollider2D>())
+                    && objManager[i]->GetComponent<BoxCollider2D>().GetTag() == BoxCollider2D::CHARACTER_COLLISION)
+                {
+                    
+                    if (Collision::IsOnGround(*objManager[i], *objManager[j])) {
+                        isGroundCheck = true;
+                        
+                        objManager[i]->GetComponent<BoxCollider2D>().SetIsGround(true);
+                        objManager[i]->GetComponent<RigidBody>().SetVelocityY(0.0f);
+                    }
                 }
             }
+            if (isGroundCheck == false) { objManager[i]->GetComponent<BoxCollider2D>().SetIsGround(false); }
         }
-        if (isCollide == false) { objManager[i]->GetComponent<BoxCollider2D>().SetIsGround(false); }
     }
 
 }
