@@ -97,7 +97,7 @@ namespace IOSystem
             case GAME:
                 //std::cout << player->GetComponent<RigidBody>().GetVelocityX() << std::endl;
                 //std::cout << player->GetComponent<BoxCollider2D>().GetIsGround() << std::endl;
-                if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS && player->GetComponent<BoxCollider2D>().GetIsGround())
+                if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS && player->GetComponent<BoxCollider2D>().GetIsGround() && currentPlayer != "Macho")
                 {
                     //std::cout << "W" << std::endl;
                     player->GetComponent<RigidBody>().SetVelocityY(20.0f);

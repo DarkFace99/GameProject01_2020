@@ -21,6 +21,8 @@ private:
 	float max_elevation = 0.0f;
 	float ground_elevation = 0.0f;
 
+	int activeValue = 0;
+
 	std::vector<GameObject*> connectedButtons;
 
 public:
@@ -32,7 +34,7 @@ public:
 		transform = &gameObject->GetComponent<Transform>();
 		collider = &gameObject->GetComponent<BoxCollider2D>();
 
-		max_elevation = transform->position.y + (transform->scale.y * elevatedHeight);
+		max_elevation = transform->position.y + elevatedHeight;
 		ground_elevation = transform->position.y;
 
 		max_height = Vector2D_float(transform->position.x, max_elevation);
@@ -62,9 +64,17 @@ public:
 	}
 	void Elevated() 
 	{
+		activeValue = 0;
+
 		for (int i = 0; i < connectedButtons.size(); i++)
 		{
+
 			if (connectedButtons[i]->GetComponent<Button>().CheckCollideActivate())
+			{
+				activeValue++;
+			}
+
+			/*if (connectedButtons[i]->GetComponent<Button>().CheckCollideActivate())
 			{
 				transform->Translate(Vector2D_float(0.0f, 1.0f));
 				if (transform->position.y > max_elevation) { transform->SetPosition(max_height); }
@@ -73,7 +83,18 @@ public:
 			{
 				transform->Translate(Vector2D_float(0.0f, -1.0f));
 				if (transform->position.y <= ground_elevation) { transform->SetPosition(ground_height); }
-			}
+			}*/
+		}
+
+		if (activeValue % 2 != 0)
+		{
+			transform->Translate(Vector2D_float(0.0f, 1.0f));
+			if (transform->position.y > max_elevation) { transform->SetPosition(max_height); }
+		}
+		else
+		{
+			transform->Translate(Vector2D_float(0.0f, -1.0f));
+			if (transform->position.y <= ground_elevation) { transform->SetPosition(ground_height); }
 		}
 	}
 

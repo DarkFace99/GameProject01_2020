@@ -17,6 +17,7 @@ public:
 		LAYER_START = 0,
 		TILE_LAYER,
 		CHARACTER_LAYER,
+		ASSET_LAYER,
 		LAYER_END
 	};
 
@@ -51,6 +52,7 @@ public:
 	}
 
 	void SetFlip(bool condition) { flip = condition; }
+	void SetAlpha(float alpha) { this->alpha = alpha; }
 
 	SpriteRenderer(std::string meshID, std::string textureID, float alpha, Camera* camera, bool flip)
 		: meshID(meshID), textureID(textureID), alpha(alpha), camera(camera), flip(flip){

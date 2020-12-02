@@ -23,10 +23,14 @@ public:
 
 	bool CheckCollideActivate() 
 	{
-		if (Collision::AABB(Engine::get().player->GetComponent<BoxCollider2D>(), gameObject->GetComponent<BoxCollider2D>())) 
-		{
-			std::cout << "Collide with button" << std::endl;
-			return true;
+		for (int i = 0; i < Engine::get().objManager.size(); i++) {
+			if (Engine::get().objManager[i]->GetComponent<BoxCollider2D>().GetTag() == BoxCollider2D::CHARACTER_COLLISION)
+			{
+				if (Collision::AABB(*collider, Engine::get().objManager[i]->GetComponent<BoxCollider2D>())) {
+					std::cout << "Collide with button" << std::endl;
+					return true;
+				}
+			}
 		}
 		return false;
 	}
