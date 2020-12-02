@@ -32,7 +32,7 @@ public:
 	void SetState(std::string stateName, int startFrame, int endFrame) {
 		if (states.count(stateName) <= 0) {
 			states[stateName] = Vector2D_Int(startFrame, endFrame);
-			std::cout << "state: [" << stateName << "] created!" << std::endl;
+			//std::cout << "state: [" << stateName << "] created!" << std::endl;
 		}
 		else {
 			std::cout << "Animator: //Error// state name [" << stateName << "] was already used!" << std::endl;

@@ -27,7 +27,7 @@ void AssetManager::Clean() {
 Texture* AssetManager::GetTexture(std::string id) {
 	// check if id exists in container, then return according to the result
 	if (textures.count(id) <= 0) { std::cout << "AssestManager: Cannot find texture " << id << std::endl; }
-	else { std::cout << "AssestManager: Get texture " << id << std::endl; }
+	else { /*std::cout << "AssestManager: Get texture " << id << std::endl;*/ }
 	return (textures.count(id) > 0) ? textures[id] : nullptr;
 }
 
@@ -64,7 +64,7 @@ void AssetManager::LoadTexture(std::string id, const char* filename) {
 	if (aTex) {
 		if (textures.count(id) <= 0) {
 			textures[id] = aTex;
-			std::cout << "texture: [" << filename << "] loaded!" << std::endl;
+			//std::cout << "texture: [" << filename << "] loaded!" << std::endl;
 		}
 		else {
 			delete aTex;
@@ -84,7 +84,7 @@ void AssetManager::LoadTexture(std::string id, const char* filename) {
 Mesh* AssetManager::GetMesh(std::string id) {
 	// check if id exists in container, then return according to the result
 	if (meshes.count(id) <= 0) { std::cout << "Cannot find mesh " << id << std::endl; }
-	else { std::cout << "AssestManager: Get texture " << id << std::endl; }
+	else { /*std::cout << "AssestManager: Get texture " << id << std::endl;*/ }
 	return (meshes.count(id) > 0) ? meshes[id] : nullptr;
 }
 
@@ -138,7 +138,7 @@ void AssetManager::LoadMesh(std::string id, int frameCountX, int frameCountY, in
 	if (aMesh) {
 		if (meshes.count(id) <= 0) {
 			meshes[id] = aMesh;
-			std::cout << "mesh: [" << id << "] Created!" << std::endl;
+			//std::cout << "mesh: [" << id << "] Created!" << std::endl;
 		}
 		else {
 			delete aMesh;

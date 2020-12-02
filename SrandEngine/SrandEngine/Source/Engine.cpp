@@ -90,6 +90,9 @@ void Engine::Init() {
     AssetManager::get().LoadMesh("BENNY_ANIM_MESH", 21);
     AssetManager::get().LoadTexture("BENNY_ANIM_TEX", "Assets/Benny_Animations-Sheet.png");
 
+    AssetManager::get().LoadMesh("MACHO_ANIM_MESH", 20);
+    AssetManager::get().LoadTexture("MACHO_ANIM_TEX", "Assets/Macho_Animation-Sheet.png");
+
     /* Tile Set */
     {
         /* First Row */
@@ -169,12 +172,13 @@ void Engine::Init() {
     
     /* Character */
 
+    // Benny
     gameObject = new GameObject();
     manager->AddEntity(gameObject);
-    gameObject->GetComponent<Transform>().position = Vector2D_float(0.0f, 300.0f);
+    gameObject->GetComponent<Transform>().position = Vector2D_float(-555.0f, -200.0f);
     gameObject->GetComponent<Transform>().scale = Vector2D_float(24.0f * RATIO, 24.0f * RATIO);
-    gameObject->AddComponent<SpriteRenderer>("BENNY_ANIM_MESH", "BENNY_ANIM_TEX", 1.0f, &camera, false);
-    gameObject->AddComponent<RigidBody>(2.0f);
+    gameObject->AddComponent<SpriteRenderer>(SpriteRenderer::CHARACTER_LAYER,"BENNY_ANIM_MESH", "BENNY_ANIM_TEX", 1.0f, &camera, false);
+    gameObject->AddComponent<RigidBody>(0.01f);
     // anim_set
     gameObject->AddComponent<Animator>(21, 100);
     gameObject->GetComponent<Animator>().SetState("BENNY_IDLE", 0, 6);
@@ -191,7 +195,25 @@ void Engine::Init() {
 
     ioSystem.AddCharacterList("Benny", benny);
     ioSystem.SetControl("Benny");
+
+    // Macho
+    gameObject = new GameObject();
+    manager->AddEntity(gameObject);
+    gameObject->GetComponent<Transform>().position = Vector2D_float(60.0f, -285.0f);
+    gameObject->GetComponent<Transform>().scale = Vector2D_float(24.0f * RATIO, 24.0f * RATIO);
+    gameObject->AddComponent<SpriteRenderer>(SpriteRenderer::CHARACTER_LAYER, "MACHO_ANIM_MESH", "MACHO_ANIM_TEX", 1.0f, &camera, true);
+    gameObject->AddComponent<RigidBody>(0.01f);
+
+    gameObject->AddComponent<Animator>(20, 100);
+    gameObject->GetComponent<Animator>().SetState("BENNY_IDLE", 0, 4);
+    gameObject->GetComponent<Animator>().SetState("BENNY_RUN", 13, 19);
+    gameObject->AddComponent<BoxCollider2D>(BoxCollider2D::CHARACTER_COLLISION, gameObject->GetComponent<Transform>().scale.x - 20, gameObject->GetComponent<Transform>().scale.y,
+        false /* overlap */, true /* movable */, "BENNY_ANIM_MESH", &camera);
    
+    macho = gameObject;
+    objManager.push_back(gameObject);
+    ioSystem.AddCharacterList("Macho", macho);
+
     running = true;
 }
 

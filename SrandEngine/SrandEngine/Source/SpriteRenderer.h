@@ -16,6 +16,7 @@ public:
 	enum LayerTag {
 		LAYER_START = 0,
 		TILE_LAYER,
+		CHARACTER_LAYER,
 		LAYER_END
 	};
 

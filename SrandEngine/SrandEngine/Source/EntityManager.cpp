@@ -29,7 +29,7 @@ void EntityManager::AddEntity(GameObject* _gameObj)
 	std::unique_ptr<GameObject> uniquePtr{ _gameObj };
 	gameObjects.emplace_back(std::move(uniquePtr));
 
-	std::cout << "Entity Added " << _gameObj->HasComponent<Transform>() << std::endl; // Just to check
+	//std::cout << "Entity Added " << _gameObj->HasComponent<Transform>() << std::endl; // Just to check
 }
 void EntityManager::DestroyEntity(GameObject* _gameObj)
 {
