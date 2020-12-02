@@ -37,7 +37,19 @@ namespace IOSystem
         {
             bool C_DOWN = false;
 
-            player->GetComponent<Animator>().PlayState("BENNY_IDLE");
+            
+            if (player->GetComponent<RigidBody>().GetVelocityY() > 0) 
+            {
+                player->GetComponent<Animator>().PlayState("BENNY_JUMP");
+            }
+            else if(player->GetComponent<RigidBody>().GetVelocityY() < 0)
+            {
+                player->GetComponent<Animator>().PlayState("BENNY_FALL");
+            }
+            else
+            {
+                player->GetComponent<Animator>().PlayState("BENNY_IDLE");
+            }
 
             if (glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS && glfwGetKey(window, GLFW_KEY_1) == GLFW_PRESS) 
             {
@@ -88,11 +100,6 @@ namespace IOSystem
                 {
                     //std::cout << "W" << std::endl;
                     player->GetComponent<RigidBody>().SetVelocityY(20.0f);
-                    /*player->GetComponent<Animator>().PlayState("BENNY_JUMP");
-                    if (player->GetComponent<RigidBody>().GetVelocityY() < 0) 
-                    {
-                        player->GetComponent<Animator>().PlayState("BENNY_FALL");
-                    }*/
                 }
                 if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
                 {
