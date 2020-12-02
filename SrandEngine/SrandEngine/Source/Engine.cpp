@@ -137,8 +137,9 @@ void Engine::Init() {
 
     gameObject->AddComponent<Button>();
 
-    gameObject->AddComponent<BoxCollider2D>(gameObject->GetComponent<Transform>().scale.x, gameObject->GetComponent<Transform>().scale.y,
+    gameObject->AddComponent<BoxCollider2D>(gameObject->GetComponent<Transform>().scale.x, gameObject->GetComponent<Transform>().scale.y/2.0f,
             true, false, "BUTTONMESH", &camera);
+    gameObject->GetComponent<BoxCollider2D>().SetOffset(0, -20);
 
     button = gameObject;
 
@@ -151,8 +152,9 @@ void Engine::Init() {
     gameObject->AddComponent<SpriteRenderer>("TEST2_MESH", "TEST2_TEX", 0.1f, &camera, false);
     std::cout << std::endl;
 
-    gameObject->AddComponent<BoxCollider2D>(gameObject->GetComponent<Transform>().scale.x, gameObject->GetComponent<Transform>().scale.y,
+    gameObject->AddComponent<BoxCollider2D>(gameObject->GetComponent<Transform>().scale.x, gameObject->GetComponent<Transform>().scale.y / 2.0f,
             false, false, "TEST2_MESH", &camera);
+    gameObject->GetComponent<BoxCollider2D>().SetOffset(0, -gameObject->GetComponent<Transform>().scale.y * (float)1/2);
 
     gameObject->AddComponent<Elevator>(3);
     gameObject->GetComponent<Elevator>().AddConnectedButtons(button);
@@ -219,8 +221,12 @@ void Engine::Update() {
         Collision::AABB(macho->GetComponent<BoxCollider2D>(), objManager[i]->GetComponent<BoxCollider2D>());
     }
 
-    if (Collision::IsOnGround(*player)) {
-        player->GetComponent<RigidBody>().SetVelocityY(0.0f);
+    if (Collision::IsOnGround(*benny)) {
+        benny->GetComponent<RigidBody>().SetVelocityY(0.0f);
+    }
+
+    if (Collision::IsOnGround(*macho)) {
+        macho->GetComponent<RigidBody>().SetVelocityY(0.0f);
     }
     
     //std::cout << "PlayerPos: " << player->GetComponent<Transform>().position << std::endl;

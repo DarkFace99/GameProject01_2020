@@ -28,6 +28,11 @@ private:
 	Mesh* mesh = nullptr;
 	Camera* camera;
 
+	float offsetX = 0.0f;
+	float offsetY = 0.0f;
+	
+	glm::vec2 modifyPosition;
+
 public:
 	BoxCollider2D(CollisionTag tag, float width, float height, bool overlap = false, bool movable = false, std::string meshID = "", Camera* camera = nullptr)
 		: tag(tag), width(width), height(height), allowOverlap(overlap), movable(movable), meshID(meshID), camera(camera) {}
@@ -43,15 +48,23 @@ public:
 	int GetTag() { return tag; }
 	bool GetOverlap() { return allowOverlap; }
 
+	void SetOffset(float offsetX, float offsetY) {
+		BoxCollider2D::offsetX = offsetX;
+		BoxCollider2D::offsetY = offsetY;
+	}
+
 	bool Init() override final {
 		transform = &gameObject->GetComponent<Transform>();
 		if (meshID != "") {
 			mesh = AssetManager::get().GetMesh(meshID);
 		}
+
+		modifyPosition = glm::vec2(transform->position.x + offsetX, transform->position.y + offsetY);
 		return true;
 	}
 
 	void Update() override final {
+		modifyPosition = glm::vec2(transform->position.x + offsetX, transform->position.y + offsetY);
 	}
 
 	void Draw() override final {
@@ -65,8 +78,8 @@ public:
 			/*Set transform of the objects relative to camera*/
 			// If there's no changing in scale and rotate on run time, move the modelMat to Init() and only calculate position here.
 			glm::mat4 modelMat = glm::mat4(1.0f);
-			modelMat = glm::translate(modelMat, glm::vec3(transform->position.x, transform->position.y, 0));
-			modelMat = glm::scale(modelMat, glm::vec3(transform->scale.x, transform->scale.y, 1));
+			modelMat = glm::translate(modelMat, glm::vec3(modifyPosition.x, modifyPosition.y, 0));
+			modelMat = glm::scale(modelMat, glm::vec3(width, height, 1));
 			modelMat = glm::rotate(modelMat, transform->rotationAngle * 3.14f / 180.0f, glm::vec3(0, 0, 1) /* rotate z-axis */);
 			glm::mat4 MVP = camera->GetProjectionMat() * camera->GetViewMatrix() * modelMat;
 			glUniformMatrix4fv(glGetUniformLocation(Shader::get()->shader, "MVP"), 1, GL_FALSE, &MVP[0][0]);
