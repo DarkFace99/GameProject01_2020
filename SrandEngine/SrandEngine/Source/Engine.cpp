@@ -85,6 +85,9 @@ void Engine::Init() {
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
+    AssetManager::get().LoadMesh("BG_MESH");
+    AssetManager::get().LoadTexture("BG_TEX", "Assets/Background.png");
+
     AssetManager::get().LoadMesh("TILESET_MESH", 8, 8);
     AssetManager::get().LoadTexture("TILESET_TEX", "Assets/TILESET.png");
 
@@ -106,6 +109,17 @@ void Engine::Init() {
     AssetManager::get().LoadMesh("ELEVATOR_STAND_MESH", 10, 13, 2, 1);
     AssetManager::get().LoadMesh("BUTTON_MESH", 10, 13, 2, 1);
 
+
+    /* BACKGROUND */
+    {
+        gameObject = new GameObject();
+        manager->AddEntity(gameObject);
+
+        gameObject->GetComponent<Transform>().position = Vector2D_float(0 * RATIO, 0 * RATIO);
+        gameObject->GetComponent<Transform>().scale = Vector2D_float(480 * RATIO, 270 * RATIO);
+
+        gameObject->AddComponent<SpriteRenderer>("BG_MESH", "BG_TEX", 1.0f, &camera, false);
+    }
 
     /* Tile Set */
     {
