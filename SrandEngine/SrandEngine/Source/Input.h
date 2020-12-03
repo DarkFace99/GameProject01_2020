@@ -105,7 +105,7 @@ namespace IOSystem
                 if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
                 {
                     //std::cout << "A" << std::endl;
-                    player->GetComponent<Transform>().Translate(Vector2D_float(-2.0f, 0.0f));
+                    player->GetComponent<Transform>().Translate(Vector2D_float(-2.5f, 0.0f));
                     if (player->GetComponent<BoxCollider2D>().GetIsGround()) {
                         player->GetComponent<Animator>().PlayState("BENNY_RUN");
                     }
@@ -114,7 +114,7 @@ namespace IOSystem
                 if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
                 {
                     //std::cout << "D" << std::endl;
-                    player->GetComponent<Transform>().Translate(Vector2D_float(2.0f, 0.0f));
+                    player->GetComponent<Transform>().Translate(Vector2D_float(2.5f, 0.0f));
                     if (player->GetComponent<BoxCollider2D>().GetIsGround()) {
                         player->GetComponent<Animator>().PlayState("BENNY_RUN");
                     }

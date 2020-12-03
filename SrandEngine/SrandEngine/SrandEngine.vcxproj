@@ -34,6 +34,7 @@
     <ClInclude Include="Source\GameObject.h" />
     <ClInclude Include="Source\Input.h" />
     <ClInclude Include="Source\Mesh.h" />
+    <ClInclude Include="Source\NPC.h" />
     <ClInclude Include="Source\Shader.h" />
     <ClInclude Include="Source\RigidBody.h" />
     <ClInclude Include="Source\SpriteRenderer.h" />

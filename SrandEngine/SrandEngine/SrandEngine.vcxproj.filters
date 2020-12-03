@@ -126,6 +126,9 @@
     <ClInclude Include="Source\TileSelector.h">
       <Filter>ECS\Header File</Filter>
     </ClInclude>
+    <ClInclude Include="Source\NPC.h">
+      <Filter>Entity</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\AssetManager.cpp">
