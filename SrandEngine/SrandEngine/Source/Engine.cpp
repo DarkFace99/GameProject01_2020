@@ -196,7 +196,7 @@ void Engine::Init() {
         gameObject->GetComponent<TileSelector>().SetTile(1, 2);
 
         gameObject->AddComponent<BoxCollider2D>(BoxCollider2D::ASSET_COLLISION, gameObject->GetComponent<Transform>().scale.x , gameObject->GetComponent<Transform>().scale.y / 2.0f,
-            true, false, "DOOR_MESH", &camera);
+            true, false/*, "BUTTON_MESH", &camera*/);
         gameObject->GetComponent<BoxCollider2D>().SetOffset(0.0f, -8);
         gameObject->AddComponent<Button>(1,1);
         
@@ -215,7 +215,7 @@ void Engine::Init() {
         gameObject->GetComponent<TileSelector>().SetTile(4, 2);
 
         gameObject->AddComponent<BoxCollider2D>(BoxCollider2D::ASSET_COLLISION, gameObject->GetComponent<Transform>().scale.x, gameObject->GetComponent<Transform>().scale.y / 2.0f,
-            true, false, "DOOR_MESH", &camera);
+            true, false/*, "BUTTON_MESH", &camera*/);
         gameObject->GetComponent<BoxCollider2D>().SetOffset(0.0f, -8);
         gameObject->AddComponent<Button>(4,1);
 
@@ -234,7 +234,7 @@ void Engine::Init() {
         gameObject->GetComponent<TileSelector>().SetTile(4, 2);
 
         gameObject->AddComponent<BoxCollider2D>(BoxCollider2D::ASSET_COLLISION, gameObject->GetComponent<Transform>().scale.x, gameObject->GetComponent<Transform>().scale.y / 2.0f,
-            true, false, "DOOR_MESH", &camera);
+            true, false/*, "BUTTON_MESH", &camera*/);
         gameObject->GetComponent<BoxCollider2D>().SetOffset(0.0f, -8);
         gameObject->AddComponent<Button>(4,1);
 
@@ -282,7 +282,7 @@ void Engine::Init() {
         gameObject->GetComponent<TileSelector>().SetTile(1, 8);
 
         gameObject->AddComponent<BoxCollider2D>(BoxCollider2D::ASSET_COLLISION, gameObject->GetComponent<Transform>().scale.x, gameObject->GetComponent<Transform>().scale.y,
-            false, false, "DOOR_MESH", &camera);
+            false, false/*, "DOOR_MESH", &camera*/);
         gameObject->AddComponent<Door>();
         gameObject->GetComponent<Door>().AddConnectedButtons(button1);
 
@@ -301,7 +301,7 @@ void Engine::Init() {
         gameObject->GetComponent<TileSelector>().SetTile(3, 8);
 
         gameObject->AddComponent<BoxCollider2D>(BoxCollider2D::ASSET_COLLISION, gameObject->GetComponent<Transform>().scale.x, gameObject->GetComponent<Transform>().scale.y,
-            false, false, "DOOR_MESH", &camera);
+            false, false/*, "DOOR_MESH", &camera*/);
         gameObject->AddComponent<Door>(false);
         gameObject->GetComponent<Door>().AddConnectedButtons(button2);
         gameObject->GetComponent<Door>().AddConnectedButtons(button3);
@@ -323,7 +323,7 @@ void Engine::Init() {
         gameObject->GetComponent<TileSelector>().SetTile(1, 4);
 
         gameObject->AddComponent<BoxCollider2D>(BoxCollider2D::ASSET_COLLISION, gameObject->GetComponent<Transform>().scale.x, gameObject->GetComponent<Transform>().scale.y / 8.0f,
-            false, false, "DOOR_MESH", &camera);
+            false, false/*, "ELEVATOR_MESH", &camera*/);
         gameObject->GetComponent<BoxCollider2D>().SetOffset(0.0f, -2.0f * RATIO);
         gameObject->AddComponent<Elevator>(4*16 * RATIO);
         gameObject->GetComponent<Elevator>().AddConnectedButtons(button1);
@@ -342,7 +342,7 @@ void Engine::Init() {
         gameObject->GetComponent<TileSelector>().SetTile(4, 4);
 
         gameObject->AddComponent<BoxCollider2D>(BoxCollider2D::ASSET_COLLISION, gameObject->GetComponent<Transform>().scale.x, gameObject->GetComponent<Transform>().scale.y / 8.0f,
-            false, false, "DOOR_MESH", &camera);
+            false, false/*, "ELEVATOR_MESH", &camera*/);
         gameObject->GetComponent<BoxCollider2D>().SetOffset(0.0f, -2.0f * RATIO);
         gameObject->AddComponent<Elevator>(5 * 16 * RATIO);
         gameObject->GetComponent<Elevator>().AddConnectedButtons(button2);
@@ -393,7 +393,7 @@ void Engine::Init() {
         gameObject->GetComponent<Animator>().SetState("BENNY_JUMP", 18, 18);
         gameObject->GetComponent<Animator>().SetState("BENNY_FALL", 19, 19);
         gameObject->AddComponent<BoxCollider2D>(BoxCollider2D::CHARACTER_COLLISION, gameObject->GetComponent<Transform>().scale.x - 20, gameObject->GetComponent<Transform>().scale.y,
-            false /* overlap */, true /* movable */, "BENNY_ANIM_MESH", &camera);
+            false /* overlap */, true /* movable *//*, "BENNY_ANIM_MESH", &camera*/);
 
         player = gameObject; // check collision
         benny = player;
@@ -417,7 +417,7 @@ void Engine::Init() {
         gameObject->GetComponent<Animator>().SetState("BENNY_IDLE", 0, 4);
         gameObject->GetComponent<Animator>().SetState("BENNY_RUN", 13, 19);
         gameObject->AddComponent<BoxCollider2D>(BoxCollider2D::CHARACTER_COLLISION, gameObject->GetComponent<Transform>().scale.x - 20, gameObject->GetComponent<Transform>().scale.y,
-            false /* overlap */, true /* movable */, "BENNY_ANIM_MESH", &camera);
+            false /* overlap */, true /* movable *//*, "BENNY_ANIM_MESH", &camera*/);
 
         macho = gameObject;
         objManager.push_back(gameObject);
@@ -466,7 +466,9 @@ void Engine::Update() {
 }
 
 void Engine::FixedUpdate(TimeStep ts) {
-    //std::cout << "FPS: " << 1.0f/TimeStep::get().GetSeconds() << std::endl;
+    /*std::cout << "FPS: " << 1.0f/TimeStep::get().GetSeconds() << std::endl;*/
+    std::cout << "BennyPos: " << benny->GetComponent<Transform>().position << std::endl;
+    std::cout << "MachoPos: " << macho->GetComponent<Transform>().position << std::endl;
 }
 
 void Engine::Event() {

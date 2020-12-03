@@ -122,7 +122,12 @@ namespace IOSystem
                 }
                 if ((glfwGetKey(window, GLFW_KEY_C) == GLFW_PRESS) && (!C_DOWN)) 
                 {
-                    if (currentPlayer == "Benny") 
+                    C_DOWN = true;
+                }
+                if ((glfwGetKey(window, GLFW_KEY_C) == GLFW_RELEASE) && (C_DOWN)) 
+                {
+                    C_DOWN = false;
+                    if (currentPlayer == "Benny")
                     {
                         SetControl("Macho");
                         Engine::get().player = characterList.at("Macho");
@@ -132,12 +137,43 @@ namespace IOSystem
                         SetControl("Benny");
                         Engine::get().player = characterList.at("Benny");
                     }
-                    C_DOWN = true;
                 }
-                if ((glfwGetKey(window, GLFW_KEY_C) == GLFW_RELEASE) && (C_DOWN)) 
+
+                // Shortcut keys
+
+                if ((glfwGetKey(window, GLFW_KEY_1) == GLFW_PRESS)) // reset character pos
                 {
-                    C_DOWN = false;
+                    SetControl("Macho");
+                    Engine::get().player = characterList.at("Macho");
+                    player->GetComponent<Transform>().SetPosition(Vector2D_float(60.0f, -285.0f));
+
+                    SetControl("Benny");
+                    Engine::get().player = characterList.at("Benny");
+                    player->GetComponent<Transform>().SetPosition(Vector2D_float(-555.0f, -200.0f)); 
                 }
+
+                if ((glfwGetKey(window, GLFW_KEY_2) == GLFW_PRESS)) // skip macho's throw
+                {
+                    SetControl("Macho");
+                    Engine::get().player = characterList.at("Macho");
+                    player->GetComponent<Transform>().SetPosition(Vector2D_float(-82.0f, -114.0f));
+
+                    SetControl("Benny");
+                    Engine::get().player = characterList.at("Benny");
+                    player->GetComponent<Transform>().SetPosition(Vector2D_float(302.0f, -114.0f));
+                }
+
+                if ((glfwGetKey(window, GLFW_KEY_3) == GLFW_PRESS)) // Benny third floor
+                {
+                    SetControl("Macho");
+                    Engine::get().player = characterList.at("Macho");
+                    player->GetComponent<Transform>().SetPosition(Vector2D_float(-77.0f, -114.0f));
+
+                    SetControl("Benny");
+                    Engine::get().player = characterList.at("Benny");
+                    player->GetComponent<Transform>().SetPosition(Vector2D_float(282.0f, 88.0f));
+                }
+
                 break;
             default:
                 break;
