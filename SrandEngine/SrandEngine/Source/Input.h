@@ -9,6 +9,8 @@
 #include "Camera.h"
 #include "Animator.h"
 #include "SpriteRenderer.h"
+//cheat
+#include "NPC.h"
 
 namespace IOSystem 
 {
@@ -150,6 +152,8 @@ namespace IOSystem
                     SetControl("Benny");
                     Engine::get().player = characterList.at("Benny");
                     player->GetComponent<Transform>().SetPosition(Vector2D_float(-555.0f, -200.0f)); 
+
+                    Engine::get().npc->GetComponent<NPC>().SetCollideFalse();
                 }
 
                 if ((glfwGetKey(window, GLFW_KEY_2) == GLFW_PRESS)) // skip macho's throw
@@ -161,6 +165,8 @@ namespace IOSystem
                     SetControl("Benny");
                     Engine::get().player = characterList.at("Benny");
                     player->GetComponent<Transform>().SetPosition(Vector2D_float(302.0f, -114.0f));
+
+                    Engine::get().npc->GetComponent<NPC>().SetCollideFalse();
                 }
 
                 if ((glfwGetKey(window, GLFW_KEY_3) == GLFW_PRESS)) // Benny third floor
@@ -172,6 +178,8 @@ namespace IOSystem
                     SetControl("Benny");
                     Engine::get().player = characterList.at("Benny");
                     player->GetComponent<Transform>().SetPosition(Vector2D_float(282.0f, 88.0f));
+
+                    Engine::get().npc->GetComponent<NPC>().SetCollideFalse();
                 }
 
                 break;

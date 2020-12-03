@@ -32,6 +32,8 @@ public:
 
 	std::vector<GameObject*> objManager;
 	GameObject* player;
+	// cheat
+	GameObject* npc;
 
 	void Init();
 	void Clean();

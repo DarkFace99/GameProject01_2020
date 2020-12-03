@@ -94,6 +94,9 @@ void Engine::Init() {
     AssetManager::get().LoadMesh("MACHO_ANIM_MESH", 20);
     AssetManager::get().LoadTexture("MACHO_ANIM_TEX", "Assets/Macho_Animation-Sheet.png");
 
+    AssetManager::get().LoadMesh("NPC_ANIM_MESH", 2);
+    AssetManager::get().LoadTexture("NPC_ANIM_TEX", "Assets/NPC_Animation_Sheet.png");
+
     // obstacle asset
     AssetManager::get().LoadTexture("LEVEL_ASSET_TEX", "Assets/Level_Assets_00.png");
 
@@ -379,6 +382,27 @@ void Engine::Init() {
     
     /* Character */
 
+    // NPC
+    {
+        gameObject = new GameObject();
+        manager->AddEntity(gameObject);
+        gameObject->GetComponent<Transform>().position = Vector2D_float(-122.0f, 130.0f);
+        gameObject->GetComponent<Transform>().scale = Vector2D_float(24.0f * RATIO, 24.0f * RATIO);
+        gameObject->AddComponent<SpriteRenderer>(SpriteRenderer::ASSET_LAYER, "NPC_ANIM_MESH", "NPC_ANIM_TEX", 1.0f, &camera, false);
+        // anim_set
+        gameObject->AddComponent<Animator>(2, 100);
+        gameObject->GetComponent<Animator>().SetState("NPC_SAD", 0, 0);
+        gameObject->GetComponent<Animator>().SetState("NPC_HAPPY", 1, 1);
+        gameObject->GetComponent<Animator>().PlayState("NPC_SAD");
+
+        gameObject->AddComponent<BoxCollider2D>(BoxCollider2D::ASSET_COLLISION, gameObject->GetComponent<Transform>().scale.x - 20, gameObject->GetComponent<Transform>().scale.y,
+            true /* overlap */, false /* movable *//*, "BENNY_ANIM_MESH", &camera*/);
+        gameObject->AddComponent<NPC>();
+
+        npc = gameObject;
+        objManager.push_back(gameObject);
+    }
+
     // Benny
     {
         gameObject = new GameObject();
@@ -468,8 +492,8 @@ void Engine::Update() {
 
 void Engine::FixedUpdate(TimeStep ts) {
     /*std::cout << "FPS: " << 1.0f/TimeStep::get().GetSeconds() << std::endl;*/
-    std::cout << "BennyPos: " << benny->GetComponent<Transform>().position << std::endl;
-    std::cout << "MachoPos: " << macho->GetComponent<Transform>().position << std::endl;
+   /* std::cout << "BennyPos: " << benny->GetComponent<Transform>().position << std::endl;*/
+    /*std::cout << "MachoPos: " << macho->GetComponent<Transform>().position << std::endl;*/
 }
 
 void Engine::Event() {
