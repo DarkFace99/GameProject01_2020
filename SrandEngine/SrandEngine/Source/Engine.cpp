@@ -8,6 +8,7 @@
 #include "Camera.h"
 #include "Collision.h"
 #include "Input.h"
+#include "NPC.h"
 #include "Button.h"
 #include "Door.h"
 #include "Elevator.h"
