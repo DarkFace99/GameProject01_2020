@@ -85,30 +85,59 @@ void Engine::Init() {
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
+    // former asset loading pattern
+    {
+        //AssetManager::get().LoadMesh("BG_MESH");
+        //AssetManager::get().LoadTexture("BG_TEX", "Assets/Background.png");
+
+        //AssetManager::get().LoadMesh("TILESET_MESH", 8, 8);
+        //AssetManager::get().LoadTexture("TILESET_TEX", "Assets/TILESET.png");
+
+        //AssetManager::get().LoadMesh("BENNY_ANIM_MESH", 21);
+        //AssetManager::get().LoadTexture("BENNY_ANIM_TEX", "Assets/Benny_Animations-Sheet.png");
+
+        //AssetManager::get().LoadMesh("MACHO_ANIM_MESH", 20);
+        //AssetManager::get().LoadTexture("MACHO_ANIM_TEX", "Assets/Macho_Animation-Sheet.png");
+
+        //AssetManager::get().LoadMesh("NPC_ANIM_MESH", 2);
+        //AssetManager::get().LoadTexture("NPC_ANIM_TEX", "Assets/NPC_Animation_Sheet.png");
+
+        //// obstacle asset
+        //AssetManager::get().LoadTexture("LEVEL_ASSET_TEX", "Assets/Level_Assets_00.png");
+
+        //AssetManager::get().LoadMesh("DOOR_STAND_MESH", 10, 13);
+        //AssetManager::get().LoadMesh("DOOR_MESH", 10, 13, 1, 4);
+        //AssetManager::get().LoadMesh("ELEVATOR_MESH", 10, 13, 2, 2);
+        //AssetManager::get().LoadMesh("ELEVATOR_STAND_MESH", 10, 13, 2, 1);
+        //AssetManager::get().LoadMesh("BUTTON_MESH", 10, 13, 2, 1);
+    }
+
+    
+
+    /* Mesh */
     AssetManager::get().LoadMesh("BG_MESH");
-    AssetManager::get().LoadTexture("BG_TEX", "Assets/Background.png");
-
     AssetManager::get().LoadMesh("TILESET_MESH", 8, 8);
-    AssetManager::get().LoadTexture("TILESET_TEX", "Assets/TILESET.png");
-
     AssetManager::get().LoadMesh("BENNY_ANIM_MESH", 21);
-    AssetManager::get().LoadTexture("BENNY_ANIM_TEX", "Assets/Benny_Animations-Sheet.png");
-
     AssetManager::get().LoadMesh("MACHO_ANIM_MESH", 20);
-    AssetManager::get().LoadTexture("MACHO_ANIM_TEX", "Assets/Macho_Animation-Sheet.png");
-
     AssetManager::get().LoadMesh("NPC_ANIM_MESH", 2);
-    AssetManager::get().LoadTexture("NPC_ANIM_TEX", "Assets/NPC_Animation_Sheet.png");
-
-    // obstacle asset
-    AssetManager::get().LoadTexture("LEVEL_ASSET_TEX", "Assets/Level_Assets_00.png");
-
     AssetManager::get().LoadMesh("DOOR_STAND_MESH", 10, 13);
     AssetManager::get().LoadMesh("DOOR_MESH", 10, 13, 1, 4);
     AssetManager::get().LoadMesh("ELEVATOR_MESH", 10, 13, 2, 2);
     AssetManager::get().LoadMesh("ELEVATOR_STAND_MESH", 10, 13, 2, 1);
     AssetManager::get().LoadMesh("BUTTON_MESH", 10, 13, 2, 1);
 
+    double init_Time = (double)glfwGetTime();
+
+    /* Texture */
+    AssetManager::get().LoadTexture("BG_TEX", "Assets/Background.png");
+    AssetManager::get().LoadTexture("TILESET_TEX", "Assets/TILESET.png");
+    AssetManager::get().LoadTexture("BENNY_ANIM_TEX", "Assets/Benny_Animations-Sheet.png");
+    AssetManager::get().LoadTexture("MACHO_ANIM_TEX", "Assets/Macho_Animation-Sheet.png");
+    AssetManager::get().LoadTexture("NPC_ANIM_TEX", "Assets/NPC_Animation_Sheet.png");
+    AssetManager::get().LoadTexture("LEVEL_ASSET_TEX", "Assets/Level_Assets_00.png");
+    
+    double time_Interval = (double)glfwGetTime() - init_Time;
+    std::cout << std::endl << "Time used: " << time_Interval << std::endl << std::endl;
 
     /* BACKGROUND */
     {

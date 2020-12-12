@@ -4,12 +4,17 @@
 #include <string>
 #include <iostream>
 
+
+
 /* Custom Header */
 #include "Mesh.h"
 #include "SOIL.h"
 
 #include "Shader.h"
 #include "Engine.h"
+
+#define HAVE_STRUCT_TIMESPEC
+#include "pthread.h"
 
 /* Typdef for Texture */
 typedef GLuint Texture;
