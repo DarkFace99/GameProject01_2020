@@ -1,6 +1,7 @@
 #pragma once
 
 /* Custom Header */
+#include "Engine.h"
 #include "GameObject.h"
 #include "Component.h"
 #include "AssetManager.h"
@@ -81,7 +82,7 @@ public:
 	void Draw() override final {
 
 		// Set the viewport of the screen. Lower Left coner will be (0,0) and the dimension will be SCREEN_WIDTH and SCREEN_HEIGTH
-		glViewport(0, 0, SCREEN_WIDTH, SCREEN_HEIGTH);
+		glViewport(0, 0, WindowProperties::get().GetWidth(), WindowProperties::get().GetHeight());
 		glUseProgram(Shader::get()->shader);
 
 		//Set the render mode between Texture and Solid Color						// glGetUniformLocation called every frame is not efficient

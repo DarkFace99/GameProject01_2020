@@ -15,7 +15,7 @@
 #include "Elevator.h"
 
 #define DEBUG 1
-#define RATIO 1280.0f / 480.0f
+#define RATIO SCREEN_WIDTH / 480.0f
 
 GameObject* gameObject;
 
@@ -33,6 +33,7 @@ IOSystem::Input ioSystem(&camera);
 std::vector<glm::vec4> tile_info;
 
 Engine* Engine::s_instance = nullptr;
+WindowProperties* WindowProperties::s_instance = nullptr;
 
 Engine::Engine() {
 	window = nullptr;
@@ -52,7 +53,7 @@ void Engine::Init() {
 
     /* Create a windowed mode window and its OpenGL context */
     std::cout << "Initializing Window..." << std::endl;
-    window = glfwCreateWindow(SCREEN_WIDTH, SCREEN_HEIGTH, WINDOW_NAME, (FULLSCREEN) ? glfwGetPrimaryMonitor() : NULL, NULL);
+    window = WindowProperties::get();
     if (!window)
     {
         glfwTerminate();
@@ -548,10 +549,13 @@ void Engine::Update() {
 }
 
 void Engine::FixedUpdate(TimeStep ts) {
-    TRACE(("Delta Time(sec): %lf sec\n", TimeStep::get().GetSeconds()));
-    TRACE(("Delta Time(millisec): %lf ms\n", TimeStep::get().GetMilliseconds()));
-   /* std::cout << "BennyPos: " << benny->GetComponent<Transform>().position << std::endl;*/
-    /*std::cout << "MachoPos: " << macho->GetComponent<Transform>().position << std::endl;*/
+    /*TRACE(("Delta Time(sec): %lf sec\n", TimeStep::get().GetSeconds()));
+    TRACE(("Delta Time(millisec): %lf ms\n", TimeStep::get().GetMilliseconds()));*/
+
+    glfwGetWindowSize(window, &width, &height);
+    WindowProperties::get().SetScreenSize(width, height);
+    TRACE(("Width: %d\n", width));
+    TRACE(("Height: %d\n", height));
 }
 
 void Engine::Event() {
