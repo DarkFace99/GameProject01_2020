@@ -46,6 +46,9 @@
     <Filter Include="System File\Source File">
       <UniqueIdentifier>{18f860e2-f709-4cd2-be49-181b275b891d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Entity">
+      <UniqueIdentifier>{24d5bd54-53ac-444c-995d-059f5805a995}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\ECS.h">
@@ -96,8 +99,35 @@
     <ClInclude Include="Source\Camera.h">
       <Filter>System File\Header File</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Animator.h">
+      <Filter>ECS\Header File</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\TimeStep.h">
+      <Filter>System File\Header File</Filter>
+    </ClInclude>
     <ClInclude Include="Source\Input.h">
       <Filter>System File\Header File</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Button.h">
+      <Filter>Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Door.h">
+      <Filter>Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Elevator.h">
+      <Filter>Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\BoxCollider2D.h">
+      <Filter>ECS\Header File</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Collision.h">
+      <Filter>System File\Header File</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\TileSelector.h">
+      <Filter>ECS\Header File</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\NPC.h">
+      <Filter>Entity</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -122,6 +152,13 @@
     <ClCompile Include="Source\TestMain.cpp" />
     <ClCompile Include="Source\TestMain.cpp" />
     <ClCompile Include="Source\Camera.cpp">
+      <Filter>System File\Source File</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\TestMain.cpp" />
+    <ClCompile Include="Source\TimeStep.cpp">
+      <Filter>System File\Source File</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Collision.cpp">
       <Filter>System File\Source File</Filter>
     </ClCompile>
   </ItemGroup>

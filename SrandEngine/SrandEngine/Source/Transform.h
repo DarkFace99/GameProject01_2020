@@ -28,6 +28,10 @@ public:
 	{
 		this->position += v;
 	}
+	void SetPosition(Vector2D_float p) 
+	{
+		this->position = p;
+	}
 
 	virtual ~Transform() = default;
 

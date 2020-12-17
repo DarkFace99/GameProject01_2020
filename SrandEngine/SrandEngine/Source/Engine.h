@@ -10,6 +10,7 @@
 #include "AssetManager.h"
 #include "Shader.h"
 #include "EntityManager.h"
+#include "TimeStep.h"
 
 /* Initialize Window */
 #define SCREEN_WIDTH    1280
@@ -23,11 +24,16 @@ private:
 	static Engine* s_instance;
 	bool running;
 
-	EntityManager* manager;
+	EntityManager* manager = nullptr;
 	
 public:
 	Engine();
 	virtual ~Engine() = default;
+
+	std::vector<GameObject*> objManager;
+	GameObject* player;
+	// cheat
+	GameObject* npc;
 
 	void Init();
 	void Clean();
@@ -35,7 +41,7 @@ public:
 
 	void Draw();
 	void Update();
-	void FixedUpdate();
+	void FixedUpdate(TimeStep ts);
 	void Event();
 
 	inline static Engine& get() {
