@@ -1,4 +1,5 @@
 #include "Engine.h"
+#include "Debug.h"
 
 /* TEST */
 #include "SpriteRenderer.h"
@@ -13,6 +14,7 @@
 #include "Door.h"
 #include "Elevator.h"
 
+#define DEBUG 1
 #define RATIO 1280.0f / 480.0f
 
 GameObject* gameObject;
@@ -38,6 +40,8 @@ Engine::Engine() {
 }
 
 void Engine::Init() {
+
+#pragma region InitializeEngine
 
     /* Initialize the library */
     std::cout << "Initializing GLFW..." << std::endl;
@@ -74,6 +78,8 @@ void Engine::Init() {
     std::cout << "--------------------------------------------------------------------------------" << std::endl;
     std::cout << "                          Version: " << glGetString(GL_VERSION) << std::endl;
     std::cout << "--------------------------------------------------------------------------------" << std::endl;
+
+#pragma endregion
 
     manager = new EntityManager();
 
@@ -112,7 +118,7 @@ void Engine::Init() {
         //AssetManager::get().LoadMesh("BUTTON_MESH", 10, 13, 2, 1);
     }
 
-    
+#pragma region meshLoading
 
     /* Mesh */
     AssetManager::get().LoadMesh("BG_MESH");
@@ -138,6 +144,10 @@ void Engine::Init() {
     
     double time_Interval = (double)glfwGetTime() - init_Time;
     std::cout << std::endl << "Time used: " << time_Interval << std::endl << std::endl;
+
+#pragma endregion
+
+#pragma region LevelAssets
 
     /* BACKGROUND */
     {
@@ -423,6 +433,10 @@ void Engine::Init() {
         gameObject->GetComponent<TileSelector>().SetTile(4, 3);
     }
     
+#pragma endregion
+
+#pragma region CharacterAssets 
+
     /* Character */
 
     // NPC
@@ -453,7 +467,7 @@ void Engine::Init() {
         gameObject->GetComponent<Transform>().position = Vector2D_float(-555.0f, -200.0f);
         gameObject->GetComponent<Transform>().scale = Vector2D_float(24.0f * RATIO, 24.0f * RATIO);
         gameObject->AddComponent<SpriteRenderer>(SpriteRenderer::CHARACTER_LAYER, "BENNY_ANIM_MESH", "BENNY_ANIM_TEX", 1.0f, &camera, false);
-        gameObject->AddComponent<RigidBody>(0.01f);
+        gameObject->AddComponent<RigidBody>(2.0f);
         // anim_set
         gameObject->AddComponent<Animator>(21, 100);
         gameObject->GetComponent<Animator>().SetState("BENNY_IDLE", 0, 6);
@@ -479,7 +493,7 @@ void Engine::Init() {
         gameObject->GetComponent<Transform>().position = Vector2D_float(60.0f, -285.0f);
         gameObject->GetComponent<Transform>().scale = Vector2D_float(24.0f * RATIO, 24.0f * RATIO);
         gameObject->AddComponent<SpriteRenderer>(SpriteRenderer::CHARACTER_LAYER, "MACHO_ANIM_MESH", "MACHO_ANIM_TEX", 1.0f, &camera, true);
-        gameObject->AddComponent<RigidBody>(0.01f);
+        gameObject->AddComponent<RigidBody>(8.0f);
 
         gameObject->AddComponent<Animator>(20, 100);
         gameObject->GetComponent<Animator>().SetState("BENNY_IDLE", 0, 4);
@@ -492,7 +506,7 @@ void Engine::Init() {
         ioSystem.AddCharacterList("Macho", macho);
     }
 
-
+#pragma endregion
 
     running = true;
 }
@@ -534,7 +548,8 @@ void Engine::Update() {
 }
 
 void Engine::FixedUpdate(TimeStep ts) {
-    /*std::cout << "FPS: " << 1.0f/TimeStep::get().GetSeconds() << std::endl;*/
+    TRACE(("Delta Time(sec): %lf sec\n", TimeStep::get().GetSeconds()));
+    TRACE(("Delta Time(millisec): %lf ms\n", TimeStep::get().GetMilliseconds()));
    /* std::cout << "BennyPos: " << benny->GetComponent<Transform>().position << std::endl;*/
     /*std::cout << "MachoPos: " << macho->GetComponent<Transform>().position << std::endl;*/
 }

@@ -102,7 +102,7 @@ namespace IOSystem
                 if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS && player->GetComponent<BoxCollider2D>().GetIsGround() && currentPlayer != "Macho")
                 {
                     //std::cout << "W" << std::endl;
-                    player->GetComponent<RigidBody>().SetVelocityY(20.0f);
+                    player->GetComponent<RigidBody>().SetVelocityY(8.0f);
                 }
                 if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
                 {

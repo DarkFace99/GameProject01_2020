@@ -14,7 +14,7 @@
 #include "Engine.h"
 
 #define HAVE_STRUCT_TIMESPEC
-#include "pthread.h"
+//#include "pthread.h"
 
 /* Typdef for Texture */
 typedef GLuint Texture;

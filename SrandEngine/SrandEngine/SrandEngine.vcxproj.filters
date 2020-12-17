@@ -129,6 +129,9 @@
     <ClInclude Include="Source\NPC.h">
       <Filter>Entity</Filter>
     </ClInclude>
+    <ClInclude Include="Debug.h">
+      <Filter>System File\Header File</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\AssetManager.cpp">

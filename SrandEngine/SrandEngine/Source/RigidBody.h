@@ -18,7 +18,7 @@ private:
 	Transform* transform = nullptr;
 
 public:
-	RigidBody() = default;
+	RigidBody() : gravityScale(1.0f) {}
 	virtual ~RigidBody() = default;
 
 	RigidBody(float gravity_scale) : gravityScale(gravity_scale) {}
@@ -32,8 +32,8 @@ public:
 	void Update() override final 
 	{
 
-		velocity.x = (force.x - drag.x) * TimeStep::get().GetMilliseconds();
-		velocity.y += (force.x + drag.y + -(gravityScale * GRAVITY)) * TimeStep::get().GetMilliseconds();
+		velocity.x = (force.x - drag.x) * TimeStep::get();
+		velocity.y += (force.x + drag.y + -(gravityScale * GRAVITY)) * TimeStep::get();
 		if (velocity.y < -20) { velocity.y = -20; } // hard code
 		transform->Translate(velocity);
 	}
