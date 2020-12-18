@@ -31,13 +31,17 @@ class WindowProperties
 {
 private:
 	static WindowProperties* s_instance;
+	GLFWwindow* window;
 
 	//Initial Properties
 	int screen_width = 1280;
 	int screen_height = 720;
 	bool isFullScreen = false;
 
-	WindowProperties() {}
+	WindowProperties() 
+	{
+		window = glfwCreateWindow(GetWidth(), GetHeight(), WINDOW_NAME, (GetIsFullScreen()) ? glfwGetPrimaryMonitor() : NULL, NULL);
+	}
 
 public:
 	inline static WindowProperties& get() 
@@ -51,7 +55,7 @@ public:
 
 	operator GLFWwindow* () const 
 	{
-		return glfwCreateWindow(GetWidth(), GetHeight(), WINDOW_NAME, (GetIsFullScreen()) ? glfwGetPrimaryMonitor() : NULL, NULL);
+		return window;
 	}
 
 	inline void SetScreenSize(int width, int height) { screen_width = width; screen_height = height; }
