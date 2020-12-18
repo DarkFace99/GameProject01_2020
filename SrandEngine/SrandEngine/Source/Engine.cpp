@@ -29,6 +29,7 @@ GameObject* macho;
 Camera camera(glm::vec3(0, 0, 0), glm::vec3(0, 0, -1), glm::vec3(0, 1, 0), 1.0f, 0.0f);
 
 IOSystem::Input ioSystem(&camera);
+UI::UserInterface user_interface;
 
 std::vector<glm::vec4> tile_info;
 
@@ -72,6 +73,9 @@ void Engine::Init() {
     {
         std::cout << "Error! Cannot initializing GLEW" << std::endl;
     }
+
+    std::cout << "Initializing UserInterface..." << std::endl;
+    user_interface.InitUserInterface();
 
     glfwSetInputMode(window, GLFW_STICKY_KEYS, GL_TRUE);
     std::cout << "--------------------------------------------------------------------------------" << std::endl;
@@ -514,6 +518,7 @@ void Engine::Init() {
 
 void Engine::Draw(){
     manager->Draw();
+    user_interface.UpdateUserInterface();
     glfwSwapBuffers(window);
 }
 
@@ -554,8 +559,8 @@ void Engine::FixedUpdate(TimeStep ts) {
 
     glfwGetWindowSize(window, &width, &height);
     WindowProperties::get().SetScreenSize(width, height);
-    TRACE(("Width: %d\n", width));
-    TRACE(("Height: %d\n", height));
+    /*TRACE(("Width: %d\n", width));
+    TRACE(("Height: %d\n", height));*/
 }
 
 void Engine::Event() {
@@ -570,6 +575,7 @@ void Engine::Clean() {
     delete manager;
 
     std::cout << "Closing window..." << std::endl << "System Shutdown" << std::endl;
+    user_interface.TerminateUserInterface();
     glfwTerminate();
 }
 

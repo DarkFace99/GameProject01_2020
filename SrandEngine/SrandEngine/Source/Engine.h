@@ -12,6 +12,15 @@
 #include "EntityManager.h"
 #include "TimeStep.h"
 
+#ifndef IMGUI
+
+/* ImGui */
+#include "imgui.h"
+#include "imgui_impl_glfw.h"
+#include "imgui_impl_opengl3.h"
+
+#endif // !IMGUI
+
 /* Initialize Window */
 #define SCREEN_WIDTH    1280
 #define SCREEN_HEIGTH   720
@@ -53,6 +62,57 @@ public:
 	inline bool GetIsFullScreen() const { return isFullScreen; }
 
 };
+
+namespace UI
+{
+	class UserInterface
+	{
+	private:
+		float m_Time = 0.0f;
+		ImGuiIO io;
+
+	public:
+		inline void InitUserInterface()
+		{
+			IMGUI_CHECKVERSION();
+
+			ImGui::CreateContext();
+			ImGui::StyleColorsDark();
+
+			io = ImGui::GetIO();
+			/*io.BackendFlags |= ImGuiBackendFlags_HasMouseCursors;
+			io.BackendFlags |= ImGuiBackendFlags_HasSetMousePos;*/
+
+			ImGui_ImplGlfw_InitForOpenGL(WindowProperties::get(), true);
+			ImGui_ImplOpenGL3_Init("#version 330 core");
+		}
+
+		inline void UpdateUserInterface()
+		{
+			// Feed IMGUI the inputs, start new frame
+			ImGui_ImplOpenGL3_NewFrame();
+			ImGui_ImplGlfw_NewFrame();
+			ImGui::NewFrame();
+
+			io = ImGui::GetIO();
+
+			static bool show = true;
+			ImGui::ShowDemoWindow(&show);
+
+			// Render IMGUI to screen
+			ImGui::Render();
+			ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+		}
+
+		inline void TerminateUserInterface() 
+		{
+			ImGui_ImplOpenGL3_Shutdown();
+			ImGui_ImplGlfw_Shutdown();
+			ImGui::DestroyContext();
+		}
+
+	};
+}
 
 class Engine {
 private:
