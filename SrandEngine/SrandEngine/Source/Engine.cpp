@@ -17,6 +17,11 @@
 #define DEBUG 1
 #define RATIO SCREEN_WIDTH / 480.0f
 
+// System-wide Initialization
+Camera camera(glm::vec3(0, 0, 0), glm::vec3(0, 0, -1), glm::vec3(0, 1, 0), 1.0f, 0.0f);
+IOSystem::Input ioSystem(&camera);
+UI::UserInterface user_interface;
+
 GameObject* gameObject;
 
 GameObject* button1;
@@ -26,17 +31,12 @@ GameObject* button3;
 GameObject* benny;
 GameObject* macho;
 
-Camera camera(glm::vec3(0, 0, 0), glm::vec3(0, 0, -1), glm::vec3(0, 1, 0), 1.0f, 0.0f);
-
-IOSystem::Input ioSystem(&camera);
-
 std::vector<glm::vec4> tile_info;
 
 Engine* Engine::s_instance = nullptr;
 WindowProperties* WindowProperties::s_instance = nullptr;
 
 Engine::Engine() {
-	window = nullptr;
 	running = false;
 }
 
@@ -51,20 +51,7 @@ void Engine::Init() {
         std::cout << "Error! Cannot initializing GLFW" << std::endl;
     }
 
-    /* Create a windowed mode window and its OpenGL context */
-    std::cout << "Initializing Window..." << std::endl;
-    window = WindowProperties::get();
-    if (!window)
-    {
-        glfwTerminate();
-        std::cout << "Error! Cannot create window" << std::endl;
-    }
-
-    /* Make the window's context current */
-    glfwMakeContextCurrent(window);
-
-    /*Vsync on = 1, off = 0*/
-    glfwSwapInterval(1);
+    WindowProperties::get();
 
     /*Initializing GLEW*/
     std::cout << "Initializing GLEW..." << std::endl;
@@ -73,7 +60,10 @@ void Engine::Init() {
         std::cout << "Error! Cannot initializing GLEW" << std::endl;
     }
 
-    glfwSetInputMode(window, GLFW_STICKY_KEYS, GL_TRUE);
+    std::cout << "Initializing UserInterface..." << std::endl;
+    user_interface.InitUserInterface();
+
+    glfwSetInputMode(WindowProperties::get(), GLFW_STICKY_KEYS, GL_TRUE);
     std::cout << "--------------------------------------------------------------------------------" << std::endl;
     std::cout << "                            |--System Initialized--|                            " << std::endl;
     std::cout << "--------------------------------------------------------------------------------" << std::endl;
@@ -514,7 +504,8 @@ void Engine::Init() {
 
 void Engine::Draw(){
     manager->Draw();
-    glfwSwapBuffers(window);
+    user_interface.UpdateUserInterface();
+    glfwSwapBuffers(WindowProperties::get());
 }
 
 void Engine::Update() {
@@ -546,22 +537,19 @@ void Engine::Update() {
         }
     }
 
+    glfwSetWindowSizeCallback(WindowProperties::get(), window_size_callback);
+
 }
 
 void Engine::FixedUpdate(TimeStep ts) {
     /*TRACE(("Delta Time(sec): %lf sec\n", TimeStep::get().GetSeconds()));
     TRACE(("Delta Time(millisec): %lf ms\n", TimeStep::get().GetMilliseconds()));*/
-
-    glfwGetWindowSize(window, &width, &height);
-    WindowProperties::get().SetScreenSize(width, height);
-    TRACE(("Width: %d\n", width));
-    TRACE(("Height: %d\n", height));
 }
 
 void Engine::Event() {
     // input
-    ioSystem.IOUpdate(window);
-    if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS) { Quit(); }
+    ioSystem.IOUpdate(WindowProperties::get());
+    if (glfwGetKey(WindowProperties::get(), GLFW_KEY_ESCAPE) == GLFW_PRESS) { Quit(); }
 }
 
 void Engine::Clean() {
@@ -570,9 +558,18 @@ void Engine::Clean() {
     delete manager;
 
     std::cout << "Closing window..." << std::endl << "System Shutdown" << std::endl;
+    user_interface.TerminateUserInterface();
     glfwTerminate();
 }
 
 void Engine::Quit() {
     running = false;
+}
+
+void window_size_callback(GLFWwindow* window, int width, int height) 
+{
+    glfwGetWindowSize(window, &width, &height);
+    WindowProperties::get().SetScreenSize(width, height);
+    /*TRACE(("Width: %d\n", width));
+    TRACE(("Height: %d\n", height));*/
 }

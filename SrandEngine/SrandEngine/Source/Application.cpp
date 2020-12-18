@@ -31,6 +31,7 @@ int main(int argc, char** argv) {
 	// Clear Singleton Instance
 	delete &AssetManager::get();
 	delete &Engine::get();
+	delete& WindowProperties::get();
 	delete Shader::get();
 	delete &TimeStep::get();
 	return 0;
