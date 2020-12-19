@@ -4,7 +4,9 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
+/* System Header */
 #include <iostream>
+#include <thread>
 
 /* Custom Header */
 #include "AssetManager.h"
@@ -90,6 +92,7 @@ namespace UI
 	private:
 		float m_Time = 0.0f;
 		ImGuiIO io;
+		bool vSync = true;
 
 	public:
 		inline void InitUserInterface()
@@ -100,8 +103,6 @@ namespace UI
 			ImGui::StyleColorsDark();
 
 			io = ImGui::GetIO();
-			/*io.BackendFlags |= ImGuiBackendFlags_HasMouseCursors;
-			io.BackendFlags |= ImGuiBackendFlags_HasSetMousePos;*/
 
 			ImGui_ImplGlfw_InitForOpenGL(WindowProperties::get(), true);
 			ImGui_ImplOpenGL3_Init("#version 330 core");
@@ -116,8 +117,13 @@ namespace UI
 
 			io = ImGui::GetIO();
 
-			static bool show = true;
-			ImGui::ShowDemoWindow(&show);
+			ImGui::Begin("Debug Console");
+
+			ImGui::Text("FPS: %.3f", ImGui::GetIO().Framerate);
+			ImGui::Checkbox("Enable Vsync", &vSync);
+			WindowProperties::get().SetVsync(vSync);
+
+			ImGui::End();
 
 			// Render IMGUI to screen
 			ImGui::Render();
