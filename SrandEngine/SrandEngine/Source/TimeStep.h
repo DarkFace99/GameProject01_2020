@@ -1,8 +1,12 @@
 #pragma once
 
+#include <GL/glew.h>
+#include <GLFW/glfw3.h>
+
 class TimeStep {
 private:
 	float m_Time;
+	float lastFrameTime = 0.0f;
 public:
 
 	static TimeStep* s_instance;
@@ -15,6 +19,13 @@ public:
 
 	TimeStep() = default;
 	TimeStep(float time): m_Time(time){}
+
+	void Update() 
+	{
+		float time = (float)glfwGetTime();
+		m_Time = time - lastFrameTime;
+		lastFrameTime = time;
+	}
 
 	operator float() const { return m_Time; }
 

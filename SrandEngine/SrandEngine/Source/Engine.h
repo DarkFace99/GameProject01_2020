@@ -146,6 +146,7 @@ private:
 	bool running;
 
 	EntityManager* manager = nullptr;
+	TimeStep* timeStep = nullptr;
 	
 public:
 	Engine();

@@ -15,6 +15,7 @@
 #include "Elevator.h"
 
 #define DEBUG 1
+#define MULTITHREAD 1
 #define RATIO SCREEN_WIDTH / 480.0f
 
 // System-wide Initialization
@@ -73,6 +74,7 @@ void Engine::Init() {
 #pragma endregion
 
     manager = new EntityManager();
+    timeStep = &TimeStep::get();
 
     /* Initialize Shader */
     Shader::get()->InitializeShader();
@@ -111,6 +113,7 @@ void Engine::Init() {
 
 #pragma region AssetsLoading
 
+    double init_Time = (double)glfwGetTime();
     /* Mesh */
     AssetManager::get().LoadMesh("BG_MESH");
     AssetManager::get().LoadMesh("TILESET_MESH", 8, 8);
@@ -123,8 +126,6 @@ void Engine::Init() {
     AssetManager::get().LoadMesh("ELEVATOR_STAND_MESH", 10, 13, 2, 1);
     AssetManager::get().LoadMesh("BUTTON_MESH", 10, 13, 2, 1);
 
-    double init_Time = (double)glfwGetTime();
-
     /* Texture */
     AssetManager::get().LoadTexture("BG_TEX", "Assets/Background.png");
     AssetManager::get().LoadTexture("TILESET_TEX", "Assets/TILESET.png");
@@ -132,7 +133,7 @@ void Engine::Init() {
     AssetManager::get().LoadTexture("MACHO_ANIM_TEX", "Assets/Macho_Animation-Sheet.png");
     AssetManager::get().LoadTexture("NPC_ANIM_TEX", "Assets/NPC_Animation_Sheet.png");
     AssetManager::get().LoadTexture("LEVEL_ASSET_TEX", "Assets/Level_Assets_00.png");
-    
+
     double time_Interval = (double)glfwGetTime() - init_Time;
     std::cout << std::endl << "Time used: " << time_Interval << std::endl << std::endl;
 
@@ -511,8 +512,22 @@ void Engine::Draw(){
 void Engine::Update() {
     glClearColor(0.3f, 0.3f, 0.5f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    manager->Update();
 
+#if MULTITHREAD
+    std::thread updateManager([&]() 
+    {
+        manager->Update(); 
+    });
+    std::thread updateTime([&]()
+    {
+        timeStep->Update();
+    });
+    updateManager.join();
+    updateTime.join();
+#else
+    manager->Update();
+    timeStep->Update();
+#endif
     // Check Collision
     for (int i = 0; i < objManager.size(); i++)
     {
