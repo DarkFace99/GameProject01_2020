@@ -109,7 +109,7 @@ void Engine::Init() {
         //AssetManager::get().LoadMesh("BUTTON_MESH", 10, 13, 2, 1);
     }
 
-#pragma region meshLoading
+#pragma region AssetsLoading
 
     /* Mesh */
     AssetManager::get().LoadMesh("BG_MESH");
