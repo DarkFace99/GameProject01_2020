@@ -90,9 +90,11 @@ namespace UI
 	class UserInterface
 	{
 	private:
-		float m_Time = 0.0f;
+		float time_sec = 0.0f;
+		float time_ms = 0.0f;
 		ImGuiIO io;
 		bool vSync = true;
+		bool show_demo_window = false;
 
 	public:
 		inline void InitUserInterface()
@@ -116,11 +118,20 @@ namespace UI
 			ImGui::NewFrame();
 
 			io = ImGui::GetIO();
+			time_sec += TimeStep::get().GetSeconds();
+			time_ms += TimeStep::get().GetMilliseconds();
+
+			if (show_demo_window) 
+			{
+				ImGui::ShowDemoWindow(&show_demo_window);
+			}
 
 			ImGui::Begin("Debug Console");
 
+			ImGui::Text("Time: %.3f sec (%.6f ms)",time_sec, time_ms);
 			ImGui::Text("FPS: %.3f", ImGui::GetIO().Framerate);
 			ImGui::Checkbox("Enable Vsync", &vSync);
+			ImGui::Checkbox("Show Demo Window", &show_demo_window);
 			WindowProperties::get().SetVsync(vSync);
 
 			ImGui::End();
