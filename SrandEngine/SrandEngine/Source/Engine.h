@@ -6,6 +6,9 @@
 
 /* System Header */
 #include <iostream>
+#include <fstream>
+#include <iomanip>
+#include <stdarg.h>
 #include <thread>
 
 /* Custom Header */
@@ -96,6 +99,9 @@ namespace UI
 		bool vSync = true;
 		bool show_demo_window = false;
 
+		float time_interval = 0.0f;
+		std::vector<float> interval_data;
+
 	public:
 		inline void InitUserInterface()
 		{
@@ -130,6 +136,7 @@ namespace UI
 
 			ImGui::Text("Time: %.3f sec (%.6f ms)",time_sec, time_ms);
 			ImGui::Text("FPS: %.3f", ImGui::GetIO().Framerate);
+			ImGui::Text("Update Interval: %.8f", time_interval);
 			ImGui::Checkbox("Enable Vsync", &vSync);
 			ImGui::Checkbox("Show Demo Window", &show_demo_window);
 			WindowProperties::get().SetVsync(vSync);
@@ -139,6 +146,12 @@ namespace UI
 			// Render IMGUI to screen
 			ImGui::Render();
 			ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+
+			if (interval_data.size() < 120) 
+			{
+				interval_data.push_back(time_interval);
+			}
+
 		}
 
 		inline void TerminateUserInterface() 
@@ -146,6 +159,25 @@ namespace UI
 			ImGui_ImplOpenGL3_Shutdown();
 			ImGui_ImplGlfw_Shutdown();
 			ImGui::DestroyContext();
+		}
+
+		inline void SetTimeInterval(float interval) 
+		{
+			time_interval = interval;
+		}
+
+		inline void WriteDataInterval(std::string fileName) 
+		{
+			std::ofstream outStream(fileName);
+
+			std::cout << std::setprecision(8) << std::fixed;
+			for (int i = 0; i < interval_data.size(); i++) 
+			{
+				outStream << i << " ," << interval_data[i] << std::endl;
+			}
+
+			outStream.close();
+
 		}
 
 	};

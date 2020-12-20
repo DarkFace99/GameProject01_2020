@@ -73,8 +73,8 @@ public:
 		texture = AssetManager::get().GetTexture(textureID);
 		mesh = AssetManager::get().GetMesh(meshID);
 
-		/*std::cout << "Sprite: texture load " << texture << std::endl;
-		std::cout << "Sprite: mesh load " << mesh << std::endl;*/
+		//std::cout << "Sprite: texture load " << *texture << std::endl;
+		//std::cout << "Sprite: mesh load " << mesh << std::endl;
 
 		return true;
 	}

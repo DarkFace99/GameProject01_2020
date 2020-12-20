@@ -15,7 +15,7 @@
 #include "Elevator.h"
 
 #define DEBUG 1
-#define MULTITHREAD 1
+#define MULTITHREAD 0
 #define RATIO SCREEN_WIDTH / 480.0f
 
 // System-wide Initialization
@@ -513,6 +513,8 @@ void Engine::Update() {
     glClearColor(0.3f, 0.3f, 0.5f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+    double init_Time = (double)glfwGetTime();
+
 #if MULTITHREAD
     std::thread updateManager([&]() 
     {
@@ -528,6 +530,11 @@ void Engine::Update() {
     manager->Update();
     timeStep->Update();
 #endif
+
+    double time_Interval = (double)glfwGetTime() - init_Time;
+    user_interface.SetTimeInterval(time_Interval);
+    //std::cout << std::endl << "Time used: " << time_Interval << std::endl << std::endl;
+
     // Check Collision
     for (int i = 0; i < objManager.size(); i++)
     {
@@ -571,6 +578,8 @@ void Engine::Clean() {
     AssetManager::get().Clean();
     Shader::get()->DeleteShader();
     delete manager;
+
+    user_interface.WriteDataInterval("MTTimeInterval.txt");
 
     std::cout << "Closing window..." << std::endl << "System Shutdown" << std::endl;
     user_interface.TerminateUserInterface();

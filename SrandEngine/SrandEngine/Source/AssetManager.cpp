@@ -61,10 +61,11 @@ void AssetManager::LoadTexture(std::string id, const char* filename) {
 	SOIL_free_image_data(pData);
 
 	/* store texture pointer to textures */
+	
 	if (aTex) {
 		if (textures.count(id) <= 0) {
 			textures[id] = aTex;
-			//std::cout << "texture: [" << filename << "] loaded!" << std::endl;
+			std::cout << "texture: [" << filename << "] loaded!" << std::endl;
 		}
 		else {
 			delete aTex;
@@ -75,6 +76,7 @@ void AssetManager::LoadTexture(std::string id, const char* filename) {
 		delete aTex;
 		std::cout << "texture: //Error// [" << filename << "] load failed!!" << std::endl; 
 	}
+	
 }
 
 /*---------------------------------*/
@@ -138,7 +140,7 @@ void AssetManager::LoadMesh(std::string id, int frameCountX, int frameCountY, in
 	if (aMesh) {
 		if (meshes.count(id) <= 0) {
 			meshes[id] = aMesh;
-			//std::cout << "mesh: [" << id << "] Created!" << std::endl;
+			std::cout << "mesh: [" << id << "] Created!" << std::endl;
 		}
 		else {
 			delete aMesh;
