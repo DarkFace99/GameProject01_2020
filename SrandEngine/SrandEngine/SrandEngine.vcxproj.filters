@@ -150,6 +150,12 @@
     <ClInclude Include="imgui\imgui_impl_opengl3.h">
       <Filter>imgui</Filter>
     </ClInclude>
+    <ClInclude Include="Source\SceneManager.h">
+      <Filter>System File\Header File</Filter>
+    </ClInclude>
+    <ClInclude Include="ecspch.h">
+      <Filter>System File\Header File</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\AssetManager.cpp">
@@ -170,7 +176,6 @@
     <ClCompile Include="Source\Shader.cpp">
       <Filter>System File\Source File</Filter>
     </ClCompile>
-    <ClCompile Include="Source\TestMain.cpp" />
     <ClCompile Include="Source\TestMain.cpp" />
     <ClCompile Include="Source\Camera.cpp">
       <Filter>System File\Source File</Filter>
@@ -202,6 +207,9 @@
     </ClCompile>
     <ClCompile Include="imgui\imgui_impl_opengl3.cpp">
       <Filter>imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\SceneManager.cpp">
+      <Filter>System File\Source File</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

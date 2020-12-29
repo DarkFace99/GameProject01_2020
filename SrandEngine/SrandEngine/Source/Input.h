@@ -191,6 +191,11 @@ namespace IOSystem
 
 
     public: 
+        Input() 
+        {
+            SetInputMode(GAME);
+            Input::camera = new Camera();
+        }
         Input(Camera* camera) 
         {
             SetInputMode(GAME);
