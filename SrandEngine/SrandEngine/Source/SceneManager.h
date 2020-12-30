@@ -13,9 +13,7 @@ namespace Srand
 	private:
 		static SceneManager* s_instance;
 		int m_currentLevel;
-
 		EntityManager* manager = nullptr;
-
 		SceneManager();
 
 	public:

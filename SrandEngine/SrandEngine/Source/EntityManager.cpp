@@ -1,6 +1,8 @@
 #include "EntityManager.h"
 #include "ECS/SpriteRenderer.h"
 
+EntityManager* EntityManager::s_instance = nullptr;
+
 void EntityManager::Draw() 
 {
 	for (int i = SpriteRenderer::LAYER_START; i < SpriteRenderer::LAYER_END; i++) { // loop through each layer
@@ -20,9 +22,9 @@ void EntityManager::Update()
 		gameObject->Update();
 	}
 }
-void EntityManager::Refresh()
+void EntityManager::Clean()
 {
-
+	// Clean when changing scene  
 }
 
 void EntityManager::AddEntity(GameObject* _gameObj)

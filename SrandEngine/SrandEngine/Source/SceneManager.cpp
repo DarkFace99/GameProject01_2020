@@ -26,7 +26,7 @@ namespace Srand
 
 	void SceneManager::Init()
 	{
-        manager = new EntityManager();
+        manager = &EntityManager::get();
 
 #pragma region LevelAssets
 

@@ -188,6 +188,8 @@ private:
 	static Engine* s_instance;
 	bool running;
 
+
+	EntityManager* manager = nullptr;
 	TimeStep* timeStep = nullptr;
 	
 public:

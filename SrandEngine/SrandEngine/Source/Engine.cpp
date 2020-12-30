@@ -56,6 +56,7 @@ void Engine::Init() {
 
 #pragma endregion
 
+    manager = &EntityManager::get();
     timeStep = &TimeStep::get();
 
     /* Initialize Shader */
