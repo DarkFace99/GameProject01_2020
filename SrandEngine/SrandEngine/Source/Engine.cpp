@@ -2,17 +2,13 @@
 #include "Debug.h"
 
 /* TEST */
-#include "SpriteRenderer.h"
-#include "TileSelector.h"
-#include "RigidBody.h"
-#include "Animator.h"
-#include "Camera.h"
-#include "Collision.h"
+#include "ecspch.h"
+
 #include "Input.h"
-#include "NPC.h"
-#include "Button.h"
-#include "Door.h"
-#include "Elevator.h"
+#include "Entity/NPC.h"
+#include "Entity/Button.h"
+#include "Entity/Door.h"
+#include "Entity/Elevator.h"
 
 #define DEBUG 1
 #define MULTITHREAD 0

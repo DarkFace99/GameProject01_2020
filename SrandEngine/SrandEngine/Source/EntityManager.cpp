@@ -1,5 +1,6 @@
 #include "EntityManager.h"
-#include "SpriteRenderer.h"
+#include "ECS/SpriteRenderer.h"
+
 void EntityManager::Draw() 
 {
 	for (int i = SpriteRenderer::LAYER_START; i < SpriteRenderer::LAYER_END; i++) { // loop through each layer

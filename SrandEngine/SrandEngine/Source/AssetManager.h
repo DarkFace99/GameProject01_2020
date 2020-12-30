@@ -4,8 +4,6 @@
 #include <string>
 #include <iostream>
 
-#include <mutex>
-
 /* Custom Header */
 #include "Mesh.h"
 #include "SOIL.h"
@@ -26,8 +24,6 @@ private:
 	static AssetManager* s_instance;
 	std::map<std::string, Texture*> textures;
 	std::map<std::string, Mesh*> meshes;
-
-	std::mutex s_mutex_lock;
 
 public:
 	AssetManager() = default;

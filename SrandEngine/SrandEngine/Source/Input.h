@@ -7,10 +7,9 @@
 /* Custom Headers */
 #include "Engine.h"
 #include "Camera.h"
-#include "Animator.h"
-#include "SpriteRenderer.h"
+#include "ecspch.h"
 //cheat
-#include "NPC.h"
+#include "Entity/NPC.h"
 
 namespace IOSystem 
 {

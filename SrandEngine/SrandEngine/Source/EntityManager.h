@@ -1,5 +1,5 @@
 #pragma once
-#include "GameObject.h"
+#include "ECS/GameObject.h"
 
 #include <vector>
 #include <memory>
