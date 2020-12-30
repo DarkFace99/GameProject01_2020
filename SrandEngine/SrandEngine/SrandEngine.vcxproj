@@ -41,6 +41,7 @@
     <ClInclude Include="imgui\imgui_impl_glfw.h" />
     <ClInclude Include="imgui\imgui_impl_opengl3.h" />
     <ClInclude Include="imgui\imgui_internal.h" />
+    <ClInclude Include="Log.h" />
     <ClInclude Include="Source\AssetManager.h" />
     <ClInclude Include="Source\EntityManager.h" />
     <ClInclude Include="Source\SceneManager.h" />
@@ -62,6 +63,7 @@
     <ClCompile Include="imgui\imgui_impl_opengl3.cpp" />
     <ClCompile Include="imgui\imgui_tables.cpp" />
     <ClCompile Include="imgui\imgui_widgets.cpp" />
+    <ClCompile Include="Log.cpp" />
     <ClCompile Include="Source\SceneManager.cpp" />
     <ClCompile Include="Source\Camera.cpp" />
     <ClCompile Include="Source\EntityManager.cpp" />
@@ -142,7 +144,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Dependency\GLW\include;$(SolutionDir)Dependency\GLEW\include;$(SolutionDir)Dependency\GLM;$(SolutionDir)SrandEngine\imgui;$(SolutionDir)SrandEngine;$(SolutionDir)Dependency\pthread\Pre-built.2\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Dependency\GLW\include;$(SolutionDir)Dependency\GLEW\include;$(SolutionDir)Dependency\GLM;$(SolutionDir)SrandEngine\imgui;$(SolutionDir)SrandEngine;$(SolutionDir)Dependency\pthread\Pre-built.2\include;$(SolutionDir)SrandEngine\spdLog\include</AdditionalIncludeDirectories>
       <UndefinePreprocessorDefinitions>DEBUG = 1</UndefinePreprocessorDefinitions>
     </ClCompile>
     <Link>
@@ -161,7 +163,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Dependency\GLW\include;$(SolutionDir)Dependency\GLEW\include;$(SolutionDir)Dependency\GLM;$(SolutionDir)SrandEngine\imgui;$(SolutionDir)SrandEngine;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Dependency\GLW\include;$(SolutionDir)Dependency\GLEW\include;$(SolutionDir)Dependency\GLM;$(SolutionDir)SrandEngine\imgui;$(SolutionDir)SrandEngine;;$(SolutionDir)SrandEngine\spdLog\include</AdditionalIncludeDirectories>
       <UndefinePreprocessorDefinitions>DEBUG = 1</UndefinePreprocessorDefinitions>
     </ClCompile>
     <Link>

@@ -33,12 +33,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Source\SpriteRenderer.h">
-      <Filter>ECS\Header File</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Vector2D.h">
-      <Filter>ECS\Header File</Filter>
-    </ClInclude>
     <ClInclude Include="imgui\imconfig.h">
       <Filter>imgui</Filter>
     </ClInclude>
@@ -138,9 +132,12 @@
     <ClInclude Include="Source\AssetManager.h">
       <Filter>SrandEngine\Manager</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Vector2D.h" />
+    <ClInclude Include="Log.h">
+      <Filter>SrandEngine</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Source\TestMain.cpp" />
     <ClCompile Include="imgui\imgui.cpp">
       <Filter>imgui</Filter>
     </ClCompile>
@@ -191,6 +188,9 @@
     </ClCompile>
     <ClCompile Include="Source\AssetManager.cpp">
       <Filter>SrandEngine\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Log.cpp">
+      <Filter>SrandEngine</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
