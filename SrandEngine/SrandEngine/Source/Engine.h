@@ -188,14 +188,12 @@ private:
 	static Engine* s_instance;
 	bool running;
 
-	EntityManager* manager = nullptr;
 	TimeStep* timeStep = nullptr;
 	
 public:
 	Engine();
 	virtual ~Engine() = default;
 
-	std::vector<GameObject*> objManager;
 	GameObject* player;
 	// cheat
 	GameObject* npc;

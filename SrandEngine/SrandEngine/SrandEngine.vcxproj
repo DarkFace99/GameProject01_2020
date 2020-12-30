@@ -20,11 +20,13 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Debug.h" />
+    <ClInclude Include="ecspch.h" />
     <ClInclude Include="imgui\imconfig.h" />
     <ClInclude Include="imgui\imgui.h" />
     <ClInclude Include="imgui\imgui_impl_glfw.h" />
     <ClInclude Include="imgui\imgui_impl_opengl3.h" />
     <ClInclude Include="imgui\imgui_internal.h" />
+    <ClInclude Include="Source\SceneManager.h" />
     <ClInclude Include="Source\Animator.h" />
     <ClInclude Include="Source\AssetManager.h" />
     <ClInclude Include="Source\BoxCollider2D.h" />
@@ -58,6 +60,7 @@
     <ClCompile Include="imgui\imgui_impl_opengl3.cpp" />
     <ClCompile Include="imgui\imgui_tables.cpp" />
     <ClCompile Include="imgui\imgui_widgets.cpp" />
+    <ClCompile Include="Source\SceneManager.cpp" />
     <ClCompile Include="Source\Camera.cpp" />
     <ClCompile Include="Source\Collision.cpp" />
     <ClCompile Include="Source\EntityManager.cpp" />
@@ -65,7 +68,6 @@
     <ClCompile Include="Source\AssetManager.cpp" />
     <ClCompile Include="Source\Engine.cpp" />
     <ClCompile Include="Source\Shader.cpp" />
-    <ClCompile Include="Source\TestMain.cpp" />
     <ClCompile Include="Source\Vertex.cpp" />
     <ClCompile Include="Source\TimeStep.cpp" />
   </ItemGroup>
