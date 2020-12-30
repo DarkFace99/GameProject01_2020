@@ -4,11 +4,17 @@
 #include <string>
 #include <iostream>
 
-/* Custom Header */
-#include "Engine.h"
-#include "Mesh.h"
-#include "SOIL.h" 
+#include <mutex>
 
+/* Custom Header */
+#include "Mesh.h"
+#include "SOIL.h"
+
+#include "Shader.h"
+#include "Engine.h"
+
+#define HAVE_STRUCT_TIMESPEC
+//#include "pthread.h"
 
 /* Typdef for Texture */
 typedef GLuint Texture;
@@ -21,6 +27,8 @@ private:
 	std::map<std::string, Texture*> textures;
 	std::map<std::string, Mesh*> meshes;
 
+	std::mutex s_mutex_lock;
+
 public:
 	AssetManager() = default;
 	~AssetManager() = default;
@@ -31,7 +39,7 @@ public:
 	void LoadTexture(std::string id, const char* filename);
 
 	Mesh* GetMesh(std::string id);
-	void LoadMesh(std::string id, int frameCount);
+	void LoadMesh(std::string id, int frameCountX = 1, int frameCountY = 1, int frameSpaceX = 1, int frameSpaceY = 1);
 
 	/* singleton */
 	inline static AssetManager& get() {

@@ -46,6 +46,12 @@
     <Filter Include="System File\Source File">
       <UniqueIdentifier>{18f860e2-f709-4cd2-be49-181b275b891d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Entity">
+      <UniqueIdentifier>{24d5bd54-53ac-444c-995d-059f5805a995}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="imgui">
+      <UniqueIdentifier>{b3d3c500-3fad-486c-9251-51996df51398}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\ECS.h">
@@ -60,16 +66,7 @@
     <ClInclude Include="Source\Transform.h">
       <Filter>ECS\Header File</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Vector2D.h">
-      <Filter>ECS\Header File</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Vertex.h">
-      <Filter>ECS\Header File</Filter>
-    </ClInclude>
     <ClInclude Include="Source\AssetManager.h">
-      <Filter>ECS\Header File</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Mesh.h">
       <Filter>ECS\Header File</Filter>
     </ClInclude>
     <ClInclude Include="Source\Engine.h">
@@ -77,6 +74,87 @@
     </ClInclude>
     <ClInclude Include="Source\SpriteRenderer.h">
       <Filter>ECS\Header File</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Shader.h">
+      <Filter>System File\Header File</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Vertex.h">
+      <Filter>System File\Header File</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Mesh.h">
+      <Filter>System File\Header File</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Vector2D.h">
+      <Filter>System File\Header File</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\SpriteRenderer.h">
+      <Filter>ECS\Header File</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Vector2D.h">
+      <Filter>ECS\Header File</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EntityManager.h">
+      <Filter>ECS\Header File</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\RigidBody.h">
+      <Filter>ECS\Header File</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Camera.h">
+      <Filter>System File\Header File</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Animator.h">
+      <Filter>ECS\Header File</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\TimeStep.h">
+      <Filter>System File\Header File</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Input.h">
+      <Filter>System File\Header File</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Button.h">
+      <Filter>Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Door.h">
+      <Filter>Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Elevator.h">
+      <Filter>Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\BoxCollider2D.h">
+      <Filter>ECS\Header File</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Collision.h">
+      <Filter>System File\Header File</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\TileSelector.h">
+      <Filter>ECS\Header File</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\NPC.h">
+      <Filter>Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="Debug.h">
+      <Filter>System File\Header File</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\imconfig.h">
+      <Filter>imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\imgui.h">
+      <Filter>imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\imgui_internal.h">
+      <Filter>imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\imgui_impl_glfw.h">
+      <Filter>imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\imgui_impl_opengl3.h">
+      <Filter>imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\SceneManager.h">
+      <Filter>System File\Header File</Filter>
+    </ClInclude>
+    <ClInclude Include="ecspch.h">
+      <Filter>System File\Header File</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -90,6 +168,47 @@
       <Filter>ECS\Source File</Filter>
     </ClCompile>
     <ClCompile Include="Source\Engine.cpp">
+      <Filter>System File\Source File</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\EntityManager.cpp">
+      <Filter>ECS\Source File</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Shader.cpp">
+      <Filter>System File\Source File</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\TestMain.cpp" />
+    <ClCompile Include="Source\Camera.cpp">
+      <Filter>System File\Source File</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\TestMain.cpp" />
+    <ClCompile Include="Source\TimeStep.cpp">
+      <Filter>System File\Source File</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Collision.cpp">
+      <Filter>System File\Source File</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\imgui.cpp">
+      <Filter>imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\imgui_draw.cpp">
+      <Filter>imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\imgui_tables.cpp">
+      <Filter>imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\imgui_widgets.cpp">
+      <Filter>imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\imgui_demo.cpp">
+      <Filter>imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\imgui_impl_glfw.cpp">
+      <Filter>imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\imgui_impl_opengl3.cpp">
+      <Filter>imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\SceneManager.cpp">
       <Filter>System File\Source File</Filter>
     </ClCompile>
   </ItemGroup>

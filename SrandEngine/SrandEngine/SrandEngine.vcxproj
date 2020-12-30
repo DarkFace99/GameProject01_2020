@@ -19,22 +19,57 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Debug.h" />
+    <ClInclude Include="ecspch.h" />
+    <ClInclude Include="imgui\imconfig.h" />
+    <ClInclude Include="imgui\imgui.h" />
+    <ClInclude Include="imgui\imgui_impl_glfw.h" />
+    <ClInclude Include="imgui\imgui_impl_opengl3.h" />
+    <ClInclude Include="imgui\imgui_internal.h" />
+    <ClInclude Include="Source\SceneManager.h" />
+    <ClInclude Include="Source\Animator.h" />
     <ClInclude Include="Source\AssetManager.h" />
+    <ClInclude Include="Source\BoxCollider2D.h" />
+    <ClInclude Include="Source\Button.h" />
+    <ClInclude Include="Source\Camera.h" />
+    <ClInclude Include="Source\Collision.h" />
     <ClInclude Include="Source\Component.h" />
+    <ClInclude Include="Source\Door.h" />
     <ClInclude Include="Source\ECS.h" />
+    <ClInclude Include="Source\Elevator.h" />
+    <ClInclude Include="Source\EntityManager.h" />
     <ClInclude Include="Source\Engine.h" />
     <ClInclude Include="Source\GameObject.h" />
+    <ClInclude Include="Source\Input.h" />
     <ClInclude Include="Source\Mesh.h" />
+    <ClInclude Include="Source\NPC.h" />
+    <ClInclude Include="Source\Shader.h" />
+    <ClInclude Include="Source\RigidBody.h" />
     <ClInclude Include="Source\SpriteRenderer.h" />
+    <ClInclude Include="Source\TimeStep.h" />
     <ClInclude Include="Source\Transform.h" />
     <ClInclude Include="Source\Vector2D.h" />
     <ClInclude Include="Source\Vertex.h" />
+    <ClInclude Include="Source\TileSelector.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="imgui\imgui.cpp" />
+    <ClCompile Include="imgui\imgui_demo.cpp" />
+    <ClCompile Include="imgui\imgui_draw.cpp" />
+    <ClCompile Include="imgui\imgui_impl_glfw.cpp" />
+    <ClCompile Include="imgui\imgui_impl_opengl3.cpp" />
+    <ClCompile Include="imgui\imgui_tables.cpp" />
+    <ClCompile Include="imgui\imgui_widgets.cpp" />
+    <ClCompile Include="Source\SceneManager.cpp" />
+    <ClCompile Include="Source\Camera.cpp" />
+    <ClCompile Include="Source\Collision.cpp" />
+    <ClCompile Include="Source\EntityManager.cpp" />
     <ClCompile Include="Source\Application.cpp" />
     <ClCompile Include="Source\AssetManager.cpp" />
     <ClCompile Include="Source\Engine.cpp" />
+    <ClCompile Include="Source\Shader.cpp" />
     <ClCompile Include="Source\Vertex.cpp" />
+    <ClCompile Include="Source\TimeStep.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
@@ -106,13 +141,15 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Dependency\GLW\include;$(SolutionDir)Dependency\GLEW\include;$(SolutionDir)Dependency\GLM;$(SolutionDir)SrandEngine</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Dependency\GLW\include;$(SolutionDir)Dependency\GLEW\include;$(SolutionDir)Dependency\GLM;$(SolutionDir)SrandEngine\imgui;$(SolutionDir)SrandEngine;$(SolutionDir)Dependency\pthread\Pre-built.2\include</AdditionalIncludeDirectories>
+      <UndefinePreprocessorDefinitions>DEBUG = 1</UndefinePreprocessorDefinitions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)Dependency\GLW\lib-vc2019;$(SolutionDir)Dependency\GLEW\lib;$(SolutionDir)Dependency\SOIL\lib;$(SolutionDir)Dependency\GLM;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)Dependency\GLW\lib-vc2019;$(SolutionDir)Dependency\GLEW\lib;$(SolutionDir)Dependency\SOIL\lib;$(SolutionDir)Dependency\GLM;$(SolutionDir)Dependency\pthread\Pre-built.2\lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>glfw3.lib;opengl32.lib;User32.lib;Gdi32.lib;Shell32.lib;glew32.lib;glew32s.lib;SOIL.lib</AdditionalDependencies>
+      <IgnoreSpecificDefaultLibraries>msvcrt.lib</IgnoreSpecificDefaultLibraries>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -123,7 +160,8 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Dependency\GLW\include;$(SolutionDir)Dependency\GLEW\include;$(SolutionDir)Dependency\GLM;$(SolutionDir)SrandEngine</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Dependency\GLW\include;$(SolutionDir)Dependency\GLEW\include;$(SolutionDir)Dependency\GLM;$(SolutionDir)SrandEngine\imgui;$(SolutionDir)SrandEngine;</AdditionalIncludeDirectories>
+      <UndefinePreprocessorDefinitions>DEBUG = 1</UndefinePreprocessorDefinitions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -132,6 +170,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)Dependency\GLW\lib-vc2019;$(SolutionDir)Dependency\GLEW\lib;$(SolutionDir)Dependency\SOIL\lib;$(SolutionDir)Dependency\GLM;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>glfw3.lib;opengl32.lib;User32.lib;Gdi32.lib;Shell32.lib;glew32.lib;glew32s.lib;SOIL.lib</AdditionalDependencies>
+      <IgnoreSpecificDefaultLibraries>msvcrt.lib</IgnoreSpecificDefaultLibraries>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
