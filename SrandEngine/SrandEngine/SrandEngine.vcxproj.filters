@@ -66,9 +66,6 @@
     <ClInclude Include="Source\Camera.h">
       <Filter>SrandEngine</Filter>
     </ClInclude>
-    <ClInclude Include="Debug.h">
-      <Filter>SrandEngine</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Input.h">
       <Filter>SrandEngine</Filter>
     </ClInclude>

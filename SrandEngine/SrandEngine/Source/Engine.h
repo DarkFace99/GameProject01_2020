@@ -32,64 +32,64 @@
 #define WINDOW_NAME		"BENNY: Everyone is Happy"
 #define FULLSCREEN		false
 
-class WindowProperties 
+namespace Srand
 {
-private:
-	static WindowProperties* s_instance;
-	GLFWwindow* window;
-
-	//Initial Properties
-	int screen_width = 1280;
-	int screen_height = 720;
-	bool enableFullScreen = false;
-	bool enableVsync = true;
-
-	WindowProperties() 
+	class WindowProperties
 	{
-		/* Create a windowed mode window and its OpenGL context */
-		std::cout << "Initializing Window..." << std::endl;
-		window = glfwCreateWindow(GetWidth(), GetHeight(), WINDOW_NAME, (GetFullScreenStatus()) ? glfwGetPrimaryMonitor() : NULL, NULL);
-		if (!window)
+	private:
+		static WindowProperties* s_instance;
+		GLFWwindow* window;
+
+		//Initial Properties
+		int screen_width = 1280;
+		int screen_height = 720;
+		bool enableFullScreen = false;
+		bool enableVsync = true;
+
+		WindowProperties()
 		{
-			glfwTerminate();
-			std::cout << "Error! Cannot create window" << std::endl;
+			/* Create a windowed mode window and its OpenGL context */
+			std::cout << "Initializing Window..." << std::endl;
+			window = glfwCreateWindow(GetWidth(), GetHeight(), WINDOW_NAME, (GetFullScreenStatus()) ? glfwGetPrimaryMonitor() : NULL, NULL);
+			if (!window)
+			{
+				glfwTerminate();
+				std::cout << "Error! Cannot create window" << std::endl;
+			}
+
+			/* Make the window's context current */
+			glfwMakeContextCurrent(window);
+
+			/*Vsync on = 1, off = 0*/
+			glfwSwapInterval(GetVsyncStatus());
 		}
 
-		/* Make the window's context current */
-		glfwMakeContextCurrent(window);
-
-		/*Vsync on = 1, off = 0*/
-		glfwSwapInterval(GetVsyncStatus());
-	}
-
-public:
-	inline static WindowProperties& get() 
-	{
-		if (s_instance == nullptr) 
+	public:
+		inline static WindowProperties& get()
 		{
-			s_instance = new WindowProperties();
+			if (s_instance == nullptr)
+			{
+				s_instance = new WindowProperties();
+			}
+			return *s_instance;
 		}
-		return *s_instance;
-	}
 
-	operator GLFWwindow* () const 
-	{
-		return window;
-	}
+		operator GLFWwindow* () const
+		{
+			return window;
+		}
 
-	inline void SetScreenSize(int width, int height) { screen_width = width; screen_height = height; }
-	inline void SetFullScreen(bool isFullScreen) { this->enableFullScreen = isFullScreen; }
-	inline void SetVsync(bool enableVsync) { this->enableVsync = enableVsync; }
+		inline void SetScreenSize(int width, int height) { screen_width = width; screen_height = height; }
+		inline void SetFullScreen(bool isFullScreen) { this->enableFullScreen = isFullScreen; }
+		inline void SetVsync(bool enableVsync) { this->enableVsync = enableVsync; }
 
-	inline int GetWidth() const { return screen_width; }
-	inline int GetHeight() const { return screen_height; }
-	inline bool GetFullScreenStatus() const { return enableFullScreen; }
-	inline bool GetVsyncStatus() const { return enableVsync; }
+		inline int GetWidth() const { return screen_width; }
+		inline int GetHeight() const { return screen_height; }
+		inline bool GetFullScreenStatus() const { return enableFullScreen; }
+		inline bool GetVsyncStatus() const { return enableVsync; }
 
-};
+	};
 
-namespace UI
-{
 	class UserInterface
 	{
 	private:
@@ -127,14 +127,14 @@ namespace UI
 			time_sec += TimeStep::get().GetSeconds();
 			time_ms += TimeStep::get().GetMilliseconds();
 
-			if (show_demo_window) 
+			if (show_demo_window)
 			{
 				ImGui::ShowDemoWindow(&show_demo_window);
 			}
 
 			ImGui::Begin("Debug Console");
 
-			ImGui::Text("Time: %.3f sec (%.6f ms)",time_sec, time_ms);
+			ImGui::Text("Time: %.3f sec (%.6f ms)", time_sec, time_ms);
 			ImGui::Text("FPS: %.3f", ImGui::GetIO().Framerate);
 			ImGui::Text("Update Interval: %.8f", time_interval);
 			ImGui::Checkbox("Enable Vsync", &vSync);
@@ -147,31 +147,31 @@ namespace UI
 			ImGui::Render();
 			ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 
-			if (interval_data.size() < 120) 
+			if (interval_data.size() < 120)
 			{
 				interval_data.push_back(time_interval);
 			}
 
 		}
 
-		inline void TerminateUserInterface() 
+		inline void TerminateUserInterface()
 		{
 			ImGui_ImplOpenGL3_Shutdown();
 			ImGui_ImplGlfw_Shutdown();
 			ImGui::DestroyContext();
 		}
 
-		inline void SetTimeInterval(float interval) 
+		inline void SetTimeInterval(float interval)
 		{
 			time_interval = interval;
 		}
 
-		inline void WriteDataInterval(std::string fileName) 
+		inline void WriteDataInterval(std::string fileName)
 		{
 			std::ofstream outStream(fileName);
 
 			std::cout << std::setprecision(8) << std::fixed;
-			for (int i = 0; i < interval_data.size(); i++) 
+			for (int i = 0; i < interval_data.size(); i++)
 			{
 				outStream << i << " ," << interval_data[i] << std::endl;
 			}
@@ -181,44 +181,45 @@ namespace UI
 		}
 
 	};
-}
-
-class Engine {
-private:
-	static Engine* s_instance;
-	bool running;
 
 
-	EntityManager* manager = nullptr;
-	TimeStep* timeStep = nullptr;
-	
-public:
-	Engine();
-	virtual ~Engine() = default;
+	class Engine {
+	private:
+		static Engine* s_instance;
+		bool running;
 
-	GameObject* player;
-	// cheat
-	GameObject* npc;
 
-	void Init();
-	void Clean();
-	void Quit();
+		EntityManager* manager = nullptr;
+		TimeStep* timeStep = nullptr;
 
-	void Draw();
-	void Update();
-	void FixedUpdate(TimeStep ts);
-	void Event();
+	public:
+		Engine();
+		virtual ~Engine() = default;
 
-	inline static Engine& get() {
-		if (s_instance == nullptr) {
-			s_instance = new Engine();
+		GameObject* player;
+		// cheat
+		GameObject* npc;
+
+		void Init();
+		void Clean();
+		void Quit();
+
+		void Draw();
+		void Update();
+		void FixedUpdate(TimeStep ts);
+		void Event();
+
+		inline static Engine& get() {
+			if (s_instance == nullptr) {
+				s_instance = new Engine();
+			}
+			return *s_instance;
 		}
-		return *s_instance;
-	}
 
-	inline bool IsRunning() {
-		return running;
-	}
-};
+		inline bool IsRunning() {
+			return running;
+		}
+	};
 
-void window_size_callback(GLFWwindow* window, int width, int height);
+	void window_size_callback(GLFWwindow* window, int width, int height);
+}

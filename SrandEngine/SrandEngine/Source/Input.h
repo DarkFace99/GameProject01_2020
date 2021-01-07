@@ -11,7 +11,7 @@
 //cheat
 #include "Entity/NPC.h"
 
-namespace IOSystem 
+namespace Srand 
 {
 	enum InputMode 
 	{

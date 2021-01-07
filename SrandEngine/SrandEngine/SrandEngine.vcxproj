@@ -19,7 +19,6 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Debug.h" />
     <ClInclude Include="ecspch.h" />
     <ClInclude Include="ECS\Animator.h" />
     <ClInclude Include="ECS\BoxCollider2D.h" />

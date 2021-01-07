@@ -1,3 +1,5 @@
 #include "TimeStep.h"
-
-TimeStep* TimeStep::s_instance = nullptr;
+namespace Srand
+{
+	TimeStep* TimeStep::s_instance = nullptr;
+}
