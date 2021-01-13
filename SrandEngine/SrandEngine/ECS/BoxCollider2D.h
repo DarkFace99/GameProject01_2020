@@ -7,6 +7,8 @@
 #include "Source/AssetManager.h"
 #include "Source/Camera.h"
 
+using namespace Srand;
+
 class BoxCollider2D : public Component{
 public:
 	enum CollisionTag {

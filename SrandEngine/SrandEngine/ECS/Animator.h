@@ -4,11 +4,16 @@
 #include <vector>
 #include <map>
 
+#include "ecspch.h"
+
 #include "GameObject.h"
 #include "Component.h"
 #include "Source/AssetManager.h"
 
-class Animator : public Component {
+using namespace Srand;
+
+class Animator : public Component 
+{
 private:
 	int totalFrames = 1;
 	float timeInterval = 1;

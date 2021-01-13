@@ -6,7 +6,7 @@ int main(int argc, char** argv) {
 	
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 
-	Engine& engine = Engine::get();
+	Srand::Engine& engine = Srand::Engine::get();
 	//TimeStep& timeStep = TimeStep::get();
 
 	engine.Init();
@@ -29,10 +29,10 @@ int main(int argc, char** argv) {
 	engine.Clean();
 
 	// Clear Singleton Instance
-	delete &AssetManager::get();
-	delete &Engine::get();
-	delete& WindowProperties::get();
-	delete Shader::get();
-	delete &TimeStep::get();
+	delete& Srand::AssetManager::get();
+	delete& Srand::Engine::get();
+	delete& Srand::WindowProperties::get();
+	delete  Srand::Shader::get();
+	delete& Srand::TimeStep::get();
 	return 0;
 }

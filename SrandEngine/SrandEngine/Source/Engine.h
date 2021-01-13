@@ -188,18 +188,12 @@ namespace Srand
 		static Engine* s_instance;
 		bool running;
 
-
-		EntityManager* manager = nullptr;
 		TimeStep* timeStep = nullptr;
 
 	public:
 		Engine();
 		virtual ~Engine() = default;
-
-		GameObject* player;
-		// cheat
-		GameObject* npc;
-
+		
 		void Init();
 		void Clean();
 		void Quit();

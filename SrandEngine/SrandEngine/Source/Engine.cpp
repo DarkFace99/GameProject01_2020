@@ -16,7 +16,6 @@
 namespace Srand
 {
     // System-wide Initialization
-    Input ioSystem(&camera);
     UserInterface user_interface;
 
     Engine* Engine::s_instance = nullptr;
@@ -58,7 +57,6 @@ namespace Srand
 
 #pragma endregion
 
-        manager = &EntityManager::get();
         timeStep = &TimeStep::get();
 
         /* Initialize Shader */
@@ -124,11 +122,14 @@ namespace Srand
 
 #pragma endregion
 
+        SceneManager::get().Init();
+
         running = true;
     }
 
-    void Engine::Draw() {
+    void Engine::Draw() {   
         user_interface.UpdateUserInterface();
+        SceneManager::get().Draw();
         glfwSwapBuffers(WindowProperties::get());
     }
 
@@ -152,6 +153,8 @@ namespace Srand
         user_interface.SetTimeInterval(time_Interval);
         //std::cout << std::endl << "Time used: " << time_Interval << std::endl << std::endl;
 
+        SceneManager::get().Update();
+
         glfwSetWindowSizeCallback(WindowProperties::get(), window_size_callback);
 
     }
@@ -163,16 +166,16 @@ namespace Srand
 
     void Engine::Event() {
         // input
-        ioSystem.IOUpdate(WindowProperties::get());
+        Input::get().IOUpdate(WindowProperties::get());
         if (glfwGetKey(WindowProperties::get(), GLFW_KEY_ESCAPE) == GLFW_PRESS) { Quit(); }
     }
 
     void Engine::Clean() {
         AssetManager::get().Clean();
         Shader::get()->DeleteShader();
-        delete manager;
 
         user_interface.WriteDataInterval("MTTimeInterval.txt");
+        SceneManager::get().Clean();
 
         std::cout << "Closing window..." << std::endl << "System Shutdown" << std::endl;
         user_interface.TerminateUserInterface();
@@ -187,7 +190,5 @@ namespace Srand
     {
         glfwGetWindowSize(window, &width, &height);
         WindowProperties::get().SetScreenSize(width, height);
-        /*TRACE(("Width: %d\n", width));
-        TRACE(("Height: %d\n", height));*/
     }
 }

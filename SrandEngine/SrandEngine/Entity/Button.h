@@ -1,8 +1,10 @@
 #pragma once
 
 #include <vector>
-#include "Source/Engine.h"
+#include "Source/SceneManager.h"
 #include "ecspch.h"
+
+using namespace Srand;
 
 class Button : public Component 
 {
@@ -34,10 +36,10 @@ public:
 
 	bool CheckCollideActivate() 
 	{
-		for (int i = 0; i < Engine::get().objManager.size(); i++) {
-			if (Engine::get().objManager[i]->GetComponent<BoxCollider2D>().GetTag() == BoxCollider2D::CHARACTER_COLLISION)
+		for (int i = 0; i < SceneManager::get().objManager.size(); i++) {
+			if (SceneManager::get().objManager[i]->GetComponent<BoxCollider2D>().GetTag() == BoxCollider2D::CHARACTER_COLLISION)
 			{
-				if (Collision::AABB(*collider, Engine::get().objManager[i]->GetComponent<BoxCollider2D>())) {
+				if (Collision::AABB(*collider, SceneManager::get().objManager[i]->GetComponent<BoxCollider2D>())) {
 					//std::cout << "Collide with button" << std::endl;
 					if (isOffsetShifted) { tileSelector->SetTile(shiftOffsetX, shiftOffsetY); }
 					return true;

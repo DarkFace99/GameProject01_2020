@@ -10,7 +10,7 @@
 // for checking glm::mat
 #include <gtx/string_cast.hpp>
 
-
+using namespace Srand;
 
 class SpriteRenderer : public Component {
 public:

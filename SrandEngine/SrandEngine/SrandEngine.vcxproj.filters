@@ -189,5 +189,8 @@
     <ClCompile Include="Log.cpp">
       <Filter>SrandEngine</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Input.cpp">
+      <Filter>SrandEngine</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
