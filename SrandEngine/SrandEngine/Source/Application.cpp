@@ -1,39 +1,38 @@
 #include <iostream>
-#include <GLFW/glfw3.h>
 
-int main(void)
-{
+#include "Engine.h"
 
-    GLFWwindow* window;
+int main(int argc, char** argv) {
+	
+	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 
-    /* Initialize the library */
-    if (!glfwInit())
-        return -1;
+	Srand::Engine& engine = Srand::Engine::get();
+	//TimeStep& timeStep = TimeStep::get();
 
-    /* Create a windowed mode window and its OpenGL context */
-    window = glfwCreateWindow(1920, 1080, "Hello World", NULL, NULL);
-    if (!window)
-    {
-        glfwTerminate();
-        return -1;
-    }
+	engine.Init();
 
-    /* Make the window's context current */
-    glfwMakeContextCurrent(window);
+	float lastFrameTime = 0;
 
-    /* Loop until the user closes the window */
-    while (!glfwWindowShouldClose(window))
-    {
-        /* Render here */
-        glClear(GL_COLOR_BUFFER_BIT);
+	while (engine.IsRunning()) {
+		/*float time = (float)glfwGetTime();
+		timeStep = time - lastFrameTime;
+		lastFrameTime = time;*/
 
-        /* Swap front and back buffers */
-        glfwSwapBuffers(window);
+		engine.Event();
+		engine.Update();
 
-        /* Poll for and process events */
-        glfwPollEvents();
-    }
+		//engine.FixedUpdate(timeStep);	// need to impliment time later
 
-    glfwTerminate();
-    return 0;
+		engine.Draw();
+	}
+
+	engine.Clean();
+
+	// Clear Singleton Instance
+	delete& Srand::AssetManager::get();
+	delete& Srand::Engine::get();
+	delete& Srand::WindowProperties::get();
+	delete  Srand::Shader::get();
+	delete& Srand::TimeStep::get();
+	return 0;
 }
