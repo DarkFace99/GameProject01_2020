@@ -4,12 +4,7 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
-/* System Header */
-#include <iostream>
-#include <fstream>
-#include <iomanip>
-#include <stdarg.h>
-#include <thread>
+#include <srpch.h>
 
 /* Custom Header */
 #include "AssetManager.h"

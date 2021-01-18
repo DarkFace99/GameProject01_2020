@@ -1,7 +1,6 @@
 #pragma once
 
-#include <iostream>
-#include <map>
+#include <srpch.h>
 #include "ecspch.h"
 
 #include "EntityManager.h"

@@ -1,8 +1,6 @@
 #pragma once
 
-/* C/C++ Headers */
-#include <iostream>
-#include <map>
+#include <srpch.h>
 
 /* Custom Headers */
 #include "ecspch.h"

@@ -52,6 +52,7 @@
     <ClInclude Include="Source\TimeStep.h" />
     <ClInclude Include="Source\Vector2D.h" />
     <ClInclude Include="Source\Vertex.h" />
+    <ClInclude Include="srpch.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ECS\Collision.cpp" />

@@ -1,8 +1,7 @@
 #pragma once
 #include "ECS/GameObject.h"
 
-#include <vector>
-#include <memory>
+#include <srpch.h>
 
 class GameObject;
 

@@ -133,6 +133,9 @@
     <ClInclude Include="Log.h">
       <Filter>SrandEngine</Filter>
     </ClInclude>
+    <ClInclude Include="srpch.h">
+      <Filter>SrandEngine</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="imgui\imgui.cpp">
