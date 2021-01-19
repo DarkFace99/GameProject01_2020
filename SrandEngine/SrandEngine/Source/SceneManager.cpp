@@ -1,6 +1,6 @@
 #include "SceneManager.h"
 
-#include "Source/Input.h"
+#include "Source/WindowsInput.h"
 
 #include "Entity/Button.h"
 #include "Entity/Door.h"
@@ -369,9 +369,6 @@ namespace Srand
             benny = player;
 
             objManager.push_back(gameObject);
-
-            Input::get().AddCharacterList("Benny", benny);
-            Input::get().SetControl("Benny");
         }
 
         // Macho
@@ -391,7 +388,6 @@ namespace Srand
 
             macho = gameObject;
             objManager.push_back(gameObject);
-            Input::get().AddCharacterList("Macho", macho);
         }
 
 #pragma endregion
