@@ -1,8 +1,8 @@
 #pragma once
 
 #include "Component.h"
-#include "Vector2D.h"
-#include "TimeStep.h"
+#include "Source/Vector2D.h"
+#include "Source/TimeStep.h"
 
 class Transform : public Component
 {

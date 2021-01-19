@@ -1,12 +1,12 @@
 #pragma once
 
 /* ECS Headers */
-#include "Source/Animator.h"
-#include "Source/BoxCollider2D.h"
-#include "Source/GameObject.h"
-#include "Source/Rigidbody.h"
-#include "Source/SpriteRenderer.h"
-#include "Source/TileSelector.h"
-#include "Source/Transform.h"
+#include "ECS/SpriteRenderer.h"
+#include "ECS/Animator.h"
+#include "ECS/BoxCollider2D.h"
+#include "ECS/GameObject.h"
+#include "ECS/Rigidbody.h"
+#include "ECS/TileSelector.h"
+#include "ECS/Transform.h"
 
-#include "Source/Collision.h"
+#include "ECS/Collision.h"

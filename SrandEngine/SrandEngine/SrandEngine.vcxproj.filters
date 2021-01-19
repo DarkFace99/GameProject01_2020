@@ -1,33 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Old Source">
-      <UniqueIdentifier>{852a6f2a-fa73-49d5-bd7e-b08a07d817e5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ECS">
-      <UniqueIdentifier>{206a4e1d-11e6-4e5d-ac9d-7320da700d25}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ECS\Header File">
-      <UniqueIdentifier>{ba9c9f99-f9bc-4d84-b2d9-af71eecc0202}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ECS\Source File">
-      <UniqueIdentifier>{a35c2bbd-29ab-4ea2-8e00-9dfc680d2ffe}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Old Source\Header File">
-      <UniqueIdentifier>{987e448f-27e1-43e5-892d-52ed73c32a25}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Old Source\Source File">
-      <UniqueIdentifier>{0ed5becd-574b-489b-b493-5adf818ae552}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Asset Manager">
-      <UniqueIdentifier>{9c3a07ee-b9a4-4ea2-90fd-dad35da0f8c7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Asset Manager\Header File">
-      <UniqueIdentifier>{a221fbf1-f1a9-47dc-914b-1ceeefea1f24}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Asset Manager\Source File">
-      <UniqueIdentifier>{33a5dafd-eb8b-430b-aaa4-87e902bde448}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Game">
       <UniqueIdentifier>{8ab40bc7-1778-4d2a-bd66-0376288f7d03}</UniqueIdentifier>
     </Filter>
@@ -37,104 +10,29 @@
     <Filter Include="Game\Source FIle">
       <UniqueIdentifier>{ca40bbc0-2e05-43b0-a5e1-ee9b95494a41}</UniqueIdentifier>
     </Filter>
-    <Filter Include="System File">
-      <UniqueIdentifier>{82be2c74-873b-45b8-a73e-ed2b1679fedf}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="System File\Header File">
-      <UniqueIdentifier>{db700d8f-ea56-4a0a-ac54-fc4a280cbab2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="System File\Source File">
-      <UniqueIdentifier>{18f860e2-f709-4cd2-be49-181b275b891d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Entity">
-      <UniqueIdentifier>{24d5bd54-53ac-444c-995d-059f5805a995}</UniqueIdentifier>
-    </Filter>
     <Filter Include="imgui">
       <UniqueIdentifier>{b3d3c500-3fad-486c-9251-51996df51398}</UniqueIdentifier>
     </Filter>
+    <Filter Include="SrandEngine">
+      <UniqueIdentifier>{82be2c74-873b-45b8-a73e-ed2b1679fedf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SrandEngine\System Initializer">
+      <UniqueIdentifier>{4724288d-d230-4ce3-a669-f6ae6f65454d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SrandEngine\Renderer">
+      <UniqueIdentifier>{e785493b-c120-454c-aa01-76651ccaad19}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SrandEngine\Entity">
+      <UniqueIdentifier>{24d5bd54-53ac-444c-995d-059f5805a995}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SrandEngine\ECS">
+      <UniqueIdentifier>{206a4e1d-11e6-4e5d-ac9d-7320da700d25}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SrandEngine\Manager">
+      <UniqueIdentifier>{3da84be1-4d4f-45d6-a771-e709ece098d5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Source\ECS.h">
-      <Filter>ECS\Header File</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\GameObject.h">
-      <Filter>ECS\Header File</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Component.h">
-      <Filter>ECS\Header File</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Transform.h">
-      <Filter>ECS\Header File</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\AssetManager.h">
-      <Filter>ECS\Header File</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Engine.h">
-      <Filter>System File\Header File</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\SpriteRenderer.h">
-      <Filter>ECS\Header File</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Shader.h">
-      <Filter>System File\Header File</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Vertex.h">
-      <Filter>System File\Header File</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Mesh.h">
-      <Filter>System File\Header File</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Vector2D.h">
-      <Filter>System File\Header File</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\SpriteRenderer.h">
-      <Filter>ECS\Header File</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Vector2D.h">
-      <Filter>ECS\Header File</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\EntityManager.h">
-      <Filter>ECS\Header File</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\RigidBody.h">
-      <Filter>ECS\Header File</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Camera.h">
-      <Filter>System File\Header File</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Animator.h">
-      <Filter>ECS\Header File</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\TimeStep.h">
-      <Filter>System File\Header File</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Input.h">
-      <Filter>System File\Header File</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Button.h">
-      <Filter>Entity</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Door.h">
-      <Filter>Entity</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Elevator.h">
-      <Filter>Entity</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\BoxCollider2D.h">
-      <Filter>ECS\Header File</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Collision.h">
-      <Filter>System File\Header File</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\TileSelector.h">
-      <Filter>ECS\Header File</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\NPC.h">
-      <Filter>Entity</Filter>
-    </ClInclude>
-    <ClInclude Include="Debug.h">
-      <Filter>System File\Header File</Filter>
-    </ClInclude>
     <ClInclude Include="imgui\imconfig.h">
       <Filter>imgui</Filter>
     </ClInclude>
@@ -150,43 +48,96 @@
     <ClInclude Include="imgui\imgui_impl_opengl3.h">
       <Filter>imgui</Filter>
     </ClInclude>
-    <ClInclude Include="Source\SceneManager.h">
-      <Filter>System File\Header File</Filter>
+    <ClInclude Include="Entity\Button.h">
+      <Filter>SrandEngine\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity\Door.h">
+      <Filter>SrandEngine\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity\Elevator.h">
+      <Filter>SrandEngine\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity\NPC.h">
+      <Filter>SrandEngine\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="ECS\Collision.h">
+      <Filter>SrandEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Camera.h">
+      <Filter>SrandEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Input.h">
+      <Filter>SrandEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Engine.h">
+      <Filter>SrandEngine\System Initializer</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Shader.h">
+      <Filter>SrandEngine\System Initializer</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Vertex.h">
+      <Filter>SrandEngine\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Vector2D.h">
+      <Filter>SrandEngine\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Mesh.h">
+      <Filter>SrandEngine\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\TimeStep.h">
+      <Filter>SrandEngine\System Initializer</Filter>
+    </ClInclude>
+    <ClInclude Include="ECS\Animator.h">
+      <Filter>SrandEngine\ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="ECS\BoxCollider2D.h">
+      <Filter>SrandEngine\ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="ECS\Component.h">
+      <Filter>SrandEngine\ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="ECS\ECS.h">
+      <Filter>SrandEngine\ECS</Filter>
     </ClInclude>
     <ClInclude Include="ecspch.h">
-      <Filter>System File\Header File</Filter>
+      <Filter>SrandEngine\ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="ECS\GameObject.h">
+      <Filter>SrandEngine\ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="ECS\RigidBody.h">
+      <Filter>SrandEngine\ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="ECS\Sprite.h">
+      <Filter>SrandEngine\ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="ECS\SpriteRenderer.h">
+      <Filter>SrandEngine\ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="ECS\TileSelector.h">
+      <Filter>SrandEngine\ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="ECS\Transform.h">
+      <Filter>SrandEngine\ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\SceneManager.h">
+      <Filter>SrandEngine\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EntityManager.h">
+      <Filter>SrandEngine\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\AssetManager.h">
+      <Filter>SrandEngine\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Vector2D.h" />
+    <ClInclude Include="Log.h">
+      <Filter>SrandEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="srpch.h">
+      <Filter>SrandEngine</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Source\AssetManager.cpp">
-      <Filter>ECS\Source File</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Vertex.cpp">
-      <Filter>ECS\Source File</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Application.cpp">
-      <Filter>ECS\Source File</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Engine.cpp">
-      <Filter>System File\Source File</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\EntityManager.cpp">
-      <Filter>ECS\Source File</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Shader.cpp">
-      <Filter>System File\Source File</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\TestMain.cpp" />
-    <ClCompile Include="Source\Camera.cpp">
-      <Filter>System File\Source File</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\TestMain.cpp" />
-    <ClCompile Include="Source\TimeStep.cpp">
-      <Filter>System File\Source File</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Collision.cpp">
-      <Filter>System File\Source File</Filter>
-    </ClCompile>
     <ClCompile Include="imgui\imgui.cpp">
       <Filter>imgui</Filter>
     </ClCompile>
@@ -208,8 +159,41 @@
     <ClCompile Include="imgui\imgui_impl_opengl3.cpp">
       <Filter>imgui</Filter>
     </ClCompile>
+    <ClCompile Include="ECS\Collision.cpp">
+      <Filter>SrandEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Camera.cpp">
+      <Filter>SrandEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Engine.cpp">
+      <Filter>SrandEngine\System Initializer</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Shader.cpp">
+      <Filter>SrandEngine\System Initializer</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Vertex.cpp">
+      <Filter>SrandEngine\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\TimeStep.cpp">
+      <Filter>SrandEngine\System Initializer</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Application.cpp">
+      <Filter>SrandEngine</Filter>
+    </ClCompile>
     <ClCompile Include="Source\SceneManager.cpp">
-      <Filter>System File\Source File</Filter>
+      <Filter>SrandEngine\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\EntityManager.cpp">
+      <Filter>SrandEngine\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\AssetManager.cpp">
+      <Filter>SrandEngine\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Log.cpp">
+      <Filter>SrandEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Input.cpp">
+      <Filter>SrandEngine</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

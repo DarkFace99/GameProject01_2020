@@ -1,5 +1,12 @@
 #include "SceneManager.h"
 
+#include "Source/Input.h"
+
+#include "Entity/Button.h"
+#include "Entity/Door.h"
+#include "Entity/Elevator.h"
+#include "Entity/NPC.h"
+
 #define RATIO SCREEN_WIDTH / 480.0f
 
 namespace Srand 
@@ -26,7 +33,7 @@ namespace Srand
 
 	void SceneManager::Init()
 	{
-        manager = new EntityManager();
+        manager = &EntityManager::get();
 
 #pragma region LevelAssets
 
@@ -363,8 +370,8 @@ namespace Srand
 
             objManager.push_back(gameObject);
 
-            ioSystem.AddCharacterList("Benny", benny);
-            ioSystem.SetControl("Benny");
+            Input::get().AddCharacterList("Benny", benny);
+            Input::get().SetControl("Benny");
         }
 
         // Macho
@@ -384,7 +391,7 @@ namespace Srand
 
             macho = gameObject;
             objManager.push_back(gameObject);
-            ioSystem.AddCharacterList("Macho", macho);
+            Input::get().AddCharacterList("Macho", macho);
         }
 
 #pragma endregion

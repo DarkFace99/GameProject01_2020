@@ -1,8 +1,7 @@
 #pragma once
 
-#include <iostream>
-#include <map>
-#include <ecspch.h>
+#include <srpch.h>
+#include "ecspch.h"
 
 #include "EntityManager.h"
 
@@ -13,13 +12,14 @@ namespace Srand
 	private:
 		static SceneManager* s_instance;
 		int m_currentLevel;
-
 		EntityManager* manager = nullptr;
 
 		SceneManager();
 
 	public:
 		std::vector<GameObject*> objManager;
+		GameObject* npc;
+		GameObject* player;
 
 		virtual ~SceneManager() = default;
 		static SceneManager& get() 
