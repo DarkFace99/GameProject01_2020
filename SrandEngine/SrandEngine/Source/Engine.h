@@ -12,6 +12,9 @@
 #include "EntityManager.h"
 #include "TimeStep.h"
 
+#include "Source/KeyCode.h"
+#include "Source/MouseButtonCode.h"
+
 #ifndef IMGUI
 
 /* ImGui */

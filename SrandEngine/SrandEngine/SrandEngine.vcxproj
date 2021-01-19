@@ -43,15 +43,18 @@
     <ClInclude Include="Log.h" />
     <ClInclude Include="Source\AssetManager.h" />
     <ClInclude Include="Source\EntityManager.h" />
+    <ClInclude Include="Source\Input.h" />
+    <ClInclude Include="Source\KeyCode.h" />
+    <ClInclude Include="Source\MouseButtonCode.h" />
     <ClInclude Include="Source\SceneManager.h" />
     <ClInclude Include="Source\Camera.h" />
     <ClInclude Include="Source\Engine.h" />
-    <ClInclude Include="Source\Input.h" />
     <ClInclude Include="Source\Mesh.h" />
     <ClInclude Include="Source\Shader.h" />
     <ClInclude Include="Source\TimeStep.h" />
     <ClInclude Include="Source\Vector2D.h" />
     <ClInclude Include="Source\Vertex.h" />
+    <ClInclude Include="Source\WindowsInput.h" />
     <ClInclude Include="srpch.h" />
   </ItemGroup>
   <ItemGroup>
@@ -64,7 +67,6 @@
     <ClCompile Include="imgui\imgui_tables.cpp" />
     <ClCompile Include="imgui\imgui_widgets.cpp" />
     <ClCompile Include="Log.cpp" />
-    <ClCompile Include="Source\Input.cpp" />
     <ClCompile Include="Source\SceneManager.cpp" />
     <ClCompile Include="Source\Camera.cpp" />
     <ClCompile Include="Source\EntityManager.cpp" />
@@ -74,6 +76,7 @@
     <ClCompile Include="Source\Shader.cpp" />
     <ClCompile Include="Source\Vertex.cpp" />
     <ClCompile Include="Source\TimeStep.cpp" />
+    <ClCompile Include="Source\WindowsInput.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

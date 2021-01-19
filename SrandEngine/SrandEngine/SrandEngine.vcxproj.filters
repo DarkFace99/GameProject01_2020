@@ -31,6 +31,9 @@
     <Filter Include="SrandEngine\Manager">
       <UniqueIdentifier>{3da84be1-4d4f-45d6-a771-e709ece098d5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="SrandEngine\Input System">
+      <UniqueIdentifier>{8f30e34c-d750-478a-abd6-8a4e29ba6aae}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="imgui\imconfig.h">
@@ -64,9 +67,6 @@
       <Filter>SrandEngine</Filter>
     </ClInclude>
     <ClInclude Include="Source\Camera.h">
-      <Filter>SrandEngine</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Input.h">
       <Filter>SrandEngine</Filter>
     </ClInclude>
     <ClInclude Include="Source\Engine.h">
@@ -136,6 +136,18 @@
     <ClInclude Include="srpch.h">
       <Filter>SrandEngine</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Input.h">
+      <Filter>SrandEngine\Input System</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\KeyCode.h">
+      <Filter>SrandEngine\Input System</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\MouseButtonCode.h">
+      <Filter>SrandEngine\Input System</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\WindowsInput.h">
+      <Filter>SrandEngine\Input System</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="imgui\imgui.cpp">
@@ -192,8 +204,8 @@
     <ClCompile Include="Log.cpp">
       <Filter>SrandEngine</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Input.cpp">
-      <Filter>SrandEngine</Filter>
+    <ClCompile Include="Source\WindowsInput.cpp">
+      <Filter>SrandEngine\Input System</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

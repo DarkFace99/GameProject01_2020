@@ -39,5 +39,6 @@ namespace Srand
 
 		void SceneCheck();
 
+		//Function to load Scene
 	};
 }

@@ -3,7 +3,7 @@
 /* TEST */
 #include "ecspch.h"
 
-#include "Input.h"
+#include "Source/WindowsInput.h"
 #include "Entity/NPC.h"
 #include "Entity/Button.h"
 #include "Entity/Door.h"
@@ -17,6 +17,7 @@ namespace Srand
 {
     // System-wide Initialization
     UserInterface user_interface;
+    WindowsInput windowsInput;
 
     Engine* Engine::s_instance = nullptr;
     WindowProperties* WindowProperties::s_instance = nullptr;
@@ -151,23 +152,21 @@ namespace Srand
 
         double time_Interval = (double)glfwGetTime() - init_Time;
         user_interface.SetTimeInterval(time_Interval);
-        //std::cout << std::endl << "Time used: " << time_Interval << std::endl << std::endl;
 
         SceneManager::get().Update();
 
         glfwSetWindowSizeCallback(WindowProperties::get(), window_size_callback);
-
     }
 
-    void Engine::FixedUpdate(TimeStep ts) {
-        /*TRACE(("Delta Time(sec): %lf sec\n", TimeStep::get().GetSeconds()));
-        TRACE(("Delta Time(millisec): %lf ms\n", TimeStep::get().GetMilliseconds()));*/
+    void Engine::FixedUpdate(TimeStep ts) 
+    {
+
     }
 
     void Engine::Event() {
         // input
-        Input::get().IOUpdate(WindowProperties::get());
-        if (glfwGetKey(WindowProperties::get(), GLFW_KEY_ESCAPE) == GLFW_PRESS) { Quit(); }
+        glfwPollEvents();
+        if (windowsInput.IsKeyPressed(SR_KEY_ESCAPE)) { Quit(); }
     }
 
     void Engine::Clean() {
