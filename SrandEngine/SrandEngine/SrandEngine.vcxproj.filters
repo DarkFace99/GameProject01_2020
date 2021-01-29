@@ -34,6 +34,9 @@
     <Filter Include="SrandEngine\Input System">
       <UniqueIdentifier>{8f30e34c-d750-478a-abd6-8a4e29ba6aae}</UniqueIdentifier>
     </Filter>
+    <Filter Include="SrandEngine\Event">
+      <UniqueIdentifier>{9182670c-d61c-4fa5-b1ce-44014bdd9384}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="imgui\imconfig.h">
@@ -147,6 +150,18 @@
     </ClInclude>
     <ClInclude Include="Source\WindowsInput.h">
       <Filter>SrandEngine\Input System</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Event.h">
+      <Filter>SrandEngine\Event</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\MouseEvent.h">
+      <Filter>SrandEngine\Event</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\KeyEvent.h">
+      <Filter>SrandEngine\Event</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ApplicationEvent.h">
+      <Filter>SrandEngine\Event</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -18,7 +18,7 @@ int main(int argc, char** argv) {
 		timeStep = time - lastFrameTime;
 		lastFrameTime = time;*/
 
-		engine.Event();
+		engine.OnEvent();
 		engine.Update();
 
 		//engine.FixedUpdate(timeStep);	// need to impliment time later

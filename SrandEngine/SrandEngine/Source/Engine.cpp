@@ -3,6 +3,9 @@
 /* TEST */
 #include "ecspch.h"
 
+#include "Source/MouseEvent.h"
+#include "Source/KeyEvent.h"
+
 #include "Source/WindowsInput.h"
 #include "Entity/NPC.h"
 #include "Entity/Button.h"
@@ -15,6 +18,8 @@
 
 namespace Srand
 {
+#define BIND_EVENT_FUNCTION(x) std::bind(&Engine::x, this, std::placeholders::_1)
+
     // System-wide Initialization
     UserInterface user_interface;
     WindowsInput windowsInput;
@@ -55,6 +60,90 @@ namespace Srand
         std::cout << "--------------------------------------------------------------------------------" << std::endl;
         std::cout << "                          Version: " << glGetString(GL_VERSION) << std::endl;
         std::cout << "--------------------------------------------------------------------------------" << std::endl;
+
+        glfwSetWindowSizeCallback(WindowProperties::get(), [](GLFWwindow* window, int width, int height)
+        {
+            WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
+            data.Width = width;
+            data.Height = height;
+
+            WindowResizeEvent event(width, height);
+            data.EventCallback(event);
+        });
+        glfwSetWindowCloseCallback(WindowProperties::get(), [](GLFWwindow* window)
+        {
+            WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
+
+            WindowCloseEvent event;
+            data.EventCallback(event);
+        });
+        glfwSetKeyCallback(WindowProperties::get(), [](GLFWwindow* window, int key, int scancode, int action, int mods)
+        {
+            WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
+
+            switch (action)
+            {
+            case GLFW_PRESS:
+            {
+                KeyPressedEvent event(key, 0);
+                data.EventCallback(event);
+                break;
+            }
+            case GLFW_RELEASE:
+            {
+                KeyReleasedEvent event(key);
+                data.EventCallback(event);
+                break;
+            }
+            case GLFW_REPEAT:
+            {
+                KeyPressedEvent event(key, 1);
+                data.EventCallback(event);
+                break;
+            }
+            }
+        });
+        glfwSetCharCallback(WindowProperties::get(), [](GLFWwindow* window, unsigned int keycode)
+        {
+            WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
+
+            KeyTypedEvent event(keycode);
+            data.EventCallback(event);
+        });
+        glfwSetMouseButtonCallback(WindowProperties::get(), [](GLFWwindow* window, int button, int action, int mods)
+        {
+            WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
+
+            switch (action)
+            {
+            case GLFW_PRESS:
+            {
+                MouseButtonPressedEvent event(button);
+                data.EventCallback(event);
+                break;
+            }
+            case GLFW_RELEASE:
+            {
+                MouseButtonReleasedEvent event(button);
+                data.EventCallback(event);
+                break;
+            }
+            }
+        });
+        glfwSetScrollCallback(WindowProperties::get(), [](GLFWwindow* window, double offsetX, double offsetY)
+        {
+            WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
+
+            MouseScrolledEvent event((float)offsetX, (float)offsetY);
+            data.EventCallback(event);
+        });
+        glfwSetCursorPosCallback(WindowProperties::get(), [](GLFWwindow* window, double xPos, double yPos)
+        {
+            WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
+
+            MouseMovedEvent event((float)xPos, (float)yPos);
+            data.EventCallback(event);
+        });
 
 #pragma endregion
 
@@ -138,6 +227,8 @@ namespace Srand
         glClearColor(0.3f, 0.3f, 0.5f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+        glfwPollEvents();
+
         double init_Time = (double)glfwGetTime();
 
 #if MULTITHREAD
@@ -163,10 +254,11 @@ namespace Srand
 
     }
 
-    void Engine::Event() {
-        // input
-        glfwPollEvents();
-        if (windowsInput.IsKeyPressed(SR_KEY_ESCAPE)) { Quit(); }
+    void Engine::OnEvent(Event& e) {
+        EventDispatcher dispatcher(e);
+        dispatcher.Dispatch<WindowCloseEvent>(BIND_EVENT_FUNCTION(Quit));
+        
+        //if (windowsInput.IsKeyPressed(SR_KEY_ESCAPE)) { Quit(); }
     }
 
     void Engine::Clean() {
@@ -184,6 +276,12 @@ namespace Srand
     void Engine::Quit() {
         running = false;
     }
+
+    /*bool Engine::OnWindowClose(WindowCloseEvent& e) 
+    {
+        running = false;
+        return true;
+    }*/
 
     void window_size_callback(GLFWwindow* window, int width, int height)
     {

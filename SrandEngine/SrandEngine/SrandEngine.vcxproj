@@ -41,11 +41,15 @@
     <ClInclude Include="imgui\imgui_impl_opengl3.h" />
     <ClInclude Include="imgui\imgui_internal.h" />
     <ClInclude Include="Log.h" />
+    <ClInclude Include="Source\ApplicationEvent.h" />
     <ClInclude Include="Source\AssetManager.h" />
     <ClInclude Include="Source\EntityManager.h" />
+    <ClInclude Include="Source\Event.h" />
     <ClInclude Include="Source\Input.h" />
     <ClInclude Include="Source\KeyCode.h" />
+    <ClInclude Include="Source\KeyEvent.h" />
     <ClInclude Include="Source\MouseButtonCode.h" />
+    <ClInclude Include="Source\MouseEvent.h" />
     <ClInclude Include="Source\SceneManager.h" />
     <ClInclude Include="Source\Camera.h" />
     <ClInclude Include="Source\Engine.h" />

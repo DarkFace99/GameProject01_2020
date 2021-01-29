@@ -12,6 +12,9 @@
 #include "EntityManager.h"
 #include "TimeStep.h"
 
+#include "Source/Event.h"
+#include "Source/ApplicationEvent.h"
+
 #include "Source/KeyCode.h"
 #include "Source/MouseButtonCode.h"
 
@@ -182,11 +185,23 @@ namespace Srand
 
 
 	class Engine {
+	public:
+		using EventCallbackFn = std::function<void(Event&)>;
 	private:
+		struct WindowData
+		{
+			std::string Title;
+			unsigned int Width, Height;
+			bool vSync;
+
+			EventCallbackFn EventCallback;
+		};
 		static Engine* s_instance;
 		bool running;
 
 		TimeStep* timeStep = nullptr;
+
+		/*bool OnWindowClose(WindowCloseEvent& e);*/
 
 	public:
 		Engine();
@@ -199,7 +214,7 @@ namespace Srand
 		void Draw();
 		void Update();
 		void FixedUpdate(TimeStep ts);
-		void Event();
+		void OnEvent(Event& e);
 
 		inline static Engine& get() {
 			if (s_instance == nullptr) {
