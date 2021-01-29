@@ -31,7 +31,9 @@
     <ClInclude Include="ECS\SpriteRenderer.h" />
     <ClInclude Include="ECS\TileSelector.h" />
     <ClInclude Include="ECS\Transform.h" />
+    <ClInclude Include="Entity\Benny.h" />
     <ClInclude Include="Entity\Button.h" />
+    <ClInclude Include="Entity\CC.h" />
     <ClInclude Include="Entity\Door.h" />
     <ClInclude Include="Entity\Elevator.h" />
     <ClInclude Include="Entity\NPC.h" />

@@ -148,6 +148,8 @@
     <ClInclude Include="Source\WindowsInput.h">
       <Filter>SrandEngine\Input System</Filter>
     </ClInclude>
+    <ClInclude Include="Entity\CC.h" />
+    <ClInclude Include="Entity\Benny.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="imgui\imgui.cpp">
