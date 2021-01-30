@@ -4,6 +4,7 @@
 #include "ecspch.h"
 
 #include "EntityManager.h"
+#include "Source/Scene.h"
 
 namespace Srand 
 {
@@ -13,6 +14,8 @@ namespace Srand
 		static SceneManager* s_instance;
 		int m_currentLevel;
 		EntityManager* manager = nullptr;
+
+		std::vector<Scene*> sceneVector;
 
 		SceneManager();
 
@@ -37,8 +40,8 @@ namespace Srand
 		void Draw();
 		void Update();
 
-		void SceneCheck();
-
 		//Function to load Scene
+		void SceneCheck();
+		
 	};
 }
