@@ -1,5 +1,4 @@
 #include "testing_scene.h"
-#include "ecspch.h"
 
 #include "Source/Camera.h"
 
@@ -7,6 +6,10 @@
 #include "Entity/Door.h"
 #include "Entity/Elevator.h"
 #include "Entity/NPC.h"
+
+Camera camera(glm::vec3(0, 0, 0), glm::vec3(0, 0, -1), glm::vec3(0, 1, 0), 1.0f, 0.0f);
+ObjManager& objManager = ObjManager::get();
+GameObject* gameObject;
 
 TestingScene::TestingScene()
 	: Scene("TestingScene")
@@ -18,9 +21,17 @@ TestingScene::~TestingScene()
 
 void TestingScene::Init()
 {
-    GameObject* gameObject;
-    Camera camera(glm::vec3(0, 0, 0), glm::vec3(0, 0, -1), glm::vec3(0, 1, 0), 1.0f, 0.0f);
     manager = &EntityManager::get();
+
+    GameObject* npc;
+    GameObject* player;
+
+    GameObject* button1;
+    GameObject* button2;
+    GameObject* button3;
+
+    GameObject* benny;
+    GameObject* macho;
 
     std::vector<glm::vec4> tile_info;
 
@@ -111,7 +122,7 @@ void TestingScene::Init()
         gameObject->GetComponent<TileSelector>().SetTile(tile_info[i].z, tile_info[i].w);
         gameObject->AddComponent<BoxCollider2D>(BoxCollider2D::TILE_COLLISION, gameObject->GetComponent<Transform>().scale.x, gameObject->GetComponent<Transform>().scale.y);
 
-        objManager.push_back(gameObject);
+        objManager.PushObject(gameObject);
     }
 
     /* Level Asset */
@@ -135,7 +146,7 @@ void TestingScene::Init()
         gameObject->AddComponent<Button>(1, 1);
 
         button1 = gameObject;
-        objManager.push_back(gameObject);
+        objManager.PushObject(gameObject);
 
         // 2
         gameObject = new GameObject();
@@ -154,7 +165,7 @@ void TestingScene::Init()
         gameObject->AddComponent<Button>(4, 1);
 
         button2 = gameObject;
-        objManager.push_back(gameObject);
+        objManager.PushObject(gameObject);
 
         // 3
         gameObject = new GameObject();
@@ -173,7 +184,7 @@ void TestingScene::Init()
         gameObject->AddComponent<Button>(4, 1);
 
         button3 = gameObject;
-        objManager.push_back(gameObject);
+        objManager.PushObject(gameObject);
     }
 
     // DOOR_STAND
@@ -220,7 +231,7 @@ void TestingScene::Init()
         gameObject->AddComponent<Door>();
         gameObject->GetComponent<Door>().AddConnectedButtons(button1);
 
-        objManager.push_back(gameObject);
+        objManager.PushObject(gameObject);
 
         // 2
         gameObject = new GameObject();
@@ -240,7 +251,7 @@ void TestingScene::Init()
         gameObject->GetComponent<Door>().AddConnectedButtons(button2);
         gameObject->GetComponent<Door>().AddConnectedButtons(button3);
 
-        objManager.push_back(gameObject);
+        objManager.PushObject(gameObject);
     }
 
     // ELEVATOR
@@ -262,7 +273,7 @@ void TestingScene::Init()
         gameObject->AddComponent<Elevator>(4 * 16 * RATIO);
         gameObject->GetComponent<Elevator>().AddConnectedButtons(button1);
 
-        objManager.push_back(gameObject);
+        objManager.PushObject(gameObject);
 
         // 2
         gameObject = new GameObject();
@@ -282,7 +293,7 @@ void TestingScene::Init()
         gameObject->GetComponent<Elevator>().AddConnectedButtons(button2);
         gameObject->GetComponent<Elevator>().AddConnectedButtons(button3);
 
-        objManager.push_back(gameObject);
+        objManager.PushObject(gameObject);
     }
 
     // ELEVATOR_STAND
@@ -334,7 +345,7 @@ void TestingScene::Init()
         gameObject->AddComponent<NPC>();
 
         npc = gameObject;
-        objManager.push_back(gameObject);
+        objManager.PushObject(gameObject);
     }
 
     // Benny
@@ -357,7 +368,7 @@ void TestingScene::Init()
         player = gameObject; // check collision
         benny = player;
 
-        objManager.push_back(gameObject);
+        objManager.PushObject(gameObject);
     }
 
     // Macho
@@ -376,10 +387,11 @@ void TestingScene::Init()
             false /* overlap */, true /* movable *//*, "BENNY_ANIM_MESH", &camera*/);
 
         macho = gameObject;
-        objManager.push_back(gameObject);
+        objManager.PushObject(gameObject);
     }
 
 #pragma endregion
+
 }
 void TestingScene::Clean()
 {
@@ -387,9 +399,33 @@ void TestingScene::Clean()
 }
 void TestingScene::Draw()
 {
-
+    manager->Draw();
 }
 void TestingScene::Update()
 {
+    manager->Update();
 
+    // Check Collision
+    for (int i = 0; i < objManager.VectorSize() - 1; i++)
+    {
+        if (objManager[i]->GetComponent<BoxCollider2D>().GetTag() != BoxCollider2D::TILE_COLLISION) {
+            bool isGroundCheck = false;
+            for (int j = 0; j < objManager.VectorSize(); j++)
+            {
+                if (i == j) { break; } // Always Collide with itself
+
+                if (Collision::AABB(objManager[i]->GetComponent<BoxCollider2D>(), objManager[j]->GetComponent<BoxCollider2D>())
+                    && objManager[i]->GetComponent<BoxCollider2D>().GetTag() == BoxCollider2D::CHARACTER_COLLISION)
+                {
+                    if (Collision::IsOnGround(*objManager[i], *objManager[j])) {
+                        isGroundCheck = true;
+
+                        objManager[i]->GetComponent<BoxCollider2D>().SetIsGround(true);
+                        objManager[i]->GetComponent<RigidBody>().SetVelocityY(0.0f);
+                    }
+                }
+            }
+            if (isGroundCheck == false) { objManager[i]->GetComponent<BoxCollider2D>().SetIsGround(false); }
+        }
+    }
 }

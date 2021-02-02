@@ -154,6 +154,9 @@
     <ClInclude Include="Game\Scenes\testing_scene.h">
       <Filter>Game\GameScene</Filter>
     </ClInclude>
+    <ClInclude Include="Source\ObjectManager.h">
+      <Filter>SrandEngine</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="imgui\imgui.cpp">
@@ -218,6 +221,9 @@
     </ClCompile>
     <ClCompile Include="Source\Scene.cpp">
       <Filter>SrandEngine\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ObjectManager.cpp">
+      <Filter>SrandEngine</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
