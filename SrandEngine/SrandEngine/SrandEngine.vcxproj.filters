@@ -150,6 +150,10 @@
     </ClInclude>
     <ClInclude Include="Entity\CC.h" />
     <ClInclude Include="Entity\Benny.h" />
+    <ClInclude Include="Entity\Barter.h" />
+    <ClInclude Include="Entity\Pear.h" />
+    <ClInclude Include="Entity\Cherry.h" />
+    <ClInclude Include="Entity\Macho.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="imgui\imgui.cpp">

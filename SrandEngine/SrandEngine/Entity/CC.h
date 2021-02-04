@@ -11,7 +11,7 @@ public:						// Not sure if this the best way to implement it.
 		BENNY,
 		MACHO,
 		CHERRY,
-		PAIR,
+		PEAR,
 		BARTER
 	};
 
@@ -23,12 +23,11 @@ public:						// Not sure if this the best way to implement it.
 	ccTag GetTag() { return tag; }	// to check CC type.
 
 	void SetTransform() { transform = &gameObject->GetComponent<Transform>(); }
-	Transform GetTransform(){ return *transform; }
+	Transform* GetTransform(){ return transform; }
 
 private:
 	Transform* transform = nullptr;
 	ccTag tag = ccTag::DEFAULT;
 
-	bool inControl = false;
-	Transform* targetTransform = nullptr;
+	bool isActive = false;
 };
