@@ -138,8 +138,6 @@ namespace Srand
         AssetManager::get().Clean();
         Shader::get()->DeleteShader();
 
-        user_interface.WriteDataInterval("MTTimeInterval.txt");
-
         //For Testing SceneManager Only
         sceneManager[0]->Clean();
 
