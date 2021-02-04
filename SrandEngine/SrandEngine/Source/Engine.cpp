@@ -104,10 +104,11 @@ namespace Srand
 
     void Engine::Draw() {   
         user_interface.UpdateUserInterface();
-        glfwSwapBuffers(WindowProperties::get());
 
         //For Testing SceneManager Only
         sceneManager[0]->Draw();
+
+        glfwSwapBuffers(WindowProperties::get());
     }
 
     void Engine::Update() {
