@@ -40,6 +40,7 @@
     <ClInclude Include="Entity\Elevator.h" />
     <ClInclude Include="Entity\Macho.h" />
     <ClInclude Include="Entity\NPC.h" />
+    <ClInclude Include="Game\Scenes\testing_scene.h" />
     <ClInclude Include="Entity\Pear.h" />
     <ClInclude Include="imgui\imconfig.h" />
     <ClInclude Include="imgui\imgui.h" />
@@ -52,6 +53,8 @@
     <ClInclude Include="Source\Input.h" />
     <ClInclude Include="Source\KeyCode.h" />
     <ClInclude Include="Source\MouseButtonCode.h" />
+    <ClInclude Include="Source\ObjectManager.h" />
+    <ClInclude Include="Source\Scene.h" />
     <ClInclude Include="Source\SceneManager.h" />
     <ClInclude Include="Source\Camera.h" />
     <ClInclude Include="Source\Engine.h" />
@@ -65,6 +68,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ECS\Collision.cpp" />
+    <ClCompile Include="Game\Scenes\testing_scene.cpp" />
     <ClCompile Include="imgui\imgui.cpp" />
     <ClCompile Include="imgui\imgui_demo.cpp" />
     <ClCompile Include="imgui\imgui_draw.cpp" />
@@ -73,6 +77,8 @@
     <ClCompile Include="imgui\imgui_tables.cpp" />
     <ClCompile Include="imgui\imgui_widgets.cpp" />
     <ClCompile Include="Log.cpp" />
+    <ClCompile Include="Source\ObjectManager.cpp" />
+    <ClCompile Include="Source\Scene.cpp" />
     <ClCompile Include="Source\SceneManager.cpp" />
     <ClCompile Include="Source\Camera.cpp" />
     <ClCompile Include="Source\EntityManager.cpp" />
