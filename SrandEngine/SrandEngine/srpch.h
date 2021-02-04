@@ -18,3 +18,4 @@
 /* Debugging Log */
 #include "Log.h"
 
+#define RATIO SCREEN_WIDTH / 480.0f

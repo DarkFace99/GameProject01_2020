@@ -4,12 +4,6 @@
     <Filter Include="Game">
       <UniqueIdentifier>{8ab40bc7-1778-4d2a-bd66-0376288f7d03}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Game\Header File">
-      <UniqueIdentifier>{91522728-915a-4643-afdc-49b2f0fdbd2f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Source FIle">
-      <UniqueIdentifier>{ca40bbc0-2e05-43b0-a5e1-ee9b95494a41}</UniqueIdentifier>
-    </Filter>
     <Filter Include="imgui">
       <UniqueIdentifier>{b3d3c500-3fad-486c-9251-51996df51398}</UniqueIdentifier>
     </Filter>
@@ -33,6 +27,12 @@
     </Filter>
     <Filter Include="SrandEngine\Input System">
       <UniqueIdentifier>{8f30e34c-d750-478a-abd6-8a4e29ba6aae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SrandEngine\Scene">
+      <UniqueIdentifier>{785de32e-eea5-44ce-8780-f794dd5d8e62}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\GameScene">
+      <UniqueIdentifier>{36426191-e851-4e70-8d30-fff73d89abfb}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -148,6 +148,15 @@
     <ClInclude Include="Source\WindowsInput.h">
       <Filter>SrandEngine\Input System</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Scene.h">
+      <Filter>SrandEngine\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Scenes\testing_scene.h">
+      <Filter>Game\GameScene</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ObjectManager.h">
+      <Filter>SrandEngine</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="imgui\imgui.cpp">
@@ -206,6 +215,15 @@
     </ClCompile>
     <ClCompile Include="Source\WindowsInput.cpp">
       <Filter>SrandEngine\Input System</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Scenes\testing_scene.cpp">
+      <Filter>Game\GameScene</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Scene.cpp">
+      <Filter>SrandEngine\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ObjectManager.cpp">
+      <Filter>SrandEngine</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

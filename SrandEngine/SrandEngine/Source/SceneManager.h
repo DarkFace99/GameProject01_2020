@@ -4,6 +4,7 @@
 #include "ecspch.h"
 
 #include "EntityManager.h"
+#include "Source/Scene.h"
 
 namespace Srand 
 {
@@ -11,17 +12,16 @@ namespace Srand
 	{
 	private:
 		static SceneManager* s_instance;
-		int m_currentLevel;
 		EntityManager* manager = nullptr;
+
+		std::vector<Scene*> m_sceneVector;
+		int m_currentLevelIndex = 0;
+		unsigned int m_vectorIndex = 0;
 
 		SceneManager();
 
 	public:
-		std::vector<GameObject*> objManager;
-		GameObject* npc;
-		GameObject* player;
-
-		virtual ~SceneManager() = default;
+		virtual ~SceneManager();
 		static SceneManager& get() 
 		{
 			if (!s_instance) 
@@ -31,14 +31,16 @@ namespace Srand
 			return *s_instance;
 		}
 
-		void Init();
-		void Clean();
+		void PushScene(Scene* sce);
+		void PopScene(Scene* sce);
+		Scene* Search(Scene* sce);
+		Scene* Search(const std::string name);
 
-		void Draw();
-		void Update();
+		inline int VectorSize() { return m_sceneVector.size(); }
+		Scene* operator[](int i) { return m_sceneVector[i]; }
 
-		void SceneCheck();
-
-		//Function to load Scene
+		std::vector<Scene*>::iterator begin() { return m_sceneVector.begin(); }
+		std::vector<Scene*>::iterator end() { return m_sceneVector.end(); }
+		
 	};
 }
