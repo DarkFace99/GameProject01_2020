@@ -6,6 +6,7 @@
 #include "Entity/Door.h"
 #include "Entity/Elevator.h"
 #include "Entity/NPC.h"
+#include "Entity/Benny.h"
 
 Camera camera(glm::vec3(0, 0, 0), glm::vec3(0, 0, -1), glm::vec3(0, 1, 0), 1.0f, 0.0f);
 ObjManager& objManager = ObjManager::get();
@@ -364,6 +365,8 @@ void TestingScene::Init()
         gameObject->GetComponent<Animator>().SetState("BENNY_FALL", 19, 19);
         gameObject->AddComponent<BoxCollider2D>(BoxCollider2D::CHARACTER_COLLISION, gameObject->GetComponent<Transform>().scale.x - 20, gameObject->GetComponent<Transform>().scale.y,
             false /* overlap */, true /* movable *//*, "BENNY_ANIM_MESH", &camera*/);
+
+        gameObject->AddComponent<Benny>();
 
         player = gameObject; // check collision
         benny = player;

@@ -14,7 +14,7 @@ public:
 		GetTransform()->position = temp_Pos;
 	}	
 
-	bool init() {
+	bool Init() {
 		SetTransform();
 
 		// function to loop through objManager to find Benny for pos
