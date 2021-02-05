@@ -7,6 +7,7 @@
 #include "Entity/Elevator.h"
 #include "Entity/NPC.h"
 #include "Entity/Benny.h"
+#include "Entity/Macho.h"
 
 Camera camera(glm::vec3(0, 0, 0), glm::vec3(0, 0, -1), glm::vec3(0, 1, 0), 1.0f, 0.0f);
 ObjManager& objManager = ObjManager::get();
@@ -366,7 +367,7 @@ void TestingScene::Init()
         gameObject->AddComponent<BoxCollider2D>(BoxCollider2D::CHARACTER_COLLISION, gameObject->GetComponent<Transform>().scale.x - 20, gameObject->GetComponent<Transform>().scale.y,
             false /* overlap */, true /* movable *//*, "BENNY_ANIM_MESH", &camera*/);
 
-        gameObject->AddComponent<Benny>();
+        gameObject->AddComponent<Benny>(); // test CC mechanics
 
         player = gameObject; // check collision
         benny = player;
@@ -388,6 +389,8 @@ void TestingScene::Init()
         gameObject->GetComponent<Animator>().SetState("BENNY_RUN", 13, 19);
         gameObject->AddComponent<BoxCollider2D>(BoxCollider2D::CHARACTER_COLLISION, gameObject->GetComponent<Transform>().scale.x - 20, gameObject->GetComponent<Transform>().scale.y,
             false /* overlap */, true /* movable *//*, "BENNY_ANIM_MESH", &camera*/);
+
+        //gameObject->AddComponent<Macho>(); // test CC mechanics
 
         macho = gameObject;
         objManager.PushObject(gameObject);

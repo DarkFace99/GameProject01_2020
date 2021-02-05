@@ -28,9 +28,24 @@ public:						// Not sure if this the best way to implement it.
 
 	void SetActive(bool state) { isActive = state; }
 
+	void Input_Movement(bool isJump) {	// basic movement
+		if(input.IsKeyPressed(SR_KEY_UP) && isJump) {
+			printf("jump\n");
+		}
+		if (input.IsKeyPressed(SR_KEY_LEFT) && isJump) {
+			printf("left\n");
+			transform->Translate(Vector2D_float(-5.0f,0.0f));
+		}
+		if (input.IsKeyPressed(SR_KEY_RIGHT) && isJump) {
+			printf("right\n");
+			transform->Translate(Vector2D_float(5.0f, 0.0f));
+		}
+	}
+
 protected:
 	Transform* transform = nullptr;
 	bool isActive = false;
 	ccTag tag = ccTag::DEFAULT;
 	WindowsInput input;
+	ObjManager& objManager = ObjManager::get();
 };

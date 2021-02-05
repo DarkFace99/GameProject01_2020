@@ -53,7 +53,7 @@ class Benny : public CC {
 private:
 	GameObject* targetCC = nullptr;
 	Transform* targetTransform = nullptr;
-	float radius = 20.0f;	// place holder 
+	float radius = 2000.0f;	// place holder 
 	std::vector<CC*>connectList;
 
 public:
@@ -62,7 +62,7 @@ public:
 		radius = r;
 		SetTag(ccTag::BENNY);
 	}
-	~Benny() {} // clear vector
+	~Benny() = default;
 
 	bool Init() override final {
 		SetTransform();
@@ -70,8 +70,19 @@ public:
 	}
 
 	void Update() override final {
-		/*if(input.IsKeyPressed(SR_KEY_Q)) {
-			printf("enter");
-		}*/
+		Input_Movement(true);
 	}
+
+	void AbilityCheck() {
+		for (int i = 0; i < objManager.VectorSize(); i++) {
+			if (objManager[i]->HasComponent<CC>()) {
+				Vector2D_float deltaVect = transform->position - objManager[i]->GetComponent<Transform>().position;
+				float magnitude = sqrt(pow(deltaVect.x, 2) + pow(deltaVect.y, 2));
+				if (magnitude < radius) {
+					connectList.push_back(&objManager[i]->GetComponent<CC>());
+				}
+			}
+		}
+	}
+
 };
