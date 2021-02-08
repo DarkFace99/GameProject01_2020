@@ -343,7 +343,7 @@ void TestingScene::Init()
         gameObject->GetComponent<Animator>().PlayState("NPC_SAD");
 
         gameObject->AddComponent<BoxCollider2D>(BoxCollider2D::ASSET_COLLISION, gameObject->GetComponent<Transform>().scale.x - 20, gameObject->GetComponent<Transform>().scale.y,
-            true /* overlap */, false /* movable *//*, "BENNY_ANIM_MESH", &camera*/);
+            true /* overlap */, false /* movable */, "BENNY_ANIM_MESH", &camera);
         gameObject->AddComponent<NPC>();
 
         npc = gameObject;
@@ -365,7 +365,7 @@ void TestingScene::Init()
         gameObject->GetComponent<Animator>().SetState("BENNY_JUMP", 18, 18);
         gameObject->GetComponent<Animator>().SetState("BENNY_FALL", 19, 19);
         gameObject->AddComponent<BoxCollider2D>(BoxCollider2D::CHARACTER_COLLISION, gameObject->GetComponent<Transform>().scale.x - 20, gameObject->GetComponent<Transform>().scale.y,
-            false /* overlap */, true /* movable *//*, "BENNY_ANIM_MESH", &camera*/);
+            false /* overlap */, true /* movable */, "BENNY_ANIM_MESH", &camera);
 
         gameObject->AddComponent<Benny>(); // test CC mechanics
 
@@ -410,7 +410,6 @@ void TestingScene::Draw()
 void TestingScene::Update()
 {
     manager->Update();
-
     // Check Collision
     for (int i = 0; i < objManager.VectorSize() - 1; i++)
     {
@@ -423,6 +422,7 @@ void TestingScene::Update()
                 if (Collision::AABB(objManager[i]->GetComponent<BoxCollider2D>(), objManager[j]->GetComponent<BoxCollider2D>())
                     && objManager[i]->GetComponent<BoxCollider2D>().GetTag() == BoxCollider2D::CHARACTER_COLLISION)
                 {
+
                     if (Collision::IsOnGround(*objManager[i], *objManager[j])) {
                         isGroundCheck = true;
 

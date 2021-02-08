@@ -9,7 +9,6 @@ public:
 	~Macho() = default;
 
 	bool init() {
-		SetTransform();
 	}
 
 	void CheckCollision() {

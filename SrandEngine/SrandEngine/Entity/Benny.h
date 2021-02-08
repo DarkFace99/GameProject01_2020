@@ -65,7 +65,7 @@ public:
 	~Benny() = default;
 
 	bool Init() override final {
-		SetTransform();
+		SetUp();
 		return true;
 	}
 
