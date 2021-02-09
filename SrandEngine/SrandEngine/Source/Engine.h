@@ -47,12 +47,12 @@ namespace Srand
 		WindowProperties()
 		{
 			/* Create a windowed mode window and its OpenGL context */
-			std::cout << "Initializing Window..." << std::endl;
+			SR_SYSTEM_INFO("Initializing Window...");
 			window = glfwCreateWindow(GetWidth(), GetHeight(), WINDOW_NAME, (GetFullScreenStatus()) ? glfwGetPrimaryMonitor() : NULL, NULL);
 			if (!window)
 			{
 				glfwTerminate();
-				std::cout << "Error! Cannot create window" << std::endl;
+				SR_SYSTEM_ERROR("Error! Cannot create window");
 			}
 
 			/* Make the window's context current */
@@ -213,5 +213,8 @@ namespace Srand
 		}
 	};
 
+
 	void window_size_callback(GLFWwindow* window, int width, int height);
+	void window_close_callback(GLFWwindow* window);
+
 }

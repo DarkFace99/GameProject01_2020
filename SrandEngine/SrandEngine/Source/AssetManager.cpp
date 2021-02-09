@@ -67,16 +67,19 @@ namespace Srand
 		if (aTex) {
 			if (textures.count(id) <= 0) {
 				textures[id] = aTex;
-				std::cout << "texture: [" << filename << "] loaded!" << std::endl;
+				//std::cout << "texture: [" << filename << "] loaded!" << std::endl;
+				SR_SYSTEM_TRACE("texture:	[ {0} ] Created!", id);
 			}
 			else {
 				delete aTex;
-				std::cout << "texture: //Error// id [" << id << "] was already used!" << std::endl;
+				//std::cout << "texture: //Error// id [" << id << "] was already used!" << std::endl;
+				SR_SYSTEM_ERROR("texture: //Error// id [ {0} ] was already used!", id);
 			}
 		}
 		else {
 			delete aTex;
-			std::cout << "texture: //Error// [" << filename << "] load failed!!" << std::endl;
+			//std::cout << "texture: //Error// [" << filename << "] load failed!!" << std::endl;
+			SR_SYSTEM_ERROR("texture: //Error// id [ {0} ] create failed!!", id);
 		}
 
 	}
@@ -142,16 +145,19 @@ namespace Srand
 		if (aMesh) {
 			if (meshes.count(id) <= 0) {
 				meshes[id] = aMesh;
-				std::cout << "mesh: [" << id << "] Created!" << std::endl;
+				//std::cout << "mesh: [" << id << "] Created!" << std::endl;
+				SR_SYSTEM_TRACE("mesh:		[ {0} ] Created!", id);
 			}
 			else {
 				delete aMesh;
-				std::cout << "mesh: //Error// id [" << id << "] was already used!" << std::endl;
+				//std::cout << "mesh: //Error// id [" << id << "] was already used!" << std::endl;
+				SR_SYSTEM_ERROR("mesh: //Error// id [ {0} ] was already used!", id);
 			}
 		}
 		else {
 			delete aMesh;
-			std::cout << "mesh: //Error// [" << id << "] create failed!!" << std::endl;
+			//std::cout << "mesh: //Error// [" << id << "] create failed!!" << std::endl;
+			SR_SYSTEM_ERROR("mesh: //Error// id [ {0} ] create failed!!", id);
 		}
 	}
 }

@@ -21,6 +21,7 @@ namespace Srand
 	{
 		for (Scene* scene : m_sceneVector)
 			delete scene;
+		delete s_instance;
 	}
 
 	void SceneManager::PushScene(Scene* sce)
