@@ -427,7 +427,6 @@ void TestingScene::Update()
                         isGroundCheck = true;
 
                         objManager[i]->GetComponent<BoxCollider2D>().SetIsGround(true);
-                        objManager[i]->GetComponent<RigidBody>().SetVelocityY(0.0f);
                     }
                 }
             }

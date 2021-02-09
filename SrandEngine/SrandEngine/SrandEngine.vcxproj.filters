@@ -163,6 +163,7 @@
     <ClInclude Include="Source\ObjectManager.h">
       <Filter>SrandEngine</Filter>
     </ClInclude>
+    <ClInclude Include="Source\LevelManager.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="imgui\imgui.cpp">

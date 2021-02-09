@@ -52,6 +52,7 @@
     <ClInclude Include="Source\EntityManager.h" />
     <ClInclude Include="Source\Input.h" />
     <ClInclude Include="Source\KeyCode.h" />
+    <ClInclude Include="Source\LevelManager.h" />
     <ClInclude Include="Source\MouseButtonCode.h" />
     <ClInclude Include="Source\ObjectManager.h" />
     <ClInclude Include="Source\Scene.h" />

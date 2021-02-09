@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Source/ObjectManager.h"
+#include "Source/LevelManager.h"
 #include "Source/WindowsInput.h"
 #include "ecspch.h"
 #include "srpch.h"
@@ -35,12 +35,14 @@ public:						// Not sure if this the best way to implement it.
 	void Input_Movement(bool canJump) {	// basic movement
 		
 		if (boxCollider2D->GetIsGround()) {
-			//rigidBody->SetVelocityY(0.0f);
+			rigidBody->SetVelocityY(0.0f);
+			isOnGround = true;
 		}
+		else { isOnGround = false; }
 
 		if(input.IsKeyPressed(SR_KEY_UP) && canJump) {
 			//printf("jump\n");
-			rigidBody->SetVelocityY(10.0f);
+			rigidBody->SetVelocityY(5.0f);
 		}
 		if (input.IsKeyPressed(SR_KEY_LEFT) && input.IsKeyPressed(SR_KEY_RIGHT)) {
 			// stay still
@@ -52,6 +54,7 @@ public:						// Not sure if this the best way to implement it.
 			//printf("right\n");
 			rigidBody->SetVelocityX(5.0f);
 		}
+		std::cout << rigidBody->GetVelocity() << std::endl;
 
 		transform->Translate(rigidBody->GetVelocity());	// translate after calculate every thing
 	}
@@ -64,4 +67,5 @@ protected:
 	ccTag tag = ccTag::DEFAULT;
 	WindowsInput input;
 	ObjManager& objManager = ObjManager::get();
+	bool isOnGround = false;
 };
