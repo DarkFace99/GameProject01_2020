@@ -5,7 +5,7 @@
 
 class Collision{
 public: 
-	static bool AABB(BoxCollider2D& colA,BoxCollider2D& colB);
-	static void CollisionPush(BoxCollider2D& colA, BoxCollider2D& colB);
-	static bool IsOnGround(GameObject& objA, GameObject& objB);
+	static bool AABB(GameObject& obj);
+	static void CollisionPush(GameObject& obj);
+	static bool IsOnGround(GameObject& obj);
 };

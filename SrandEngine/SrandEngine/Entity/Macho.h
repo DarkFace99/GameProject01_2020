@@ -9,13 +9,15 @@ public:
 	~Macho() = default;
 
 	bool init() {
+		SetUp();
+		return true;
 	}
 
-	void CheckCollision() {
-
+	void Update() override final {
+		Input_Movement(false);
 	}
 
 private:
-	Transform* BennyTransform = nullptr;
+	Transform* targetTransform = nullptr;
 };
 

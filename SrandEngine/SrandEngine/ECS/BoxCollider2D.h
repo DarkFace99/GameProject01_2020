@@ -4,6 +4,7 @@
 
 #include "GameObject.h"
 #include "Component.h"
+#include "RigidBody.h"
 #include "Source/AssetManager.h"
 #include "Source/Camera.h"
 
@@ -25,6 +26,7 @@ private:
 	float width, height;
 	CollisionTag tag = COLLISION_START;
 	Transform* transform = nullptr;
+	RigidBody* rigidBody = nullptr;
 
 	bool allowOverlap = false;
 	bool movable = false;

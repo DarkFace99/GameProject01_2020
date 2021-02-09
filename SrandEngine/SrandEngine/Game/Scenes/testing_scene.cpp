@@ -382,7 +382,7 @@ void TestingScene::Init()
         gameObject->GetComponent<Transform>().position = Vector2D_float(60.0f, -285.0f);
         gameObject->GetComponent<Transform>().scale = Vector2D_float(24.0f * RATIO, 24.0f * RATIO);
         gameObject->AddComponent<SpriteRenderer>(SpriteRenderer::CHARACTER_LAYER, "MACHO_ANIM_MESH", "MACHO_ANIM_TEX", 1.0f, &camera, true);
-        gameObject->AddComponent<RigidBody>(8.0f);
+        gameObject->AddComponent<RigidBody>(2.0f);
 
         gameObject->AddComponent<Animator>(20, 100);
         gameObject->GetComponent<Animator>().SetState("BENNY_IDLE", 0, 4);
@@ -411,26 +411,25 @@ void TestingScene::Update()
 {
     manager->Update();
     // Check Collision
-    for (int i = 0; i < objManager.VectorSize() - 1; i++)
-    {
-        if (objManager[i]->GetComponent<BoxCollider2D>().GetTag() != BoxCollider2D::TILE_COLLISION) {
-            bool isGroundCheck = false;
-            for (int j = 0; j < objManager.VectorSize(); j++)
-            {
-                if (i == j) { break; } // Always Collide with itself
+    //for (int i = 0; i < objManager.VectorSize() - 1; i++)
+    //{
+    //    if (objManager[i]->GetComponent<BoxCollider2D>().GetTag() != BoxCollider2D::TILE_COLLISION) {
+    //        bool isGroundCheck = false;
+    //        for (int j = 0; j < objManager.VectorSize(); j++)
+    //        {
+    //            if (i == j) { continue; } // Always Collide with itself
 
-                if (Collision::AABB(objManager[i]->GetComponent<BoxCollider2D>(), objManager[j]->GetComponent<BoxCollider2D>())
-                    && objManager[i]->GetComponent<BoxCollider2D>().GetTag() == BoxCollider2D::CHARACTER_COLLISION)
-                {
+    //            if (Collision::AABB(objManager[i]->GetComponent<BoxCollider2D>(), objManager[j]->GetComponent<BoxCollider2D>())
+    //                && objManager[i]->GetComponent<BoxCollider2D>().GetTag() == BoxCollider2D::CHARACTER_COLLISION)
+    //            {
 
-                    if (Collision::IsOnGround(*objManager[i], *objManager[j])) {
-                        isGroundCheck = true;
-
-                        objManager[i]->GetComponent<BoxCollider2D>().SetIsGround(true);
-                    }
-                }
-            }
-            if (isGroundCheck == false) { objManager[i]->GetComponent<BoxCollider2D>().SetIsGround(false); }
-        }
-    }
+    //                if (Collision::IsOnGround(*objManager[i], *objManager[j]) && !isGroundCheck) {
+    //                    isGroundCheck = true;
+    //                    objManager[i]->GetComponent<BoxCollider2D>().SetIsGround(true);
+    //                }
+    //            }
+    //        }
+    //        if (isGroundCheck == false) { objManager[i]->GetComponent<BoxCollider2D>().SetIsGround(false); }
+    //    }
+    //}
 }

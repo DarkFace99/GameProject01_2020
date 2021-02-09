@@ -5,6 +5,7 @@
 #include "ecspch.h"
 #include "srpch.h"
 
+
 class CC : public Component	// base class for CC
 {
 public:						// Not sure if this the best way to implement it. 
@@ -53,11 +54,10 @@ public:						// Not sure if this the best way to implement it.
 		}else if (input.IsKeyPressed(SR_KEY_RIGHT)) {
 			//printf("right\n");
 			rigidBody->SetVelocityX(5.0f);
-		}
-		std::cout << rigidBody->GetVelocity() << std::endl;
-
-		transform->Translate(rigidBody->GetVelocity());	// translate after calculate every thing
+		}	
 	}
+	void Collision_Check() { }
+	void Execute() { transform->Translate(rigidBody->GetVelocity()); }
 
 protected:
 	Transform* transform = nullptr;
