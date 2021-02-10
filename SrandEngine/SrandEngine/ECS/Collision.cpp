@@ -115,7 +115,7 @@ bool Collision::CC_AABB(GameObject& objA, GameObject& objB) {	// A is main Obj
 	}
 
 	// check ground
-
+	IsOnGround(objA, objB);
 
 	return isCollide;
 }
@@ -131,16 +131,25 @@ void Collision::CC_Collision_Push(GameObject& objA, GameObject& objB) {
 	if (isAxis_Y) { isDir_P = (colA.modifyPosition.y + rigA.GetVelocityY() > colB.modifyPosition.y); }
 	else{ isDir_P = (colA.modifyPosition.x +rigA.GetVelocityX() > colB.modifyPosition.x); }
 
+	std::cout << "\t\nPreCal" << std::endl;
+	std::cout << "isAxisY:" << isAxis_Y << std::endl;
+	std::cout << "isDir_P:" << isDir_P << std::endl;
+
 	if (isAxis_Y) {
 		//  distance to move = Egde of desired pos - current pos ( currently overlap )
-		float vecPush_Y = colB.modifyPosition.y + (((colA.height + colB.height) / 2.0f) * ((isDir_P) ? 1 : -1)) - (colA.modifyPosition.y + colA.offsetY); // not sure
-		rigA.SetVelocityY(rigA.GetVelocityY() - vecPush_Y);
+		float vecPush_Y = colB.modifyPosition.y + (((colA.height + colB.height) / 2.0f) * ((isDir_P) ? 1 : -1)) - (colA.modifyPosition.y + colA.offsetY + rigA.GetVelocityY()); // not sure
+		rigA.SetVelocityY(rigA.GetVelocityY() + vecPush_Y);
+		std::cout << "\n\nCalY" << std::endl;
+		std::cout << "vecPush_Y:" << vecPush_Y << std::endl;
+		std::cout << "vecNew_Y:" << rigA.GetVelocityY() + vecPush_Y << std::endl;
 	}
 	else {
 		//  distance to move = Egde of desired pos - current pos ( currently overlap )
-		float vecPush_X = colB.modifyPosition.x + (((colA.width + colB.width) / 2.0f) * ((isDir_P) ? 1 : -1)) - (colA.modifyPosition.x + colA.offsetX); // not sure
-		rigA.SetVelocityX(rigA.GetVelocityX() - vecPush_X);
-
+		float vecPush_X = colB.modifyPosition.x + (((colA.width + colB.width) / 2.0f) * ((isDir_P) ? 1 : -1)) - (colA.modifyPosition.x + colA.offsetX + rigA.GetVelocityX()); // not sure
+		rigA.SetVelocityX(rigA.GetVelocityX() + vecPush_X);
+		std::cout << "\n\nCalX" << std::endl;
+		std::cout << "vecPush_X:" << vecPush_X << std::endl;
+		std::cout << "vecNew_X:" << rigA.GetVelocityX() + vecPush_X << std::endl;
 	}
 }
 

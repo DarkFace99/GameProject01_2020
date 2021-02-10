@@ -4,6 +4,7 @@
 #include "Source/WindowsInput.h"
 #include "ecspch.h"
 #include "srpch.h"
+#include "ECS/Collision.h"
 
 
 class CC : public Component	// base class for CC
@@ -56,7 +57,12 @@ public:						// Not sure if this the best way to implement it.
 			rigidBody->SetVelocityX(5.0f);
 		}	
 	}
-	void Collision_Check() { }
+	void Collision_Check() { 
+		for (int i = 0; i < objManager.VectorSize(); i++) {
+			if (gameObject == objManager[i]) { continue; }
+			Collision::CC_AABB(*gameObject,*objManager[i]);
+		}
+	}
 	void Execute() { transform->Translate(rigidBody->GetVelocity()); }
 
 protected:

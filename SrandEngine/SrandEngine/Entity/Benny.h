@@ -71,6 +71,8 @@ public:
 
 	void Update() override final {
 		Input_Movement(true);
+		Collision_Check();
+		std::cout << rigidBody->GetVelocity() << std::endl;
 		Execute();
 	}
 
