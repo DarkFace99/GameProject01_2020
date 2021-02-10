@@ -86,3 +86,46 @@
 //}
 
 #include "Collision.h"
+
+bool Collision::CC_AABB(GameObject& objA, GameObject& objB) {	// A is main Obj
+	BoxCollider2D& colA = objA.GetComponent<BoxCollider2D>();
+	BoxCollider2D& colB = objB.GetComponent<BoxCollider2D>();
+	RigidBody& rigA = objA.GetComponent<RigidBody>();
+		
+	bool isCollide = (colA.modifyPosition.x + (colA.width / 2.0f) + rigA.GetVelocityX() >= colB.modifyPosition.x - (colB.width / 2.0f)) &&
+					 (colB.modifyPosition.x + (colB.width / 2.0f) >= colA.modifyPosition.x - (colA.width / 2.0f)) + rigA.GetVelocityX() &&
+					 (colA.modifyPosition.y + (colA.height / 2.0f) + rigA.GetVelocityY() >= colB.modifyPosition.y - (colB.height / 2.0f)) &&
+					 (colB.modifyPosition.y + (colB.height / 2.0f) >= colA.modifyPosition.y - (colA.height / 2.0f) + rigA.GetVelocityY());
+		
+	// calulate next translation
+	if (isCollide) {
+		if ((colA.allowOverlap || colB.allowOverlap) == false) {
+			CC_Collision_Push(rigA, colA, colB);
+		}
+	}
+
+	// check ground
+
+
+	return isCollide;
+}
+
+void Collision::CC_Collision_Push(RigidBody& rigA, BoxCollider2D& colA, BoxCollider2D& colB) {
+	bool isAxis_Y = abs(colA.modifyPosition.x + rigA.GetVelocityX() - colB.modifyPosition.x) / ((colA.width + colB.width)/2.0f)
+					< abs(colA.modifyPosition.y + rigA.GetVelocityY() - colB.modifyPosition.y) / ((colA.height + colB.height) / 2.0f);
+	bool isDir_P;
+	if (isAxis_Y) { isDir_P = (colA.modifyPosition.y + rigA.GetVelocityY() > colB.modifyPosition.y); }
+	else{ isDir_P = (colA.modifyPosition.x +rigA.GetVelocityX() > colB.modifyPosition.x); }
+
+	if (isAxis_Y) {
+		//  distance to move = Egde of desired pos - current pos ( currently overlap )
+		float vecPush_Y = colB.modifyPosition.y + (((colA.height + colB.height) / 2.0f) * ((isDir_P) ? 1 : -1)) - (colA.modifyPosition.y + colA.offsetY); // not sure
+		rigA.SetVelocityY(rigA.GetVelocityY() - vecPush_Y);
+	}
+	else {
+		//  distance to move = Egde of desired pos - current pos ( currently overlap )
+		float vecPush_X = colB.modifyPosition.x + (((colA.width + colB.width) / 2.0f) * ((isDir_P) ? 1 : -1)) - (colA.modifyPosition.x + colA.offsetX); // not sure
+		rigA.SetVelocityX(rigA.GetVelocityX() - vecPush_X);
+
+	}	
+}
