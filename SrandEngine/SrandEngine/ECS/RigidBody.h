@@ -31,8 +31,8 @@ public:
 
 	void Update() override final 
 	{
-		velocity.x = (force.x - drag.x) * TimeStep::get();
-		velocity.y += (force.x + drag.y + -(gravityScale * GRAVITY)) * TimeStep::get();
+		velocity.x = (force.x - drag.x) * Srand::TimeStep::get();
+		velocity.y += (force.x + drag.y + -(gravityScale * GRAVITY)) * Srand::TimeStep::get();
 		if (velocity.y < -20) { velocity.y = -20; } // hard code
 	}
 

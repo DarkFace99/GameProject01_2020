@@ -110,7 +110,7 @@ bool Collision::CC_AABB(GameObject& objA, GameObject& objB) {	// A is main Obj
 	if (isCollide) {
 		IsOnGround(objA, objB);
 		if ((colA.allowOverlap || colB.allowOverlap) == false) {
-			CC_Collision_Push(rigA, colA, colB);
+			CC_Collision_Push(objA, objB);
 		}
 	}
 
@@ -120,7 +120,11 @@ bool Collision::CC_AABB(GameObject& objA, GameObject& objB) {	// A is main Obj
 	return isCollide;
 }
 
-void Collision::CC_Collision_Push(RigidBody& rigA, BoxCollider2D& colA, BoxCollider2D& colB) {
+void Collision::CC_Collision_Push(GameObject& objA, GameObject& objB) {
+	BoxCollider2D& colA = objA.GetComponent<BoxCollider2D>();
+	BoxCollider2D& colB = objB.GetComponent<BoxCollider2D>();
+	RigidBody& rigA = objA.GetComponent<RigidBody>();
+
 	bool isAxis_Y = abs(colA.modifyPosition.x + rigA.GetVelocityX() - colB.modifyPosition.x) / ((colA.width + colB.width)/2.0f)
 					< abs(colA.modifyPosition.y + rigA.GetVelocityY() - colB.modifyPosition.y) / ((colA.height + colB.height) / 2.0f);
 	bool isDir_P;
