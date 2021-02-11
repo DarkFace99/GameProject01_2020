@@ -46,6 +46,10 @@ public:						// Not sure if this the best way to implement it.
 			//printf("jump\n");
 			rigidBody->SetVelocityY(5.0f);
 		}
+		if (input.IsKeyPressed(SR_KEY_DOWN) && canJump) {	// for testing
+			//printf("jump\n");
+			rigidBody->SetVelocityY(-5.0f);
+		}
 		if (input.IsKeyPressed(SR_KEY_LEFT) && input.IsKeyPressed(SR_KEY_RIGHT)) {
 			// stay still
 		}
