@@ -35,21 +35,22 @@ public:						// Not sure if this the best way to implement it.
 	void SetActive(bool state) { isActive = state; }
 
 	void Input_Movement(bool canJump) {	// basic movement
-		
+
+		rigidBody->Update_Gravity();
+		//std::cout << "isGround:" << boxCollider2D->GetIsGround() << std::endl;
 		if (boxCollider2D->GetIsGround()) {
 			rigidBody->SetVelocityY(0.0f);
 			isOnGround = true;
 		}
-		else { isOnGround = false; }
+		else {
+			isOnGround = false; 
+		}
 
 		if(input.IsKeyPressed(SR_KEY_UP) && canJump) {
 			//printf("jump\n");
 			rigidBody->SetVelocityY(5.0f);
 		}
-		if (input.IsKeyPressed(SR_KEY_DOWN) && canJump) {	// for testing
-			//printf("jump\n");
-			rigidBody->SetVelocityY(-5.0f);
-		}
+
 		if (input.IsKeyPressed(SR_KEY_LEFT) && input.IsKeyPressed(SR_KEY_RIGHT)) {
 			// stay still
 		}

@@ -71,10 +71,11 @@ public:
 
 	void Update() override final {
 		Input_Movement(true);
-		printf("\n\t---------------------------\n");
+		/*printf("\n\t---------------------------\n");
 		printf("\t-----------Update----------\n");
-		printf("\t---------------------------\n\n");
+		printf("\t---------------------------\n\n");*/
 		Collision_Check();
+		std::cout << rigidBody->GetVelocity() << std::endl;
 		Execute();
 	}
 
