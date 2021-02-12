@@ -37,16 +37,10 @@ public:						// Not sure if this the best way to implement it.
 	void Input_Movement(bool canJump) {	// basic movement
 
 		rigidBody->Update_Gravity();
-		//std::cout << "isGround:" << boxCollider2D->GetIsGround() << std::endl;
-		if (boxCollider2D->GetIsGround()) {
-			rigidBody->SetVelocityY(0.0f);
-			isOnGround = true;
-		}
-		else {
-			isOnGround = false; 
-		}
-
-		if(input.IsKeyPressed(SR_KEY_UP) && canJump) {
+		std::cout << "isGround:" << boxCollider2D->GetIsGround() << std::endl;
+		if (boxCollider2D->GetIsGround()) { rigidBody->SetVelocityY(0.0f); }
+		
+		if(input.IsKeyPressed(SR_KEY_UP) && canJump /*&& boxCollider2D->GetIsGround()*/) {
 			//printf("jump\n");
 			rigidBody->SetVelocityY(5.0f);
 		}
@@ -63,12 +57,15 @@ public:						// Not sure if this the best way to implement it.
 		}	
 	}
 	void Collision_Check() { 
+		boxCollider2D->SetIsGround(false);	// reset 
 		for (int i = 0; i < objManager.VectorSize(); i++) {
-			if (gameObject == objManager[i]) { continue; }
+			if (gameObject == objManager[i] || objManager[i]->HasComponent<CC>()) { continue; }
 			Collision::CC_AABB(*gameObject,*objManager[i]);
 		}
 	}
-	void Execute() { transform->Translate(rigidBody->GetVelocity()); }
+	void Execute() { 
+		transform->Translate(rigidBody->GetVelocity());
+	}
 
 protected:
 	Transform* transform = nullptr;

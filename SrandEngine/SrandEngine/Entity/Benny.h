@@ -75,7 +75,7 @@ public:
 		printf("\t-----------Update----------\n");
 		printf("\t---------------------------\n\n");*/
 		Collision_Check();
-		std::cout << rigidBody->GetVelocity() << std::endl;
+		//std::cout << rigidBody->GetVelocity() << std::endl;
 		Execute();
 	}
 
