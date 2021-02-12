@@ -37,31 +37,27 @@ public:						// Not sure if this the best way to implement it.
 	void Input_Movement(bool canJump) {	// basic movement
 
 		rigidBody->Update_Gravity();
-		std::cout << "isGround:" << boxCollider2D->GetIsGround() << std::endl;
 		if (boxCollider2D->GetIsGround()) { rigidBody->SetVelocityY(0.0f); }
 		
 		if(input.IsKeyPressed(SR_KEY_UP) && canJump /*&& boxCollider2D->GetIsGround()*/) {
-			//printf("jump\n");
 			rigidBody->SetVelocityY(5.0f);
 		}
 
-		if (input.IsKeyPressed(SR_KEY_LEFT) && input.IsKeyPressed(SR_KEY_RIGHT)) {
-			// stay still
-		}
+		if (input.IsKeyPressed(SR_KEY_LEFT) && input.IsKeyPressed(SR_KEY_RIGHT)) {} // do nothing
 		else if (input.IsKeyPressed(SR_KEY_LEFT)) {
-			//printf("left\n");
 			rigidBody->SetVelocityX(-5.0f);
 		}else if (input.IsKeyPressed(SR_KEY_RIGHT)) {
-			//printf("right\n");
 			rigidBody->SetVelocityX(5.0f);
 		}	
 	}
 	void Collision_Check() { 
 		boxCollider2D->SetIsGround(false);	// reset 
 		for (int i = 0; i < objManager.VectorSize(); i++) {
-			if (gameObject == objManager[i] || objManager[i]->HasComponent<CC>()) { continue; }
+			if (gameObject == objManager[i]) { continue; }
 			Collision::CC_AABB(*gameObject,*objManager[i]);
 		}
+		std::cout << "\nisGround:" << boxCollider2D->GetIsGround() << std::endl;
+		std::cout << "\n**************** END LOOP ****************\n\n";
 	}
 	void Execute() { 
 		transform->Translate(rigidBody->GetVelocity());
