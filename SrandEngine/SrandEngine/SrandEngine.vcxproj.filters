@@ -148,6 +148,12 @@
     <ClInclude Include="Source\WindowsInput.h">
       <Filter>SrandEngine\Input System</Filter>
     </ClInclude>
+    <ClInclude Include="Entity\CC.h" />
+    <ClInclude Include="Entity\Benny.h" />
+    <ClInclude Include="Entity\Barter.h" />
+    <ClInclude Include="Entity\Pear.h" />
+    <ClInclude Include="Entity\Cherry.h" />
+    <ClInclude Include="Entity\Macho.h" />
     <ClInclude Include="Source\Scene.h">
       <Filter>SrandEngine\Scene</Filter>
     </ClInclude>
@@ -157,6 +163,7 @@
     <ClInclude Include="Source\ObjectManager.h">
       <Filter>SrandEngine</Filter>
     </ClInclude>
+    <ClInclude Include="Source\LevelManager.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="imgui\imgui.cpp">

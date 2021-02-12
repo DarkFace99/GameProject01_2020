@@ -6,6 +6,8 @@
 #include "Entity/Door.h"
 #include "Entity/Elevator.h"
 #include "Entity/NPC.h"
+#include "Entity/Benny.h"
+#include "Entity/Macho.h"
 
 Camera camera(glm::vec3(0, 0, 0), glm::vec3(0, 0, -1), glm::vec3(0, 1, 0), 1.0f, 0.0f);
 ObjManager& objManager = ObjManager::get();
@@ -341,7 +343,7 @@ void TestingScene::Init()
         gameObject->GetComponent<Animator>().PlayState("NPC_SAD");
 
         gameObject->AddComponent<BoxCollider2D>(BoxCollider2D::ASSET_COLLISION, gameObject->GetComponent<Transform>().scale.x - 20, gameObject->GetComponent<Transform>().scale.y,
-            true /* overlap */, false /* movable *//*, "BENNY_ANIM_MESH", &camera*/);
+            true /* overlap */, false /* movable */, "BENNY_ANIM_MESH", &camera);
         gameObject->AddComponent<NPC>();
 
         npc = gameObject;
@@ -363,7 +365,9 @@ void TestingScene::Init()
         gameObject->GetComponent<Animator>().SetState("BENNY_JUMP", 18, 18);
         gameObject->GetComponent<Animator>().SetState("BENNY_FALL", 19, 19);
         gameObject->AddComponent<BoxCollider2D>(BoxCollider2D::CHARACTER_COLLISION, gameObject->GetComponent<Transform>().scale.x - 20, gameObject->GetComponent<Transform>().scale.y,
-            false /* overlap */, true /* movable *//*, "BENNY_ANIM_MESH", &camera*/);
+            false /* overlap */, true /* movable */, "BENNY_ANIM_MESH", &camera);
+
+        gameObject->AddComponent<Benny>(); // test CC mechanics
 
         player = gameObject; // check collision
         benny = player;
@@ -378,13 +382,15 @@ void TestingScene::Init()
         gameObject->GetComponent<Transform>().position = Vector2D_float(60.0f, -285.0f);
         gameObject->GetComponent<Transform>().scale = Vector2D_float(24.0f * RATIO, 24.0f * RATIO);
         gameObject->AddComponent<SpriteRenderer>(SpriteRenderer::CHARACTER_LAYER, "MACHO_ANIM_MESH", "MACHO_ANIM_TEX", 1.0f, &camera, true);
-        gameObject->AddComponent<RigidBody>(8.0f);
+        gameObject->AddComponent<RigidBody>(2.0f);
 
         gameObject->AddComponent<Animator>(20, 100);
         gameObject->GetComponent<Animator>().SetState("BENNY_IDLE", 0, 4);
         gameObject->GetComponent<Animator>().SetState("BENNY_RUN", 13, 19);
         gameObject->AddComponent<BoxCollider2D>(BoxCollider2D::CHARACTER_COLLISION, gameObject->GetComponent<Transform>().scale.x - 20, gameObject->GetComponent<Transform>().scale.y,
             false /* overlap */, true /* movable *//*, "BENNY_ANIM_MESH", &camera*/);
+
+        //gameObject->AddComponent<Macho>(); // test CC mechanics
 
         macho = gameObject;
         objManager.PushObject(gameObject);
@@ -404,28 +410,26 @@ void TestingScene::Draw()
 void TestingScene::Update()
 {
     manager->Update();
-
     // Check Collision
-    for (int i = 0; i < objManager.VectorSize() - 1; i++)
-    {
-        if (objManager[i]->GetComponent<BoxCollider2D>().GetTag() != BoxCollider2D::TILE_COLLISION) {
-            bool isGroundCheck = false;
-            for (int j = 0; j < objManager.VectorSize(); j++)
-            {
-                if (i == j) { break; } // Always Collide with itself
+    //for (int i = 0; i < objManager.VectorSize() - 1; i++)
+    //{
+    //    if (objManager[i]->GetComponent<BoxCollider2D>().GetTag() != BoxCollider2D::TILE_COLLISION) {
+    //        bool isGroundCheck = false;
+    //        for (int j = 0; j < objManager.VectorSize(); j++)
+    //        {
+    //            if (i == j) { continue; } // Always Collide with itself
 
-                if (Collision::AABB(objManager[i]->GetComponent<BoxCollider2D>(), objManager[j]->GetComponent<BoxCollider2D>())
-                    && objManager[i]->GetComponent<BoxCollider2D>().GetTag() == BoxCollider2D::CHARACTER_COLLISION)
-                {
-                    if (Collision::IsOnGround(*objManager[i], *objManager[j])) {
-                        isGroundCheck = true;
+    //            if (Collision::AABB(objManager[i]->GetComponent<BoxCollider2D>(), objManager[j]->GetComponent<BoxCollider2D>())
+    //                && objManager[i]->GetComponent<BoxCollider2D>().GetTag() == BoxCollider2D::CHARACTER_COLLISION)
+    //            {
 
-                        objManager[i]->GetComponent<BoxCollider2D>().SetIsGround(true);
-                        objManager[i]->GetComponent<RigidBody>().SetVelocityY(0.0f);
-                    }
-                }
-            }
-            if (isGroundCheck == false) { objManager[i]->GetComponent<BoxCollider2D>().SetIsGround(false); }
-        }
-    }
+    //                if (Collision::IsOnGround(*objManager[i], *objManager[j]) && !isGroundCheck) {
+    //                    isGroundCheck = true;
+    //                    objManager[i]->GetComponent<BoxCollider2D>().SetIsGround(true);
+    //                }
+    //            }
+    //        }
+    //        if (isGroundCheck == false) { objManager[i]->GetComponent<BoxCollider2D>().SetIsGround(false); }
+    //    }
+    //}
 }
