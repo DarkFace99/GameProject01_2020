@@ -6,7 +6,13 @@
 #include "Engine.h"
 
 int main(int argc, char** argv) {
-	
+
+	HANDLE mutex = CreateMutex(NULL, TRUE, L"BENNY: Everyone is Happy");
+	if (GetLastError() == ERROR_ALREADY_EXISTS) 
+	{
+		return 0;
+	}
+
 	_CrtMemState sOld;
 	_CrtMemState sNew;
 	_CrtMemState sDiff;
