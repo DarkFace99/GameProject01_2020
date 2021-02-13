@@ -39,7 +39,7 @@ public:						// Not sure if this the best way to implement it.
 		rigidBody->Update_Gravity();
 		if (boxCollider2D->GetIsGround()) { rigidBody->SetVelocityY(0.0f); }
 		
-		if(input.IsKeyPressed(SR_KEY_UP) && canJump /*&& boxCollider2D->GetIsGround()*/) {
+		if(input.IsKeyPressed(SR_KEY_UP) && canJump && boxCollider2D->GetIsGround()) {
 			rigidBody->SetVelocityY(5.0f);
 		}
 
@@ -56,8 +56,8 @@ public:						// Not sure if this the best way to implement it.
 			if (gameObject == objManager[i]) { continue; }
 			Collision::CC_AABB(*gameObject,*objManager[i]);
 		}
-		std::cout << "\nisGround:" << boxCollider2D->GetIsGround() << std::endl;
-		std::cout << "\n**************** END LOOP ****************\n\n";
+		/*std::cout << "\nisGround:" << boxCollider2D->GetIsGround() << std::endl;
+		std::cout << "\n**************** END LOOP ****************\n\n";*/
 	}
 	void Execute() { 
 		transform->Translate(rigidBody->GetVelocity());

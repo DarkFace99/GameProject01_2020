@@ -103,10 +103,10 @@ namespace Srand
     }
 
     void Engine::Draw() {   
-        user_interface.UpdateUserInterface();
-
         //For Testing SceneManager Only
         sceneManager[0]->Draw();
+
+        user_interface.UpdateUserInterface();
 
         glfwSwapBuffers(WindowProperties::get());
     }
@@ -138,7 +138,7 @@ namespace Srand
         AssetManager::get().Clean();
         Shader::get()->DeleteShader();
 
-        user_interface.WriteDataInterval("MTTimeInterval.txt");
+        //user_interface.WriteDataInterval("MTTimeInterval.txt");
 
         //For Testing SceneManager Only
         sceneManager[0]->Clean();

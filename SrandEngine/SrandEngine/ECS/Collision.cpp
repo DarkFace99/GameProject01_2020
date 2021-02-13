@@ -163,10 +163,10 @@ void Collision::CC_Collision_Push(GameObject& objA, GameObject& objB) {
 		//  distance to move = Egde of desired pos - current pos ( currently overlap )
 		float vecPush_X = colB.modifyPosition.x + (((colA.width + colB.width) / 2.0f) * ((isDir_P) ? 1 : -1)) - (colA.modifyPosition.x + rigA.GetVelocityX()); // not sure
 		rigA.SetVelocityX(rigA.GetVelocityX() + vecPush_X);
-		std::cout << "\nCalX" << std::endl;
+		/*std::cout << "\nCalX" << std::endl;
 		std::cout << "Edge_X:" << colB.modifyPosition.x + (((colA.width + colB.width) / 2.0f) * ((isDir_P) ? 1 : -1)) << std::endl;
 		std::cout << "vecPush_X:" << vecPush_X << std::endl;
-		std::cout << "vecNew_X:" << rigA.GetVelocityX() << std::endl;
+		std::cout << "vecNew_X:" << rigA.GetVelocityX() << std::endl;*/
 	}
 	
 	// Check isGround
