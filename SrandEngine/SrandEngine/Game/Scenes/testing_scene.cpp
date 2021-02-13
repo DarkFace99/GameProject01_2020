@@ -343,7 +343,7 @@ void TestingScene::Init()
         gameObject->GetComponent<Animator>().PlayState("NPC_SAD");
 
         gameObject->AddComponent<BoxCollider2D>(BoxCollider2D::ASSET_COLLISION, gameObject->GetComponent<Transform>().scale.x - 20, gameObject->GetComponent<Transform>().scale.y,
-            true /* overlap */, false /* movable */, "BENNY_ANIM_MESH", &camera);
+            true /* overlap */, false /* movable *//*, "BENNY_ANIM_MESH", &camera*/);
         gameObject->AddComponent<NPC>();
 
         npc = gameObject;
@@ -365,7 +365,7 @@ void TestingScene::Init()
         gameObject->GetComponent<Animator>().SetState("BENNY_JUMP", 18, 18);
         gameObject->GetComponent<Animator>().SetState("BENNY_FALL", 19, 19);
         gameObject->AddComponent<BoxCollider2D>(BoxCollider2D::CHARACTER_COLLISION, gameObject->GetComponent<Transform>().scale.x - 20, gameObject->GetComponent<Transform>().scale.y,
-            false /* overlap */, true /* movable */, "BENNY_ANIM_MESH", &camera);
+            false /* overlap */, true /* movable *//*, "BENNY_ANIM_MESH", &camera*/);
 
         gameObject->AddComponent<Benny>(); // test CC mechanics
 
@@ -389,7 +389,7 @@ void TestingScene::Init()
         gameObject->GetComponent<Animator>().SetState("BENNY_RUN", 13, 19);
         gameObject->AddComponent<BoxCollider2D>(BoxCollider2D::CHARACTER_COLLISION, gameObject->GetComponent<Transform>().scale.x - 20, gameObject->GetComponent<Transform>().scale.y,
             false /* overlap */, true /* movable *//*, "BENNY_ANIM_MESH", &camera*/);
-
+        
         //gameObject->AddComponent<Macho>(); // test CC mechanics
 
         macho = gameObject;

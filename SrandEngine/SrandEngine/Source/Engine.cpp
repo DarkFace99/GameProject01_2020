@@ -107,6 +107,8 @@ namespace Srand
         sceneManager[0]->Draw();
         user_interface.UpdateUserInterface();
 
+        user_interface.UpdateUserInterface();
+
         glfwSwapBuffers(WindowProperties::get());
     }
 

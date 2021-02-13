@@ -133,7 +133,7 @@ void Collision::CC_Collision_Push(GameObject& objA, GameObject& objB) {
 	else{ isDir_P = (colA.modifyPosition.x +rigA.GetVelocityX() > colB.modifyPosition.x); }
 
 
-	std::cout << "\nPreCal----------------------------" << std::endl;
+	/*std::cout << "\nPreCal----------------------------" << std::endl;
 	std::cout << "Current_Vel:" << rigA.GetVelocity() << std::endl;
 	std::cout << "colA_modifyPosition_X:" << colA.modifyPosition.x << std::endl;
 	std::cout << "colA_modifyPosition_Y:" << colA.modifyPosition.y << std::endl;
@@ -148,29 +148,29 @@ void Collision::CC_Collision_Push(GameObject& objA, GameObject& objB) {
 	std::cout << "\nRatio_VecX:" << abs(colA.modifyPosition.x + rigA.GetVelocityX() - colB.modifyPosition.x) / ((colA.width + colB.width) / 2.0f) << std::endl;
 	std::cout << "Ratio_VecY:" << abs(colA.modifyPosition.y + rigA.GetVelocityY() - colB.modifyPosition.y) / ((colA.height + colB.height) / 2.0f) << std::endl;
 	std::cout << "isAxisY:" << isAxis_Y << std::endl;
-	std::cout << "isDir_P:" << isDir_P << std::endl; 
+	std::cout << "isDir_P:" << isDir_P << std::endl; */
 
 	if (isAxis_Y) {
 		//  distance to move = Egde of desired pos - current pos ( currently overlap )
 		float vecPush_Y = colB.modifyPosition.y + (((colA.height + colB.height) / 2.0f) * ((isDir_P) ? 1 : -1)) - (colA.modifyPosition.y + rigA.GetVelocityY()); // not sure
 		rigA.SetVelocityY(rigA.GetVelocityY() + vecPush_Y);
-		std::cout << "\nCalY" << std::endl;
+		/*std::cout << "\nCalY" << std::endl;
 		std::cout << "Edge_Y:" << colB.modifyPosition.y + (((colA.height + colB.height) / 2.0f) * ((isDir_P) ? 1 : -1)) << std::endl;
 		std::cout << "vecPush_Y:" << vecPush_Y << std::endl;
-		std::cout << "vecNew_Y:" << rigA.GetVelocityY() << std::endl;
+		std::cout << "vecNew_Y:" << rigA.GetVelocityY() << std::endl;*/
 	}
 	else {
 		//  distance to move = Egde of desired pos - current pos ( currently overlap )
 		float vecPush_X = colB.modifyPosition.x + (((colA.width + colB.width) / 2.0f) * ((isDir_P) ? 1 : -1)) - (colA.modifyPosition.x + rigA.GetVelocityX()); // not sure
 		rigA.SetVelocityX(rigA.GetVelocityX() + vecPush_X);
-		std::cout << "\nCalX" << std::endl;
+		/*std::cout << "\nCalX" << std::endl;
 		std::cout << "Edge_X:" << colB.modifyPosition.x + (((colA.width + colB.width) / 2.0f) * ((isDir_P) ? 1 : -1)) << std::endl;
 		std::cout << "vecPush_X:" << vecPush_X << std::endl;
-		std::cout << "vecNew_X:" << rigA.GetVelocityX() << std::endl;
+		std::cout << "vecNew_X:" << rigA.GetVelocityX() << std::endl;*/
 	}
 	
 	// Check isGround
-	//if (isAxis_Y && isDir_P) { colA.SetIsGround(true); }
+	if (isAxis_Y && isDir_P) { colA.SetIsGround(true); }
 
 }
 
