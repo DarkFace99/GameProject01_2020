@@ -13,6 +13,16 @@ Camera camera(glm::vec3(0, 0, 0), glm::vec3(0, 0, -1), glm::vec3(0, 1, 0), 1.0f,
 ObjManager& objManager = ObjManager::get();
 GameObject* gameObject;
 
+GameObject* npc;
+GameObject* player;
+
+GameObject* button1;
+GameObject* button2;
+GameObject* button3;
+
+GameObject* benny;
+GameObject* macho;
+
 TestingScene::TestingScene()
 	: Scene("TestingScene")
 {}
@@ -24,16 +34,6 @@ TestingScene::~TestingScene()
 void TestingScene::Init()
 {
     manager = &EntityManager::get();
-
-    GameObject* npc;
-    GameObject* player;
-
-    GameObject* button1;
-    GameObject* button2;
-    GameObject* button3;
-
-    GameObject* benny;
-    GameObject* macho;
 
     std::vector<glm::vec4> tile_info;
 
@@ -397,11 +397,12 @@ void TestingScene::Init()
     }
 
 #pragma endregion
-
+    
 }
 void TestingScene::Clean()
 {
-
+    manager->Clean();
+    objManager.Clean();
 }
 void TestingScene::Draw()
 {

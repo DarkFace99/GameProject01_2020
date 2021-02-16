@@ -42,6 +42,11 @@ namespace Srand
 				m_vectorIndex--;
 			}
 		}
+		inline void Clean() 
+		{
+			m_objVector.clear();
+			m_vectorIndex = 0;
+		}
 
 		inline int VectorSize() { return m_objVector.size(); }
 		GameObject* operator[](int i) { return m_objVector[i]; }

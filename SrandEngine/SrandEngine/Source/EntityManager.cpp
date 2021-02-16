@@ -26,7 +26,8 @@ namespace Srand
 	}
 	void EntityManager::Clean()
 	{
-		// Clean when changing scene  
+		// Clean when changing scene
+		gameObjects.clear();
 	}
 
 	void EntityManager::AddEntity(GameObject* _gameObj)
@@ -38,7 +39,12 @@ namespace Srand
 	}
 	void EntityManager::DestroyEntity(GameObject* _gameObj)
 	{
-
+		std::unique_ptr<GameObject> uniquePtr{ _gameObj };
+		auto it = std::find(gameObjects.begin(), gameObjects.end(), uniquePtr);
+		if (it != gameObjects.end())
+		{
+			gameObjects.erase(it);
+		}
 	}
 
 	GameObject* EntityManager::CloneEntity(GameObject* _gameObj)

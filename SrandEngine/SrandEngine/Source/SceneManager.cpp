@@ -51,4 +51,10 @@ namespace Srand
 				return scene;
 		}
 	}
+	void SceneManager::Clear()
+	{
+		m_sceneVector.clear();
+		m_vectorIndex = 0;
+		m_currentLevelIndex = 0;
+	}
 }
