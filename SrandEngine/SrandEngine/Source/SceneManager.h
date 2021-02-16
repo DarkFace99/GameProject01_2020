@@ -36,6 +36,8 @@ namespace Srand
 		Scene* Search(Scene* sce);
 		Scene* Search(const std::string name);
 
+		void Clear();
+
 		inline int VectorSize() { return m_sceneVector.size(); }
 		Scene* operator[](int i) { return m_sceneVector[i]; }
 
