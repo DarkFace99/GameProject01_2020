@@ -1,3 +1,5 @@
+#include <Windows.h>
+
 #include <iostream>
 #define _CRTDBG_MAP_ALLOC //to get more details
 #include <stdlib.h>
@@ -10,6 +12,7 @@ int main(int argc, char** argv) {
 	HANDLE mutex = CreateMutex(NULL, TRUE, L"BENNY: Everyone is Happy");
 	if (GetLastError() == ERROR_ALREADY_EXISTS) 
 	{
+		MessageBox(NULL, L"Multiple Instances of Application", NULL, MB_ICONERROR | MB_OK);
 		return 0;
 	}
 
@@ -27,15 +30,10 @@ int main(int argc, char** argv) {
 
 	float lastFrameTime = 0;
 
-	while (engine.IsRunning()) {
-		/*float time = (float)glfwGetTime();
-		timeStep = time - lastFrameTime;
-		lastFrameTime = time;*/
-
+	while (engine.IsRunning()) 
+	{
 		engine.Event();
 		engine.Update();
-
-		//engine.FixedUpdate(timeStep);	// need to impliment time later
 
 		engine.Draw();
 	}
