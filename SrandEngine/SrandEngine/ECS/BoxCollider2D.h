@@ -40,7 +40,7 @@ private:
 
 	bool isGround;
 	
-	glm::vec2 modifyPosition;
+	Vector2D_float modifyPosition;
 
 public:
 	BoxCollider2D(CollisionTag tag, float width, float height, bool overlap = false, bool movable = false, std::string meshID = "", Camera* camera = nullptr)
@@ -68,12 +68,12 @@ public:
 			mesh = AssetManager::get().GetMesh(meshID);
 		}
 
-		modifyPosition = glm::vec2(transform->position.x + offsetX, transform->position.y + offsetY);
+		modifyPosition = Vector2D_float(transform->position.x + offsetX, transform->position.y + offsetY);
 		return true;
 	}
 
 	void Update() override final {
-		modifyPosition = glm::vec2(transform->position.x + offsetX, transform->position.y + offsetY);
+		modifyPosition = Vector2D_float(transform->position.x + offsetX, transform->position.y + offsetY);
 	}
 
 	void Draw() override final {

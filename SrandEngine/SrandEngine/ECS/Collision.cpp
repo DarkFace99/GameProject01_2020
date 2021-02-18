@@ -113,7 +113,7 @@ bool Collision::CC_AABB(GameObject& objA, GameObject& objB) {	// A is main Obj
 	if (isCollide) {
 
 		if ((colA.allowOverlap || colB.allowOverlap) == false) {
-			CC_Collision_Push(objA, objB);
+			CC_Collision_Push(rigA, colA, colB);
 		}
 		//IsOnGround(objA, objB);
 	}
@@ -121,57 +121,141 @@ bool Collision::CC_AABB(GameObject& objA, GameObject& objB) {	// A is main Obj
 	return isCollide;
 }
 
-void Collision::CC_Collision_Push(GameObject& objA, GameObject& objB) {
-	BoxCollider2D& colA = objA.GetComponent<BoxCollider2D>();
-	BoxCollider2D& colB = objB.GetComponent<BoxCollider2D>();
-	RigidBody& rigA = objA.GetComponent<RigidBody>();
+//void Collision::CC_Collision_Push(RigidBody& rigA, BoxCollider2D& colA, BoxCollider2D& colB) {
+//
+//	bool isAxis_Y = abs(colA.modifyPosition.x + rigA.GetVelocityX() - colB.modifyPosition.x) / ((colA.width + colB.width) / 2.0f)
+//					< abs(colA.modifyPosition.y + rigA.GetVelocityY() - colB.modifyPosition.y) / ((colA.height + colB.height) / 2.0f);
+//	bool isDir_P;
+//	if (isAxis_Y) { isDir_P = (colA.modifyPosition.y + rigA.GetVelocityY() > colB.modifyPosition.y); }
+//	else{ isDir_P = (colA.modifyPosition.x +rigA.GetVelocityX() > colB.modifyPosition.x); }
+//
+//
+//	/*std::cout << "\nPreCal----------------------------" << std::endl;
+//	std::cout << "Current_Vel:" << rigA.GetVelocity() << std::endl;
+//	std::cout << "colA_modifyPosition_X:" << colA.modifyPosition.x << std::endl;
+//	std::cout << "colA_modifyPosition_Y:" << colA.modifyPosition.y << std::endl;
+//	std::cout << "colB_modifyPosition_X:" << colB.modifyPosition.x << std::endl;
+//	std::cout << "colB_modifyPosition_Y:" << colB.modifyPosition.y << std::endl;
+//
+//	std::cout << "\Vector_PosX:" << abs(colA.modifyPosition.x + rigA.GetVelocityX() - colB.modifyPosition.x) << std::endl;
+//	std::cout << "X_Multiplier:" << ((colA.width + colB.width) / 2.0f) << std::endl;
+//	std::cout << "Vector_PosY:" << abs(colA.modifyPosition.y + rigA.GetVelocityY() - colB.modifyPosition.y) << std::endl;
+//	std::cout << "Y_Multiplier:" << ((colA.height + colB.height) / 2.0f) << std::endl;
+//
+//	std::cout << "\nRatio_VecX:" << abs(colA.modifyPosition.x + rigA.GetVelocityX() - colB.modifyPosition.x) / ((colA.width + colB.width) / 2.0f) << std::endl;
+//	std::cout << "Ratio_VecY:" << abs(colA.modifyPosition.y + rigA.GetVelocityY() - colB.modifyPosition.y) / ((colA.height + colB.height) / 2.0f) << std::endl;
+//	std::cout << "isAxisY:" << isAxis_Y << std::endl;
+//	std::cout << "isDir_P:" << isDir_P << std::endl; */
+//
+//	if (isAxis_Y) {
+//		//  distance to move = Egde of desired pos - current pos ( currently overlap )
+//		float vecPush_Y = colB.modifyPosition.y + (((colA.height + colB.height) / 2.0f) * ((isDir_P) ? 1 : -1)) - (colA.modifyPosition.y + rigA.GetVelocityY()); // not sure
+//		rigA.SetVelocityY(rigA.GetVelocityY() + vecPush_Y);
+//		/*std::cout << "\nCalY" << std::endl;
+//		std::cout << "Edge_Y:" << colB.modifyPosition.y + (((colA.height + colB.height) / 2.0f) * ((isDir_P) ? 1 : -1)) << std::endl;
+//		std::cout << "vecPush_Y:" << vecPush_Y << std::endl;
+//		std::cout << "vecNew_Y:" << rigA.GetVelocityY() << std::endl;*/
+//	}
+//	else {
+//		//  distance to move = Egde of desired pos - current pos ( currently overlap )
+//		float vecPush_X = colB.modifyPosition.x + (((colA.width + colB.width) / 2.0f) * ((isDir_P) ? 1 : -1)) - (colA.modifyPosition.x + rigA.GetVelocityX()); // not sure
+//		rigA.SetVelocityX(rigA.GetVelocityX() + vecPush_X);
+//		/*std::cout << "\nCalX" << std::endl;
+//		std::cout << "Edge_X:" << colB.modifyPosition.x + (((colA.width + colB.width) / 2.0f) * ((isDir_P) ? 1 : -1)) << std::endl;
+//		std::cout << "vecPush_X:" << vecPush_X << std::endl;
+//		std::cout << "vecNew_X:" << rigA.GetVelocityX() << std::endl;*/
+//	}
+//	
+//	// Check isGround
+//	if (isAxis_Y && isDir_P) { colA.SetIsGround(true); }
+//
+//}
 
-	bool isAxis_Y = abs(colA.modifyPosition.x + rigA.GetVelocityX() - colB.modifyPosition.x) / ((colA.width + colB.width) / 2.0f)
-					< abs(colA.modifyPosition.y + rigA.GetVelocityY() - colB.modifyPosition.y) / ((colA.height + colB.height) / 2.0f);
-	bool isDir_P;
-	if (isAxis_Y) { isDir_P = (colA.modifyPosition.y + rigA.GetVelocityY() > colB.modifyPosition.y); }
-	else{ isDir_P = (colA.modifyPosition.x +rigA.GetVelocityX() > colB.modifyPosition.x); }
+void Collision::CC_Collision_Push(RigidBody& rigA, BoxCollider2D& colA, BoxCollider2D& colB) {
 
-
-	/*std::cout << "\nPreCal----------------------------" << std::endl;
-	std::cout << "Current_Vel:" << rigA.GetVelocity() << std::endl;
-	std::cout << "colA_modifyPosition_X:" << colA.modifyPosition.x << std::endl;
-	std::cout << "colA_modifyPosition_Y:" << colA.modifyPosition.y << std::endl;
-	std::cout << "colB_modifyPosition_X:" << colB.modifyPosition.x << std::endl;
-	std::cout << "colB_modifyPosition_Y:" << colB.modifyPosition.y << std::endl;
-
-	std::cout << "\Vector_PosX:" << abs(colA.modifyPosition.x + rigA.GetVelocityX() - colB.modifyPosition.x) << std::endl;
-	std::cout << "X_Multiplier:" << ((colA.width + colB.width) / 2.0f) << std::endl;
-	std::cout << "Vector_PosY:" << abs(colA.modifyPosition.y + rigA.GetVelocityY() - colB.modifyPosition.y) << std::endl;
-	std::cout << "Y_Multiplier:" << ((colA.height + colB.height) / 2.0f) << std::endl;
-
-	std::cout << "\nRatio_VecX:" << abs(colA.modifyPosition.x + rigA.GetVelocityX() - colB.modifyPosition.x) / ((colA.width + colB.width) / 2.0f) << std::endl;
-	std::cout << "Ratio_VecY:" << abs(colA.modifyPosition.y + rigA.GetVelocityY() - colB.modifyPosition.y) / ((colA.height + colB.height) / 2.0f) << std::endl;
-	std::cout << "isAxisY:" << isAxis_Y << std::endl;
-	std::cout << "isDir_P:" << isDir_P << std::endl; */
-
-	if (isAxis_Y) {
-		//  distance to move = Egde of desired pos - current pos ( currently overlap )
-		float vecPush_Y = colB.modifyPosition.y + (((colA.height + colB.height) / 2.0f) * ((isDir_P) ? 1 : -1)) - (colA.modifyPosition.y + rigA.GetVelocityY()); // not sure
-		rigA.SetVelocityY(rigA.GetVelocityY() + vecPush_Y);
-		/*std::cout << "\nCalY" << std::endl;
-		std::cout << "Edge_Y:" << colB.modifyPosition.y + (((colA.height + colB.height) / 2.0f) * ((isDir_P) ? 1 : -1)) << std::endl;
-		std::cout << "vecPush_Y:" << vecPush_Y << std::endl;
-		std::cout << "vecNew_Y:" << rigA.GetVelocityY() << std::endl;*/
-	}
-	else {
-		//  distance to move = Egde of desired pos - current pos ( currently overlap )
-		float vecPush_X = colB.modifyPosition.x + (((colA.width + colB.width) / 2.0f) * ((isDir_P) ? 1 : -1)) - (colA.modifyPosition.x + rigA.GetVelocityX()); // not sure
-		rigA.SetVelocityX(rigA.GetVelocityX() + vecPush_X);
-		/*std::cout << "\nCalX" << std::endl;
-		std::cout << "Edge_X:" << colB.modifyPosition.x + (((colA.width + colB.width) / 2.0f) * ((isDir_P) ? 1 : -1)) << std::endl;
-		std::cout << "vecPush_X:" << vecPush_X << std::endl;
-		std::cout << "vecNew_X:" << rigA.GetVelocityX() << std::endl;*/
-	}
+	// hotspot var
+	std::vector<int> collideSpot;
+	int hPerSide = 2;				// for each side
+	float percent_Offset = 15;			// where the first point willl be scaling from corner (less than 100)
 	
-	// Check isGround
-	if (isAxis_Y && isDir_P) { colA.SetIsGround(true); }
+	float firstOffset_X = colA.width * percent_Offset / 100.0f;
+	float firstOffset_Y = colA.height * percent_Offset / 100.0f;
+	float betweenPoint_X = (colA.width * (100.0f - (percent_Offset * 2)) / 100.0f) / (float)(hPerSide - 1);
+	float betweenPoint_Y = (colA.height * (100.0f - (percent_Offset * 2)) / 100.0f) / (float)(hPerSide - 1);
+	
+	// Y_right
+	for (int i = 0; i < hPerSide; i++) {
+		Vector2D_float hPoint = colA.modifyPosition + rigA.GetVelocity() + Vector2D_float(colA.width / 2.0f, colA.height / 2.0f)/*top-right*/
+			+ Vector2D_float(0.0f, -(firstOffset_Y + (float)(betweenPoint_Y * i)));
+		bool isCollide = (hPoint.x >= colB.modifyPosition.x - (colB.width / 2.0f)) &&
+			(hPoint.x <= colB.modifyPosition.x + (colB.width / 2.0f)) &&
+			(hPoint.y >= colB.modifyPosition.y - (colB.height / 2.0f)) &&
+			(hPoint.y <= colB.modifyPosition.y + (colB.height / 2.0f));
+		
+		if (isCollide) { collideSpot.push_back(1); } // 1 => right
+	}
 
+	// Y_left
+	for (int i = 0; i < hPerSide; i++) {
+		Vector2D_float hPoint = colA.modifyPosition + rigA.GetVelocity() + Vector2D_float(-colA.width / 2.0f, colA.height / 2.0f)/*top-left*/
+			+ Vector2D_float(0.0f, -(firstOffset_Y + (float)(betweenPoint_Y * i)));
+		bool isCollide = (hPoint.x >= colB.modifyPosition.x - (colB.width / 2.0f)) &&
+			(hPoint.x <= colB.modifyPosition.x + (colB.width / 2.0f)) &&
+			(hPoint.y >= colB.modifyPosition.y - (colB.height / 2.0f)) &&
+			(hPoint.y <= colB.modifyPosition.y + (colB.height / 2.0f));
+
+		if (isCollide) { collideSpot.push_back(2); } // 2 => left
+	}
+
+	// X_Top
+	for (int i = 0; i < hPerSide; i++) {
+		Vector2D_float hPoint = colA.modifyPosition + rigA.GetVelocity() + Vector2D_float(-colA.width / 2.0f, colA.height / 2.0f)/*top-left*/
+			+ Vector2D_float((firstOffset_X + (float)(betweenPoint_X * i)), 0.0f);
+		bool isCollide = (hPoint.x >= colB.modifyPosition.x - (colB.width / 2.0f)) &&
+			(hPoint.x <= colB.modifyPosition.x + (colB.width / 2.0f)) &&
+			(hPoint.y >= colB.modifyPosition.y - (colB.height / 2.0f)) &&
+			(hPoint.y <= colB.modifyPosition.y + (colB.height / 2.0f));
+
+		if (isCollide) { collideSpot.push_back(3); } // 3 => top
+	}
+
+	// X_Bottom
+	for (int i = 0; i < hPerSide; i++) {
+		Vector2D_float hPoint = colA.modifyPosition + rigA.GetVelocity() + Vector2D_float(-colA.width / 2.0f, -colA.height / 2.0f)/*bottom-left*/
+			+ Vector2D_float((firstOffset_X + (float)(betweenPoint_X * i)), 0.0f);
+		bool isCollide = (hPoint.x >= colB.modifyPosition.x - (colB.width / 2.0f)) &&
+			(hPoint.x <= colB.modifyPosition.x + (colB.width / 2.0f)) &&
+			(hPoint.y >= colB.modifyPosition.y - (colB.height / 2.0f)) &&
+			(hPoint.y <= colB.modifyPosition.y + (colB.height / 2.0f));
+
+		if (isCollide) { collideSpot.push_back(4); } // 4 => bottom
+	}
+	float vecPush;
+	if (collideSpot.empty()) { return; }
+
+	switch (collideSpot[0]) {
+		case 1: // right
+			printf("right\n");
+			vecPush = colB.modifyPosition.x + (((colA.width + colB.width) / 2.0f) * -1 ) - (colA.modifyPosition.x + rigA.GetVelocityX());
+			rigA.SetVelocityX(rigA.GetVelocityX() + vecPush);
+			break;
+		case 2: // left
+			printf("left\n");
+			vecPush = colB.modifyPosition.x + (((colA.width + colB.width) / 2.0f) * 1) - (colA.modifyPosition.x + rigA.GetVelocityX());
+			rigA.SetVelocityX(rigA.GetVelocityX() + vecPush);
+			break;
+		case 3:	// top
+			printf("top\n");
+			vecPush = colB.modifyPosition.y + (((colA.height + colB.height) / 2.0f) * -1) - (colA.modifyPosition.y + rigA.GetVelocityY());
+			rigA.SetVelocityY(rigA.GetVelocityY() + vecPush);
+			break;
+		case 4: // bottom
+			printf("bottom\n");
+			vecPush = colB.modifyPosition.y + (((colA.height + colB.height) / 2.0f) * 1) - (colA.modifyPosition.y + rigA.GetVelocityY());
+			rigA.SetVelocityY(rigA.GetVelocityY() + vecPush);
+			break;
+	}
+	collideSpot.clear();
 }
 
 //bool Collision::IsOnGround(GameObject& objA, GameObject& objB) {
