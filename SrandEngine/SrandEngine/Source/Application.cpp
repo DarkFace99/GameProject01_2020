@@ -7,6 +7,8 @@
 
 #include "Engine.h"
 
+const float dt = 0.01f;
+
 int main(int argc, char** argv) {
 
 	HANDLE mutex = CreateMutex(NULL, TRUE, L"BENNY: Everyone is Happy");
@@ -22,6 +24,8 @@ int main(int argc, char** argv) {
 	_CrtMemCheckpoint(&sOld); //take a snapchot
 
 	Srand::Engine& engine = Srand::Engine::get();
+	glfwSetTime(0);
+	Srand::TimeStep& timeStep = Srand::TimeStep::get();
 
 	Srand::Log::Init();
 	SR_SYSTEM_INFO("Initializing Log...");
@@ -33,7 +37,15 @@ int main(int argc, char** argv) {
 	while (engine.IsRunning()) 
 	{
 		engine.Event();
-		engine.Update();
+		timeStep.Update();
+
+		while (timeStep.accumulator >= dt) 
+		{
+			engine.Update();
+			timeStep.accumulator -= dt;
+		}
+		SR_SYSTEM_TRACE("Accumulator: {0}", timeStep.accumulator);
+		SR_SYSTEM_TRACE("m_Time: {0}", timeStep.GetSeconds());
 
 		engine.Draw();
 	}

@@ -10,6 +10,7 @@ namespace Srand
 		float m_Time;
 		float lastFrameTime = 0.0f;
 	public:
+		float accumulator;
 
 		static TimeStep* s_instance;
 		static TimeStep& get() {
@@ -26,7 +27,10 @@ namespace Srand
 		{
 			float time = (float)glfwGetTime();
 			m_Time = time - lastFrameTime;
+			if (m_Time > 0.25f)
+				m_Time = 0.25f;
 			lastFrameTime = time;
+			accumulator += m_Time;
 		}
 
 		operator float() const { return m_Time; }
