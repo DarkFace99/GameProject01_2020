@@ -59,7 +59,7 @@ namespace Srand
 			glfwMakeContextCurrent(window);
 
 			/*Vsync on = 1, off = 0*/
-			glfwSwapInterval(GetVsyncStatus());
+			glfwSwapInterval(enableVsync);
 		}
 
 	public:
@@ -92,7 +92,7 @@ namespace Srand
 	{
 	private:
 		ImGuiIO io;
-		bool vSync = true;
+		bool vSync = false;
 		bool show_demo_window = false;
 
 	public:
@@ -122,6 +122,14 @@ namespace Srand
 			{
 				ImGui::ShowDemoWindow(&show_demo_window);
 			}
+			if (vSync) 
+			{
+				WindowProperties::get().SetVsync(true);
+			}
+			else 
+			{
+				WindowProperties::get().SetVsync(false);
+			}
 
 			ImGui::Begin("Debug Console");
 
@@ -129,7 +137,6 @@ namespace Srand
 			ImGui::Text("FPS: %.3f", ImGui::GetIO().Framerate);
 			ImGui::Checkbox("Enable Vsync", &vSync);
 			ImGui::Checkbox("Show Demo Window", &show_demo_window);
-			WindowProperties::get().SetVsync(vSync);
 
 			ImGui::End();
 

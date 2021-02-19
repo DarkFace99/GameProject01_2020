@@ -42,14 +42,14 @@ public:						// Not sure if this the best way to implement it.
 		if (boxCollider2D->GetIsGround()) { rigidBody->SetVelocityY(0.0f); }
 		
 		if(input.IsKeyPressed(SR_KEY_UP) && canJump && boxCollider2D->GetIsGround()) {
-			rigidBody->SetVelocityY(5.0f);
+			rigidBody->SetVelocityY(8.0f);
 		}
 
 		if (input.IsKeyPressed(SR_KEY_LEFT) && input.IsKeyPressed(SR_KEY_RIGHT)) {} // do nothing
 		else if (input.IsKeyPressed(SR_KEY_LEFT)) {
-			rigidBody->SetVelocityX(-5.0f);
+			rigidBody->SetVelocityX(-2.0f);
 		}else if (input.IsKeyPressed(SR_KEY_RIGHT)) {
-			rigidBody->SetVelocityX(5.0f);
+			rigidBody->SetVelocityX(2.0f);
 		}	
 	}
 	void Collision_Check() { 

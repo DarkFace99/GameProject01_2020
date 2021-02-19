@@ -119,6 +119,8 @@ namespace Srand
 
         //timeStep->Update();
 
+        //SR_SYSTEM_TRACE("Vsync: {0}" ,WindowProperties::get().GetVsyncStatus());
+
         //For Testing SceneManager Only
         sceneManager[0]->Update();
 
