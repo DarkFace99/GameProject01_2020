@@ -175,8 +175,8 @@ void Collision::CC_Collision_Push(RigidBody& rigA, BoxCollider2D& colA, BoxColli
 
 	// hotspot var
 	std::vector<int> collideSpot;
-	int hPerSide = 2;				// for each side
-	float percent_Offset = 15;			// where the first point willl be scaling from corner (less than 100)
+	int hPerSide = 3;				// for each side (more than 1)
+	float percent_Offset = 1;			// where the first point willl be scaling from corner (less than 100)
 	
 	float firstOffset_X = colA.width * percent_Offset / 100.0f;
 	float firstOffset_Y = colA.height * percent_Offset / 100.0f;
@@ -276,6 +276,7 @@ void Collision::CC_Collision_Push(RigidBody& rigA, BoxCollider2D& colA, BoxColli
 			/*printf("bottom\n");*/
 			vecPush = colB.modifyPosition.y + (((colA.height + colB.height) / 2.0f) * 1) - (colA.modifyPosition.y + rigA.GetVelocityY());
 			rigA.SetVelocityY(rigA.GetVelocityY() + vecPush);
+			colA.SetIsGround(true);
 			break;
 	}
 	
