@@ -230,32 +230,55 @@ void Collision::CC_Collision_Push(RigidBody& rigA, BoxCollider2D& colA, BoxColli
 
 		if (isCollide) { collideSpot.push_back(4); } // 4 => bottom
 	}
-	float vecPush;
+	
 	if (collideSpot.empty()) { return; }
 
-	switch (collideSpot[0]) {
+	int maxSide		= 0;
+	int curSide		= 0;
+	int maxCount	= 0;
+	int curCount	= 0;
+	for (auto i : collideSpot) {
+		if (i == curSide) {
+			curCount++;
+		}
+		else if (i != curSide) {
+			curSide = i;
+			curCount = 1;
+		}
+
+		if (curCount > maxCount) {
+			maxSide = curSide;
+			maxCount = curCount;
+		}
+	}
+	collideSpot.clear();
+	
+	/*std::cout << maxSide << std::endl;*/
+
+	float vecPush;
+	switch (maxSide) {
 		case 1: // right
-			printf("right\n");
+			/*printf("right\n");*/
 			vecPush = colB.modifyPosition.x + (((colA.width + colB.width) / 2.0f) * -1 ) - (colA.modifyPosition.x + rigA.GetVelocityX());
 			rigA.SetVelocityX(rigA.GetVelocityX() + vecPush);
 			break;
 		case 2: // left
-			printf("left\n");
+			/*printf("left\n");*/
 			vecPush = colB.modifyPosition.x + (((colA.width + colB.width) / 2.0f) * 1) - (colA.modifyPosition.x + rigA.GetVelocityX());
 			rigA.SetVelocityX(rigA.GetVelocityX() + vecPush);
 			break;
 		case 3:	// top
-			printf("top\n");
+			/*printf("top\n");*/
 			vecPush = colB.modifyPosition.y + (((colA.height + colB.height) / 2.0f) * -1) - (colA.modifyPosition.y + rigA.GetVelocityY());
 			rigA.SetVelocityY(rigA.GetVelocityY() + vecPush);
 			break;
 		case 4: // bottom
-			printf("bottom\n");
+			/*printf("bottom\n");*/
 			vecPush = colB.modifyPosition.y + (((colA.height + colB.height) / 2.0f) * 1) - (colA.modifyPosition.y + rigA.GetVelocityY());
 			rigA.SetVelocityY(rigA.GetVelocityY() + vecPush);
 			break;
 	}
-	collideSpot.clear();
+	
 }
 
 //bool Collision::IsOnGround(GameObject& objA, GameObject& objB) {
