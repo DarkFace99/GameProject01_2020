@@ -8,20 +8,24 @@
 #include "Entity/NPC.h"
 #include "Entity/Benny.h"
 #include "Entity/Macho.h"
+#include "Entity/Cherry.h"
+#include "Entity/Pear.h"
+#include "Entity/Barter.h"
 
 Camera camera(glm::vec3(0, 0, 0), glm::vec3(0, 0, -1), glm::vec3(0, 1, 0), 1.0f, 0.0f);
 ObjManager& objManager = ObjManager::get();
 GameObject* gameObject;
 
-GameObject* npc;
-GameObject* player;
+//GameObject* npc;
+//GameObject* player;
+//GameObject* benny;
+//GameObject* macho;
 
 GameObject* button1;
 GameObject* button2;
 GameObject* button3;
 
-GameObject* benny;
-GameObject* macho;
+
 
 TestingScene::TestingScene()
 	: Scene("TestingScene")
@@ -346,7 +350,7 @@ void TestingScene::Init()
             true /* overlap */, false /* movable *//*, "BENNY_ANIM_MESH", &camera*/);
         gameObject->AddComponent<NPC>();
 
-        npc = gameObject;
+        /*npc = gameObject;*/
         objManager.PushObject(gameObject);
     }
 
@@ -369,8 +373,8 @@ void TestingScene::Init()
 
         gameObject->AddComponent<Benny>(); // test CC mechanics
 
-        player = gameObject; // check collision
-        benny = player;
+        //player = gameObject; // check collision
+        //benny = player;
 
         objManager.PushObject(gameObject);
     }
@@ -392,7 +396,8 @@ void TestingScene::Init()
         
         //gameObject->AddComponent<Macho>(); // test CC mechanics
 
-        macho = gameObject;
+        gameObject->AddComponent<Pear>();
+        /*macho = gameObject;*/
         objManager.PushObject(gameObject);
     }
 

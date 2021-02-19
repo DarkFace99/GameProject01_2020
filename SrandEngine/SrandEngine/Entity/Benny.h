@@ -65,14 +65,16 @@ public:
 	~Benny() = default;
 
 	bool Init() override final {
+		SetActive(true);
 		SetUp();
+		
 		return true;
 	}
 
 	void Update() override final {
-		Input_Movement(true);
+		rigidBody->Update_Gravity();
+		if (isActive) { Input_Movement(true); }
 		AnimationController(); // place before collision check because, it will change velocity and may result in weird animation  
-
 		Collision_Check();
 		Execute();
 	}
@@ -92,14 +94,20 @@ public:
 				animator->PlayState("BENNY_IDLE");
 			}
 		}
-		else{ // airborne
-			if (rigidBody->GetVelocityY() > 0) {
-				animator->PlayState("BENNY_JUMP");
-			}
-			else {
-				animator->PlayState("BENNY_FALL");
-			}
-		}
+		//else{ // airborne
+		//	if (rigidBody->GetVelocityY() > 0) {
+		//		animator->PlayState("BENNY_JUMP");
+		//	}
+		//	else {
+		//		animator->PlayState("BENNY_FALL");
+		//	}
+		//}
 	}
 
+	void SetRadius(float r) {
+		radius = r;
+	}
+	float GetRadius() {
+		return radius;
+	}
 };

@@ -17,6 +17,12 @@ public:
 		Input_Movement(false);
 	}
 
+	void CC::AnimationController() override {
+		// Flip
+		if (rigidBody->GetVelocityX() > 0) { renderer->SetFlip(false); }
+		else if (rigidBody->GetVelocityX() < 0) { renderer->SetFlip(true); }
+	}
+
 private:
 	Transform* targetTransform = nullptr;
 };

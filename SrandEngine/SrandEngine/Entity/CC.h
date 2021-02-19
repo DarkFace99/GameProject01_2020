@@ -29,8 +29,8 @@ public:						// Not sure if this the best way to implement it.
 		transform = &gameObject->GetComponent<Transform>(); 
 		rigidBody = &gameObject->GetComponent<RigidBody>();
 		boxCollider2D = &gameObject->GetComponent<BoxCollider2D>();
-		animator = &gameObject->GetComponent<Animator>();
 		renderer = &gameObject->GetComponent<SpriteRenderer>();
+		animator = &gameObject->GetComponent<Animator>();
 	}
 	//Transform* GetTransform(){ return transform; }
 
@@ -38,7 +38,7 @@ public:						// Not sure if this the best way to implement it.
 
 	void Input_Movement(bool canJump) {	// basic movement
 
-		rigidBody->Update_Gravity();
+		
 		if (boxCollider2D->GetIsGround()) { rigidBody->SetVelocityY(0.0f); }
 		
 		if(input.IsKeyPressed(SR_KEY_UP) && canJump && boxCollider2D->GetIsGround()) {
