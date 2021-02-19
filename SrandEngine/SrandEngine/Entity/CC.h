@@ -6,7 +6,6 @@
 #include "srpch.h"
 #include "ECS/Collision.h"
 
-
 class CC : public Component	// base class for CC
 {
 public:						// Not sure if this the best way to implement it. 
@@ -78,4 +77,5 @@ protected:
 	ccTag tag = ccTag::DEFAULT;
 	WindowsInput input;
 	ObjManager& objManager = ObjManager::get();
+	LevelManager& levelmanager = LevelManager::get();
 };

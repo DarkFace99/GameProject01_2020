@@ -13,16 +13,27 @@ public:
 		transform->SetPosition(temp);
 	}	
 
-	bool Init() {
+	bool Init() override final {
+		SetActive(false);
 		SetUp();
-		SetActive(true);
+		return true;
 	}
 
 	void Update() override final {
+		if (isActive) { 
+			SwapAbility(); 
+			SetActive(false);
+		}
 		rigidBody->Update_Gravity();
 		Collision_Check();
 		Execute();
 	}
+
+	void SetBarter(GameObject* benny) {
+		BennyTransform = &benny->GetComponent<Transform>();
+	}
+
+	void CC::AnimationController() override {}
 
 private:
 	Transform* BennyTransform = nullptr;

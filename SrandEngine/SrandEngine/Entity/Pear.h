@@ -11,7 +11,7 @@ public:
 	// wait for input section
 
 	bool Init() override final {
-		SetActive(true);
+		SetActive(false);
 		SetUp();
 		return true;
 	}

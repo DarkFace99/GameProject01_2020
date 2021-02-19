@@ -232,5 +232,6 @@
     <ClCompile Include="Source\ObjectManager.cpp">
       <Filter>SrandEngine</Filter>
     </ClCompile>
+    <ClCompile Include="Source\LevelManager.cpp" />
   </ItemGroup>
 </Project>

@@ -1,7 +1,6 @@
 #pragma once
 
 #include <vector>
-
 #include "CC.h"
 
 //class Benny : public CC {
@@ -53,9 +52,9 @@ class Benny : public CC {
 private:
 	GameObject* targetCC = nullptr;
 	Transform* targetTransform = nullptr;
-	float radius = 2000.0f;	// place holder 
+	float radius = 400.0f;	// place holder 
 	std::vector<CC*>connectList;
-
+	bool useAbility = false;
 public:
 	Benny() { SetTag(ccTag::BENNY); }
 	Benny(float r) { 
@@ -67,7 +66,6 @@ public:
 	bool Init() override final {
 		SetActive(true);
 		SetUp();
-		
 		return true;
 	}
 
@@ -77,6 +75,30 @@ public:
 		AnimationController(); // place before collision check because, it will change velocity and may result in weird animation  
 		Collision_Check();
 		Execute();
+
+		Ability();
+	}
+
+	void Ability() {
+		if (!useAbility) {
+			if (input.IsKeyPressed(SR_KEY_1)) {			// Cherry
+				levelManager.ActivateCherry();
+				useAbility = true;
+			}
+			else if (input.IsKeyPressed(SR_KEY_2)) {	// Pear
+				levelManager.ActivatePear();
+				useAbility = true;
+			}
+			else if (input.IsKeyPressed(SR_KEY_3)) {	// Barter
+				levelManager.ActivateBarter();
+				useAbility = true;
+			}
+		}
+
+		if (input.IsKeyPressed(SR_KEY_0)) {			// Cancel
+			levelManager.ClearActivation();
+			useAbility = false;
+		}
 	}
 
 	void CC::AnimationController() override {
