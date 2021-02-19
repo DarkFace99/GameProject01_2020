@@ -1,6 +1,5 @@
 #pragma once
 
-#include <vector>
 #include "CC.h"
 
 class Barter : public CC {
@@ -9,18 +8,22 @@ public:
 	~Barter() = default;
 
 	void SwapAbility() {
-		Vector2D_float temp_Pos = BennyTransform->position;
-		BennyTransform->position = GetTransform()->position;
-		GetTransform()->position = temp_Pos;
+		Vector2D_float temp = BennyTransform->position;
+		BennyTransform->SetPosition(transform->position);
+		transform->SetPosition(temp);
 	}	
 
 	bool Init() {
-		SetTransform();
+		SetUp();
+		SetActive(true);
+	}
 
-		// function to loop through objManager to find Benny for pos
+	void Update() override final {
+		rigidBody->Update_Gravity();
+		Collision_Check();
+		Execute();
 	}
 
 private:
 	Transform* BennyTransform = nullptr;
-
 };

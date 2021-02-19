@@ -44,8 +44,8 @@ int main(int argc, char** argv) {
 			engine.Update();
 			timeStep.accumulator -= dt;
 		}
-		SR_SYSTEM_TRACE("Accumulator: {0}", timeStep.accumulator);
-		SR_SYSTEM_TRACE("m_Time: {0}", timeStep.GetSeconds());
+		/*SR_SYSTEM_TRACE("Accumulator: {0}", timeStep.accumulator);
+		SR_SYSTEM_TRACE("m_Time: {0}", timeStep.GetSeconds());*/
 
 		engine.Draw();
 	}
