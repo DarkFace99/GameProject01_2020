@@ -71,12 +71,35 @@ public:
 
 	void Update() override final {
 		Input_Movement(true);
-		/*printf("\n\t---------------------------\n");
-		printf("\t-----------Update----------\n");
-		printf("\t---------------------------\n\n");*/
+		AnimationController(); // place before collision check because, it will change velocity and may result in weird animation  
+
 		Collision_Check();
-		//std::cout << rigidBody->GetVelocity() << std::endl;
 		Execute();
+	}
+
+	void CC::AnimationController() override {
+
+		// Flip
+		if (rigidBody->GetVelocityX() > 0) { renderer->SetFlip(false); }
+		else if(rigidBody->GetVelocityX() < 0) { renderer->SetFlip(true); }
+
+		// Animation
+		if (boxCollider2D->GetIsGround()) {	// on ground
+			if (rigidBody->GetVelocityX() != 0) {
+				animator->PlayState("BENNY_RUN");
+			}
+			else {
+				animator->PlayState("BENNY_IDLE");
+			}
+		}
+		else{ // airborne
+			if (rigidBody->GetVelocityY() > 0) {
+				animator->PlayState("BENNY_JUMP");
+			}
+			else {
+				animator->PlayState("BENNY_FALL");
+			}
+		}
 	}
 
 };
