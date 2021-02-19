@@ -24,6 +24,10 @@ namespace Srand
 		GameObject* pear = nullptr;
 		GameObject* barter = nullptr;
 
+	protected:
+		bool useAbility = false;
+		WindowsInput input;
+
 	public:
 		static LevelManager& get()
 		{
@@ -83,6 +87,28 @@ namespace Srand
 			}
 		}
 
+		void Ability() {
+			if (!useAbility) {
+				if (input.IsKeyPressed(SR_KEY_1)) {			// Cherry
+					ActivateCherry();
+					useAbility = true;
+				}
+				else if (input.IsKeyPressed(SR_KEY_2)) {	// Pear
+					ActivatePear();
+					useAbility = true;
+				}
+				else if (input.IsKeyPressed(SR_KEY_3)) {	// Barter
+					ActivateBarter();
+					useAbility = true;
+				}
+			}
+
+			if (input.IsKeyPressed(SR_KEY_4)) {			// Cancel
+				ClearActivation();
+				useAbility = false;
+			}
+		}
+
 		void ActivateCherry() {
 			cherry->GetComponent<Cherry>().SetActive(true);
 			benny->GetComponent<Benny>().SetActive(false);
@@ -92,7 +118,6 @@ namespace Srand
 		}
 		void ActivateBarter() { 
 			barter->GetComponent<Barter>().SetActive(true); 
-			benny->GetComponent<Benny>().SetActive(false);
 		}
 
 		void ClearActivation() { 

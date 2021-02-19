@@ -487,6 +487,7 @@ void TestingScene::Draw()
 void TestingScene::Update()
 {
     manager->Update();
+    levelManager.Ability();
     // Check Collision
     //for (int i = 0; i < objManager.VectorSize() - 1; i++)
     //{

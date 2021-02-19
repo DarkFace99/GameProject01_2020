@@ -23,17 +23,20 @@ public:
 		AnimationController(); 
 		Collision_Check();
 		Execute();
+		AmplifyAbility();
 	}
 
 	void AmplifyAbility() {
 		Vector2D_float deltaVect = transform->position - BennyTransform->position;
 		float magnitude = sqrt(pow(deltaVect.x, 2) + pow(deltaVect.y, 2));
+		//::cout << "Magnitude:" << (int)magnitude << "(200)";
 		if (magnitude < radius) {
 			bennyProp->SetRadius(rCal);
 		}
 		else {
 			bennyProp->SetRadius(rOld);
 		}
+		//std::cout << "\tBennyRadius:" << bennyProp->GetRadius() << std::endl;
 	}
 
 	void CC::AnimationController() override {

@@ -77,5 +77,4 @@ protected:
 	ccTag tag = ccTag::DEFAULT;
 	WindowsInput input;
 	ObjManager& objManager = ObjManager::get();
-	LevelManager& levelmanager = LevelManager::get();
 };
