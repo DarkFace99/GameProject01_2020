@@ -29,6 +29,8 @@ public:						// Not sure if this the best way to implement it.
 		transform = &gameObject->GetComponent<Transform>(); 
 		rigidBody = &gameObject->GetComponent<RigidBody>();
 		boxCollider2D = &gameObject->GetComponent<BoxCollider2D>();
+		animator = &gameObject->GetComponent<Animator>();
+		renderer = &gameObject->GetComponent<SpriteRenderer>();
 	}
 	//Transform* GetTransform(){ return transform; }
 
@@ -63,13 +65,17 @@ public:						// Not sure if this the best way to implement it.
 		transform->Translate(rigidBody->GetVelocity());
 	}
 
+	virtual void AnimationController() = 0;
+
 protected:
 	Transform* transform = nullptr;
 	RigidBody* rigidBody = nullptr;
 	BoxCollider2D* boxCollider2D = nullptr;
+	Animator* animator = nullptr;
+	SpriteRenderer* renderer = nullptr;
+
 	bool isActive = false;
 	ccTag tag = ccTag::DEFAULT;
 	WindowsInput input;
 	ObjManager& objManager = ObjManager::get();
-	bool isOnGround = false;
 };
