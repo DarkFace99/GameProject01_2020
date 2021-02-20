@@ -43,6 +43,16 @@ public:
 		// Flip
 		if (rigidBody->GetVelocityX() > 0) { renderer->SetFlip(false); }
 		else if (rigidBody->GetVelocityX() < 0) { renderer->SetFlip(true); }
+
+		// Animation
+		if (boxCollider2D->GetIsGround()) {	// on ground
+			if (rigidBody->GetVelocityX() != 0) {
+				animator->PlayState("CHERRY_RUN");
+			}
+			else {
+				animator->PlayState("CHERRY_IDLE");
+			}
+		}
 	}
 
 	void SetCherry(GameObject* benny) {

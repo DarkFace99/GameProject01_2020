@@ -62,26 +62,26 @@ namespace Srand
 		inline void SetUpCC() {
 			for (int i = 0; i < cc_List.size(); i++) {
 				if (cc_List[i]->HasComponent<Benny>()) {
-					printf("Level: Found Benny\n");
+					SR_SYSTEM_TRACE("Level: Found Benny");
 					benny = cc_List[i];
 				}
 				else if (cc_List[i]->HasComponent<Macho>()) {
-					printf("Level: Found Macho\n");
+					SR_SYSTEM_TRACE("Level: Found Macho");
 					macho = cc_List[i];
 				}
 				else if (cc_List[i]->HasComponent<Cherry>()) {
-					printf("Level: Found Cherry\n");
+					SR_SYSTEM_TRACE("Level: Found Cherry");
 					cherry = cc_List[i];
 					cc_List[i]->GetComponent<Cherry>().SetCherry(benny);
 				}
 				else if (cc_List[i]->HasComponent<Pear>()) {
 					pear = cc_List[i];
-					printf("Level: Found Pear\n");
+					SR_SYSTEM_TRACE("Level: Found Pear");
 				}
 				else if (cc_List[i]->HasComponent<Barter>()) {
 					barter = cc_List[i];
 					cc_List[i]->GetComponent<Barter>().SetBarter(benny);
-					printf("Level: Found Barter\n");
+					SR_SYSTEM_TRACE("Level: Found Barter");
 					
 				}
 			}

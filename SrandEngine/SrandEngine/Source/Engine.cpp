@@ -10,7 +10,7 @@
 namespace Srand
 {
     // System-wide Initialization
-    UserInterface user_interface;
+    //UserInterface user_interface;
     WindowsInput windowsInput;
 
     Engine* Engine::s_instance = nullptr;
@@ -43,8 +43,8 @@ namespace Srand
             SR_SYSTEM_ERROR("Error! Cannot initializing GLEW");
         }
 
-        SR_SYSTEM_INFO("Initializing UserInterface...");
-        user_interface.InitUserInterface();
+        //SR_SYSTEM_INFO("Initializing UserInterface...");
+        //user_interface.InitUserInterface();
 
         glfwSetInputMode(WindowProperties::get(), GLFW_STICKY_KEYS, GL_TRUE);
         std::cout << "--------------------------------------------------------------------------------" << std::endl;
@@ -112,9 +112,8 @@ namespace Srand
     void Engine::Draw() {   
         //For Testing SceneManager Only
         sceneManager[0]->Draw();
-        user_interface.UpdateUserInterface();
 
-        user_interface.UpdateUserInterface();
+        //user_interface.UpdateUserInterface();
 
         glfwSwapBuffers(WindowProperties::get());
     }
@@ -155,7 +154,7 @@ namespace Srand
         //std::cout << "Closing window..." << std::endl << "System Shutdown" << std::endl;
         SR_SYSTEM_INFO("Closing window...");
         SR_SYSTEM_INFO("System Shutdown");
-        user_interface.TerminateUserInterface();
+        //user_interface.TerminateUserInterface();
         glfwTerminate();
     }
 
