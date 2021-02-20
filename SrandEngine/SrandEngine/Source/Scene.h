@@ -4,6 +4,7 @@
 #include "ecspch.h"
 
 #include "Source/ObjectManager.h"
+#include "Source/LevelManager.h"
 
 namespace Srand 
 {

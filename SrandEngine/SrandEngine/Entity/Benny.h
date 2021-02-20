@@ -1,7 +1,6 @@
 #pragma once
 
 #include <vector>
-
 #include "CC.h"
 
 //class Benny : public CC {
@@ -53,9 +52,8 @@ class Benny : public CC {
 private:
 	GameObject* targetCC = nullptr;
 	Transform* targetTransform = nullptr;
-	float radius = 2000.0f;	// place holder 
+	float radius = 400.0f;	// place holder 
 	std::vector<CC*>connectList;
-
 public:
 	Benny() { SetTag(ccTag::BENNY); }
 	Benny(float r) { 
@@ -67,7 +65,6 @@ public:
 	bool Init() override final {
 		SetActive(true);
 		SetUp();
-		
 		return true;
 	}
 
@@ -78,6 +75,8 @@ public:
 		Collision_Check();
 		Execute();
 	}
+
+	
 
 	void CC::AnimationController() override {
 

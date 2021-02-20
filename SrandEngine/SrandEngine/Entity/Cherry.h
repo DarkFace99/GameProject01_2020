@@ -11,25 +11,55 @@ public:
 	}
 	~Cherry() = default;
 
-	bool init() {
+	bool Init() override final {
+		SetActive(false);
+		SetUp();
+		return true;
+	}
+
+	void Update() override final {
+		rigidBody->Update_Gravity();
+		if (isActive) { Input_Movement(true); }
+		AnimationController(); 
+		Collision_Check();
+		Execute();
+		AmplifyAbility();
 	}
 
 	void AmplifyAbility() {
 		Vector2D_float deltaVect = transform->position - BennyTransform->position;
 		float magnitude = sqrt(pow(deltaVect.x, 2) + pow(deltaVect.y, 2));
+		//::cout << "Magnitude:" << (int)magnitude << "(200)";
 		if (magnitude < radius) {
-			rCal = bennyProp->GetRadius() * rMultiplier;
 			bennyProp->SetRadius(rCal);
 		}
 		else {
 			bennyProp->SetRadius(rOld);
 		}
+		//std::cout << "\tBennyRadius:" << bennyProp->GetRadius() << std::endl;
 	}
 
 	void CC::AnimationController() override {
 		// Flip
 		if (rigidBody->GetVelocityX() > 0) { renderer->SetFlip(false); }
 		else if (rigidBody->GetVelocityX() < 0) { renderer->SetFlip(true); }
+
+		// Animation
+		if (boxCollider2D->GetIsGround()) {	// on ground
+			if (rigidBody->GetVelocityX() != 0) {
+				animator->PlayState("CHERRY_RUN");
+			}
+			else {
+				animator->PlayState("CHERRY_IDLE");
+			}
+		}
+	}
+
+	void SetCherry(GameObject* benny) {
+		BennyTransform = &benny->GetComponent<Transform>();
+		bennyProp = &benny->GetComponent<Benny>();
+		rOld = bennyProp->GetRadius();
+		rCal = rOld * rMultiplier;
 	}
 
 private:
@@ -39,4 +69,5 @@ private:
 	float rMultiplier = 1.5;
 	float rOld;
 	float rCal; 
+	bool isInRange = false;
 };
