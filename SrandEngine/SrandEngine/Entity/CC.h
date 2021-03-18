@@ -46,9 +46,9 @@ public:						// Not sure if this the best way to implement it.
 
 		if (input.IsKeyPressed(SR_KEY_LEFT) && input.IsKeyPressed(SR_KEY_RIGHT)) {} // do nothing
 		else if (input.IsKeyPressed(SR_KEY_LEFT)) {
-			rigidBody->SetVelocityX(-2.0f);
+			rigidBody->SetVelocityX(-3.0f);
 		}else if (input.IsKeyPressed(SR_KEY_RIGHT)) {
-			rigidBody->SetVelocityX(2.0f);
+			rigidBody->SetVelocityX(3.0f);
 		}	
 	}
 	void Collision_Check() { 
