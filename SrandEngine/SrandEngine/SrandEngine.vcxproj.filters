@@ -34,6 +34,9 @@
     <Filter Include="Game\GameScene">
       <UniqueIdentifier>{36426191-e851-4e70-8d30-fff73d89abfb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="SrandEngine\Audio">
+      <UniqueIdentifier>{705efcb6-e1d9-4925-a7e2-1e102ca79243}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="imgui\imconfig.h">
@@ -164,6 +167,9 @@
       <Filter>SrandEngine</Filter>
     </ClInclude>
     <ClInclude Include="Source\LevelManager.h" />
+    <ClInclude Include="Source\Audio.h">
+      <Filter>SrandEngine\Audio</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="imgui\imgui.cpp">
@@ -233,5 +239,8 @@
       <Filter>SrandEngine</Filter>
     </ClCompile>
     <ClCompile Include="Source\LevelManager.cpp" />
+    <ClCompile Include="Source\Audio.cpp">
+      <Filter>SrandEngine\Audio</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
