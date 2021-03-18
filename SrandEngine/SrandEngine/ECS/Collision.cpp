@@ -85,6 +85,7 @@
 //	}
 //}
 
+#include <math.h>
 #include "Collision.h"
 
 bool Collision::AABB(BoxCollider2D& colA, BoxCollider2D& colB) {
@@ -101,17 +102,23 @@ bool Collision::CC_AABB(GameObject& objA, GameObject& objB) {	// A is main Obj
 	BoxCollider2D& colB = objB.GetComponent<BoxCollider2D>();
 	RigidBody& rigA = objA.GetComponent<RigidBody>();
 		
-	bool isCollide = (colA.modifyPosition.x + (colA.width / 2.0f) + rigA.GetVelocityX() >= colB.modifyPosition.x - (colB.width / 2.0f)) &&		// right_A >= left_B
-					 (colA.modifyPosition.x - (colA.width / 2.0f) + rigA.GetVelocityX() <= colB.modifyPosition.x + (colB.width / 2.0f)) &&		// left_A <= right_B
-					 (colA.modifyPosition.y + (colA.height / 2.0f) + rigA.GetVelocityY() >= colB.modifyPosition.y - (colB.height / 2.0f)) &&	// top_A >= bottom_B
-					 (colA.modifyPosition.y - (colA.height / 2.0f) + rigA.GetVelocityY() <= colB.modifyPosition.y + (colB.height / 2.0f));		// bottom_A <= top_B
+	//bool isCollide = (colA.modifyPosition.x + (colA.width / 2.0f) + rigA.GetVelocityX() >= colB.modifyPosition.x - (colB.width / 2.0f)) &&		// right_A >= left_B
+	//				 (colA.modifyPosition.x - (colA.width / 2.0f) + rigA.GetVelocityX() <= colB.modifyPosition.x + (colB.width / 2.0f)) &&		// left_A <= right_B
+	//				 (colA.modifyPosition.y + (colA.height / 2.0f) + rigA.GetVelocityY() >= colB.modifyPosition.y - (colB.height / 2.0f)) &&	// top_A >= bottom_B
+	//				 (colA.modifyPosition.y - (colA.height / 2.0f) + rigA.GetVelocityY() <= colB.modifyPosition.y + (colB.height / 2.0f));		// bottom_A <= top_B
 
+	bool right = (colA.modifyPosition.x + (colA.width / 2.0f) + rigA.GetVelocityX() >= colB.modifyPosition.x - (colB.width / 2.0f));		// right_A >= left_B
+	bool left = (colA.modifyPosition.x - (colA.width / 2.0f) + rigA.GetVelocityX() <= colB.modifyPosition.x + (colB.width / 2.0f));		// left_A <= right_B
+	bool top = (colA.modifyPosition.y + (colA.height / 2.0f) + rigA.GetVelocityY() >= colB.modifyPosition.y - (colB.height / 2.0f));	// top_A >= bottom_B
 	
-
+	float bottomA = roundf((colA.modifyPosition.y - (colA.height / 2.0f) + rigA.GetVelocityY()) * 100.0f) / 100.0f;
+	float bottomB = roundf((colB.modifyPosition.y + (colB.height / 2.0f)) * 100.0f) / 100.0f;
+	bool bottom = bottomA <= bottomB;
 		
+	bool isCollide = (right && left && top && bottom);
+
 	// calulate next translation
 	if (isCollide) {
-
 		if ((colA.allowOverlap || colB.allowOverlap) == false) {
 			CC_Collision_Push(rigA, colA, colB);
 		}
@@ -223,6 +230,10 @@ void Collision::CC_Collision_Push(RigidBody& rigA, BoxCollider2D& colA, BoxColli
 	for (int i = 0; i < hPerSide; i++) {
 		Vector2D_float hPoint = colA.modifyPosition + rigA.GetVelocity() + Vector2D_float(-colA.width / 2.0f, -colA.height / 2.0f)/*bottom-left*/
 			+ Vector2D_float((firstOffset_X + (float)(betweenPoint_X * i)), 0.0f);
+
+		hPoint.x = roundf(hPoint.x * 100.0f) / 100.0f;
+		hPoint.y = roundf(hPoint.y * 100.0f) / 100.0f;
+
 		bool isCollide = (hPoint.x >= colB.modifyPosition.x - (colB.width / 2.0f)) &&
 			(hPoint.x <= colB.modifyPosition.x + (colB.width / 2.0f)) &&
 			(hPoint.y >= colB.modifyPosition.y - (colB.height / 2.0f)) &&
@@ -274,7 +285,7 @@ void Collision::CC_Collision_Push(RigidBody& rigA, BoxCollider2D& colA, BoxColli
 			break;
 		case 4: // bottom
 			/*printf("bottom\n");*/
-			vecPush = colB.modifyPosition.y + (((colA.height + colB.height) / 2.0f) * 1) - (colA.modifyPosition.y + rigA.GetVelocityY());
+			vecPush = roundf((colB.modifyPosition.y + (((colA.height + colB.height) / 2.0f) * 1) - (colA.modifyPosition.y + rigA.GetVelocityY())) * 100.0f) / 100.0f;
 			rigA.SetVelocityY(rigA.GetVelocityY() + vecPush);
 			colA.SetIsGround(true);
 			break;

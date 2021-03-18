@@ -69,10 +69,12 @@ public:
 	}
 
 	void Update() override final {
+		std::cout << "Benny: ";
 		rigidBody->Update_Gravity();
 		if (isActive) { Input_Movement(true); }
 		AnimationController(); // place before collision check because, it will change velocity and may result in weird animation  
 		Collision_Check();
+		std::cout << boxCollider2D->GetIsGround() << std::endl;
 		Execute();
 	}
 
@@ -93,14 +95,14 @@ public:
 				animator->PlayState("BENNY_IDLE");
 			}
 		}
-		//else{ // airborne
-		//	if (rigidBody->GetVelocityY() > 0) {
-		//		animator->PlayState("BENNY_JUMP");
-		//	}
-		//	else {
-		//		animator->PlayState("BENNY_FALL");
-		//	}
-		//}
+		else{ // airborne
+			if (rigidBody->GetVelocityY() > 0) {
+				animator->PlayState("BENNY_JUMP");
+			}
+			else {
+				animator->PlayState("BENNY_FALL");
+			}
+		}
 	}
 
 	void SetRadius(float r) {
