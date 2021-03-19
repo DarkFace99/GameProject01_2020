@@ -6,6 +6,8 @@
 #include "srpch.h"
 #include "ECS/Collision.h"
 
+#include "Source/Audio.h"
+
 class CC : public Component	// base class for CC
 {
 public:						// Not sure if this the best way to implement it. 
@@ -42,6 +44,7 @@ public:						// Not sure if this the best way to implement it.
 		
 		if(input.IsKeyPressed(SR_KEY_UP) && canJump && boxCollider2D->GetIsGround()) {
 			rigidBody->SetVelocityY(8.0f);
+			audioController.Play("TEST2");
 		}
 
 		if (input.IsKeyPressed(SR_KEY_LEFT) && input.IsKeyPressed(SR_KEY_RIGHT)) {} // do nothing
@@ -77,4 +80,5 @@ protected:
 	ccTag tag = ccTag::DEFAULT;
 	WindowsInput input;
 	ObjManager& objManager = ObjManager::get();
+	AudioController& audioController = AudioController::get();
 };
