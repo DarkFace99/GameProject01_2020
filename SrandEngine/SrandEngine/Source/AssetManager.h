@@ -9,8 +9,7 @@
 #include "Shader.h"
 #include "Engine.h"
 
-#define HAVE_STRUCT_TIMESPEC
-//#include "pthread.h"
+#define ASSET_FILE_PATH "Assets/"
 
 /* Typdef for Texture */
 typedef GLuint Texture;
@@ -32,7 +31,7 @@ namespace Srand
 		void Clean();
 
 		Texture* GetTexture(std::string id);
-		void LoadTexture(std::string id, const char* filename);
+		void LoadTexture(std::string id, std::string filename);
 
 		Mesh* GetMesh(std::string id);
 		void LoadMesh(std::string id, int frameCountX = 1, int frameCountY = 1, int frameSpaceX = 1, int frameSpaceY = 1);
