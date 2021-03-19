@@ -57,11 +57,42 @@ namespace Srand
 			m_engine->drop();
 		}
 
+		/// <summary>
+		/// Add Audio to controller and can be use to call it later
+		/// (Add audio when loading the assets)
+		/// </summary>
+		/// <param name="audio"> : Data of the audio </param>
 		void AddAudioSource(AudioSource* audio);
+
+		/// <summary>
+		/// Find matching name of an AudioSource and return its pointer
+		/// </summary>
+		/// <param name="name"> : Name of the AudioSource </param>
+		/// <returns> Pointer to AudioSource</returns>
 		AudioSource* Find(std::string name);
+
+		/// <summary>
+		/// Play AudioSource by searching inside m_soundSource for a matching name
+		/// </summary>
+		/// <param name="name"> : Name of the AudioSource </param>
 		void Play(std::string name);
+
+		/// <summary>
+		/// Play AudioSource that has not been added to m_soundSource
+		/// </summary>
+		/// <param name="filepath"> : Path of Audio file </param>
+		/// <param name="volume"> : Audio volume </param>
+		/// <param name="isLoopable">: Set loop status </param>
 		void Play(std::string filepath, float volume, bool isLoopable);
+
+		/// <summary>
+		/// Pause current playing audio
+		/// </summary>
 		void Pause();
+
+		/// <summary>
+		/// Stop current playing audio and drop its pointer
+		/// </summary>
 		void Stop();
 	};
 }
