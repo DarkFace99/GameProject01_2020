@@ -12,10 +12,14 @@
 #include "Entity/Pear.h"
 #include "Entity/Barter.h"
 
+#include "Source/Audio.h"
+
 Camera camera(glm::vec3(0, 0, 0), glm::vec3(0, 0, -1), glm::vec3(0, 1, 0), 1.0f, 0.0f);
 ObjManager& objManager = ObjManager::get();
 LevelManager& levelManager = LevelManager::get();
 GameObject* gameObject;
+
+AudioController& audioController = AudioController::get();
 
 //GameObject* npc;
 //GameObject* player;
@@ -474,6 +478,8 @@ void TestingScene::Init()
 
 #pragma endregion
     
+    audioController.Play("TEST1");
+
 }
 void TestingScene::Clean()
 {
