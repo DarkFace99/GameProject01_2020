@@ -80,10 +80,11 @@ namespace Srand
 		/// <summary>
 		/// Play AudioSource that has not been added to m_soundSource
 		/// </summary>
-		/// <param name="filepath"> : Path of Audio file </param>
+		/// <param name="name"> : Name of Audio file </param>
 		/// <param name="volume"> : Audio volume </param>
 		/// <param name="isLoopable">: Set loop status </param>
-		void Play(std::string filepath, float volume, bool isLoopable);
+		/// <param name="filepath"> : Path of Audio file </param>
+		void Play(std::string name, float volume, bool isLoopable, std::string filePath);
 
 		/// <summary>
 		/// Pause current playing audio

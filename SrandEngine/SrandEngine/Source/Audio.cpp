@@ -36,8 +36,10 @@ namespace Srand
         }
         sound->setVolume(audio->volume);
     }
-    void AudioController::Play(std::string filePath, float volume, bool isLoopable)
+    void AudioController::Play(std::string name, float volume, bool isLoopable, std::string filePath)
     {
+        AddAudioSource(new AudioSource(name, volume, isLoopable, filePath));
+
         if (m_engine == nullptr)
             return;
 
