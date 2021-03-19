@@ -29,7 +29,25 @@ namespace Srand
         AudioSource* audio = Find(name);
 
         sound = m_engine->play2D((AUDIO_FILE_PATH + audio->filePath).c_str(), audio->isLoopable, false, true);
+        if (sound == nullptr) 
+        {
+            SR_SYSTEM_ERROR("Error: Cannot find {0}", AUDIO_FILE_PATH + audio->filePath);
+            return;
+        }
         sound->setVolume(audio->volume);
+    }
+    void AudioController::Play(std::string filePath, float volume, bool isLoopable)
+    {
+        if (m_engine == nullptr)
+            return;
+
+        sound = m_engine->play2D((AUDIO_FILE_PATH + filePath).c_str(), isLoopable, false, true);
+        if (sound == nullptr)
+        {
+            SR_SYSTEM_ERROR("Error: Cannot find {0}", AUDIO_FILE_PATH + filePath);
+            return;
+        }
+        sound->setVolume(volume);
     }
     void AudioController::Pause()
     {

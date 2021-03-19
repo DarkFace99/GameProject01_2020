@@ -5,7 +5,7 @@
 
 using namespace irrklang;
 
-#define AUDIO_FILE_PATH "../Assets/Audio/"
+#define AUDIO_FILE_PATH "Assets/Audio/"
 
 namespace Srand
 {
@@ -60,6 +60,7 @@ namespace Srand
 		void AddAudioSource(AudioSource* audio);
 		AudioSource* Find(std::string name);
 		void Play(std::string name);
+		void Play(std::string filepath, float volume, bool isLoopable);
 		void Pause();
 		void Stop();
 	};

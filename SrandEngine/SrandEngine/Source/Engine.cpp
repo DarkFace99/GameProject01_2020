@@ -7,6 +7,8 @@
 #include "Source/SceneManager.h"
 #include "Game/Scenes/testing_scene.h"
 
+#include "Source/Audio.h"
+
 namespace Srand
 {
     // System-wide Initialization
@@ -18,6 +20,8 @@ namespace Srand
 
     SceneManager& sceneManager = SceneManager::get();
     Scene* scene = nullptr;
+
+    AudioController& audioController = AudioController::get();
 
     Engine::Engine() {
         running = false;
@@ -93,6 +97,9 @@ namespace Srand
         AssetManager::get().LoadTexture("BARTER_ANIM_TEX", "Assets/Barther.png");
         AssetManager::get().LoadTexture("NPC_ANIM_TEX", "Assets/NPC_Animation_Sheet.png");
         AssetManager::get().LoadTexture("LEVEL_ASSET_TEX", "Assets/Level_Assets_00.png");
+
+        audioController.AddAudioSource(new AudioSource("TEST1", 1.0f, false, "Warmful World.mp3"));
+        audioController.AddAudioSource(new AudioSource("TEST2", 1.0f, false, "Throwing.mp3"));
 
 #pragma endregion
 
