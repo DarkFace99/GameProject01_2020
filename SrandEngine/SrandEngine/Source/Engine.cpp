@@ -88,15 +88,15 @@ namespace Srand
         AssetManager::get().LoadMesh("BUTTON_MESH", 10, 13, 2, 1);
 
         /* Texture */
-        AssetManager::get().LoadTexture("BG_TEX", "Assets/Background.png");
-        AssetManager::get().LoadTexture("TILESET_TEX", "Assets/TILESET.png");
-        AssetManager::get().LoadTexture("BENNY_ANIM_TEX", "Assets/Benny_Animations-Sheet.png");
-        AssetManager::get().LoadTexture("MACHO_ANIM_TEX", "Assets/Macho_Animation-Sheet.png");
-        AssetManager::get().LoadTexture("CHERRY_ANIM_TEX", "Assets/Cherry_SpriteSheet.png");
-        AssetManager::get().LoadTexture("PEAR_ANIM_TEX", "Assets/Pear_SpriteShee.png");
-        AssetManager::get().LoadTexture("BARTER_ANIM_TEX", "Assets/Barther.png");
-        AssetManager::get().LoadTexture("NPC_ANIM_TEX", "Assets/NPC_Animation_Sheet.png");
-        AssetManager::get().LoadTexture("LEVEL_ASSET_TEX", "Assets/Level_Assets_00.png");
+        AssetManager::get().LoadTexture("BG_TEX", "Background.png");
+        AssetManager::get().LoadTexture("TILESET_TEX", "TILESET.png");
+        AssetManager::get().LoadTexture("BENNY_ANIM_TEX", "Benny_Animations-Sheet.png");
+        AssetManager::get().LoadTexture("MACHO_ANIM_TEX", "Macho_Animation-Sheet.png");
+        AssetManager::get().LoadTexture("CHERRY_ANIM_TEX", "Cherry_SpriteSheet.png");
+        AssetManager::get().LoadTexture("PEAR_ANIM_TEX", "Pear_SpriteShee.png");
+        AssetManager::get().LoadTexture("BARTER_ANIM_TEX", "Barther.png");
+        AssetManager::get().LoadTexture("NPC_ANIM_TEX", "NPC_Animation_Sheet.png");
+        AssetManager::get().LoadTexture("LEVEL_ASSET_TEX", "Level_Assets_00.png");
 
         audioController.AddAudioSource(new AudioSource("TEST1", 1.0f, false, "Warmful World.mp3"));
         audioController.AddAudioSource(new AudioSource("TEST2", 1.0f, false, "Throwing.mp3"));

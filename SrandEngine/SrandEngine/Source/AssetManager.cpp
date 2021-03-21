@@ -28,12 +28,13 @@ namespace Srand
 
 	Texture* AssetManager::GetTexture(std::string id) {
 		// check if id exists in container, then return according to the result
-		if (textures.count(id) <= 0) { std::cout << "AssestManager: Cannot find texture " << id << std::endl; }
+		if (textures.count(id) <= 0) { SR_SYSTEM_ERROR("AssestManager: Cannot find texture [{0}]", id);
+		}
 		else { /*std::cout << "AssestManager: Get texture " << id << std::endl;*/ }
 		return (textures.count(id) > 0) ? textures[id] : nullptr;
 	}
 
-	void AssetManager::LoadTexture(std::string id, const char* filename) {
+	void AssetManager::LoadTexture(std::string id, std::string filename) {
 
 		Texture* aTex = new Texture();
 
@@ -41,10 +42,10 @@ namespace Srand
 		int			texWidth, texHeight, channels;
 
 		/* load texture using SOIL */
-		pData = SOIL_load_image(filename, &texWidth, &texHeight, &channels, SOIL_LOAD_AUTO);
+		pData = SOIL_load_image((ASSET_FILE_PATH + filename).c_str(), &texWidth, &texHeight, &channels, SOIL_LOAD_AUTO);
 
 		if (pData == nullptr) {
-			std::cout << "texture: Cannot find texture [" << filename << "]" << std::endl;
+			SR_SYSTEM_ERROR("texture: Cannot find texture [{0}]", filename);
 			delete aTex;
 			return;
 		}
