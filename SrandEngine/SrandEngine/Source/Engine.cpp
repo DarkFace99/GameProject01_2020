@@ -98,8 +98,8 @@ namespace Srand
         AssetManager::get().LoadTexture("NPC_ANIM_TEX", "NPC_Animation_Sheet.png");
         AssetManager::get().LoadTexture("LEVEL_ASSET_TEX", "Level_Assets_00.png");
 
-        audioController.AddAudioSource(new AudioSource("TEST1", 1.0f, false, "Warmful World.mp3"));
-        audioController.AddAudioSource(new AudioSource("TEST2", 1.0f, false, "Throwing.mp3"));
+        audioController.AddAudioSource(new AudioSource("BGM", 0.5f, true, "The Happy Man.mp3"));
+        audioController.AddAudioSource(new AudioSource("TEST2", 0.2f, false, "Throwing.mp3"));
 
 #pragma endregion
 

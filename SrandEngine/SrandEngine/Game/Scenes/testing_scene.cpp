@@ -478,13 +478,14 @@ void TestingScene::Init()
 
 #pragma endregion
     
-    audioController.Play("TEST1");
+    audioController.Play("BGM");
 
 }
 void TestingScene::Clean()
 {
     manager->Clean();
     objManager.Clean();
+    audioController.Stop();
 }
 void TestingScene::Draw()
 {
