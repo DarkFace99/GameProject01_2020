@@ -9,6 +9,9 @@
 
 #include "Source/Audio.h"
 
+#define SFX_VOLUME 0.2f
+#define BGM_VOLUME 0.5f
+
 namespace Srand
 {
     // System-wide Initialization
@@ -98,8 +101,19 @@ namespace Srand
         AssetManager::get().LoadTexture("NPC_ANIM_TEX", "NPC_Animation_Sheet.png");
         AssetManager::get().LoadTexture("LEVEL_ASSET_TEX", "Level_Assets_00.png");
 
-        audioController.AddAudioSource(new AudioSource("BGM", 0.5f, true, "The Happy Man.mp3"));
-        audioController.AddAudioSource(new AudioSource("TEST2", 0.2f, false, "Throwing.mp3"));
+        /* Audio */
+        audioController.AddAudioSource(new AudioSource("BGM", BGM_VOLUME, true, "The Happy Man.mp3"));
+        audioController.AddAudioSource(new AudioSource("Barter_swap", SFX_VOLUME, false, "Barter_swap.mp3"));
+        audioController.AddAudioSource(new AudioSource("Char_fall", SFX_VOLUME, false, "Char_fall.mp3"));
+        audioController.AddAudioSource(new AudioSource("Char_jump", SFX_VOLUME, false, "Char_jump.mp3"));
+        audioController.AddAudioSource(new AudioSource("Cherry_inRange", SFX_VOLUME, false, "Cherry_inRange.mp3"));
+        audioController.AddAudioSource(new AudioSource("Cherry_outRange", SFX_VOLUME, false, "Cherry_outRange.mp3"));
+        audioController.AddAudioSource(new AudioSource("Deactivate", SFX_VOLUME, false, "Deactivate.mp3"));
+        audioController.AddAudioSource(new AudioSource("Door_open-close", SFX_VOLUME, false, "Door_open-close.mp3"));
+        audioController.AddAudioSource(new AudioSource("Elevator", SFX_VOLUME, false, "Elevator.mp3"));
+        audioController.AddAudioSource(new AudioSource("Macho_pickup", SFX_VOLUME, false, "Macho_pickup.mp3"));
+        audioController.AddAudioSource(new AudioSource("Macho_throw", SFX_VOLUME, false, "Macho_throw.mp3"));
+        audioController.AddAudioSource(new AudioSource("NPC_rescue", SFX_VOLUME, false, "NPC_rescue.mp3"));
 
 #pragma endregion
 
