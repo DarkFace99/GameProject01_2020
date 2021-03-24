@@ -69,12 +69,10 @@ public:
 	}
 
 	void Update() override final {
-		std::cout << "Benny: ";
 		rigidBody->Update_Gravity();
 		if (isActive) { Input_Movement(true); }
 		AnimationController(); // place before collision check because, it will change velocity and may result in weird animation  
 		Collision_Check();
-		std::cout << boxCollider2D->GetIsGround() << std::endl;
 		Execute();
 	}
 
