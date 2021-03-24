@@ -119,7 +119,7 @@ bool Collision::CC_AABB(GameObject& objA, GameObject& objB) {	// A is main Obj
 
 	// calulate next translation
 	if (isCollide) {
-		if ((colA.allowOverlap || colB.allowOverlap) == false) {
+		if (((colA.allowOverlap || colB.allowOverlap) == false) && (colA.movable != colB.movable)) {
 			CC_Collision_Push(rigA, colA, colB);
 		}
 		//IsOnGround(objA, objB);
