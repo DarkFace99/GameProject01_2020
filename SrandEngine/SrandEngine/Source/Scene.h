@@ -6,12 +6,17 @@
 #include "Source/ObjectManager.h"
 #include "Source/LevelManager.h"
 
+
+
 namespace Srand 
 {
 	class Scene 
 	{
 	protected:
 		std::string m_DebugName;
+
+		const int _tileSize = 16;
+		const int _offset = 8;
 
 	public:
 		Scene(const std::string& name = "Scene");
