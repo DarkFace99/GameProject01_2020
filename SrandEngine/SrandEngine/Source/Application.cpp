@@ -22,13 +22,14 @@ int main(int argc, char** argv) {
 	_CrtMemCheckpoint(&sOld); //take a snapchot
 
 	Srand::Engine& engine = Srand::Engine::get();
-	glfwSetTime(0);
 	Srand::TimeStep& timeStep = Srand::TimeStep::get();
 
 	Srand::Log::Init();
 	SR_SYSTEM_INFO("Initializing Log...");
 
 	engine.Init();
+
+	glfwSetTime(0);
 
 	while (engine.IsRunning()) 
 	{
@@ -46,9 +47,9 @@ int main(int argc, char** argv) {
 
 		if (glfwGetTime() - timeStep.lastFrameTime > 1.0f) 
 		{
-			timeStep.lastFrameTime++;
 			timeStep.updates = timeStep.frames = 0;
 			SR_SYSTEM_TRACE("Frames: {0}		Updates: {1}", timeStep.frames, timeStep.updates);
+			Sleep((glfwGetTime() - timeStep.lastFrameTime) * 1000);
 		}
 	}
 

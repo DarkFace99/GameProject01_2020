@@ -62,9 +62,6 @@ namespace Srand
 
 #pragma endregion
 
-        /*glfwSetTime(0);
-        timeStep = &TimeStep::get();*/
-
         /* Initialize Shader */
         Shader::get()->InitializeShader();
 
@@ -142,10 +139,6 @@ namespace Srand
     void Engine::Update() {
         glClearColor(0.3f, 0.3f, 0.5f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-        //timeStep->Update();
-
-        //SR_SYSTEM_TRACE("Vsync: {0}" ,WindowProperties::get().GetVsyncStatus());
 
         //For Testing SceneManager Only
         sceneManager[0]->Update();
