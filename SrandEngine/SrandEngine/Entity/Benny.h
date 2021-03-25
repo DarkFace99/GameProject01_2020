@@ -50,10 +50,8 @@
 
 class Benny : public CC {
 private:
-	GameObject* targetCC = nullptr;
-	Transform* targetTransform = nullptr;
 	float radius = 400.0f;	// place holder 
-	std::vector<CC*>connectList;
+
 public:
 	Benny() { SetTag(ccTag::BENNY); }
 	Benny(float r) { 

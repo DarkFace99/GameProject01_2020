@@ -37,7 +37,7 @@ namespace Srand
 			m_Time = (time - lastFrameTime);
 			lastFrameTime = time;
 
-			SR_SYSTEM_TRACE("Time: {0}		Delta_Time: {1}", m_Time, deltaTime);
+			//SR_SYSTEM_TRACE("Time: {0}		Delta_Time: {1}", m_Time, deltaTime);
 		}
 
 		operator float() const { return m_Time; }

@@ -24,7 +24,8 @@ public:						// Not sure if this the best way to implement it.
 	virtual ~CC() = default;
 
 	inline void SetTag(ccTag cctag) { CC:tag = cctag; }	// Not use directly, it will be called in the constructor of each derived CC class.												
-	//ccTag GetTag() { return tag; }	// to check CC type.
+	ccTag GetTag() { return tag; }	// to check CC type.
+
 
 	void SetUp() { 
 		transform = &gameObject->GetComponent<Transform>(); 
