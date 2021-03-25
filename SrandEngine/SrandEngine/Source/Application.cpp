@@ -7,8 +7,6 @@
 
 #include "Engine.h"
 
-const float dt = 0.016f;
-
 int main(int argc, char** argv) {
 
 	HANDLE mutex = CreateMutex(NULL, TRUE, L"BENNY: Everyone is Happy");
@@ -24,7 +22,6 @@ int main(int argc, char** argv) {
 	_CrtMemCheckpoint(&sOld); //take a snapchot
 
 	Srand::Engine& engine = Srand::Engine::get();
-	glfwSetTime(0);
 	Srand::TimeStep& timeStep = Srand::TimeStep::get();
 
 	Srand::Log::Init();
@@ -32,20 +29,28 @@ int main(int argc, char** argv) {
 
 	engine.Init();
 
-	float lastFrameTime = 0;
+	glfwSetTime(0);
 
 	while (engine.IsRunning()) 
 	{
 		engine.Event();
 		timeStep.Update();
 
-		while (timeStep.accumulator >= dt) 
+		while (timeStep.deltaTime >= 1.0f)
 		{
 			engine.Update();
-			timeStep.accumulator -= dt;
+			timeStep.updates++;
+			timeStep.deltaTime--;
 		}
-
 		engine.Draw();
+		timeStep.frames++;
+
+		if (glfwGetTime() - timeStep.lastFrameTime > 1.0f) 
+		{
+			timeStep.updates = timeStep.frames = 0;
+			SR_SYSTEM_TRACE("Frames: {0}		Updates: {1}", timeStep.frames, timeStep.updates);
+			Sleep((glfwGetTime() - timeStep.lastFrameTime) * 1000);
+		}
 	}
 
 	engine.Clean();

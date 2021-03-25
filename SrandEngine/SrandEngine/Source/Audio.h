@@ -54,6 +54,7 @@ namespace Srand
 		}
 		~AudioController() 
 		{
+			m_soundSource.clear();
 			m_engine->drop();
 		}
 

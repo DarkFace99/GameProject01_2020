@@ -37,6 +37,12 @@
     <Filter Include="SrandEngine\Audio">
       <UniqueIdentifier>{705efcb6-e1d9-4925-a7e2-1e102ca79243}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game\GameScene\Level1">
+      <UniqueIdentifier>{2191fbe3-dae9-4753-989d-5d8aebf0d3e1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\GameScene\Level2">
+      <UniqueIdentifier>{52eda947-ac7e-4ca8-bcf6-cc0ca81536fe}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="imgui\imconfig.h">
@@ -154,9 +160,6 @@
     <ClInclude Include="Source\Scene.h">
       <Filter>SrandEngine\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="Game\Scenes\testing_scene.h">
-      <Filter>Game\GameScene</Filter>
-    </ClInclude>
     <ClInclude Include="Source\ObjectManager.h">
       <Filter>SrandEngine</Filter>
     </ClInclude>
@@ -181,6 +184,12 @@
     </ClInclude>
     <ClInclude Include="Entity\Pear.h">
       <Filter>SrandEngine\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Scenes\testing_scene.h">
+      <Filter>Game\GameScene\Level1</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Scenes\Level2.h">
+      <Filter>Game\GameScene\Level2</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -241,9 +250,6 @@
     <ClCompile Include="Source\WindowsInput.cpp">
       <Filter>SrandEngine\Input System</Filter>
     </ClCompile>
-    <ClCompile Include="Game\Scenes\testing_scene.cpp">
-      <Filter>Game\GameScene</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Scene.cpp">
       <Filter>SrandEngine\Scene</Filter>
     </ClCompile>
@@ -253,6 +259,12 @@
     <ClCompile Include="Source\LevelManager.cpp" />
     <ClCompile Include="Source\Audio.cpp">
       <Filter>SrandEngine\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Scenes\testing_scene.cpp">
+      <Filter>Game\GameScene\Level1</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Scenes\Level2.cpp">
+      <Filter>Game\GameScene\Level2</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

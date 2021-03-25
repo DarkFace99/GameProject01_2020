@@ -40,6 +40,7 @@
     <ClInclude Include="Entity\Elevator.h" />
     <ClInclude Include="Entity\Macho.h" />
     <ClInclude Include="Entity\NPC.h" />
+    <ClInclude Include="Game\Scenes\Level2.h" />
     <ClInclude Include="Game\Scenes\testing_scene.h" />
     <ClInclude Include="Entity\Pear.h" />
     <ClInclude Include="imgui\imconfig.h" />
@@ -70,6 +71,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ECS\Collision.cpp" />
+    <ClCompile Include="Game\Scenes\Level2.cpp" />
     <ClCompile Include="Game\Scenes\testing_scene.cpp" />
     <ClCompile Include="imgui\imgui.cpp" />
     <ClCompile Include="imgui\imgui_demo.cpp" />

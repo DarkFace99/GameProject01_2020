@@ -64,58 +64,58 @@ void TestingScene::Init()
         /* First Row */
         for (int i = 0; i < 30; i++)
         {
-            if (i > 5 && i < 29) { tile_info.push_back(glm::vec4(8 + (i * 16), 8, 2, 6)); }
-            else { tile_info.push_back(glm::vec4(8 + (i * 16), 8, 2, 5)); }
+            if (i > 5 && i < 29) {  tile_info.push_back(glm::vec4(i, 0, 2, 6)); }
+            else {                  tile_info.push_back(glm::vec4(i, 0, 2, 5)); }
 
         }
         /* Second Row */
         for (int i = 0; i < 7; i++)
         {
-            if (i > 5) { tile_info.push_back(glm::vec4(8 + (29 * 16), 24, 1, 5)); }
-            else if (i == 5) { tile_info.push_back(glm::vec4(8 + (i * 16), 24, 3, 5)); }
-            else { tile_info.push_back(glm::vec4(8 + (i * 16), 24, 2, 5)); }
+            if (i > 5) {            tile_info.push_back(glm::vec4(29, 1, 1, 5)); }
+            else if (i == 5) {      tile_info.push_back(glm::vec4(i, 1, 3, 5)); }
+            else {                  tile_info.push_back(glm::vec4(i, 1, 2, 5)); }
         }
         /* Third Row */
         for (int i = 0; i < 7; i++)
         {
-            if (i > 5) { tile_info.push_back(glm::vec4(8 + (29 * 16), 40, 1, 5)); }
-            else if (i == 5) { tile_info.push_back(glm::vec4(8 + (i * 16), 40, 3, 6)); }
-            else { tile_info.push_back(glm::vec4(8 + (i * 16), 40, 2, 6)); }
+            if (i > 5) {            tile_info.push_back(glm::vec4(29, 2, 1, 5)); }
+            else if (i == 5) {      tile_info.push_back(glm::vec4(i, 2, 3, 6)); }
+            else {                  tile_info.push_back(glm::vec4(i, 2, 2, 6)); }
         }
         /* Forth Row */
-        tile_info.push_back(glm::vec4(8 + (29 * 16), 56, 1, 5));
+                                    tile_info.push_back(glm::vec4(29, 3, 1, 5));
         /* Fifth Row */
         for (int i = 8; i < 14; i++)
         {
-            if (i == 8) { tile_info.push_back(glm::vec4(8 + (i * 16), 72, 1, 2)); }
-            else { tile_info.push_back(glm::vec4(8 + (i * 16), 72, 2, 2)); }
+            if (i == 8) {           tile_info.push_back(glm::vec4(i, 4, 1, 2)); }
+            else {                  tile_info.push_back(glm::vec4(i, 4, 2, 2)); }
         }
         for (int i = 18; i < 30; i++)
         {
-            if (i == 29) { tile_info.push_back(glm::vec4(8 + (i * 16), 72, 2, 6)); }
-            else { tile_info.push_back(glm::vec4(8 + (i * 16), 72, 2, 2)); }
+            if (i == 29) {          tile_info.push_back(glm::vec4(i, 4, 2, 6)); }
+            else {                  tile_info.push_back(glm::vec4(i, 4, 2, 2)); }
         }
         /* Tenth Row */
         for (int i = 15; i < 24; i++)
         {
-            if (i == 23) { tile_info.push_back(glm::vec4(8 + (i * 16), 148, 3, 2)); }
-            else if (i == 15) { tile_info.push_back(glm::vec4(8 + (i * 16), 148, 1, 4)); }
-            else if (i == 16) { tile_info.push_back(glm::vec4(8 + (i * 16), 148, 2, 4)); }
-            else { tile_info.push_back(glm::vec4(8 + (i * 16), 148, 2, 2)); }
+            if (i == 23) {          tile_info.push_back(glm::vec4(i, 9, 3, 2)); }
+            else if (i == 15) {     tile_info.push_back(glm::vec4(i, 9, 1, 4)); }
+            else if (i == 16) {     tile_info.push_back(glm::vec4(i, 9, 2, 4)); }
+            else {                  tile_info.push_back(glm::vec4(i, 9, 2, 2)); }
         }
         /* Eleventh Row */
         for (int i = 9; i < 17; i++)
         {
-            if (i == 9) { tile_info.push_back(glm::vec4(8 + (i * 16), 164, 1, 4)); }
-            else if (i == 15) { tile_info.push_back(glm::vec4(8 + (i * 16), 164, 2, 6)); }
-            else if (i == 16) { tile_info.push_back(glm::vec4(8 + (i * 16), 164, 3, 6)); }
-            else { tile_info.push_back(glm::vec4(8 + (i * 16), 164, 2, 2)); }
+            if (i == 9) {           tile_info.push_back(glm::vec4(i, 10, 1, 4)); }
+            else if (i == 15) {     tile_info.push_back(glm::vec4(i, 10, 2, 6)); }
+            else if (i == 16) {     tile_info.push_back(glm::vec4(i, 10, 3, 6)); }
+            else {                  tile_info.push_back(glm::vec4(i, 10, 2, 2)); }
         }
         /* Remaining Row */
         for (int i = 1; i < 6; i++)
         {
-            if (i < 5) { tile_info.push_back(glm::vec4(152, 164 + (i * 16), 6, 5)); }
-            else { tile_info.push_back(glm::vec4(152, 164 + (i * 16), 6, 6)); }
+            if (i < 5) {            tile_info.push_back(glm::vec4(9, 10 + i, 6, 5)); }
+            else {                  tile_info.push_back(glm::vec4(9, 10 + i, 6, 6)); }
         }
     }
 
@@ -124,7 +124,7 @@ void TestingScene::Init()
         gameObject = new GameObject();
         manager->AddEntity(gameObject);
 
-        gameObject->GetComponent<Transform>().position = Vector2D_float((-240.0f + tile_info[i].x) * RATIO, (-135.0f + tile_info[i].y) * RATIO);
+        gameObject->GetComponent<Transform>().position = Vector2D_float((_midPointX + _offset + (tile_info[i].x * _tileSize)) * RATIO, (_midPointY + _offset + (tile_info[i].y * _tileSize)) * RATIO);
         gameObject->GetComponent<Transform>().scale = Vector2D_float(16.0f * RATIO, 16.0f * RATIO);
 
         gameObject->AddComponent<SpriteRenderer>(SpriteRenderer::TILE_LAYER, "TILESET_MESH", "TILESET_TEX", 1.0f, &camera, false);
@@ -478,13 +478,14 @@ void TestingScene::Init()
 
 #pragma endregion
     
-    audioController.Play("TEST1");
+    audioController.Play("BGM");
 
 }
 void TestingScene::Clean()
 {
     manager->Clean();
     objManager.Clean();
+    audioController.Stop();
 }
 void TestingScene::Draw()
 {

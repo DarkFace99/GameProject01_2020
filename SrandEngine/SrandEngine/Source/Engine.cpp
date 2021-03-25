@@ -9,10 +9,13 @@
 
 #include "Source/Audio.h"
 
+#define SFX_VOLUME 0.2f
+#define BGM_VOLUME 0.5f
+
 namespace Srand
 {
     // System-wide Initialization
-    //UserInterface user_interface;
+    UserInterface user_interface;
     WindowsInput windowsInput;
 
     Engine* Engine::s_instance = nullptr;
@@ -47,8 +50,8 @@ namespace Srand
             SR_SYSTEM_ERROR("Error! Cannot initializing GLEW");
         }
 
-        //SR_SYSTEM_INFO("Initializing UserInterface...");
-        //user_interface.InitUserInterface();
+        SR_SYSTEM_INFO("Initializing UserInterface...");
+        user_interface.InitUserInterface();
 
         glfwSetInputMode(WindowProperties::get(), GLFW_STICKY_KEYS, GL_TRUE);
         std::cout << "--------------------------------------------------------------------------------" << std::endl;
@@ -58,9 +61,6 @@ namespace Srand
         std::cout << "--------------------------------------------------------------------------------" << std::endl;
 
 #pragma endregion
-
-        /*glfwSetTime(0);
-        timeStep = &TimeStep::get();*/
 
         /* Initialize Shader */
         Shader::get()->InitializeShader();
@@ -98,8 +98,19 @@ namespace Srand
         AssetManager::get().LoadTexture("NPC_ANIM_TEX", "NPC_Animation_Sheet.png");
         AssetManager::get().LoadTexture("LEVEL_ASSET_TEX", "Level_Assets_00.png");
 
-        audioController.AddAudioSource(new AudioSource("TEST1", 1.0f, false, "Warmful World.mp3"));
-        audioController.AddAudioSource(new AudioSource("TEST2", 1.0f, false, "Throwing.mp3"));
+        /* Audio */
+        audioController.AddAudioSource(new AudioSource("BGM", BGM_VOLUME, true, "The Happy Man.mp3"));
+        audioController.AddAudioSource(new AudioSource("Barter_swap", SFX_VOLUME, false, "Barter_swap.mp3"));
+        audioController.AddAudioSource(new AudioSource("Char_fall", SFX_VOLUME, false, "Char_fall.mp3"));
+        audioController.AddAudioSource(new AudioSource("Char_jump", SFX_VOLUME, false, "Char_jump.mp3"));
+        audioController.AddAudioSource(new AudioSource("Cherry_inRange", SFX_VOLUME, false, "Cherry_inRange.mp3"));
+        audioController.AddAudioSource(new AudioSource("Cherry_outRange", SFX_VOLUME, false, "Cherry_outRange.mp3"));
+        audioController.AddAudioSource(new AudioSource("Deactivate", SFX_VOLUME, false, "Deactivate.mp3"));
+        audioController.AddAudioSource(new AudioSource("Door_open-close", SFX_VOLUME, false, "Door_open-close.mp3"));
+        audioController.AddAudioSource(new AudioSource("Elevator", SFX_VOLUME, false, "Elevator.mp3"));
+        audioController.AddAudioSource(new AudioSource("Macho_pickup", SFX_VOLUME, false, "Macho_pickup.mp3"));
+        audioController.AddAudioSource(new AudioSource("Macho_throw", SFX_VOLUME, false, "Macho_throw.mp3"));
+        audioController.AddAudioSource(new AudioSource("NPC_rescue", SFX_VOLUME, false, "NPC_rescue.mp3"));
 
 #pragma endregion
 
@@ -120,7 +131,7 @@ namespace Srand
         //For Testing SceneManager Only
         sceneManager[0]->Draw();
 
-        //user_interface.UpdateUserInterface();
+        user_interface.UpdateUserInterface();
 
         glfwSwapBuffers(WindowProperties::get());
     }
@@ -128,10 +139,6 @@ namespace Srand
     void Engine::Update() {
         glClearColor(0.3f, 0.3f, 0.5f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-        //timeStep->Update();
-
-        //SR_SYSTEM_TRACE("Vsync: {0}" ,WindowProperties::get().GetVsyncStatus());
 
         //For Testing SceneManager Only
         sceneManager[0]->Update();
@@ -161,7 +168,7 @@ namespace Srand
         //std::cout << "Closing window..." << std::endl << "System Shutdown" << std::endl;
         SR_SYSTEM_INFO("Closing window...");
         SR_SYSTEM_INFO("System Shutdown");
-        //user_interface.TerminateUserInterface();
+        user_interface.TerminateUserInterface();
         glfwTerminate();
     }
 
