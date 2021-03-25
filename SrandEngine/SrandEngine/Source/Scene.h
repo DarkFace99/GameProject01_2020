@@ -17,6 +17,8 @@ namespace Srand
 
 		const int _tileSize = 16;
 		const int _offset = 8;
+		const int _midPointX = -240;
+		const int _midPointY = -135;
 
 	public:
 		Scene(const std::string& name = "Scene");
