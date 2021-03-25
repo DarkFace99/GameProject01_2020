@@ -44,7 +44,7 @@ public:						// Not sure if this the best way to implement it.
 		
 		if(input.IsKeyPressed(SR_KEY_UP) && canJump && boxCollider2D->GetIsGround()) {
 			rigidBody->SetVelocityY(8.0f);
-			audioController.Play("TEST2");
+			audioController.Play("Char_jump");
 		}
 
 		if (input.IsKeyPressed(SR_KEY_LEFT) && input.IsKeyPressed(SR_KEY_RIGHT)) {} // do nothing

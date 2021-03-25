@@ -7,8 +7,6 @@
 
 #include "Engine.h"
 
-const float dt = 0.016f;
-
 int main(int argc, char** argv) {
 
 	HANDLE mutex = CreateMutex(NULL, TRUE, L"BENNY: Everyone is Happy");
@@ -32,20 +30,26 @@ int main(int argc, char** argv) {
 
 	engine.Init();
 
-	float lastFrameTime = 0;
-
 	while (engine.IsRunning()) 
 	{
 		engine.Event();
 		timeStep.Update();
 
-		while (timeStep.accumulator >= dt) 
+		while (timeStep.deltaTime >= 1.0f)
 		{
 			engine.Update();
-			timeStep.accumulator -= dt;
+			timeStep.updates++;
+			timeStep.deltaTime--;
 		}
-
 		engine.Draw();
+		timeStep.frames++;
+
+		if (glfwGetTime() - timeStep.lastFrameTime > 1.0f) 
+		{
+			timeStep.lastFrameTime++;
+			timeStep.updates = timeStep.frames = 0;
+			SR_SYSTEM_TRACE("Frames: {0}		Updates: {1}", timeStep.frames, timeStep.updates);
+		}
 	}
 
 	engine.Clean();
