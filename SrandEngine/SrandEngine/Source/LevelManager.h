@@ -171,31 +171,34 @@ namespace Srand
 		}
 
 		void AbilityControl() {
-			
+			//SR_SYSTEM_TRACE("cc_At: {0}", cc_At);
 			if (!useAbility) {
 				CheckInRange();
 
 				// ActivateAbility
 				if (input.IsKeyPressed(SR_KEY_Z)) {
+					SR_SYSTEM_TRACE("Choosing...");
 					choosingStage = true; 
 				}
 				else if(choosingStage && (!input.IsKeyPressed(SR_KEY_Z))){
 					useAbility = true;
 					choosingStage = false;
-					cc_At = 0; // reset
+					SR_SYSTEM_TRACE("Done_Choosing");
 				}
 
 				// empty->cancel
-				if (inRange_Tag.empty()) { 
+				if (choosingStage && inRange_Tag.empty()) {
+					cc_At = 0; // reset
 					choosingStage = false;
 				}
 
 				if (choosingStage) {
-					if (input.IsKeyPressed(SR_KEY_X)) { cc_At++; }
+					if (input.IsKeyPressed(SR_KEY_X)) { cc_At++; /*SR_SYSTEM_TRACE("cc_AT++_cc_AT++_cc_AT++_cc_AT++_");*/  } // Minor Promblem
+					
 					cc_At = cc_At % inRange_Tag.size(); // mod incase if the cc_At exceeds Tag size or Tag size decrease
 
 					/*-------debug-------*/
-					SR_SYSTEM_TRACE("inRange_Size: {0}	cc_At: {1}", inRange_Tag.size(), cc_At);
+					//SR_SYSTEM_TRACE("inRange_Size: {0}	cc_At: {1}", inRange_Tag.size(), cc_At);
 					if (inRange_Tag[cc_At] == CC::ccTag::MACHO) {
 						SR_SYSTEM_TRACE("Choose: MACHO");
 					}
@@ -228,7 +231,14 @@ namespace Srand
 				//}
 			}
 			else { // if (useAbility)
-				if (input.IsKeyPressed(SR_KEY_X)) { useAbility = false; }
+				if (input.IsKeyPressed(SR_KEY_Z)) {
+					SR_SYSTEM_TRACE("Nothing");
+				}
+				else if (input.IsKeyPressed(SR_KEY_X)) { 
+					SR_SYSTEM_TRACE("CANCEL---CANCEL---CANCEL---CANCEL---CANCEL");
+					cc_At = 0; // reset
+					useAbility = false; 
+				}
 			}
 
 			//if (input.IsKeyPressed(SR_KEY_4)) {			// Cancel
