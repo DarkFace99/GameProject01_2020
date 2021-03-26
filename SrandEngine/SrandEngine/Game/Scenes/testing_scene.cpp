@@ -383,23 +383,23 @@ void TestingScene::Init()
 
     // Macho
     {
-        //gameObject = new GameObject();
-        //manager->AddEntity(gameObject);
-        //gameObject->GetComponent<Transform>().position = Vector2D_float(-0.0f, -200.0f);
-        //gameObject->GetComponent<Transform>().scale = Vector2D_float(24.0f * RATIO, 24.0f * RATIO);
-        //gameObject->AddComponent<SpriteRenderer>(SpriteRenderer::CHARACTER_LAYER, "MACHO_ANIM_MESH", "MACHO_ANIM_TEX", 1.0f, &camera, false);
-        //gameObject->AddComponent<RigidBody>(2.0f);
-        //// anim_set
-        //gameObject->AddComponent<Animator>(20, 100);
-        //gameObject->GetComponent<Animator>().SetState("MACHO_IDLE", 0, 4);
-        //gameObject->GetComponent<Animator>().SetState("MACHO_RUN", 13, 19);
-        //gameObject->AddComponent<BoxCollider2D>(BoxCollider2D::CHARACTER_COLLISION, gameObject->GetComponent<Transform>().scale.x - 20, gameObject->GetComponent<Transform>().scale.y,
-        //    false /* overlap */, true /* movable *//*, "BENNY_ANIM_MESH", &camera*/);
+        gameObject = new GameObject();
+        manager->AddEntity(gameObject);
+        gameObject->GetComponent<Transform>().position = Vector2D_float(-0.0f, -200.0f);
+        gameObject->GetComponent<Transform>().scale = Vector2D_float(24.0f * RATIO, 24.0f * RATIO);
+        gameObject->AddComponent<SpriteRenderer>(SpriteRenderer::CHARACTER_LAYER, "MACHO_ANIM_MESH", "MACHO_ANIM_TEX", 1.0f, &camera, false);
+        gameObject->AddComponent<RigidBody>(2.0f);
+        // anim_set
+        gameObject->AddComponent<Animator>(20, 100);
+        gameObject->GetComponent<Animator>().SetState("MACHO_IDLE", 0, 4);
+        gameObject->GetComponent<Animator>().SetState("MACHO_RUN", 13, 19);
+        gameObject->AddComponent<BoxCollider2D>(BoxCollider2D::CHARACTER_COLLISION, gameObject->GetComponent<Transform>().scale.x - 20, gameObject->GetComponent<Transform>().scale.y,
+            false /* overlap */, true /* movable *//*, "BENNY_ANIM_MESH", &camera*/);
 
-        //gameObject->AddComponent<Macho>(); // test CC mechanics
+        gameObject->AddComponent<Macho>(); // test CC mechanics
 
-        //objManager.PushObject(gameObject);
-        //levelManager.AddObject(gameObject);
+        objManager.PushObject(gameObject);
+        levelManager.AddObject(gameObject);
         
     }
 

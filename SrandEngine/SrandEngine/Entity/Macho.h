@@ -8,7 +8,7 @@ public:
 	Macho() { SetTag(ccTag::MACHO); }
 	~Macho() = default;
 
-	bool init() {
+	bool Init() override final {
 		SetActive(false);
 		SetUp();
 		return true;
