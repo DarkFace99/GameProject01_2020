@@ -24,6 +24,7 @@ public:
 		Collision_Check();
 		Execute();
 		AmplifyAbility();
+		Boundary();
 	}
 
 	void AmplifyAbility() {

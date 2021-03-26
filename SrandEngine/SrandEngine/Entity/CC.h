@@ -71,6 +71,13 @@ public:						// Not sure if this the best way to implement it.
 		transform->Translate(rigidBody->GetVelocity());
 	}
 
+	void Boundary() {
+		if (transform->position.x < -630) { transform->SetPosition(Vector2D_float(-630.0f, transform->position.y)); }
+		if (transform->position.x > 630) { transform->SetPosition(Vector2D_float(630.0f, transform->position.y)); }
+		if (transform->position.y < -360) { transform->SetPosition(Vector2D_float(transform->position.x, -360.0f)); }
+		if (transform->position.y > 360) { transform->SetPosition(Vector2D_float(transform->position.x, 360.0f)); }
+	}
+
 	virtual void AnimationController() = 0;
 
 protected:

@@ -34,6 +34,7 @@ public:
 		AnimationController();
 		Collision_Check();
 		Execute();
+		Boundary();
 	}
 
 	void cc_Carry() {

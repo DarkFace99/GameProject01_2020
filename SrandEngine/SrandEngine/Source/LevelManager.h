@@ -30,6 +30,7 @@ namespace Srand
 		GameObject* barterObj = nullptr;
 		
 		bool isSwitchCC_Down = false;
+		bool isCancel = false;
 
 	protected:
 		Transform* bennyTransform = nullptr;
@@ -101,6 +102,7 @@ namespace Srand
 			cc_At = 0;
 			useAbility = false;
 			isSwitchCC_Down = false;
+			isCancel = false;
 		}
 
 		inline int VectorSize() { return cc_List.size(); }
@@ -294,11 +296,17 @@ namespace Srand
 				//}
 			}
 			else { // if (useAbility)
-				/*if (input.IsKeyPressed(SR_KEY_Z)) {
-					SR_SYSTEM_TRACE("Nothing");
-				}
-				else*/ 
-				if (input.IsKeyPressed(SR_KEY_X)) { 
+
+				
+				Vector2D_float deltaVect = bennyTransform->position - controlled_Transform->position;;
+				float magnitude = sqrt(pow(deltaVect.x, 2) + pow(deltaVect.y, 2));
+				SR_SYSTEM_TRACE("Magnitude: {0}\t({1})", magnitude, benny->GetRadius());
+				if (magnitude > benny->GetRadius()) { isCancel = true; } //disconnect
+				else if (input.IsKeyPressed(SR_KEY_X)) { isCancel = true; } // manual
+				else if (controlled_Tag == CC::ccTag::BARTER) { isCancel = true; } // Barter
+				
+				if (isCancel) {
+					isCancel = false;
 					SR_SYSTEM_TRACE("CANCEL---CANCEL---CANCEL");
 
 					AudioController::get().Play("Deactivate");
@@ -323,12 +331,6 @@ namespace Srand
 
 					cc_At = 0; // reset
 					useAbility = false; 
-				}else if(controlled_Tag == CC::ccTag::BARTER){
-					controlled_Tag = CC::ccTag::DEFAULT;
-					controlled_Transform = nullptr;
-
-					cc_At = 0; // reset
-					useAbility = false;
 				}
 			}
 
