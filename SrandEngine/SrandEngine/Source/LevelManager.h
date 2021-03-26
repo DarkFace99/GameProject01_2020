@@ -1,7 +1,7 @@
 #pragma once
 
 #include <srpch.h>
-#include "ecspch.h"
+
 #include "Source/ObjectManager.h"
 #include "Entity/Benny.h"
 #include "Entity/Macho.h"
@@ -9,23 +9,42 @@
 #include "Entity/Pear.h"
 #include "Entity/Barter.h"
 
+
 namespace Srand
 {
 	class LevelManager
 	{
 	private:
 		std::vector<GameObject*> cc_List;
+		std::vector<CC::ccTag> cc_Tag;
+
+		std::vector<GameObject*> inRange_List;
+		std::vector<CC::ccTag> inRange_Tag;
 
 		LevelManager() {}
 		static LevelManager* s_instance;
-		GameObject* benny = nullptr;
-		GameObject* macho = nullptr;
-		GameObject* cherry = nullptr;
-		GameObject* pear = nullptr;
-		GameObject* barter = nullptr;
+		GameObject* bennyObj = nullptr;
+		GameObject* machoObj = nullptr;
+		GameObject* cherryObj = nullptr;
+		GameObject* pearObj = nullptr;
+		GameObject* barterObj = nullptr;
 
 	protected:
+		Transform* bennyTransform = nullptr;
+		Benny* benny = nullptr;
+		Transform* machoTransform = nullptr;
+		Macho* macho = nullptr;
+		Transform* cherryTransform = nullptr;
+		Cherry* cherry = nullptr;
+		Transform* pearTransform = nullptr;
+		Pear* pear = nullptr;
+		Transform* barterTransform = nullptr;
+		Barter* barter = nullptr;
+
+		bool choosingStage = false;
+		unsigned int cc_At = 0;
 		bool useAbility = false;
+		
 		WindowsInput input;
 
 	public:
@@ -55,76 +74,187 @@ namespace Srand
 
 		inline int VectorSize() { return cc_List.size(); }
 		GameObject* operator[](int i) { return cc_List[i]; }
-
+		
 		std::vector<GameObject*>::iterator begin() { return cc_List.begin(); }
 		std::vector<GameObject*>::iterator end() { return cc_List.end(); }
 		
 		inline void SetUpCC() {
-			for (int i = 0; i < cc_List.size(); i++) {
+			for (int i = 0; i < cc_List.size(); i++) {		// find Benny first
 				if (cc_List[i]->HasComponent<Benny>()) {
 					SR_SYSTEM_TRACE("Level: Found Benny");
-					benny = cc_List[i];
+					bennyObj = cc_List[i];
+
+					bennyTransform = &bennyObj->GetComponent<Transform>();
+					benny = &bennyObj->GetComponent<Benny>();
+					cc_Tag.push_back(benny->GetTag());
 				}
-				else if (cc_List[i]->HasComponent<Macho>()) {
+			}
+
+			for (int i = 0; i < cc_List.size(); i++) {		// other CCs
+				if (cc_List[i]->HasComponent<Macho>()) {
 					SR_SYSTEM_TRACE("Level: Found Macho");
-					macho = cc_List[i];
+					machoObj = cc_List[i];
+
+					machoTransform = &machoObj->GetComponent<Transform>();
+					macho = &machoObj->GetComponent<Macho>();
+					cc_Tag.push_back(macho->GetTag());
 				}
 				else if (cc_List[i]->HasComponent<Cherry>()) {
 					SR_SYSTEM_TRACE("Level: Found Cherry");
-					cherry = cc_List[i];
-					cc_List[i]->GetComponent<Cherry>().SetCherry(benny);
+					cherryObj = cc_List[i];
+					cc_List[i]->GetComponent<Cherry>().SetCherry(bennyObj);
+
+					cherryTransform = &cherryObj->GetComponent<Transform>();
+					cherry = &cherryObj->GetComponent<Cherry>();
+					cc_Tag.push_back(cherry->GetTag());
+
 				}
 				else if (cc_List[i]->HasComponent<Pear>()) {
-					pear = cc_List[i];
+					pearObj = cc_List[i];
 					SR_SYSTEM_TRACE("Level: Found Pear");
+
+					pearTransform = &pearObj->GetComponent<Transform>();
+					pear = &pearObj->GetComponent<Pear>();
+					cc_Tag.push_back(pear->GetTag());
 				}
 				else if (cc_List[i]->HasComponent<Barter>()) {
-					barter = cc_List[i];
-					cc_List[i]->GetComponent<Barter>().SetBarter(benny);
+					barterObj = cc_List[i];
+					cc_List[i]->GetComponent<Barter>().SetBarter(bennyObj);
 					SR_SYSTEM_TRACE("Level: Found Barter");
+
+					barterTransform = &barterObj->GetComponent<Transform>();
+					barter = &barterObj->GetComponent<Barter>();
+					cc_Tag.push_back(barter->GetTag());
 					
 				}
 			}
 		}
 
-		void Ability() {
+		void CheckInRange() {
+			Vector2D_float deltaVect;
+			float magnitude;
+			float prevMag = -1.0f;
+			float closestMag;
+			int closestCC = -1;
+			
+			for (int i = 0; i < cc_Tag.size()-1; i++) { // exclude Benny
+				closestMag = benny->GetRadius(); //reset closestMag
+				for (int j = 0; j < cc_Tag.size(); j++) {
+					if (cc_Tag[j] != CC::ccTag::BENNY) {
+
+						if (cc_Tag[j] == CC::ccTag::MACHO) { deltaVect = bennyTransform->position - machoTransform->position; }
+						else if (cc_Tag[j] == CC::ccTag::CHERRY) { deltaVect = bennyTransform->position - cherryTransform->position; }
+						else if (cc_Tag[j] == CC::ccTag::PEAR) { deltaVect = bennyTransform->position - pearTransform->position; }
+						else if (cc_Tag[j] == CC::ccTag::BARTER) { deltaVect = bennyTransform->position - barterTransform->position; }
+						else { SR_SYSTEM_TRACE("CheckInRange: Error"); }
+
+						magnitude = sqrt(pow(deltaVect.x, 2) + pow(deltaVect.y, 2));
+
+						if (prevMag < magnitude && magnitude < closestMag) {
+							closestMag = magnitude;
+							closestCC = j;
+						}
+					}
+				}
+				if (closestMag < benny->GetRadius()) {
+					inRange_List.push_back(cc_List[closestCC]);
+					inRange_Tag.push_back(cc_Tag[closestCC]);
+					prevMag = closestMag;
+				}
+			}
+			//SR_SYSTEM_TRACE("inRange: {0}\n---------------------\n", inRange.size());
+		}
+
+		void ClearInRange() {
+			inRange_List.clear();
+			inRange_Tag.clear();
+		}
+
+		void AbilityControl() {
+			
 			if (!useAbility) {
-				if (input.IsKeyPressed(SR_KEY_1)) {			// Cherry
-					ActivateCherry();
-					useAbility = true;
+				CheckInRange();
+
+				// ActivateAbility
+				if (input.IsKeyPressed(SR_KEY_Z)) {
+					choosingStage = true; 
 				}
-				else if (input.IsKeyPressed(SR_KEY_2)) {	// Pear
-					ActivatePear();
+				else if(choosingStage && (!input.IsKeyPressed(SR_KEY_Z))){
 					useAbility = true;
+					choosingStage = false;
+					cc_At = 0; // reset
 				}
-				else if (input.IsKeyPressed(SR_KEY_3)) {	// Barter
-					ActivateBarter();
-					useAbility = true;
+
+				// empty->cancel
+				if (inRange_Tag.empty()) { 
+					choosingStage = false;
 				}
+
+				if (choosingStage) {
+					if (input.IsKeyPressed(SR_KEY_X)) { cc_At++; }
+					cc_At = cc_At % inRange_Tag.size(); // mod incase if the cc_At exceeds Tag size or Tag size decrease
+
+					/*-------debug-------*/
+					SR_SYSTEM_TRACE("inRange_Size: {0}	cc_At: {1}", inRange_Tag.size(), cc_At);
+					if (inRange_Tag[cc_At] == CC::ccTag::MACHO) {
+						SR_SYSTEM_TRACE("Choose: MACHO");
+					}
+					else if (inRange_Tag[cc_At] == CC::ccTag::CHERRY) {
+						SR_SYSTEM_TRACE("Choose: CHERRY");
+					}
+					else if (inRange_Tag[cc_At] == CC::ccTag::PEAR) {
+						SR_SYSTEM_TRACE("Choose: PEAR");
+					}
+					else if (inRange_Tag[cc_At] == CC::ccTag::BARTER) {
+						SR_SYSTEM_TRACE("Choose: BARTER");
+					}
+					
+				}
+				
+
+				// CancelAbility
+
+				//if (input.IsKeyPressed(SR_KEY_1)) {			// Cherry
+				//	ActivateCherry();
+				//	useAbility = true;
+				//}
+				//else if (input.IsKeyPressed(SR_KEY_2)) {	// Pear
+				//	ActivatePear();
+				//	useAbility = true;
+				//}
+				//else if (input.IsKeyPressed(SR_KEY_3)) {	// Barter
+				//	ActivateBarter();
+				//	useAbility = true;
+				//}
+			}
+			else { // if (useAbility)
+				if (input.IsKeyPressed(SR_KEY_X)) { useAbility = false; }
 			}
 
-			if (input.IsKeyPressed(SR_KEY_4)) {			// Cancel
-				ClearActivation();
-				useAbility = false;
-			}
+			//if (input.IsKeyPressed(SR_KEY_4)) {			// Cancel
+			//	ClearActivation();
+			//	useAbility = false;
+			//}
+
+			ClearInRange();
 		}
 
 		void ActivateCherry() {
-			cherry->GetComponent<Cherry>().SetActive(true);
-			benny->GetComponent<Benny>().SetActive(false);
+			cherryObj->GetComponent<Cherry>().SetActive(true);
+			bennyObj->GetComponent<Benny>().SetActive(false);
 		}
 		void ActivatePear() {
-			pear->GetComponent<Pear>().SetActive(true);
+			pearObj->GetComponent<Pear>().SetActive(true);
 		}
 		void ActivateBarter() { 
-			barter->GetComponent<Barter>().SetActive(true); 
+			barterObj->GetComponent<Barter>().SetActive(true); 
 		}
 
 		void ClearActivation() { 
-			benny->GetComponent<Benny>().SetActive(true); 
-			cherry->GetComponent<Cherry>().SetActive(false);
-			pear->GetComponent<Pear>().SetActive(false);
-			barter->GetComponent<Barter>().SetActive(false);
+			bennyObj->GetComponent<Benny>().SetActive(true); 
+			cherryObj->GetComponent<Cherry>().SetActive(false);
+			pearObj->GetComponent<Pear>().SetActive(false);
+			barterObj->GetComponent<Barter>().SetActive(false);
 		}
 	};
 }

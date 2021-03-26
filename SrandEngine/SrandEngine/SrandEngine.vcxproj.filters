@@ -163,7 +163,6 @@
     <ClInclude Include="Source\ObjectManager.h">
       <Filter>SrandEngine</Filter>
     </ClInclude>
-    <ClInclude Include="Source\LevelManager.h" />
     <ClInclude Include="Source\Audio.h">
       <Filter>SrandEngine\Audio</Filter>
     </ClInclude>
@@ -190,6 +189,9 @@
     </ClInclude>
     <ClInclude Include="Game\Scenes\Level2.h">
       <Filter>Game\GameScene\Level2</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\LevelManager.h">
+      <Filter>SrandEngine</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -256,7 +258,6 @@
     <ClCompile Include="Source\ObjectManager.cpp">
       <Filter>SrandEngine</Filter>
     </ClCompile>
-    <ClCompile Include="Source\LevelManager.cpp" />
     <ClCompile Include="Source\Audio.cpp">
       <Filter>SrandEngine\Audio</Filter>
     </ClCompile>
@@ -265,6 +266,9 @@
     </ClCompile>
     <ClCompile Include="Game\Scenes\Level2.cpp">
       <Filter>Game\GameScene\Level2</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\LevelManager.cpp">
+      <Filter>SrandEngine</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
