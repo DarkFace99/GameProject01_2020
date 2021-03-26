@@ -180,7 +180,7 @@ namespace Srand
 					SR_SYSTEM_TRACE("Choosing...");
 					choosingStage = true; 
 				}
-				else if(choosingStage && (!input.IsKeyPressed(SR_KEY_Z))){
+				else if(choosingStage && (input.IsKeyReleased(SR_KEY_Z))){
 					useAbility = true;
 					choosingStage = false;
 					SR_SYSTEM_TRACE("Done_Choosing");
@@ -198,7 +198,7 @@ namespace Srand
 					cc_At = cc_At % inRange_Tag.size(); // mod incase if the cc_At exceeds Tag size or Tag size decrease
 
 					/*-------debug-------*/
-					//SR_SYSTEM_TRACE("inRange_Size: {0}	cc_At: {1}", inRange_Tag.size(), cc_At);
+					SR_SYSTEM_TRACE("inRange_Size: {0}	cc_At: {1}", inRange_Tag.size(), cc_At);
 					if (inRange_Tag[cc_At] == CC::ccTag::MACHO) {
 						SR_SYSTEM_TRACE("Choose: MACHO");
 					}
