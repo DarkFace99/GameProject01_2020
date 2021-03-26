@@ -14,6 +14,7 @@ public:
 		targetRigidBody = nullptr;
 		cc_CopyList.clear(); 
 		isPickUp = false;
+		isPickUp_Down = false;
 	}
 
 	bool Init() override final {
@@ -28,7 +29,7 @@ public:
 			Input_Movement(false); 
 			ThrowAbility();
 		}
-		SR_SYSTEM_TRACE("Pick: {0}", isPickUp);
+		//SR_SYSTEM_TRACE("Pick: {0}", isPickUp);
 		if (isPickUp) { cc_Carry(); }
 		AnimationController();
 		Collision_Check();
@@ -39,10 +40,14 @@ public:
 		targetTransform->SetPosition(Vector2D_float(transform->position.x, transform->position.y + (boxCollider2D->GetHeight() / 2) + (targetCollider->GetHeight() / 2)));
 		targetRenderer->SetFlip(renderer->GetFlip());
 		if (targetAnimator != nullptr)targetAnimator->PlayState("IDLE");
+
+		if (!isActive) { isPickUp = false; }
 	}
 
 	void ThrowAbility() {
-		if (input.IsKeyPressed(SR_KEY_C)) {
+		if (input.IsKeyPressed(SR_KEY_C)) { isPickUp_Down = true; }
+		if(isPickUp_Down && !input.IsKeyPressed(SR_KEY_C)){
+			isPickUp_Down = false;
 			if (!isPickUp) {
 				for (int i = 0; i < cc_CopyList.size(); i++) {
 					if (!cc_CopyList[i]->HasComponent<Macho>()) {
@@ -51,6 +56,7 @@ public:
 							targetCollider = &cc_CopyList[i]->GetComponent<BoxCollider2D>();
 							targetRenderer = &cc_CopyList[i]->GetComponent<SpriteRenderer>();
 							targetAnimator = &cc_CopyList[i]->GetComponent<Animator>();
+							targetRigidBody = &cc_CopyList[i]->GetComponent<RigidBody>();
 							isPickUp = true;
 							break;
 						}
@@ -58,9 +64,15 @@ public:
 				}
 			}
 			else if (isPickUp) { // throw 
-
 				isPickUp = false;
+				if (renderer->GetFlip()) { targetRigidBody->SetVelocityX(-throwForceX); }
+				else { targetRigidBody->SetVelocityX(throwForceX); }
+				targetRigidBody->SetVelocityY(throwForceY);
 			}
+		}
+
+		if (input.IsKeyPressed(SR_KEY_DOWN) && isPickUp) {
+			isPickUp = false;
 		}
 
 	}
@@ -69,6 +81,13 @@ public:
 		// Flip
 		if (rigidBody->GetVelocityX() > 0) { renderer->SetFlip(false); }
 		else if (rigidBody->GetVelocityX() < 0) { renderer->SetFlip(true); }
+
+		if (rigidBody->GetVelocityX() != 0) {
+			animator->PlayState("MACHO_RUN");
+		}
+		else {
+			animator->PlayState("MACHO_IDLE");
+		}
 	}
 
 	void CopyCC_List(std::vector<GameObject*> cc_List) {
@@ -86,7 +105,9 @@ private:
 	RigidBody* targetRigidBody = nullptr;
 	std::vector<GameObject*> cc_CopyList;
 	
-
+	float throwForceX = 50.0f;
+	float throwForceY = 1.0f;
 	bool isPickUp = false;
+	bool isPickUp_Down = false;
 };
 

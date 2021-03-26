@@ -28,6 +28,8 @@ namespace Srand
 		GameObject* cherryObj = nullptr;
 		GameObject* pearObj = nullptr;
 		GameObject* barterObj = nullptr;
+		
+		bool isSwitchCC_Down = false;
 
 	protected:
 		Transform* bennyTransform = nullptr;
@@ -98,6 +100,7 @@ namespace Srand
 			choosingStage = false;
 			cc_At = 0;
 			useAbility = false;
+			isSwitchCC_Down = false;
 		}
 
 		inline int VectorSize() { return cc_List.size(); }
@@ -252,12 +255,13 @@ namespace Srand
 				}
 
 				if (choosingStage) {
-					if (input.IsKeyPressed(SR_KEY_X)) { cc_At++; /*SR_SYSTEM_TRACE("cc_AT++_cc_AT++_cc_AT++_cc_AT++_");*/  } // Minor Promblem
+					if (input.IsKeyPressed(SR_KEY_X)) { isSwitchCC_Down = true; /*SR_SYSTEM_TRACE("cc_AT++_cc_AT++_cc_AT++_cc_AT++_");*/  } // Minor Promblem
+					else if (isSwitchCC_Down && !input.IsKeyPressed(SR_KEY_X)) { cc_At++; isSwitchCC_Down = false;}
 					
 					cc_At = cc_At % inRange_Tag.size(); // mod incase if the cc_At exceeds Tag size or Tag size decrease
 
 					/*-------debug-------*/
-					SR_SYSTEM_TRACE("inRange_Size: {0}	cc_At: {1}", inRange_Tag.size(), cc_At);
+					SR_SYSTEM_TRACE("inRange_Size: {0}", inRange_Tag.size());
 					if (inRange_Tag[cc_At] == CC::ccTag::MACHO) {
 						SR_SYSTEM_TRACE("Choose: MACHO");
 					}
@@ -295,7 +299,7 @@ namespace Srand
 				}
 				else*/ 
 				if (input.IsKeyPressed(SR_KEY_X)) { 
-					SR_SYSTEM_TRACE("CANCEL---CANCEL---CANCEL---CANCEL---CANCEL");
+					SR_SYSTEM_TRACE("CANCEL---CANCEL---CANCEL");
 
 					AudioController::get().Play("Deactivate");
 

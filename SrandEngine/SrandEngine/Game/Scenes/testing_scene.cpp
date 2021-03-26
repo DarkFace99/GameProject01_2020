@@ -417,7 +417,7 @@ void TestingScene::Init()
         gameObject->AddComponent<SpriteRenderer>(SpriteRenderer::CHARACTER_LAYER, "PEAR_ANIM_MESH", "PEAR_ANIM_TEX", 1.0f, &camera, false);
         gameObject->AddComponent<RigidBody>(2.0f);
         // anim_set
-        gameObject->AddComponent<Animator>(19, 100);
+        gameObject->AddComponent<Animator>(18, 100);
         gameObject->GetComponent<Animator>().SetState("PEAR_IDLE", 1, 6);
         gameObject->GetComponent<Animator>().SetState("PEAR_RUN", 7, 16);
         gameObject->GetComponent<Animator>().SetState("PEAR_JUMP", 17, 17);
