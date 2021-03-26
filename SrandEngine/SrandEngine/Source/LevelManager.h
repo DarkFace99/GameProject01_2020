@@ -77,6 +77,27 @@ namespace Srand
 
 			inRange_List.clear();
 			inRange_Tag.clear();
+
+			bennyObj = nullptr;
+			machoObj = nullptr;
+			cherryObj = nullptr;
+			pearObj = nullptr;
+			barterObj = nullptr;
+
+			bennyTransform = nullptr;
+			benny = nullptr;
+			machoTransform = nullptr;
+			macho = nullptr;
+			cherryTransform = nullptr;
+			cherry = nullptr;
+			pearTransform = nullptr;
+			pear = nullptr;
+			barterTransform = nullptr;
+			barter = nullptr;
+
+			choosingStage = false;
+			cc_At = 0;
+			useAbility = false;
 		}
 
 		inline int VectorSize() { return cc_List.size(); }
