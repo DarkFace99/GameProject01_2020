@@ -14,6 +14,13 @@ namespace Srand
 
 		return state == GLFW_PRESS || state == GLFW_REPEAT;
 	}
+	bool WindowsInput::IsKeyReleasedImpl(int keycode)
+	{
+		auto window = static_cast<GLFWwindow*>(WindowProperties::get());
+		auto state = glfwGetKey(window, keycode);
+
+		return state == GLFW_RELEASE;
+	}
 	bool WindowsInput::IsMouseButtonPressedImpl(int button)
 	{
 		auto window = static_cast<GLFWwindow*>(WindowProperties::get());

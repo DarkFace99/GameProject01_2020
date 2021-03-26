@@ -9,12 +9,17 @@ public:
 	~Macho() = default;
 
 	bool init() {
+		SetActive(false);
 		SetUp();
 		return true;
 	}
 
 	void Update() override final {
-		Input_Movement(false);
+		rigidBody->Update_Gravity();
+		if (isActive) { Input_Movement(false); }
+		AnimationController();
+		Collision_Check();
+		Execute();
 	}
 
 	void CC::AnimationController() override {
