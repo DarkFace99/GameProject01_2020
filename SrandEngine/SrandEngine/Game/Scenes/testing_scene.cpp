@@ -389,7 +389,7 @@ void TestingScene::Init()
     {
         gameObject = new GameObject();
         manager->AddEntity(gameObject);
-        gameObject->GetComponent<Transform>().position = Vector2D_float(-235.0f, -230.0f);
+        gameObject->GetComponent<Transform>().position = Vector2D_float(-235.0f, -270.0f);
         gameObject->GetComponent<Transform>().scale = Vector2D_float(24.0f * RATIO, 24.0f * RATIO);
         gameObject->AddComponent<SpriteRenderer>(SpriteRenderer::CHARACTER_LAYER, "CHERRY_ANIM_MESH", "CHERRY_ANIM_TEX", 1.0f, &camera, false);
         gameObject->AddComponent<RigidBody>(2.0f);
@@ -413,7 +413,7 @@ void TestingScene::Init()
     {
         gameObject = new GameObject();
         manager->AddEntity(gameObject);
-        gameObject->GetComponent<Transform>().position = Vector2D_float(100.0f, -200.0f);
+        gameObject->GetComponent<Transform>().position = Vector2D_float(160.0f, -270.0f);
         gameObject->GetComponent<Transform>().scale = Vector2D_float(24.0f * RATIO, 24.0f * RATIO);
         gameObject->AddComponent<SpriteRenderer>(SpriteRenderer::CHARACTER_LAYER, "PEAR_ANIM_MESH", "PEAR_ANIM_TEX", 1.0f, &camera, false);
         gameObject->AddComponent<RigidBody>(2.0f);
@@ -437,7 +437,7 @@ void TestingScene::Init()
     {
         gameObject = new GameObject();
         manager->AddEntity(gameObject);
-        gameObject->GetComponent<Transform>().position = Vector2D_float(300.0f, 300.0f);
+        gameObject->GetComponent<Transform>().position = Vector2D_float(300.0f, 100.0f);
         gameObject->GetComponent<Transform>().scale = Vector2D_float(24.0f * RATIO, 24.0f * RATIO);
         gameObject->AddComponent<SpriteRenderer>(SpriteRenderer::CHARACTER_LAYER, "BARTER_ANIM_MESH", "BARTER_ANIM_TEX", 1.0f, &camera, false);
         gameObject->AddComponent<RigidBody>(2.0f);
@@ -457,7 +457,7 @@ void TestingScene::Init()
     {
         gameObject = new GameObject();
         manager->AddEntity(gameObject);
-        gameObject->GetComponent<Transform>().position = Vector2D_float(-0.0f, -200.0f);
+        gameObject->GetComponent<Transform>().position = Vector2D_float(-0.0f, -270.0f);
         gameObject->GetComponent<Transform>().scale = Vector2D_float(24.0f * RATIO, 24.0f * RATIO);
         gameObject->AddComponent<SpriteRenderer>(SpriteRenderer::CHARACTER_LAYER, "MACHO_ANIM_MESH", "MACHO_ANIM_TEX", 1.0f, &camera, false);
         gameObject->AddComponent<RigidBody>(2.0f);
