@@ -74,8 +74,6 @@ public:
 		Execute();
 	}
 
-	
-
 	void CC::AnimationController() override {
 
 		// Flip

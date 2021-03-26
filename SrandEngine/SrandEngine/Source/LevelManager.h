@@ -107,6 +107,9 @@ namespace Srand
 		std::vector<GameObject*>::iterator end() { return cc_List.end(); }
 		
 		inline void SetUpCC() {
+			
+			bool isMachoFound = false;
+
 			for (int i = 0; i < cc_List.size(); i++) {		// find Benny first
 				if (cc_List[i]->HasComponent<Benny>()) {
 					SR_SYSTEM_TRACE("Level: Found Benny");
@@ -126,6 +129,7 @@ namespace Srand
 					machoTransform = &machoObj->GetComponent<Transform>();
 					macho = &machoObj->GetComponent<Macho>();
 					cc_Tag.push_back(macho->GetTag());
+					isMachoFound = true;
 				}
 				else if (cc_List[i]->HasComponent<Cherry>()) {
 					SR_SYSTEM_TRACE("Level: Found Cherry");
@@ -156,6 +160,7 @@ namespace Srand
 					
 				}
 			}
+			if (isMachoFound) { macho->CopyCC_List(cc_List); }
 		}
 
 		void CheckInRange() {
