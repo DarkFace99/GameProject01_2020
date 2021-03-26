@@ -1,41 +1,12 @@
 #include "Level2.h"
 
-//#include "Source/Camera.h"
-//
-//#include "Entity/Button.h"
-//#include "Entity/Door.h"
-//#include "Entity/Elevator.h"
-//#include "Entity/NPC.h"
-//#include "Entity/Benny.h"
-//#include "Entity/Macho.h"
-//#include "Entity/Cherry.h"
-//#include "Entity/Pear.h"
-//#include "Entity/Barter.h"
-//
-//#include "Source/Audio.h"
-//
-//Camera camera(glm::vec3(0, 0, 0), glm::vec3(0, 0, -1), glm::vec3(0, 1, 0), 1.0f, 0.0f);
-//ObjManager& objManager = ObjManager::get();
-//LevelManager& levelManager = LevelManager::get();
-//GameObject* gameObject;
-//
-//AudioController& audioController = AudioController::get();
-
-//GameObject* npc;
-//GameObject* player;
-//GameObject* benny;
-//GameObject* macho;
-
-//GameObject* button1;
-//GameObject* button2;
-//GameObject* button3;
-
 Level2::Level2()
 	:Scene("Level2")
 {}
 
 Level2::~Level2()
 {
+    Clean();
 }
 
 void Level2::Init()
@@ -62,49 +33,53 @@ void Level2::Init()
         /* First Row */
         for (int i = 0; i < 30; i++)
         {
-            if (i == 16) { tile_info.push_back(glm::vec4(8 + (i * 16), 8, 2, 5)); } //inner Dirt
-            else { tile_info.push_back(glm::vec4(8 + (i * 16), 8, 2, 6)); } //grass top
+            if (i == 16) {  tile_info.push_back(glm::vec4(i, 0, 2, 5)); } //inner Dirt
+            else {          tile_info.push_back(glm::vec4(i, 0, 2, 6)); } //grass top
 
         }
         /* Second Row */
-        tile_info.push_back(glm::vec4(8 + (16 * 16), 24, 2, 5)); //inner Dirt
+        tile_info.push_back(glm::vec4(16, 1, 2, 5)); //inner Dirt
         /* Third Row */
-        tile_info.push_back(glm::vec4(8 + (16 * 16), 40, 2, 5)); //inner Dirt
+        tile_info.push_back(glm::vec4(16, 2, 2, 5)); //inner Dirt
         /* Forth Row */
-        tile_info.push_back(glm::vec4(8 + (16 * 16), 56, 2, 5)); //inner Dirt
-        /* Fifth Row */
-        for (int i = 8; i < 14; i++)
+        for (int i = 11; i < 21; i++)
         {
-            if (i == 8) { tile_info.push_back(glm::vec4(8 + (i * 16), 72, 1, 2)); }
-            else { tile_info.push_back(glm::vec4(8 + (i * 16), 72, 2, 2)); }
+            if (i == 16) {  tile_info.push_back(glm::vec4(i, 3, 2, 5)); }
+            else {          tile_info.push_back(glm::vec4(i, 3, 2, 2)); }
         }
-        for (int i = 18; i < 30; i++)
+        /* Seventh Row */
+        for (int i = 0; i < 30; i++)
         {
-            if (i == 29) { tile_info.push_back(glm::vec4(8 + (i * 16), 72, 2, 6)); }
-            else { tile_info.push_back(glm::vec4(8 + (i * 16), 72, 2, 2)); }
+            if (i >= 0 && i <= 10) {        tile_info.push_back(glm::vec4(i, 6, 2, 2)); }
+            else if (i == 11) {             tile_info.push_back(glm::vec4(i, 6, 3, 2)); }
+            else if (i == 21) {             tile_info.push_back(glm::vec4(i, 6, 1, 2)); }
+            else if (i > 21 && i < 30) {    tile_info.push_back(glm::vec4(i, 6, 2, 2)); }
         }
-        /* Tenth Row */
-        for (int i = 15; i < 24; i++)
-        {
-            if (i == 23) { tile_info.push_back(glm::vec4(8 + (i * 16), 148, 3, 2)); }
-            else if (i == 15) { tile_info.push_back(glm::vec4(8 + (i * 16), 148, 1, 4)); }
-            else if (i == 16) { tile_info.push_back(glm::vec4(8 + (i * 16), 148, 2, 4)); }
-            else { tile_info.push_back(glm::vec4(8 + (i * 16), 148, 2, 2)); }
-        }
-        /* Eleventh Row */
-        for (int i = 9; i < 17; i++)
-        {
-            if (i == 9) { tile_info.push_back(glm::vec4(8 + (i * 16), 164, 1, 4)); }
-            else if (i == 15) { tile_info.push_back(glm::vec4(8 + (i * 16), 164, 2, 6)); }
-            else if (i == 16) { tile_info.push_back(glm::vec4(8 + (i * 16), 164, 3, 6)); }
-            else { tile_info.push_back(glm::vec4(8 + (i * 16), 164, 2, 2)); }
-        }
+        /* ninth Row */
+        tile_info.push_back(glm::vec4(16, 8, 2, 5)); //inner Dirt
+        /* tenth Row */
+        tile_info.push_back(glm::vec4(16, 9, 2, 5)); //inner Dirt
+        /* eleventh Row */
+        tile_info.push_back(glm::vec4(16, 10, 2, 5)); //inner Dirt
+        /* twelveth Row */
+        tile_info.push_back(glm::vec4(16, 11, 2, 5)); //inner Dirt
+        /* thirteenth Row */
+        tile_info.push_back(glm::vec4(16, 12, 2, 5)); //inner Dirt
+        /* forteenth Row */
+        tile_info.push_back(glm::vec4(16, 13, 2, 5)); //inner Dirt
+        /* fiftheenth Row */
+        tile_info.push_back(glm::vec4(16, 14, 2, 5)); //inner Dirt
+        /* sixteenth Row */
+        tile_info.push_back(glm::vec4(16, 15, 2, 5)); //inner Dirt
+
         /* Remaining Row */
-        for (int i = 1; i < 6; i++)
+        for (int i = 8; i < 16; i++) 
         {
-            if (i < 5) { tile_info.push_back(glm::vec4(152, 164 + (i * 16), 6, 5)); }
-            else { tile_info.push_back(glm::vec4(152, 164 + (i * 16), 6, 6)); }
+            if (i == 8) { tile_info.push_back(glm::vec4(16, i, 6, 4)); }
+            else if (i == 15) { tile_info.push_back(glm::vec4(16, i, 6, 6)); }
+            else { tile_info.push_back(glm::vec4(16, i, 6, 5)); }
         }
+
     }
 
     for (int i = 0; i < tile_info.size(); i++)
@@ -112,7 +87,7 @@ void Level2::Init()
         gameObject = new GameObject();
         manager->AddEntity(gameObject);
 
-        gameObject->GetComponent<Transform>().position = Vector2D_float((-240.0f + tile_info[i].x) * RATIO, (-135.0f + tile_info[i].y) * RATIO);
+        gameObject->GetComponent<Transform>().position = Vector2D_float((_midPointX + _offset + (tile_info[i].x * _tileSize)) * RATIO, (_midPointY + _offset + (tile_info[i].y * _tileSize)) * RATIO);
         gameObject->GetComponent<Transform>().scale = Vector2D_float(16.0f * RATIO, 16.0f * RATIO);
 
         gameObject->AddComponent<SpriteRenderer>(SpriteRenderer::TILE_LAYER, "TILESET_MESH", "TILESET_TEX", 1.0f, &camera, false);

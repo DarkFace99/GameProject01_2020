@@ -45,11 +45,11 @@ int main(int argc, char** argv) {
 		engine.Draw();
 		timeStep.frames++;
 
-		if (glfwGetTime() - timeStep.lastFrameTime > 1.0f) 
+		if ((float)timeStep > 1.0f)
 		{
 			timeStep.updates = timeStep.frames = 0;
-			SR_SYSTEM_TRACE("Frames: {0}		Updates: {1}", timeStep.frames, timeStep.updates);
-			Sleep((glfwGetTime() - timeStep.lastFrameTime) * 1000);
+			SR_SYSTEM_TRACE("Time: {0}		Frames: {1}		Updates: {2}", (float)timeStep, timeStep.frames, timeStep.updates);
+			Sleep(timeStep.GetMilliseconds());
 		}
 	}
 
