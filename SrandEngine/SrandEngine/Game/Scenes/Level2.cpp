@@ -55,22 +55,6 @@ void Level2::Init()
             else if (i == 21) {             tile_info.push_back(glm::vec4(i, 6, 1, 2)); }
             else if (i > 21 && i < 30) {    tile_info.push_back(glm::vec4(i, 6, 2, 2)); }
         }
-        /* ninth Row */
-        tile_info.push_back(glm::vec4(16, 8, 2, 5)); //inner Dirt
-        /* tenth Row */
-        tile_info.push_back(glm::vec4(16, 9, 2, 5)); //inner Dirt
-        /* eleventh Row */
-        tile_info.push_back(glm::vec4(16, 10, 2, 5)); //inner Dirt
-        /* twelveth Row */
-        tile_info.push_back(glm::vec4(16, 11, 2, 5)); //inner Dirt
-        /* thirteenth Row */
-        tile_info.push_back(glm::vec4(16, 12, 2, 5)); //inner Dirt
-        /* forteenth Row */
-        tile_info.push_back(glm::vec4(16, 13, 2, 5)); //inner Dirt
-        /* fiftheenth Row */
-        tile_info.push_back(glm::vec4(16, 14, 2, 5)); //inner Dirt
-        /* sixteenth Row */
-        tile_info.push_back(glm::vec4(16, 15, 2, 5)); //inner Dirt
 
         /* Remaining Row */
         for (int i = 8; i < 16; i++) 
@@ -295,17 +279,77 @@ void Level2::Init()
         gameObject->GetComponent<TileSelector>().SetTile(4, 3);
     }
 
+    // Benny
+    {
+        gameObject = new GameObject();
+        manager->AddEntity(gameObject);
+        gameObject->GetComponent<Transform>().position = Vector2D_float(-555.0f, -200.0f);
+        gameObject->GetComponent<Transform>().scale = Vector2D_float(24.0f * RATIO, 24.0f * RATIO);
+        gameObject->AddComponent<SpriteRenderer>(SpriteRenderer::CHARACTER_LAYER, "BENNY_ANIM_MESH", "BENNY_ANIM_TEX", 1.0f, &camera, false);
+        gameObject->AddComponent<RigidBody>(2.0f);
+        // anim_set
+        gameObject->AddComponent<Animator>(21, 100);
+        gameObject->GetComponent<Animator>().SetState("BENNY_IDLE", 0, 6);
+        gameObject->GetComponent<Animator>().SetState("BENNY_RUN", 8, 16);
+        gameObject->GetComponent<Animator>().SetState("BENNY_JUMP", 18, 18);
+        gameObject->GetComponent<Animator>().SetState("BENNY_FALL", 19, 19);
+        gameObject->AddComponent<BoxCollider2D>(BoxCollider2D::CHARACTER_COLLISION, gameObject->GetComponent<Transform>().scale.x - 20, gameObject->GetComponent<Transform>().scale.y,
+            false /* overlap */, true /* movable *//*, "BENNY_ANIM_MESH", &camera*/);
+
+        gameObject->AddComponent<Benny>(); // test CC mechanics
+
+        //player = gameObject; // check collision
+        //benny = player;
+
+        objManager.PushObject(gameObject);
+        levelManager.AddObject(gameObject);
+    }
+
+    // Cherry
+    {
+        gameObject = new GameObject();
+        manager->AddEntity(gameObject);
+        gameObject->GetComponent<Transform>().position = Vector2D_float(-235.0f, -200.0f);
+        gameObject->GetComponent<Transform>().scale = Vector2D_float(24.0f * RATIO, 24.0f * RATIO);
+        gameObject->AddComponent<SpriteRenderer>(SpriteRenderer::CHARACTER_LAYER, "CHERRY_ANIM_MESH", "CHERRY_ANIM_TEX", 1.0f, &camera, false);
+        gameObject->AddComponent<RigidBody>(2.0f);
+        // anim_set
+        gameObject->AddComponent<Animator>(19, 100);
+        gameObject->GetComponent<Animator>().SetState("CHERRY_IDLE", 1, 6);
+        gameObject->GetComponent<Animator>().SetState("CHERRY_RUN", 7, 15);
+        gameObject->GetComponent<Animator>().SetState("CHERRY_JUMP", 16, 16);
+        gameObject->GetComponent<Animator>().SetState("CHERRY_FALL", 17, 17);
+        gameObject->AddComponent<BoxCollider2D>(BoxCollider2D::CHARACTER_COLLISION, gameObject->GetComponent<Transform>().scale.x - 20, gameObject->GetComponent<Transform>().scale.y,
+            false /* overlap */, true /* movable *//*, "BENNY_ANIM_MESH", &camera*/);
+
+        gameObject->AddComponent<Cherry>(); // test CC mechanics
+
+        objManager.PushObject(gameObject);
+        levelManager.AddObject(gameObject);
+    }
+
+    levelManager.SetUpCC();
+
 #pragma endregion
+
+    //audioController.Play("BGM");
 }
 
 void Level2::Clean()
 {
+    manager->Clean();
+    objManager.Clean();
+    levelManager.Clean();
+    audioController.Stop();
 }
 
 void Level2::Draw()
 {
+    manager->Draw();
 }
 
 void Level2::Update()
 {
+    manager->Update();
+    levelManager.AbilityControl();
 }

@@ -38,9 +38,9 @@ void Level3::Init()
         /* Sixth Row */
         for (int i = 0; i < 30; i++)
         {
-            if (i == 0) { tile_info.push_back(glm::vec4(i, 0, 1, 2)); }
-            else if (i == 29) { tile_info.push_back(glm::vec4(i, 0, 3, 2)); }
-            else { tile_info.push_back(glm::vec4(i, 0, 2, 2)); }
+            if (i == 0) { tile_info.push_back(glm::vec4(i, 5, 1, 2)); }
+            else if (i == 29) { tile_info.push_back(glm::vec4(i, 5, 3, 2)); }
+            else { tile_info.push_back(glm::vec4(i, 5, 2, 2)); }
 
         }
     }
@@ -262,29 +262,6 @@ void Level3::Init()
 
 #pragma region CharacterAssets 
 
-    /* Character */
-
-    // NPC
-    {
-        gameObject = new GameObject();
-        manager->AddEntity(gameObject);
-        gameObject->GetComponent<Transform>().position = Vector2D_float(-122.0f, 130.0f);
-        gameObject->GetComponent<Transform>().scale = Vector2D_float(24.0f * RATIO, 24.0f * RATIO);
-        gameObject->AddComponent<SpriteRenderer>(SpriteRenderer::ASSET_LAYER, "NPC_ANIM_MESH", "NPC_ANIM_TEX", 1.0f, &camera, false);
-        // anim_set
-        gameObject->AddComponent<Animator>(2, 100);
-        gameObject->GetComponent<Animator>().SetState("NPC_SAD", 0, 0);
-        gameObject->GetComponent<Animator>().SetState("NPC_HAPPY", 1, 1);
-        gameObject->GetComponent<Animator>().PlayState("NPC_SAD");
-
-        gameObject->AddComponent<BoxCollider2D>(BoxCollider2D::ASSET_COLLISION, gameObject->GetComponent<Transform>().scale.x - 20, gameObject->GetComponent<Transform>().scale.y,
-            true /* overlap */, false /* movable *//*, "BENNY_ANIM_MESH", &camera*/);
-        gameObject->AddComponent<NPC>();
-
-        /*npc = gameObject;*/
-        objManager.PushObject(gameObject);
-    }
-
     // Benny
     {
         gameObject = new GameObject();
@@ -311,28 +288,6 @@ void Level3::Init()
         levelManager.AddObject(gameObject);
     }
 
-    //// Macho
-    //{
-    //    gameObject = new GameObject();
-    //    manager->AddEntity(gameObject);
-    //    gameObject->GetComponent<Transform>().position = Vector2D_float(60.0f, -285.0f);
-    //    gameObject->GetComponent<Transform>().scale = Vector2D_float(24.0f * RATIO, 24.0f * RATIO);
-    //    gameObject->AddComponent<SpriteRenderer>(SpriteRenderer::CHARACTER_LAYER, "MACHO_ANIM_MESH", "MACHO_ANIM_TEX", 1.0f, &camera, true);
-    //    gameObject->AddComponent<RigidBody>(2.0f);
-
-    //    gameObject->AddComponent<Animator>(20, 100);
-    //    gameObject->GetComponent<Animator>().SetState("BENNY_IDLE", 0, 4);
-    //    gameObject->GetComponent<Animator>().SetState("BENNY_RUN", 13, 19);
-    //    gameObject->AddComponent<BoxCollider2D>(BoxCollider2D::CHARACTER_COLLISION, gameObject->GetComponent<Transform>().scale.x - 20, gameObject->GetComponent<Transform>().scale.y,
-    //        false /* overlap */, true /* movable *//*, "BENNY_ANIM_MESH", &camera*/);
-    //    
-    //    //gameObject->AddComponent<Macho>(); // test CC mechanics
-
-    //    /*macho = gameObject;*/
-    //    objManager.PushObject(gameObject);
-    //    levelManager.AddObject(gameObject);
-    //}
-
     // Cherry
     {
         gameObject = new GameObject();
@@ -356,66 +311,28 @@ void Level3::Init()
         levelManager.AddObject(gameObject);
     }
 
-    // Pear
-    {
-        gameObject = new GameObject();
-        manager->AddEntity(gameObject);
-        gameObject->GetComponent<Transform>().position = Vector2D_float(100.0f, -200.0f);
-        gameObject->GetComponent<Transform>().scale = Vector2D_float(24.0f * RATIO, 24.0f * RATIO);
-        gameObject->AddComponent<SpriteRenderer>(SpriteRenderer::CHARACTER_LAYER, "PEAR_ANIM_MESH", "PEAR_ANIM_TEX", 1.0f, &camera, false);
-        gameObject->AddComponent<RigidBody>(2.0f);
-        // anim_set
-        gameObject->AddComponent<Animator>(19, 100);
-        gameObject->GetComponent<Animator>().SetState("PEAR_IDLE", 1, 6);
-        gameObject->GetComponent<Animator>().SetState("PEAR_RUN", 7, 16);
-        gameObject->GetComponent<Animator>().SetState("PEAR_JUMP", 17, 17);
-        gameObject->GetComponent<Animator>().SetState("PEAR_FALL", 18, 18);
-        gameObject->AddComponent<BoxCollider2D>(BoxCollider2D::CHARACTER_COLLISION, gameObject->GetComponent<Transform>().scale.x - 20, gameObject->GetComponent<Transform>().scale.y,
-            false /* overlap */, true /* movable *//*, "BENNY_ANIM_MESH", &camera*/);
-
-        gameObject->AddComponent<Pear>();
-
-        objManager.PushObject(gameObject);
-        levelManager.AddObject(gameObject);
-    }
-
-    // Barter
-    {
-        gameObject = new GameObject();
-        manager->AddEntity(gameObject);
-        gameObject->GetComponent<Transform>().position = Vector2D_float(300.0f, 300.0f);
-        gameObject->GetComponent<Transform>().scale = Vector2D_float(24.0f * RATIO, 24.0f * RATIO);
-        gameObject->AddComponent<SpriteRenderer>(SpriteRenderer::CHARACTER_LAYER, "BARTER_ANIM_MESH", "BARTER_ANIM_TEX", 1.0f, &camera, false);
-        gameObject->AddComponent<RigidBody>(2.0f);
-        // anim_set
-       /* gameObject->AddComponent<Animator>(1, 100);
-        gameObject->GetComponent<Animator>().SetState("BARTER_IDLE", 0, 0);*/
-        gameObject->AddComponent<BoxCollider2D>(BoxCollider2D::CHARACTER_COLLISION, gameObject->GetComponent<Transform>().scale.x - 20, gameObject->GetComponent<Transform>().scale.y,
-            false /* overlap */, true /* movable *//*, "BENNY_ANIM_MESH", &camera*/);
-
-        gameObject->AddComponent<Barter>();
-
-        objManager.PushObject(gameObject);
-        levelManager.AddObject(gameObject);
-    }
-
-
     levelManager.SetUpCC();
 
 #pragma endregion
 
-    audioController.Play("BGM");
-
+    //audioController.Play("BGM");
 }
 
 void Level3::Clean()
 {
+    manager->Clean();
+    objManager.Clean();
+    levelManager.Clean();
+    audioController.Stop();
 }
 
 void Level3::Draw()
 {
+    manager->Draw();
 }
 
 void Level3::Update()
 {
+    manager->Update();
+    levelManager.AbilityControl();
 }

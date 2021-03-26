@@ -43,6 +43,9 @@
     <Filter Include="Game\GameScene\Level2">
       <UniqueIdentifier>{52eda947-ac7e-4ca8-bcf6-cc0ca81536fe}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game\GameScene\Level3">
+      <UniqueIdentifier>{7e2ecfd8-394f-4f56-a2f4-bcd8a9b94ae7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="imgui\imconfig.h">
@@ -193,6 +196,9 @@
     <ClInclude Include="Source\ObjectManager.h">
       <Filter>SrandEngine\Manager</Filter>
     </ClInclude>
+    <ClInclude Include="Game\Scenes\Level3.h">
+      <Filter>Game\GameScene\Level3</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="imgui\imgui.cpp">
@@ -269,6 +275,9 @@
     </ClCompile>
     <ClCompile Include="Source\ObjectManager.cpp">
       <Filter>SrandEngine\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Scenes\Level3.cpp">
+      <Filter>Game\GameScene\Level3</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

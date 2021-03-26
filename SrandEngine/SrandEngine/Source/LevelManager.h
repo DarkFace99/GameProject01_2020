@@ -291,6 +291,8 @@ namespace Srand
 				if (input.IsKeyPressed(SR_KEY_X)) { 
 					SR_SYSTEM_TRACE("CANCEL---CANCEL---CANCEL---CANCEL---CANCEL");
 
+					AudioController::get().Play("Deactivate");
+
 					if (controlled_Tag == CC::ccTag::MACHO) {
 						benny->SetActive(true);
 						macho->SetActive(false);

@@ -15,6 +15,8 @@ public:
 		transform->SetPosition(temp);
 		boxCollider2D->SetOverlap(false);
 		BennyCollider->SetOverlap(false);
+
+		audioController.Play("Barter_swap");
 	}	
 
 	bool Init() override final {
