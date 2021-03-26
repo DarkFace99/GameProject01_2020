@@ -11,7 +11,7 @@ class RigidBody : public Component
 {
 private:
 	float gravityScale = 1.0f;
-	Vector2D_float drag = Vector2D_float();
+	Vector2D_float drag = Vector2D_float(3.0f, 0.0f);
 	Vector2D_float force = Vector2D_float();
 
 	Vector2D_float velocity = Vector2D_float();
@@ -64,8 +64,10 @@ public:
 	}
 
 	void Update_Gravity() {
-		velocity.x = (force.x - drag.x) * Srand::TimeStep::get();
+		velocity.x += (force.x - drag.x) * Srand::TimeStep::get();
 		velocity.y += (force.x + drag.y + -(gravityScale * GRAVITY)) * Srand::TimeStep::get();
 		if (velocity.y < -20) { velocity.y = -20; } // hard code
+		if (velocity.x < 0.9f) { velocity.x = 0; }
+		else if (velocity.x > -0.9f) { velocity.x = 0; }
 	}
 };

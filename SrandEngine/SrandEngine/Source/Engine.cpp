@@ -29,6 +29,8 @@ namespace Srand
 
     AudioController& audioController = AudioController::get();
 
+    GLFWimage icons[1];
+
     Engine::Engine() {
         running = false;
     }
@@ -62,6 +64,12 @@ namespace Srand
         std::cout << "--------------------------------------------------------------------------------" << std::endl;
         std::cout << "                          Version: " << glGetString(GL_VERSION) << std::endl;
         std::cout << "--------------------------------------------------------------------------------" << std::endl;
+
+        icons[0].pixels = SOIL_load_image("Assets/icon.png", &icons[0].width, &icons[0].height, 0, SOIL_LOAD_RGBA);
+        glfwSetWindowIcon(WindowProperties::get(), 1, icons);
+        SOIL_free_image_data(icons[0].pixels);
+
+        glfwSetWindowPos(WindowProperties::get(), 100, 100);
 
 #pragma endregion
 
