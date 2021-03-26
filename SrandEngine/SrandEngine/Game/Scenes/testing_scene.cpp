@@ -1,36 +1,34 @@
 #include "testing_scene.h"
 
-#include "Source/Camera.h"
+//#include "Source/Camera.h"
+//
+//#include "Entity/Button.h"
+//#include "Entity/Door.h"
+//#include "Entity/Elevator.h"
+//#include "Entity/NPC.h"
+//#include "Entity/Benny.h"
+//#include "Entity/Macho.h"
+//#include "Entity/Cherry.h"
+//#include "Entity/Pear.h"
+//#include "Entity/Barter.h"
+//
+//#include "Source/Audio.h"
 
-#include "Entity/Button.h"
-#include "Entity/Door.h"
-#include "Entity/Elevator.h"
-#include "Entity/NPC.h"
-#include "Entity/Benny.h"
-#include "Entity/Macho.h"
-#include "Entity/Cherry.h"
-#include "Entity/Pear.h"
-#include "Entity/Barter.h"
-
-#include "Source/Audio.h"
-
-Camera camera(glm::vec3(0, 0, 0), glm::vec3(0, 0, -1), glm::vec3(0, 1, 0), 1.0f, 0.0f);
-ObjManager& objManager = ObjManager::get();
-LevelManager& levelManager = LevelManager::get();
-GameObject* gameObject;
-
-AudioController& audioController = AudioController::get();
+//Camera camera(glm::vec3(0, 0, 0), glm::vec3(0, 0, -1), glm::vec3(0, 1, 0), 1.0f, 0.0f);
+//ObjManager& objManager = ObjManager::get();
+//LevelManager& levelManager = LevelManager::get();
+//GameObject* gameObject;
+//
+//AudioController& audioController = AudioController::get();
 
 //GameObject* npc;
 //GameObject* player;
 //GameObject* benny;
 //GameObject* macho;
 
-GameObject* button1;
-GameObject* button2;
-GameObject* button3;
-
-
+//GameObject* button1;
+//GameObject* button2;
+//GameObject* button3;
 
 TestingScene::TestingScene()
 	: Scene("TestingScene")

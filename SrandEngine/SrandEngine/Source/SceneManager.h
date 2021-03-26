@@ -8,6 +8,8 @@
 
 namespace Srand 
 {
+	class Scene;
+
 	class SceneManager 
 	{
 	private:
