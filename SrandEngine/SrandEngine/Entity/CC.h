@@ -55,7 +55,7 @@ public:						// Not sure if this the best way to implement it.
 			rigidBody->SetVelocityX(3.0f);
 		}	
 
-		SR_TRACE("VelX: {0}", rigidBody->GetVelocityX());
+		//SR_TRACE("VelX: {0}", rigidBody->GetVelocityX());
 
 	}
 	void Collision_Check() { 

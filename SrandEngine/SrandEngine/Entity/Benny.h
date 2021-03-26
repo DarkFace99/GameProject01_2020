@@ -68,13 +68,12 @@ public:
 
 	void Update() override final {
 		rigidBody->Update_Gravity();
+		SR_SYSTEM_TRACE("Benny_VelX: {0}",rigidBody->GetVelocityX());
 		if (isActive) { Input_Movement(true); }
 		AnimationController(); // place before collision check because, it will change velocity and may result in weird animation  
 		Collision_Check();
 		Execute();
 	}
-
-	
 
 	void CC::AnimationController() override {
 

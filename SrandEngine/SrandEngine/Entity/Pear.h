@@ -29,14 +29,14 @@ public:
 		if (rigidBody->GetVelocityX() > 0) { renderer->SetFlip(false); }
 		else if (rigidBody->GetVelocityX() < 0) { renderer->SetFlip(true); }
 
-		//// Animation
-		//if (boxCollider2D->GetIsGround()) {	// on ground
-		//	if (rigidBody->GetVelocityX() != 0) {
-		//		animator->PlayState("PEAR_RUN");
-		//	}
-		//	else {
-		//		animator->PlayState("PEAR_IDLE");
-		//	}
-		//}
+		// Animation
+		if (boxCollider2D->GetIsGround()) {	// on ground
+			if (rigidBody->GetVelocityX() != 0) {
+				animator->PlayState("PEAR_RUN");
+			}
+			else {
+				animator->PlayState("PEAR_IDLE");
+			}
+		}
 	}
 }; 

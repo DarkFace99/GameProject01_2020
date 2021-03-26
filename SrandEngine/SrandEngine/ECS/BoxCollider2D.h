@@ -57,6 +57,9 @@ public:
 	int GetTag() { return tag; }
 	bool GetOverlap() { return allowOverlap; }
 
+	float GetWidth() { return width; }
+	float GetHeight() { return height; }
+
 	void SetOffset(float offsetX, float offsetY) {
 		BoxCollider2D::offsetX = offsetX;
 		BoxCollider2D::offsetY = offsetY;

@@ -53,6 +53,7 @@ public:
 	}
 
 	void SetFlip(bool condition) { flip = condition; }
+	bool GetFlip() { return flip; }
 	void SetAlpha(float alpha) { this->alpha = alpha; }
 
 	SpriteRenderer(std::string meshID, std::string textureID, float alpha, Camera* camera, bool flip)
