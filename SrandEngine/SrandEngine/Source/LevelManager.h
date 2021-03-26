@@ -44,7 +44,10 @@ namespace Srand
 		bool choosingStage = false;
 		unsigned int cc_At = 0;
 		bool useAbility = false;
-		
+
+		CC::ccTag controlled_Tag = CC::ccTag::DEFAULT;
+		Transform* controlled_Transform = nullptr;
+
 		WindowsInput input;
 
 	public:
@@ -181,6 +184,31 @@ namespace Srand
 					choosingStage = true; 
 				}
 				else if(choosingStage && (input.IsKeyReleased(SR_KEY_Z))){
+
+					if (inRange_Tag[cc_At] == CC::ccTag::MACHO) {
+						controlled_Tag = CC::ccTag::MACHO;
+						controlled_Transform = machoTransform;
+						macho->SetActive(true);
+						benny->SetActive(false);
+					}
+					else if (inRange_Tag[cc_At] == CC::ccTag::CHERRY) {
+						controlled_Tag = CC::ccTag::CHERRY;
+						controlled_Transform = cherryTransform;
+						cherry->SetActive(true);
+						benny->SetActive(false);
+					}
+					else if (inRange_Tag[cc_At] == CC::ccTag::PEAR) {
+						controlled_Tag = CC::ccTag::PEAR;
+						controlled_Transform = pearTransform;
+						pear->SetActive(true);
+					}
+					else if (inRange_Tag[cc_At] == CC::ccTag::BARTER) {
+						controlled_Tag = CC::ccTag::BARTER;
+						controlled_Transform = barterTransform;
+						barter->SetActive(true);
+
+					}
+
 					useAbility = true;
 					choosingStage = false;
 					SR_SYSTEM_TRACE("Done_Choosing");
@@ -231,13 +259,39 @@ namespace Srand
 				//}
 			}
 			else { // if (useAbility)
-				if (input.IsKeyPressed(SR_KEY_Z)) {
+				/*if (input.IsKeyPressed(SR_KEY_Z)) {
 					SR_SYSTEM_TRACE("Nothing");
 				}
-				else if (input.IsKeyPressed(SR_KEY_X)) { 
+				else*/ 
+				if (input.IsKeyPressed(SR_KEY_X)) { 
 					SR_SYSTEM_TRACE("CANCEL---CANCEL---CANCEL---CANCEL---CANCEL");
+
+					if (controlled_Tag == CC::ccTag::MACHO) {
+						benny->SetActive(true);
+						macho->SetActive(false);
+					
+					}else if (controlled_Tag == CC::ccTag::CHERRY) {
+						benny->SetActive(true);
+						cherry->SetActive(false);
+					}
+					else if (controlled_Tag == CC::ccTag::PEAR) {
+						pear->SetActive(false);
+					}
+					/*else if (controlled_Tag == CC::ccTag::BARTER) {
+						barter->SetActive(false);
+					}*/
+
+					controlled_Tag = CC::ccTag::DEFAULT;
+					controlled_Transform = nullptr;
+
 					cc_At = 0; // reset
 					useAbility = false; 
+				}else if(controlled_Tag == CC::ccTag::BARTER){
+					controlled_Tag = CC::ccTag::DEFAULT;
+					controlled_Transform = nullptr;
+
+					cc_At = 0; // reset
+					useAbility = false;
 				}
 			}
 
@@ -249,22 +303,22 @@ namespace Srand
 			ClearInRange();
 		}
 
-		void ActivateCherry() {
-			cherryObj->GetComponent<Cherry>().SetActive(true);
-			bennyObj->GetComponent<Benny>().SetActive(false);
+		/*void ActivateCherry() {
+			cherry->SetActive(true);
+			benny->SetActive(false);
 		}
 		void ActivatePear() {
-			pearObj->GetComponent<Pear>().SetActive(true);
+			pear->SetActive(true);
 		}
 		void ActivateBarter() { 
-			barterObj->GetComponent<Barter>().SetActive(true); 
+			barter->SetActive(true); 
 		}
 
 		void ClearActivation() { 
-			bennyObj->GetComponent<Benny>().SetActive(true); 
-			cherryObj->GetComponent<Cherry>().SetActive(false);
-			pearObj->GetComponent<Pear>().SetActive(false);
-			barterObj->GetComponent<Barter>().SetActive(false);
-		}
+			benny->SetActive(true); 
+			cherry->SetActive(false);
+			pear->SetActive(false);
+			barter->SetActive(false);
+		}*/
 	};
 }
