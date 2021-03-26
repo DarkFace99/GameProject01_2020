@@ -74,20 +74,24 @@ public:
 		if (activeValue % 2 != 0) { // true
 			if (defaultState) {
 				collider->SetOverlap(true);
+				//AudioController::get().Play("Door_open-close");
 				spriteRenderer->SetAlpha(0.0f);
 			}
 			else {
 				collider->SetOverlap(false);
+				//AudioController::get().Play("Door_open-close");
 				spriteRenderer->SetAlpha(1.0f);
 			}
 		}
 		else {	// false
 			if (defaultState) {
 				collider->SetOverlap(false);
+				//AudioController::get().Play("Door_open-close");
 				spriteRenderer->SetAlpha(1.0f);
 			}
 			else {
 				collider->SetOverlap(true);
+				//AudioController::get().Play("Door_open-close");
 				spriteRenderer->SetAlpha(0.0f);
 			}
 		}

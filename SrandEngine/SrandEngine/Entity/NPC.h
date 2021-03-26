@@ -55,6 +55,7 @@ public:
 				if (Collision::AABB(*collider, ObjManager::get()[i]->GetComponent<BoxCollider2D>())) {
 					//std::cout << "Collide with button" << std::endl;
 					animator->PlayState("NPC_HAPPY");
+					AudioController::get().Play("NPC_rescue");
 					isCollide = true;
 					/*spriteRenderer->SetAlpha(0.0f);*/
 				}

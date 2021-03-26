@@ -12,8 +12,8 @@
 
 #include "Source/Audio.h"
 
-#define SFX_VOLUME 0.2f
-#define BGM_VOLUME 0.5f
+#define SFX_VOLUME 0.3f
+#define BGM_VOLUME 0.2f
 
 namespace Srand
 {
