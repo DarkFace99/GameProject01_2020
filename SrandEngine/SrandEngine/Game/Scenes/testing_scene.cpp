@@ -113,6 +113,7 @@ void TestingScene::Init()
             if (i < 5) {            tile_info.push_back(glm::vec4(9, 10 + i, 6, 5)); }
             else {                  tile_info.push_back(glm::vec4(9, 10 + i, 6, 6)); }
         }
+
     }
 
     for (int i = 0; i < tile_info.size(); i++)
@@ -140,7 +141,7 @@ void TestingScene::Init()
         gameObject = new GameObject();
         manager->AddEntity(gameObject);
 
-        gameObject->GetComponent<Transform>().position = Vector2D_float((-240.0f + (11 * 16)) * RATIO, (-135.0f + 88) * RATIO);
+        gameObject->GetComponent<Transform>().position = Vector2D_float((-240.0f + (11 * 16)) * RATIO, (_midPointY + _offset + (5 * _tileSize)) * RATIO);
         gameObject->GetComponent<Transform>().scale = Vector2D_float(32.0f * RATIO, 16.0f * RATIO);
 
         gameObject->AddComponent<SpriteRenderer>(SpriteRenderer::ASSET_LAYER, "BUTTON_MESH", "LEVEL_ASSET_TEX", 1.0f, &camera, false);
@@ -178,7 +179,7 @@ void TestingScene::Init()
         gameObject = new GameObject();
         manager->AddEntity(gameObject);
 
-        gameObject->GetComponent<Transform>().position = Vector2D_float((-240.0f + (19 * 16)) * RATIO, (-135.0f + 164) * RATIO);
+        gameObject->GetComponent<Transform>().position = Vector2D_float((-240.0f + (19 * 16)) * RATIO, (_midPointY + _offset + (10 * _tileSize)) * RATIO);
         gameObject->GetComponent<Transform>().scale = Vector2D_float(32.0f * RATIO, 16.0f * RATIO);
 
         gameObject->AddComponent<SpriteRenderer>(SpriteRenderer::ASSET_LAYER, "BUTTON_MESH", "LEVEL_ASSET_TEX", 1.0f, &camera, false);
@@ -200,7 +201,7 @@ void TestingScene::Init()
         gameObject = new GameObject();
         manager->AddEntity(gameObject);
 
-        gameObject->GetComponent<Transform>().position = Vector2D_float((-240.0f + 8 + (14 * 16)) * RATIO, (-135.0f + 164) * RATIO);
+        gameObject->GetComponent<Transform>().position = Vector2D_float((-240.0f + 8 + (14 * 16)) * RATIO, (_midPointY + _offset + (10 * _tileSize)) * RATIO);
         gameObject->GetComponent<Transform>().scale = Vector2D_float(16.0f * RATIO, 16.0f * RATIO);
 
         gameObject->AddComponent<SpriteRenderer>(SpriteRenderer::ASSET_LAYER, "DOOR_STAND_MESH", "LEVEL_ASSET_TEX", 1.0f, &camera, false);
@@ -226,7 +227,7 @@ void TestingScene::Init()
         gameObject = new GameObject();
         manager->AddEntity(gameObject);
 
-        gameObject->GetComponent<Transform>().position = Vector2D_float((-240.0f + 8 + (14 * 16)) * RATIO, (-135.0f + 196 + 8) * RATIO);
+        gameObject->GetComponent<Transform>().position = Vector2D_float((-240.0f + 8 + (14 * 16)) * RATIO, (_midPointY + _offset + (12.5 * _tileSize)) * RATIO);
         gameObject->GetComponent<Transform>().scale = Vector2D_float(16.0f * RATIO, 64.0f * RATIO);
 
         gameObject->AddComponent<SpriteRenderer>(SpriteRenderer::ASSET_LAYER, "DOOR_MESH", "LEVEL_ASSET_TEX", 1.0f, &camera, false);
@@ -338,7 +339,7 @@ void TestingScene::Init()
     {
         gameObject = new GameObject();
         manager->AddEntity(gameObject);
-        gameObject->GetComponent<Transform>().position = Vector2D_float(-122.0f, 130.0f);
+        gameObject->GetComponent<Transform>().position = Vector2D_float(-122.0f, 136.0f);
         gameObject->GetComponent<Transform>().scale = Vector2D_float(24.0f * RATIO, 24.0f * RATIO);
         gameObject->AddComponent<SpriteRenderer>(SpriteRenderer::ASSET_LAYER, "NPC_ANIM_MESH", "NPC_ANIM_TEX", 1.0f, &camera, false);
         // anim_set
@@ -388,7 +389,7 @@ void TestingScene::Init()
     {
         gameObject = new GameObject();
         manager->AddEntity(gameObject);
-        gameObject->GetComponent<Transform>().position = Vector2D_float(-235.0f, -200.0f);
+        gameObject->GetComponent<Transform>().position = Vector2D_float(-235.0f, -230.0f);
         gameObject->GetComponent<Transform>().scale = Vector2D_float(24.0f * RATIO, 24.0f * RATIO);
         gameObject->AddComponent<SpriteRenderer>(SpriteRenderer::CHARACTER_LAYER, "CHERRY_ANIM_MESH", "CHERRY_ANIM_TEX", 1.0f, &camera, false);
         gameObject->AddComponent<RigidBody>(2.0f);
