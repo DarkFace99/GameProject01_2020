@@ -73,6 +73,10 @@ namespace Srand
 		inline void Clean()
 		{
 			cc_List.clear();
+			cc_Tag.clear();
+
+			inRange_List.clear();
+			inRange_Tag.clear();
 		}
 
 		inline int VectorSize() { return cc_List.size(); }
