@@ -1,42 +1,15 @@
-#include "testing_scene.h"
+#include "Level3.h"
 
-//#include "Source/Camera.h"
-//
-//#include "Entity/Button.h"
-//#include "Entity/Door.h"
-//#include "Entity/Elevator.h"
-//#include "Entity/NPC.h"
-//#include "Entity/Benny.h"
-//#include "Entity/Macho.h"
-//#include "Entity/Cherry.h"
-//#include "Entity/Pear.h"
-//#include "Entity/Barter.h"
-//
-//#include "Source/Audio.h"
-//Camera camera(glm::vec3(0, 0, 0), glm::vec3(0, 0, -1), glm::vec3(0, 1, 0), 1.0f, 0.0f);
-//ObjManager& objManager = ObjManager::get();
-//LevelManager& levelManager = LevelManager::get();
-//GameObject* gameObject;
-//
-//AudioController& audioController = AudioController::get();
-//GameObject* npc;
-//GameObject* player;
-//GameObject* benny;
-//GameObject* macho;
-//GameObject* button1;
-//GameObject* button2;
-//GameObject* button3;
-
-TestingScene::TestingScene()
-	: Scene("TestingScene")
+Level3::Level3()
+	:Scene("Level3")
 {}
 
-TestingScene::~TestingScene()
+Level3::~Level3()
 {
-    Clean();
+	Clean();
 }
 
-void TestingScene::Init()
+void Level3::Init()
 {
     manager = &EntityManager::get();
 
@@ -60,58 +33,15 @@ void TestingScene::Init()
         /* First Row */
         for (int i = 0; i < 30; i++)
         {
-            if (i > 5 && i < 29) {  tile_info.push_back(glm::vec4(i, 0, 2, 6)); }
-            else {                  tile_info.push_back(glm::vec4(i, 0, 2, 5)); }
+            tile_info.push_back(glm::vec4(i, 0, 2, 2));
+        }
+        /* Sixth Row */
+        for (int i = 0; i < 30; i++)
+        {
+            if (i == 0) { tile_info.push_back(glm::vec4(i, 0, 1, 2)); }
+            else if (i == 29) { tile_info.push_back(glm::vec4(i, 0, 3, 2)); }
+            else { tile_info.push_back(glm::vec4(i, 0, 2, 2)); }
 
-        }
-        /* Second Row */
-        for (int i = 0; i < 7; i++)
-        {
-            if (i > 5) {            tile_info.push_back(glm::vec4(29, 1, 1, 5)); }
-            else if (i == 5) {      tile_info.push_back(glm::vec4(i, 1, 3, 5)); }
-            else {                  tile_info.push_back(glm::vec4(i, 1, 2, 5)); }
-        }
-        /* Third Row */
-        for (int i = 0; i < 7; i++)
-        {
-            if (i > 5) {            tile_info.push_back(glm::vec4(29, 2, 1, 5)); }
-            else if (i == 5) {      tile_info.push_back(glm::vec4(i, 2, 3, 6)); }
-            else {                  tile_info.push_back(glm::vec4(i, 2, 2, 6)); }
-        }
-        /* Forth Row */
-                                    tile_info.push_back(glm::vec4(29, 3, 1, 5));
-        /* Fifth Row */
-        for (int i = 8; i < 14; i++)
-        {
-            if (i == 8) {           tile_info.push_back(glm::vec4(i, 4, 1, 2)); }
-            else {                  tile_info.push_back(glm::vec4(i, 4, 2, 2)); }
-        }
-        for (int i = 18; i < 30; i++)
-        {
-            if (i == 29) {          tile_info.push_back(glm::vec4(i, 4, 2, 6)); }
-            else {                  tile_info.push_back(glm::vec4(i, 4, 2, 2)); }
-        }
-        /* Tenth Row */
-        for (int i = 15; i < 24; i++)
-        {
-            if (i == 23) {          tile_info.push_back(glm::vec4(i, 9, 3, 2)); }
-            else if (i == 15) {     tile_info.push_back(glm::vec4(i, 9, 1, 4)); }
-            else if (i == 16) {     tile_info.push_back(glm::vec4(i, 9, 2, 4)); }
-            else {                  tile_info.push_back(glm::vec4(i, 9, 2, 2)); }
-        }
-        /* Eleventh Row */
-        for (int i = 9; i < 17; i++)
-        {
-            if (i == 9) {           tile_info.push_back(glm::vec4(i, 10, 1, 4)); }
-            else if (i == 15) {     tile_info.push_back(glm::vec4(i, 10, 2, 6)); }
-            else if (i == 16) {     tile_info.push_back(glm::vec4(i, 10, 3, 6)); }
-            else {                  tile_info.push_back(glm::vec4(i, 10, 2, 2)); }
-        }
-        /* Remaining Row */
-        for (int i = 1; i < 6; i++)
-        {
-            if (i < 5) {            tile_info.push_back(glm::vec4(9, 10 + i, 6, 5)); }
-            else {                  tile_info.push_back(glm::vec4(9, 10 + i, 6, 6)); }
         }
     }
 
@@ -443,7 +373,7 @@ void TestingScene::Init()
         gameObject->AddComponent<BoxCollider2D>(BoxCollider2D::CHARACTER_COLLISION, gameObject->GetComponent<Transform>().scale.x - 20, gameObject->GetComponent<Transform>().scale.y,
             false /* overlap */, true /* movable *//*, "BENNY_ANIM_MESH", &camera*/);
 
-        gameObject->AddComponent<Pear>(); 
+        gameObject->AddComponent<Pear>();
 
         objManager.PushObject(gameObject);
         levelManager.AddObject(gameObject);
@@ -473,44 +403,19 @@ void TestingScene::Init()
     levelManager.SetUpCC();
 
 #pragma endregion
-    
+
     audioController.Play("BGM");
 
 }
-void TestingScene::Clean()
-{
-    manager->Clean();
-    objManager.Clean();
-    audioController.Stop();
-}
-void TestingScene::Draw()
-{
-    manager->Draw();
-}
-void TestingScene::Update()
-{
-    manager->Update();
-    levelManager.AbilityControl();
-    // Check Collision
-    //for (int i = 0; i < objManager.VectorSize() - 1; i++)
-    //{
-    //    if (objManager[i]->GetComponent<BoxCollider2D>().GetTag() != BoxCollider2D::TILE_COLLISION) {
-    //        bool isGroundCheck = false;
-    //        for (int j = 0; j < objManager.VectorSize(); j++)
-    //        {
-    //            if (i == j) { continue; } // Always Collide with itself
 
-    //            if (Collision::AABB(objManager[i]->GetComponent<BoxCollider2D>(), objManager[j]->GetComponent<BoxCollider2D>())
-    //                && objManager[i]->GetComponent<BoxCollider2D>().GetTag() == BoxCollider2D::CHARACTER_COLLISION)
-    //            {
+void Level3::Clean()
+{
+}
 
-    //                if (Collision::IsOnGround(*objManager[i], *objManager[j]) && !isGroundCheck) {
-    //                    isGroundCheck = true;
-    //                    objManager[i]->GetComponent<BoxCollider2D>().SetIsGround(true);
-    //                }
-    //            }
-    //        }
-    //        if (isGroundCheck == false) { objManager[i]->GetComponent<BoxCollider2D>().SetIsGround(false); }
-    //    }
-    //}
+void Level3::Draw()
+{
+}
+
+void Level3::Update()
+{
 }
