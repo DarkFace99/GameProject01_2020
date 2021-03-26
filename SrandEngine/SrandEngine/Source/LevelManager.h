@@ -237,6 +237,7 @@ namespace Srand
 					useAbility = true;
 					choosingStage = false;
 					SR_SYSTEM_TRACE("Done_Choosing");
+					AudioController::get().Play("Activate");
 				}
 
 				// empty->cancel
