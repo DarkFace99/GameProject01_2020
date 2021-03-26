@@ -55,22 +55,6 @@ void Level2::Init()
             else if (i == 21) {             tile_info.push_back(glm::vec4(i, 6, 1, 2)); }
             else if (i > 21 && i < 30) {    tile_info.push_back(glm::vec4(i, 6, 2, 2)); }
         }
-        /* ninth Row */
-        tile_info.push_back(glm::vec4(16, 8, 2, 5)); //inner Dirt
-        /* tenth Row */
-        tile_info.push_back(glm::vec4(16, 9, 2, 5)); //inner Dirt
-        /* eleventh Row */
-        tile_info.push_back(glm::vec4(16, 10, 2, 5)); //inner Dirt
-        /* twelveth Row */
-        tile_info.push_back(glm::vec4(16, 11, 2, 5)); //inner Dirt
-        /* thirteenth Row */
-        tile_info.push_back(glm::vec4(16, 12, 2, 5)); //inner Dirt
-        /* forteenth Row */
-        tile_info.push_back(glm::vec4(16, 13, 2, 5)); //inner Dirt
-        /* fiftheenth Row */
-        tile_info.push_back(glm::vec4(16, 14, 2, 5)); //inner Dirt
-        /* sixteenth Row */
-        tile_info.push_back(glm::vec4(16, 15, 2, 5)); //inner Dirt
 
         /* Remaining Row */
         for (int i = 8; i < 16; i++) 
@@ -296,16 +280,24 @@ void Level2::Init()
     }
 
 #pragma endregion
+
+    audioController.Play("BGM");
 }
 
 void Level2::Clean()
 {
+    manager->Clean();
+    objManager.Clean();
+    audioController.Stop();
 }
 
 void Level2::Draw()
 {
+    manager->Draw();
 }
 
 void Level2::Update()
 {
+    manager->Update();
+    levelManager.AbilityControl();
 }

@@ -5,7 +5,10 @@
 
 #include "Source/WindowsInput.h"
 #include "Source/SceneManager.h"
+
 #include "Game/Scenes/testing_scene.h"
+#include "Game/Scenes/Level2.h"
+#include "Game/Scenes/Level3.h"
 
 #include "Source/Audio.h"
 
@@ -22,7 +25,7 @@ namespace Srand
     WindowProperties* WindowProperties::s_instance = nullptr;
 
     SceneManager& sceneManager = SceneManager::get();
-    Scene* scene = nullptr;
+    Scene* currentScene = nullptr;
 
     AudioController& audioController = AudioController::get();
 
@@ -116,20 +119,23 @@ namespace Srand
 
 #pragma region SceneLoading
 
-        scene = new TestingScene();
-        sceneManager.PushScene(scene);
+        sceneManager.PushScene(new TestingScene());
+        sceneManager.PushScene(new Level2());
+        sceneManager.PushScene(new Level3());
 
 #pragma endregion
 
         //For Testing SceneManager Only
-        sceneManager[0]->Init();
+        currentScene = sceneManager[0];
+
+        currentScene->Init();
         
         running = true;
     }
 
     void Engine::Draw() {   
         //For Testing SceneManager Only
-        sceneManager[0]->Draw();
+        currentScene->Draw();
 
         user_interface.UpdateUserInterface();
 
@@ -141,8 +147,9 @@ namespace Srand
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         //For Testing SceneManager Only
-        sceneManager[0]->Update();
+        currentScene->Update();
 
+        glfwSetKeyCallback(WindowProperties::get(), window_key_callback);
         glfwSetWindowSizeCallback(WindowProperties::get(), window_size_callback);
         glfwSetWindowCloseCallback(WindowProperties::get(), window_close_callback);
     }
@@ -163,7 +170,9 @@ namespace Srand
         Shader::get()->DeleteShader();
 
         //For Testing SceneManager Only
-        sceneManager[0]->Clean();
+        currentScene->Clean();
+
+        audioController.Stop();
 
         //std::cout << "Closing window..." << std::endl << "System Shutdown" << std::endl;
         SR_SYSTEM_INFO("Closing window...");
@@ -184,5 +193,26 @@ namespace Srand
     void window_close_callback(GLFWwindow* window)
     {
         Engine::get().Quit();
+    }
+    void window_key_callback(GLFWwindow* window, int key, int scancode, int action, int mods) 
+    {
+        if (key == SR_KEY_1 && action == GLFW_PRESS) 
+        {
+            currentScene->Clean();
+            currentScene = sceneManager[0];
+            currentScene->Init();
+        }
+        else if (key == SR_KEY_2 && action == GLFW_PRESS)
+        {
+            currentScene->Clean();
+            currentScene = sceneManager[1];
+            currentScene->Init();
+        }
+        else if(key == SR_KEY_3 && action == GLFW_PRESS)
+        {
+            currentScene->Clean();
+            currentScene = sceneManager[2];
+            currentScene->Init();
+        }
     }
 }
