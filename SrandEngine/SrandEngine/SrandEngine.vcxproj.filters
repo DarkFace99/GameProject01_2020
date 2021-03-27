@@ -199,6 +199,7 @@
     <ClInclude Include="Game\Scenes\Level3.h">
       <Filter>Game\GameScene\Level3</Filter>
     </ClInclude>
+    <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="imgui\imgui.cpp">
@@ -279,5 +280,12 @@
     <ClCompile Include="Game\Scenes\Level3.cpp">
       <Filter>Game\GameScene\Level3</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="SrandEngine.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Assets\icon.ico" />
+    <Image Include="Assets\icon.png" />
   </ItemGroup>
 </Project>
