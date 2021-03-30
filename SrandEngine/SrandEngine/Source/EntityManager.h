@@ -1,26 +1,40 @@
 #pragma once
-#include "GameObject.h"
+#include "ECS/GameObject.h"
 
-#include <vector>
-#include <memory>
+#include <srpch.h>
 
 class GameObject;
 
-class EntityManager
+namespace Srand 
 {
-public:
-	EntityManager() = default;
-	~EntityManager() = default;
+	class EntityManager
+	{
+	public:
+		EntityManager() = default;
+		~EntityManager() = default;
 
-	void Draw();
-	void Update();
-	void Refresh();
-	
-	void AddEntity(GameObject* _gameObj);
-	void DestroyEntity(GameObject* _gameObj);
+		void Draw();
+		void Update();
+		void Clean();
 
-	GameObject* CloneEntity(GameObject* _gameObj);
+		void AddEntity(GameObject* _gameObj);
+		void DestroyEntity(GameObject* _gameObj);
 
-private:
-	std::vector<std::unique_ptr<GameObject>> gameObjects;
-};
+		GameObject* CloneEntity(GameObject* _gameObj);
+
+		static EntityManager& get()
+		{
+			if (!s_instance)
+			{
+				s_instance = new EntityManager();
+			}
+			return *s_instance;
+		}
+
+	private:
+		static EntityManager* s_instance;
+		std::vector<std::unique_ptr<GameObject>> gameObjects;
+	};
+}
+
+

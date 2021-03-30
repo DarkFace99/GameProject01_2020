@@ -1,575 +1,227 @@
 #include "Engine.h"
-#include "Debug.h"
 
 /* TEST */
-#include "SpriteRenderer.h"
-#include "TileSelector.h"
-#include "RigidBody.h"
-#include "Animator.h"
-#include "Camera.h"
-#include "Collision.h"
-#include "Input.h"
-#include "NPC.h"
-#include "Button.h"
-#include "Door.h"
-#include "Elevator.h"
+#include "ecspch.h"
 
-#define DEBUG 1
-#define RATIO SCREEN_WIDTH / 480.0f
+#include "Source/WindowsInput.h"
+#include "Source/SceneManager.h"
 
-// System-wide Initialization
-Camera camera(glm::vec3(0, 0, 0), glm::vec3(0, 0, -1), glm::vec3(0, 1, 0), 1.0f, 0.0f);
-IOSystem::Input ioSystem(&camera);
-UI::UserInterface user_interface;
+#include "Game/Scenes/testing_scene.h"
+#include "Game/Scenes/Level2.h"
+#include "Game/Scenes/Level3.h"
 
-GameObject* gameObject;
+#include "Source/Audio.h"
 
-GameObject* button1;
-GameObject* button2;
-GameObject* button3;
+#define SFX_VOLUME 0.3f
+#define BGM_VOLUME 0.2f
 
-GameObject* benny;
-GameObject* macho;
+namespace Srand
+{
+    // System-wide Initialization
+    //UserInterface user_interface;
+    WindowsInput windowsInput;
 
-std::vector<glm::vec4> tile_info;
+    Engine* Engine::s_instance = nullptr;
+    WindowProperties* WindowProperties::s_instance = nullptr;
 
-Engine* Engine::s_instance = nullptr;
-WindowProperties* WindowProperties::s_instance = nullptr;
+    SceneManager& sceneManager = SceneManager::get();
+    Scene* currentScene = nullptr;
 
-Engine::Engine() {
-	running = false;
-}
+    AudioController& audioController = AudioController::get();
 
-void Engine::Init() {
+    GLFWimage icons[1];
+
+    Engine::Engine() {
+        running = false;
+    }
+
+    void Engine::Init() {
 
 #pragma region InitializeEngine
 
-    /* Initialize the library */
-    std::cout << "Initializing GLFW..." << std::endl;
-    if (!glfwInit())
-    {
-        std::cout << "Error! Cannot initializing GLFW" << std::endl;
-    }
+        /* Initialize the library */
+        SR_SYSTEM_INFO("Initializing GLFW...");
+        if (!glfwInit())
+        {
+            SR_SYSTEM_ERROR("Error! Cannot initializing GLFW");
+        }
 
-    WindowProperties::get();
+        WindowProperties::get();
 
-    /*Initializing GLEW*/
-    std::cout << "Initializing GLEW..." << std::endl;
-    if (glewInit() != GLEW_OK)
-    {
-        std::cout << "Error! Cannot initializing GLEW" << std::endl;
-    }
+        /*Initializing GLEW*/
+        SR_SYSTEM_INFO("Initializing GLEW...");
+        if (glewInit() != GLEW_OK)
+        {
+            SR_SYSTEM_ERROR("Error! Cannot initializing GLEW");
+        }
 
-    std::cout << "Initializing UserInterface..." << std::endl;
-    user_interface.InitUserInterface();
+        SR_SYSTEM_INFO("Initializing UserInterface...");
+        //user_interface.InitUserInterface();
 
-    glfwSetInputMode(WindowProperties::get(), GLFW_STICKY_KEYS, GL_TRUE);
-    std::cout << "--------------------------------------------------------------------------------" << std::endl;
-    std::cout << "                            |--System Initialized--|                            " << std::endl;
-    std::cout << "--------------------------------------------------------------------------------" << std::endl;
-    std::cout << "                          Version: " << glGetString(GL_VERSION) << std::endl;
-    std::cout << "--------------------------------------------------------------------------------" << std::endl;
+        glfwSetInputMode(WindowProperties::get(), GLFW_STICKY_KEYS, GL_TRUE);
+        std::cout << "--------------------------------------------------------------------------------" << std::endl;
+        std::cout << "                            |--System Initialized--|                            " << std::endl;
+        std::cout << "--------------------------------------------------------------------------------" << std::endl;
+        std::cout << "                          Version: " << glGetString(GL_VERSION) << std::endl;
+        std::cout << "--------------------------------------------------------------------------------" << std::endl;
+
+        icons[0].pixels = SOIL_load_image("Assets/icon.png", &icons[0].width, &icons[0].height, 0, SOIL_LOAD_RGBA);
+        glfwSetWindowIcon(WindowProperties::get(), 1, icons);
+        SOIL_free_image_data(icons[0].pixels);
+
+        glfwSetWindowPos(WindowProperties::get(), 100, 100);
 
 #pragma endregion
 
-    manager = new EntityManager();
+        /* Initialize Shader */
+        Shader::get()->InitializeShader();
 
-    /* Initialize Shader */
-    Shader::get()->InitializeShader();
-
-    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-    glDisable(GL_CULL_FACE);
-    glEnable(GL_BLEND);
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
-    // former asset loading pattern
-    {
-        //AssetManager::get().LoadMesh("BG_MESH");
-        //AssetManager::get().LoadTexture("BG_TEX", "Assets/Background.png");
-
-        //AssetManager::get().LoadMesh("TILESET_MESH", 8, 8);
-        //AssetManager::get().LoadTexture("TILESET_TEX", "Assets/TILESET.png");
-
-        //AssetManager::get().LoadMesh("BENNY_ANIM_MESH", 21);
-        //AssetManager::get().LoadTexture("BENNY_ANIM_TEX", "Assets/Benny_Animations-Sheet.png");
-
-        //AssetManager::get().LoadMesh("MACHO_ANIM_MESH", 20);
-        //AssetManager::get().LoadTexture("MACHO_ANIM_TEX", "Assets/Macho_Animation-Sheet.png");
-
-        //AssetManager::get().LoadMesh("NPC_ANIM_MESH", 2);
-        //AssetManager::get().LoadTexture("NPC_ANIM_TEX", "Assets/NPC_Animation_Sheet.png");
-
-        //// obstacle asset
-        //AssetManager::get().LoadTexture("LEVEL_ASSET_TEX", "Assets/Level_Assets_00.png");
-
-        //AssetManager::get().LoadMesh("DOOR_STAND_MESH", 10, 13);
-        //AssetManager::get().LoadMesh("DOOR_MESH", 10, 13, 1, 4);
-        //AssetManager::get().LoadMesh("ELEVATOR_MESH", 10, 13, 2, 2);
-        //AssetManager::get().LoadMesh("ELEVATOR_STAND_MESH", 10, 13, 2, 1);
-        //AssetManager::get().LoadMesh("BUTTON_MESH", 10, 13, 2, 1);
-    }
+        glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+        glDisable(GL_CULL_FACE);
+        glEnable(GL_BLEND);
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 #pragma region AssetsLoading
 
-    /* Mesh */
-    AssetManager::get().LoadMesh("BG_MESH");
-    AssetManager::get().LoadMesh("TILESET_MESH", 8, 8);
-    AssetManager::get().LoadMesh("BENNY_ANIM_MESH", 21);
-    AssetManager::get().LoadMesh("MACHO_ANIM_MESH", 20);
-    AssetManager::get().LoadMesh("NPC_ANIM_MESH", 2);
-    AssetManager::get().LoadMesh("DOOR_STAND_MESH", 10, 13);
-    AssetManager::get().LoadMesh("DOOR_MESH", 10, 13, 1, 4);
-    AssetManager::get().LoadMesh("ELEVATOR_MESH", 10, 13, 2, 2);
-    AssetManager::get().LoadMesh("ELEVATOR_STAND_MESH", 10, 13, 2, 1);
-    AssetManager::get().LoadMesh("BUTTON_MESH", 10, 13, 2, 1);
+        /* Mesh */
+        AssetManager::get().LoadMesh("BG_MESH");
+        AssetManager::get().LoadMesh("TILESET_MESH", 8, 8);
+        AssetManager::get().LoadMesh("BENNY_ANIM_MESH", 21);
+        AssetManager::get().LoadMesh("MACHO_ANIM_MESH", 20);
+        AssetManager::get().LoadMesh("CHERRY_ANIM_MESH", 19);
+        AssetManager::get().LoadMesh("PEAR_ANIM_MESH", 19);
+        AssetManager::get().LoadMesh("BARTER_ANIM_MESH");
+        AssetManager::get().LoadMesh("NPC_ANIM_MESH", 2);
+        AssetManager::get().LoadMesh("DOOR_STAND_MESH", 10, 13);
+        AssetManager::get().LoadMesh("DOOR_MESH", 10, 13, 1, 4);
+        AssetManager::get().LoadMesh("ELEVATOR_MESH", 10, 13, 2, 2);
+        AssetManager::get().LoadMesh("ELEVATOR_STAND_MESH", 10, 13, 2, 1);
+        AssetManager::get().LoadMesh("BUTTON_MESH", 10, 13, 2, 1);
 
-    double init_Time = (double)glfwGetTime();
+        /* Texture */
+        AssetManager::get().LoadTexture("BG_TEX", "Background.png");
+        AssetManager::get().LoadTexture("TILESET_TEX", "TILESET.png");
+        AssetManager::get().LoadTexture("BENNY_ANIM_TEX", "Benny_Animations-Sheet.png");
+        AssetManager::get().LoadTexture("MACHO_ANIM_TEX", "Macho_Animation-Sheet.png");
+        AssetManager::get().LoadTexture("CHERRY_ANIM_TEX", "Cherry_SpriteSheet.png");
+        AssetManager::get().LoadTexture("PEAR_ANIM_TEX", "Pear_SpriteShee.png");
+        AssetManager::get().LoadTexture("BARTER_ANIM_TEX", "Barther.png");
+        AssetManager::get().LoadTexture("NPC_ANIM_TEX", "NPC_Animation_Sheet.png");
+        AssetManager::get().LoadTexture("LEVEL_ASSET_TEX", "Level_Assets_00.png");
 
-    /* Texture */
-    AssetManager::get().LoadTexture("BG_TEX", "Assets/Background.png");
-    AssetManager::get().LoadTexture("TILESET_TEX", "Assets/TILESET.png");
-    AssetManager::get().LoadTexture("BENNY_ANIM_TEX", "Assets/Benny_Animations-Sheet.png");
-    AssetManager::get().LoadTexture("MACHO_ANIM_TEX", "Assets/Macho_Animation-Sheet.png");
-    AssetManager::get().LoadTexture("NPC_ANIM_TEX", "Assets/NPC_Animation_Sheet.png");
-    AssetManager::get().LoadTexture("LEVEL_ASSET_TEX", "Assets/Level_Assets_00.png");
-    
-    double time_Interval = (double)glfwGetTime() - init_Time;
-    std::cout << std::endl << "Time used: " << time_Interval << std::endl << std::endl;
+        /* Audio */
+        audioController.AddAudioSource(new AudioSource("BGM", BGM_VOLUME, true, "The Happy Man.mp3"));
+        audioController.AddAudioSource(new AudioSource("Activate", SFX_VOLUME, false, "Activate.mp3"));
+        audioController.AddAudioSource(new AudioSource("Barter_swap", SFX_VOLUME, false, "Barter_swap.mp3"));
+        audioController.AddAudioSource(new AudioSource("Char_fall", SFX_VOLUME, false, "Char_fall.mp3"));
+        audioController.AddAudioSource(new AudioSource("Char_jump", SFX_VOLUME, false, "Char_jump.mp3"));
+        audioController.AddAudioSource(new AudioSource("Cherry_inRange", SFX_VOLUME, false, "Cherry_inRange.mp3"));
+        audioController.AddAudioSource(new AudioSource("Cherry_outRange", SFX_VOLUME, false, "Cherry_outRange.mp3"));
+        audioController.AddAudioSource(new AudioSource("Deactivate", SFX_VOLUME, false, "Deactivate.mp3"));
+        audioController.AddAudioSource(new AudioSource("Door_open-close", SFX_VOLUME, false, "Door_open-close.mp3"));
+        audioController.AddAudioSource(new AudioSource("Elevator", SFX_VOLUME, false, "Elevator.mp3"));
+        audioController.AddAudioSource(new AudioSource("Macho_pickup", SFX_VOLUME, false, "Macho_pickup.mp3"));
+        audioController.AddAudioSource(new AudioSource("Macho_throw", SFX_VOLUME, false, "Macho_throw.mp3"));
+        audioController.AddAudioSource(new AudioSource("NPC_rescue", SFX_VOLUME, false, "NPC_rescue.mp3"));
 
 #pragma endregion
 
-#pragma region LevelAssets
+#pragma region SceneLoading
 
-    /* BACKGROUND */
-    {
-        gameObject = new GameObject();
-        manager->AddEntity(gameObject);
+        sceneManager.PushScene(new TestingScene());
+        sceneManager.PushScene(new Level2());
+        sceneManager.PushScene(new Level3());
 
-        gameObject->GetComponent<Transform>().position = Vector2D_float(0 * RATIO, 0 * RATIO);
-        gameObject->GetComponent<Transform>().scale = Vector2D_float(480 * RATIO, 270 * RATIO);
+#pragma endregion
 
-        gameObject->AddComponent<SpriteRenderer>("BG_MESH", "BG_TEX", 1.0f, &camera, false);
-    }
+        //For Testing SceneManager Only
+        currentScene = sceneManager[0];
 
-    /* Tile Set */
-    {
-        /* First Row */
-        for (int i = 0; i < 30; i++)
-        {
-            if (i > 5 && i < 29) { tile_info.push_back(glm::vec4(8 + (i * 16), 8, 2, 6)); }
-            else { tile_info.push_back(glm::vec4(8 + (i * 16), 8, 2, 5)); }
-
-        }
-        /* Second Row */
-        for (int i = 0; i < 7; i++)
-        {
-            if (i > 5) { tile_info.push_back(glm::vec4(8 + (29 * 16), 24, 1, 5)); }
-            else if (i == 5) { tile_info.push_back(glm::vec4(8 + (i * 16), 24, 3, 5)); }
-            else { tile_info.push_back(glm::vec4(8 + (i * 16), 24, 2, 5)); }
-        }
-        /* Third Row */
-        for (int i = 0; i < 7; i++)
-        {
-            if (i > 5) { tile_info.push_back(glm::vec4(8 + (29 * 16), 40, 1, 5)); }
-            else if (i == 5) { tile_info.push_back(glm::vec4(8 + (i * 16), 40, 3, 6)); }
-            else { tile_info.push_back(glm::vec4(8 + (i * 16), 40, 2, 6)); }
-        }
-        /* Forth Row */
-        tile_info.push_back(glm::vec4(8 + (29 * 16), 56, 1, 5));
-        /* Fifth Row */
-        for (int i = 8; i < 14; i++)
-        {
-            if (i == 8) { tile_info.push_back(glm::vec4(8 + (i * 16), 72, 1, 2)); }
-            else { tile_info.push_back(glm::vec4(8 + (i * 16), 72, 2, 2)); }
-        }
-        for (int i = 18; i < 30; i++)
-        {
-            if (i == 29) { tile_info.push_back(glm::vec4(8 + (i * 16), 72, 2, 6)); }
-            else { tile_info.push_back(glm::vec4(8 + (i * 16), 72, 2, 2)); }
-        }
-        /* Tenth Row */
-        for (int i = 15; i < 24; i++)
-        {
-            if (i == 23) { tile_info.push_back(glm::vec4(8 + (i * 16), 148, 3, 2)); }
-            else if (i == 15) { tile_info.push_back(glm::vec4(8 + (i * 16), 148, 1, 4)); }
-            else if (i == 16) { tile_info.push_back(glm::vec4(8 + (i * 16), 148, 2, 4)); }
-            else { tile_info.push_back(glm::vec4(8 + (i * 16), 148, 2, 2)); }
-        }
-        /* Eleventh Row */
-        for (int i = 9; i < 17; i++)
-        {
-            if (i == 9) { tile_info.push_back(glm::vec4(8 + (i * 16), 164, 1, 4)); }
-            else if (i == 15) { tile_info.push_back(glm::vec4(8 + (i * 16), 164, 2, 6)); }
-            else if (i == 16) { tile_info.push_back(glm::vec4(8 + (i * 16), 164, 3, 6)); }
-            else { tile_info.push_back(glm::vec4(8 + (i * 16), 164, 2, 2)); }
-        }
-        /* Remaining Row */
-        for (int i = 1; i < 6; i++)
-        {
-            if (i < 5) { tile_info.push_back(glm::vec4(152, 164 + (i * 16), 6, 5)); }
-            else { tile_info.push_back(glm::vec4(152, 164 + (i * 16), 6, 6)); }
-        }
-    }
-
-    for (int i = 0; i < tile_info.size(); i++) 
-    {
-        gameObject = new GameObject();
-        manager->AddEntity(gameObject);
-
-        gameObject->GetComponent<Transform>().position = Vector2D_float((-240.0f + tile_info[i].x) * RATIO, (-135.0f + tile_info[i].y) * RATIO);
-        gameObject->GetComponent<Transform>().scale = Vector2D_float(16.0f * RATIO, 16.0f * RATIO);
-
-        gameObject->AddComponent<SpriteRenderer>(SpriteRenderer::TILE_LAYER, "TILESET_MESH", "TILESET_TEX", 1.0f, &camera, false);
-        gameObject->AddComponent<TileSelector>(8, 8);
+        currentScene->Init();
         
-        gameObject->GetComponent<TileSelector>().SetTile(tile_info[i].z, tile_info[i].w);
-        gameObject->AddComponent<BoxCollider2D>(BoxCollider2D::TILE_COLLISION, gameObject->GetComponent<Transform>().scale.x, gameObject->GetComponent<Transform>().scale.y);
-
-        objManager.push_back(gameObject);
+        running = true;
     }
 
-    /* Level Asset */
+    void Engine::Draw() {   
+        //For Testing SceneManager Only
+        currentScene->Draw();
 
-    // BUTTON
-    {
-        // 1
-        gameObject = new GameObject();
-        manager->AddEntity(gameObject);
+        //user_interface.UpdateUserInterface();
 
-        gameObject->GetComponent<Transform>().position = Vector2D_float((-240.0f + (11 * 16)) * RATIO, (-135.0f + 88) * RATIO);
-        gameObject->GetComponent<Transform>().scale = Vector2D_float(32.0f * RATIO, 16.0f * RATIO);
-
-        gameObject->AddComponent<SpriteRenderer>(SpriteRenderer::ASSET_LAYER, "BUTTON_MESH", "LEVEL_ASSET_TEX", 1.0f, &camera, false);
-        gameObject->AddComponent<TileSelector>(10, 13);
-        gameObject->GetComponent<TileSelector>().SetTile(1, 2);
-
-        gameObject->AddComponent<BoxCollider2D>(BoxCollider2D::ASSET_COLLISION, gameObject->GetComponent<Transform>().scale.x , gameObject->GetComponent<Transform>().scale.y / 2.0f,
-            true, false/*, "BUTTON_MESH", &camera*/);
-        gameObject->GetComponent<BoxCollider2D>().SetOffset(0.0f, -8);
-        gameObject->AddComponent<Button>(1,1);
-        
-        button1 = gameObject;
-        objManager.push_back(gameObject);
-
-        // 2
-        gameObject = new GameObject();
-        manager->AddEntity(gameObject);
-
-        gameObject->GetComponent<Transform>().position = Vector2D_float((-240.0f + (20 * 16)) * RATIO, (-135.0f + 88) * RATIO);
-        gameObject->GetComponent<Transform>().scale = Vector2D_float(32.0f * RATIO, 16.0f * RATIO);
-
-        gameObject->AddComponent<SpriteRenderer>(SpriteRenderer::ASSET_LAYER, "BUTTON_MESH", "LEVEL_ASSET_TEX", 1.0f, &camera, false);
-        gameObject->AddComponent<TileSelector>(10, 13);
-        gameObject->GetComponent<TileSelector>().SetTile(4, 2);
-
-        gameObject->AddComponent<BoxCollider2D>(BoxCollider2D::ASSET_COLLISION, gameObject->GetComponent<Transform>().scale.x, gameObject->GetComponent<Transform>().scale.y / 2.0f,
-            true, false/*, "BUTTON_MESH", &camera*/);
-        gameObject->GetComponent<BoxCollider2D>().SetOffset(0.0f, -8);
-        gameObject->AddComponent<Button>(4,1);
-
-        button2 = gameObject;
-        objManager.push_back(gameObject);
-
-        // 3
-        gameObject = new GameObject();
-        manager->AddEntity(gameObject);
-
-        gameObject->GetComponent<Transform>().position = Vector2D_float((-240.0f + (19 * 16)) * RATIO, (-135.0f + 164) * RATIO);
-        gameObject->GetComponent<Transform>().scale = Vector2D_float(32.0f * RATIO, 16.0f * RATIO);
-
-        gameObject->AddComponent<SpriteRenderer>(SpriteRenderer::ASSET_LAYER, "BUTTON_MESH", "LEVEL_ASSET_TEX", 1.0f, &camera, false);
-        gameObject->AddComponent<TileSelector>(10, 13);
-        gameObject->GetComponent<TileSelector>().SetTile(4, 2);
-
-        gameObject->AddComponent<BoxCollider2D>(BoxCollider2D::ASSET_COLLISION, gameObject->GetComponent<Transform>().scale.x, gameObject->GetComponent<Transform>().scale.y / 2.0f,
-            true, false/*, "BUTTON_MESH", &camera*/);
-        gameObject->GetComponent<BoxCollider2D>().SetOffset(0.0f, -8);
-        gameObject->AddComponent<Button>(4,1);
-
-        button3 = gameObject;
-        objManager.push_back(gameObject);
+        glfwSwapBuffers(WindowProperties::get());
     }
 
-    // DOOR_STAND
-    {
-        // 1
-        gameObject = new GameObject();
-        manager->AddEntity(gameObject);
+    void Engine::Update() {
+        glClearColor(0.3f, 0.3f, 0.5f, 1.0f);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-        gameObject->GetComponent<Transform>().position = Vector2D_float((-240.0f + 8 + (14 * 16)) * RATIO, (-135.0f + 164) * RATIO);
-        gameObject->GetComponent<Transform>().scale = Vector2D_float(16.0f * RATIO, 16.0f * RATIO);
+        //For Testing SceneManager Only
+        currentScene->Update();
 
-        gameObject->AddComponent<SpriteRenderer>(SpriteRenderer::ASSET_LAYER, "DOOR_STAND_MESH", "LEVEL_ASSET_TEX", 1.0f, &camera, false);
-        gameObject->AddComponent<TileSelector>(10, 13);
-        gameObject->GetComponent<TileSelector>().SetTile(1, 6);
-
-        // 2
-        gameObject = new GameObject();
-        manager->AddEntity(gameObject);
-
-        gameObject->GetComponent<Transform>().position = Vector2D_float((-240.0f + 8 + (18 * 16)) * RATIO, (-135.0f + 72) * RATIO);
-        gameObject->GetComponent<Transform>().scale = Vector2D_float(16.0f * RATIO, 16.0f * RATIO);
-        gameObject->GetComponent<Transform>().rotationAngle = 90;
-
-        gameObject->AddComponent<SpriteRenderer>(SpriteRenderer::ASSET_LAYER, "DOOR_STAND_MESH", "LEVEL_ASSET_TEX", 1.0f, &camera, false);
-        gameObject->AddComponent<TileSelector>(10, 13);
-        gameObject->GetComponent<TileSelector>().SetTile(3, 6);
+        glfwSetKeyCallback(WindowProperties::get(), window_key_callback);
+        glfwSetWindowSizeCallback(WindowProperties::get(), window_size_callback);
+        glfwSetWindowCloseCallback(WindowProperties::get(), window_close_callback);
     }
 
-    // DOOR
+    void Engine::FixedUpdate(TimeStep ts) 
     {
-        // 1
-        gameObject = new GameObject();
-        manager->AddEntity(gameObject);
-
-        gameObject->GetComponent<Transform>().position = Vector2D_float((-240.0f + 8 + (14 * 16)) * RATIO, (-135.0f + 196 + 8) * RATIO);
-        gameObject->GetComponent<Transform>().scale = Vector2D_float(16.0f * RATIO, 64.0f * RATIO);
-
-        gameObject->AddComponent<SpriteRenderer>(SpriteRenderer::ASSET_LAYER, "DOOR_MESH", "LEVEL_ASSET_TEX", 1.0f, &camera, false);
-        gameObject->AddComponent<TileSelector>(10, 13);
-        gameObject->GetComponent<TileSelector>().SetTile(1, 8);
-
-        gameObject->AddComponent<BoxCollider2D>(BoxCollider2D::ASSET_COLLISION, gameObject->GetComponent<Transform>().scale.x, gameObject->GetComponent<Transform>().scale.y,
-            false, false/*, "DOOR_MESH", &camera*/);
-        gameObject->AddComponent<Door>();
-        gameObject->GetComponent<Door>().AddConnectedButtons(button1);
-
-        objManager.push_back(gameObject);
-
-        // 2
-        gameObject = new GameObject();
-        manager->AddEntity(gameObject);
-
-        gameObject->GetComponent<Transform>().position = Vector2D_float((-240.0f + (16 * 16)) * RATIO, (-135.0f + 64 + 8) * RATIO);
-        gameObject->GetComponent<Transform>().scale = Vector2D_float(64.0f * RATIO, 16.0f * RATIO);
-        gameObject->GetComponent<Transform>().rotationAngle = 90;
-
-        gameObject->AddComponent<SpriteRenderer>(SpriteRenderer::ASSET_LAYER, "DOOR_MESH", "LEVEL_ASSET_TEX", 1.0f, &camera, false);
-        gameObject->AddComponent<TileSelector>(10, 13);
-        gameObject->GetComponent<TileSelector>().SetTile(3, 8);
-
-        gameObject->AddComponent<BoxCollider2D>(BoxCollider2D::ASSET_COLLISION, gameObject->GetComponent<Transform>().scale.x, gameObject->GetComponent<Transform>().scale.y,
-            false, false/*, "DOOR_MESH", &camera*/);
-        gameObject->AddComponent<Door>(false);
-        gameObject->GetComponent<Door>().AddConnectedButtons(button2);
-        gameObject->GetComponent<Door>().AddConnectedButtons(button3);
-
-        objManager.push_back(gameObject);
+ 
     }
 
-    // ELEVATOR
-    {
-        // 1
-        gameObject = new GameObject();
-        manager->AddEntity(gameObject);
-
-        gameObject->GetComponent<Transform>().position = Vector2D_float((-240.0f + (7 * 16)) * RATIO, (-135.0f + 16) * RATIO);
-        gameObject->GetComponent<Transform>().scale = Vector2D_float(32.0f * RATIO, 32.0f * RATIO);
-
-        gameObject->AddComponent<SpriteRenderer>(SpriteRenderer::ASSET_LAYER, "ELEVATOR_MESH", "LEVEL_ASSET_TEX", 1.0f, &camera, false);
-        gameObject->AddComponent<TileSelector>(10, 13);
-        gameObject->GetComponent<TileSelector>().SetTile(1, 4);
-
-        gameObject->AddComponent<BoxCollider2D>(BoxCollider2D::ASSET_COLLISION, gameObject->GetComponent<Transform>().scale.x, gameObject->GetComponent<Transform>().scale.y / 8.0f,
-            false, false/*, "ELEVATOR_MESH", &camera*/);
-        gameObject->GetComponent<BoxCollider2D>().SetOffset(0.0f, -2.0f * RATIO);
-        gameObject->AddComponent<Elevator>(4*16 * RATIO);
-        gameObject->GetComponent<Elevator>().AddConnectedButtons(button1);
-
-        objManager.push_back(gameObject);
-
-        // 2
-        gameObject = new GameObject();
-        manager->AddEntity(gameObject);
-
-        gameObject->GetComponent<Transform>().position = Vector2D_float((-240.0f + (25 * 16)) * RATIO, (-135.0f + 80) * RATIO);
-        gameObject->GetComponent<Transform>().scale = Vector2D_float(32.0f * RATIO, 32.0f * RATIO);
-
-        gameObject->AddComponent<SpriteRenderer>(SpriteRenderer::ASSET_LAYER, "ELEVATOR_MESH", "LEVEL_ASSET_TEX", 1.0f, &camera, false);
-        gameObject->AddComponent<TileSelector>(10, 13);
-        gameObject->GetComponent<TileSelector>().SetTile(4, 4);
-
-        gameObject->AddComponent<BoxCollider2D>(BoxCollider2D::ASSET_COLLISION, gameObject->GetComponent<Transform>().scale.x, gameObject->GetComponent<Transform>().scale.y / 8.0f,
-            false, false/*, "ELEVATOR_MESH", &camera*/);
-        gameObject->GetComponent<BoxCollider2D>().SetOffset(0.0f, -2.0f * RATIO);
-        gameObject->AddComponent<Elevator>(5 * 16 * RATIO);
-        gameObject->GetComponent<Elevator>().AddConnectedButtons(button2);
-        gameObject->GetComponent<Elevator>().AddConnectedButtons(button3);
-
-        objManager.push_back(gameObject);
+    void Engine::Event() {
+        // input
+        glfwPollEvents();
+        if (windowsInput.IsKeyPressed(SR_KEY_ESCAPE)) { Quit(); }
     }
 
-    // ELEVATOR_STAND
-    {
-        // 1
-        gameObject = new GameObject();
-        manager->AddEntity(gameObject);
+    void Engine::Clean() {
+        AssetManager::get().Clean();
+        Shader::get()->DeleteShader();
 
-        gameObject->GetComponent<Transform>().position = Vector2D_float((-240.0f + (7 * 16)) * RATIO, (-135.0f + 8) * RATIO);
-        gameObject->GetComponent<Transform>().scale = Vector2D_float(32.0f * RATIO, 16.0f * RATIO);
+        //For Testing SceneManager Only
+        currentScene->Clean();
 
-        gameObject->AddComponent<SpriteRenderer>(SpriteRenderer::ASSET_LAYER, "ELEVATOR_STAND_MESH", "LEVEL_ASSET_TEX", 1.0f, &camera, false);
-        gameObject->AddComponent<TileSelector>(10, 13);
-        gameObject->GetComponent<TileSelector>().SetTile(1, 3);
+        audioController.Stop();
 
-        // 2
-        gameObject = new GameObject();
-        manager->AddEntity(gameObject);
-
-        gameObject->GetComponent<Transform>().position = Vector2D_float((-240.0f + (25 * 16)) * RATIO, (-135.0f + 72) * RATIO);
-        gameObject->GetComponent<Transform>().scale = Vector2D_float(32.0f * RATIO, 16.0f * RATIO);
-
-        gameObject->AddComponent<SpriteRenderer>(SpriteRenderer::ASSET_LAYER, "ELEVATOR_STAND_MESH", "LEVEL_ASSET_TEX", 1.0f, &camera, false);
-        gameObject->AddComponent<TileSelector>(10, 13);
-        gameObject->GetComponent<TileSelector>().SetTile(4, 3);
-    }
-    
-#pragma endregion
-
-#pragma region CharacterAssets 
-
-    /* Character */
-
-    // NPC
-    {
-        gameObject = new GameObject();
-        manager->AddEntity(gameObject);
-        gameObject->GetComponent<Transform>().position = Vector2D_float(-122.0f, 130.0f);
-        gameObject->GetComponent<Transform>().scale = Vector2D_float(24.0f * RATIO, 24.0f * RATIO);
-        gameObject->AddComponent<SpriteRenderer>(SpriteRenderer::ASSET_LAYER, "NPC_ANIM_MESH", "NPC_ANIM_TEX", 1.0f, &camera, false);
-        // anim_set
-        gameObject->AddComponent<Animator>(2, 100);
-        gameObject->GetComponent<Animator>().SetState("NPC_SAD", 0, 0);
-        gameObject->GetComponent<Animator>().SetState("NPC_HAPPY", 1, 1);
-        gameObject->GetComponent<Animator>().PlayState("NPC_SAD");
-
-        gameObject->AddComponent<BoxCollider2D>(BoxCollider2D::ASSET_COLLISION, gameObject->GetComponent<Transform>().scale.x - 20, gameObject->GetComponent<Transform>().scale.y,
-            true /* overlap */, false /* movable *//*, "BENNY_ANIM_MESH", &camera*/);
-        gameObject->AddComponent<NPC>();
-
-        npc = gameObject;
-        objManager.push_back(gameObject);
+        //std::cout << "Closing window..." << std::endl << "System Shutdown" << std::endl;
+        SR_SYSTEM_INFO("Closing window...");
+        SR_SYSTEM_INFO("System Shutdown");
+        //user_interface.TerminateUserInterface();
+        glfwTerminate();
     }
 
-    // Benny
-    {
-        gameObject = new GameObject();
-        manager->AddEntity(gameObject);
-        gameObject->GetComponent<Transform>().position = Vector2D_float(-555.0f, -200.0f);
-        gameObject->GetComponent<Transform>().scale = Vector2D_float(24.0f * RATIO, 24.0f * RATIO);
-        gameObject->AddComponent<SpriteRenderer>(SpriteRenderer::CHARACTER_LAYER, "BENNY_ANIM_MESH", "BENNY_ANIM_TEX", 1.0f, &camera, false);
-        gameObject->AddComponent<RigidBody>(2.0f);
-        // anim_set
-        gameObject->AddComponent<Animator>(21, 100);
-        gameObject->GetComponent<Animator>().SetState("BENNY_IDLE", 0, 6);
-        gameObject->GetComponent<Animator>().SetState("BENNY_RUN", 8, 16);
-        gameObject->GetComponent<Animator>().SetState("BENNY_JUMP", 18, 18);
-        gameObject->GetComponent<Animator>().SetState("BENNY_FALL", 19, 19);
-        gameObject->AddComponent<BoxCollider2D>(BoxCollider2D::CHARACTER_COLLISION, gameObject->GetComponent<Transform>().scale.x - 20, gameObject->GetComponent<Transform>().scale.y,
-            false /* overlap */, true /* movable *//*, "BENNY_ANIM_MESH", &camera*/);
-
-        player = gameObject; // check collision
-        benny = player;
-
-        objManager.push_back(gameObject);
-
-        ioSystem.AddCharacterList("Benny", benny);
-        ioSystem.SetControl("Benny");
+    void Engine::Quit() {
+        running = false;
     }
 
-    // Macho
+    void window_size_callback(GLFWwindow* window, int width, int height)
     {
-        gameObject = new GameObject();
-        manager->AddEntity(gameObject);
-        gameObject->GetComponent<Transform>().position = Vector2D_float(60.0f, -285.0f);
-        gameObject->GetComponent<Transform>().scale = Vector2D_float(24.0f * RATIO, 24.0f * RATIO);
-        gameObject->AddComponent<SpriteRenderer>(SpriteRenderer::CHARACTER_LAYER, "MACHO_ANIM_MESH", "MACHO_ANIM_TEX", 1.0f, &camera, true);
-        gameObject->AddComponent<RigidBody>(8.0f);
-
-        gameObject->AddComponent<Animator>(20, 100);
-        gameObject->GetComponent<Animator>().SetState("BENNY_IDLE", 0, 4);
-        gameObject->GetComponent<Animator>().SetState("BENNY_RUN", 13, 19);
-        gameObject->AddComponent<BoxCollider2D>(BoxCollider2D::CHARACTER_COLLISION, gameObject->GetComponent<Transform>().scale.x - 20, gameObject->GetComponent<Transform>().scale.y,
-            false /* overlap */, true /* movable *//*, "BENNY_ANIM_MESH", &camera*/);
-
-        macho = gameObject;
-        objManager.push_back(gameObject);
-        ioSystem.AddCharacterList("Macho", macho);
+        glfwGetWindowSize(window, &width, &height);
+        WindowProperties::get().SetScreenSize(width, height);
     }
-
-#pragma endregion
-
-    running = true;
-}
-
-void Engine::Draw(){
-    manager->Draw();
-    user_interface.UpdateUserInterface();
-    glfwSwapBuffers(WindowProperties::get());
-}
-
-void Engine::Update() {
-    glClearColor(0.3f, 0.3f, 0.5f, 1.0f);
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    manager->Update();
-
-    // Check Collision
-    for (int i = 0; i < objManager.size(); i++)
+    void window_close_callback(GLFWwindow* window)
     {
-        if (objManager[i]->GetComponent<BoxCollider2D>().GetTag() != BoxCollider2D::TILE_COLLISION){
-            bool isGroundCheck = false;
-            for (int j = 0; j < objManager.size(); j++)
-            {
-                if (i == j) { break; } // Always Collide with itself
-
-                if (Collision::AABB(objManager[i]->GetComponent<BoxCollider2D>(), objManager[j]->GetComponent<BoxCollider2D>())
-                    && objManager[i]->GetComponent<BoxCollider2D>().GetTag() == BoxCollider2D::CHARACTER_COLLISION)
-                {
-                    if (Collision::IsOnGround(*objManager[i], *objManager[j])) {
-                        isGroundCheck = true;
-                        
-                        objManager[i]->GetComponent<BoxCollider2D>().SetIsGround(true);
-                        objManager[i]->GetComponent<RigidBody>().SetVelocityY(0.0f);
-                    }
-                }
-            }
-            if (isGroundCheck == false) { objManager[i]->GetComponent<BoxCollider2D>().SetIsGround(false); }
+        Engine::get().Quit();
+    }
+    void window_key_callback(GLFWwindow* window, int key, int scancode, int action, int mods) 
+    {
+        if (key == SR_KEY_1 && action == GLFW_PRESS) 
+        {
+            currentScene->Clean();
+            currentScene = sceneManager[0];
+            currentScene->Init();
+        }
+        else if (key == SR_KEY_2 && action == GLFW_PRESS)
+        {
+            currentScene->Clean();
+            currentScene = sceneManager[1];
+            currentScene->Init();
+        }
+        else if(key == SR_KEY_3 && action == GLFW_PRESS)
+        {
+            currentScene->Clean();
+            currentScene = sceneManager[2];
+            currentScene->Init();
         }
     }
-
-    glfwSetWindowSizeCallback(WindowProperties::get(), window_size_callback);
-
-}
-
-void Engine::FixedUpdate(TimeStep ts) {
-    /*TRACE(("Delta Time(sec): %lf sec\n", TimeStep::get().GetSeconds()));
-    TRACE(("Delta Time(millisec): %lf ms\n", TimeStep::get().GetMilliseconds()));*/
-}
-
-void Engine::Event() {
-    // input
-    ioSystem.IOUpdate(WindowProperties::get());
-    if (glfwGetKey(WindowProperties::get(), GLFW_KEY_ESCAPE) == GLFW_PRESS) { Quit(); }
-}
-
-void Engine::Clean() {
-    AssetManager::get().Clean();
-    Shader::get()->DeleteShader();
-    delete manager;
-
-    std::cout << "Closing window..." << std::endl << "System Shutdown" << std::endl;
-    user_interface.TerminateUserInterface();
-    glfwTerminate();
-}
-
-void Engine::Quit() {
-    running = false;
-}
-
-void window_size_callback(GLFWwindow* window, int width, int height) 
-{
-    glfwGetWindowSize(window, &width, &height);
-    WindowProperties::get().SetScreenSize(width, height);
-    /*TRACE(("Width: %d\n", width));
-    TRACE(("Height: %d\n", height));*/
 }

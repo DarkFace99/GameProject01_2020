@@ -4,15 +4,16 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
-/* System Header */
-#include <iostream>
-#include <thread>
+#include <srpch.h>
 
 /* Custom Header */
 #include "AssetManager.h"
 #include "Shader.h"
 #include "EntityManager.h"
 #include "TimeStep.h"
+
+#include "Source/KeyCode.h"
+#include "Source/MouseButtonCode.h"
 
 #ifndef IMGUI
 
@@ -29,71 +30,69 @@
 #define WINDOW_NAME		"BENNY: Everyone is Happy"
 #define FULLSCREEN		false
 
-class WindowProperties 
+namespace Srand
 {
-private:
-	static WindowProperties* s_instance;
-	GLFWwindow* window;
-
-	//Initial Properties
-	int screen_width = 1280;
-	int screen_height = 720;
-	bool enableFullScreen = false;
-	bool enableVsync = true;
-
-	WindowProperties() 
+	class WindowProperties
 	{
-		/* Create a windowed mode window and its OpenGL context */
-		std::cout << "Initializing Window..." << std::endl;
-		window = glfwCreateWindow(GetWidth(), GetHeight(), WINDOW_NAME, (GetFullScreenStatus()) ? glfwGetPrimaryMonitor() : NULL, NULL);
-		if (!window)
+	private:
+		static WindowProperties* s_instance;
+		GLFWwindow* window;
+
+		//Initial Properties
+		int screen_width = 1280;
+		int screen_height = 720;
+		bool enableFullScreen = false;
+		bool enableVsync = true;
+
+		WindowProperties()
 		{
-			glfwTerminate();
-			std::cout << "Error! Cannot create window" << std::endl;
+			/* Create a windowed mode window and its OpenGL context */
+			SR_SYSTEM_INFO("Initializing Window...");
+			window = glfwCreateWindow(GetWidth(), GetHeight(), WINDOW_NAME, (GetFullScreenStatus()) ? glfwGetPrimaryMonitor() : NULL, NULL);
+			if (!window)
+			{
+				glfwTerminate();
+				SR_SYSTEM_ERROR("Error! Cannot create window");
+			}
+
+			/* Make the window's context current */
+			glfwMakeContextCurrent(window);
+
+			/*Vsync on = 1, off = 0*/
+			glfwSwapInterval(enableVsync);
 		}
 
-		/* Make the window's context current */
-		glfwMakeContextCurrent(window);
-
-		/*Vsync on = 1, off = 0*/
-		glfwSwapInterval(GetVsyncStatus());
-	}
-
-public:
-	inline static WindowProperties& get() 
-	{
-		if (s_instance == nullptr) 
+	public:
+		inline static WindowProperties& get()
 		{
-			s_instance = new WindowProperties();
+			if (s_instance == nullptr)
+			{
+				s_instance = new WindowProperties();
+			}
+			return *s_instance;
 		}
-		return *s_instance;
-	}
 
-	operator GLFWwindow* () const 
-	{
-		return window;
-	}
+		operator GLFWwindow* () const
+		{
+			return window;
+		}
 
-	inline void SetScreenSize(int width, int height) { screen_width = width; screen_height = height; }
-	inline void SetFullScreen(bool isFullScreen) { this->enableFullScreen = isFullScreen; }
-	inline void SetVsync(bool enableVsync) { this->enableVsync = enableVsync; }
+		inline void SetScreenSize(int width, int height) { screen_width = width; screen_height = height; }
+		inline void SetFullScreen(bool isFullScreen) { this->enableFullScreen = isFullScreen; }
+		inline void SetVsync(bool enableVsync) { this->enableVsync = enableVsync; }
 
-	inline int GetWidth() const { return screen_width; }
-	inline int GetHeight() const { return screen_height; }
-	inline bool GetFullScreenStatus() const { return enableFullScreen; }
-	inline bool GetVsyncStatus() const { return enableVsync; }
+		inline int GetWidth() const { return screen_width; }
+		inline int GetHeight() const { return screen_height; }
+		inline bool GetFullScreenStatus() const { return enableFullScreen; }
+		inline bool GetVsyncStatus() const { return enableVsync; }
 
-};
+	};
 
-namespace UI
-{
 	class UserInterface
 	{
 	private:
-		float time_sec = 0.0f;
-		float time_ms = 0.0f;
 		ImGuiIO io;
-		bool vSync = true;
+		bool vSync = false;
 		bool show_demo_window = false;
 
 	public:
@@ -118,21 +117,26 @@ namespace UI
 			ImGui::NewFrame();
 
 			io = ImGui::GetIO();
-			time_sec += TimeStep::get().GetSeconds();
-			time_ms += TimeStep::get().GetMilliseconds();
 
-			if (show_demo_window) 
+			if (show_demo_window)
 			{
 				ImGui::ShowDemoWindow(&show_demo_window);
+			}
+			if (vSync) 
+			{
+				WindowProperties::get().SetVsync(true);
+			}
+			else 
+			{
+				WindowProperties::get().SetVsync(false);
 			}
 
 			ImGui::Begin("Debug Console");
 
-			ImGui::Text("Time: %.3f sec (%.6f ms)",time_sec, time_ms);
+			ImGui::Text("Time: %.3f sec", glfwGetTime());
 			ImGui::Text("FPS: %.3f", ImGui::GetIO().Framerate);
 			ImGui::Checkbox("Enable Vsync", &vSync);
 			ImGui::Checkbox("Show Demo Window", &show_demo_window);
-			WindowProperties::get().SetVsync(vSync);
 
 			ImGui::End();
 
@@ -141,7 +145,7 @@ namespace UI
 			ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 		}
 
-		inline void TerminateUserInterface() 
+		inline void TerminateUserInterface()
 		{
 			ImGui_ImplOpenGL3_Shutdown();
 			ImGui_ImplGlfw_Shutdown();
@@ -149,43 +153,41 @@ namespace UI
 		}
 
 	};
-}
 
-class Engine {
-private:
-	static Engine* s_instance;
-	bool running;
+	class Engine {
+	private:
+		static Engine* s_instance;
+		bool running;
 
-	EntityManager* manager = nullptr;
-	
-public:
-	Engine();
-	virtual ~Engine() = default;
+		TimeStep* timeStep = nullptr;
 
-	std::vector<GameObject*> objManager;
-	GameObject* player;
-	// cheat
-	GameObject* npc;
+	public:
+		Engine();
+		virtual ~Engine() = default;
+		
+		void Init();
+		void Clean();
+		void Quit();
 
-	void Init();
-	void Clean();
-	void Quit();
+		void Draw();
+		void Update();
+		void FixedUpdate(TimeStep ts);
+		void Event();
 
-	void Draw();
-	void Update();
-	void FixedUpdate(TimeStep ts);
-	void Event();
-
-	inline static Engine& get() {
-		if (s_instance == nullptr) {
-			s_instance = new Engine();
+		inline static Engine& get() {
+			if (s_instance == nullptr) {
+				s_instance = new Engine();
+			}
+			return *s_instance;
 		}
-		return *s_instance;
-	}
 
-	inline bool IsRunning() {
-		return running;
-	}
-};
+		inline bool IsRunning() {
+			return running;
+		}
+	};
 
-void window_size_callback(GLFWwindow* window, int width, int height);
+
+	void window_size_callback(GLFWwindow* window, int width, int height);
+	void window_close_callback(GLFWwindow* window);
+	void window_key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
+}
