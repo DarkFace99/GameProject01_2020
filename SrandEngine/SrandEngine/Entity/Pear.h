@@ -22,6 +22,7 @@ public:
 		AnimationController();
 		Collision_Check();
 		Execute();
+		Boundary();
 	}
 
 	void CC::AnimationController() override {

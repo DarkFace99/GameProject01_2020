@@ -50,6 +50,7 @@
     <ClInclude Include="imgui\imgui_impl_opengl3.h" />
     <ClInclude Include="imgui\imgui_internal.h" />
     <ClInclude Include="Log.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="Source\AssetManager.h" />
     <ClInclude Include="Source\Audio.h" />
     <ClInclude Include="Source\EntityManager.h" />
@@ -97,6 +98,13 @@
     <ClCompile Include="Source\Vertex.cpp" />
     <ClCompile Include="Source\TimeStep.cpp" />
     <ClCompile Include="Source\WindowsInput.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="SrandEngine.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Assets\icon.ico" />
+    <Image Include="Assets\icon.png" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

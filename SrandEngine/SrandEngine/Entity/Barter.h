@@ -33,6 +33,7 @@ public:
 		rigidBody->Update_Gravity();
 		Collision_Check();
 		Execute();
+		Boundary();
 	}
 
 	void SetBarter(GameObject* benny) {
