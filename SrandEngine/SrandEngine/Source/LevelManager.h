@@ -48,6 +48,12 @@ namespace Srand
 		unsigned int cc_At = 0;
 		bool useAbility = false;
 
+		bool isFinishPoint = false;
+		float xPoint;
+		float yPoint;
+		float yLine_Min;
+		float yLine_Max;
+
 		CC::ccTag controlled_Tag = CC::ccTag::DEFAULT;
 		Transform* controlled_Transform = nullptr;
 
@@ -103,6 +109,8 @@ namespace Srand
 			useAbility = false;
 			isSwitchCC_Down = false;
 			isCancel = false;
+
+			isFinishPoint = false;
 		}
 
 		inline int VectorSize() { return cc_List.size(); }
@@ -358,6 +366,35 @@ namespace Srand
 			cherry->SetActive(false);
 			pear->SetActive(false);
 			barter->SetActive(false);
+		}*/
+
+		void Set_FinishPoint(Vector2D_float point){
+			xPoint = point.x;
+			yPoint = point.y;
+			isFinishPoint = true;
+		}
+		
+		void Set_FinishLine(float x, float yMax, float yMin) {
+			xPoint = x;
+			yLine_Min = yMin;
+			yLine_Max = yMax;
+			isFinishPoint = false;
+		}
+
+		/*void CC_Exit() {
+			if (isFinishPoint) {
+				for (int i = 0; i < cc_List.size(); i++) {
+					BoxCollider2D* col = &cc_List[i]->GetComponent<BoxCollider2D>();
+					bool x_Axis = 
+					bool y_Axis =
+					if()
+				}
+			}
+			else {
+				for (int i = 0; i < cc_List.size(); i++) {
+
+				}
+			}
 		}*/
 	};
 }

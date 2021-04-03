@@ -20,6 +20,7 @@ public:						// Not sure if this the best way to implement it.
 		BARTER
 	};
 
+
 	CC() = default;
 	virtual ~CC() = default;
 
@@ -72,10 +73,10 @@ public:						// Not sure if this the best way to implement it.
 	}
 
 	void Boundary() {
-		if (transform->position.x < -630) { transform->SetPosition(Vector2D_float(-630.0f, transform->position.y)); }
-		if (transform->position.x > 630) { transform->SetPosition(Vector2D_float(630.0f, transform->position.y)); }
-		if (transform->position.y < -360) { transform->SetPosition(Vector2D_float(transform->position.x, -360.0f)); }
-		if (transform->position.y > 360) { transform->SetPosition(Vector2D_float(transform->position.x, 360.0f)); }
+		if (transform->position.x < -x_bound) { transform->SetPosition(Vector2D_float(-x_bound, transform->position.y)); }
+		if (transform->position.x > x_bound) { transform->SetPosition(Vector2D_float(x_bound, transform->position.y)); }
+		if (transform->position.y < -y_bound) { transform->SetPosition(Vector2D_float(transform->position.x, -y_bound)); }
+		if (transform->position.y > y_bound) { transform->SetPosition(Vector2D_float(transform->position.x, y_bound)); }
 	}
 
 	virtual void AnimationController() = 0;
@@ -92,4 +93,7 @@ protected:
 	WindowsInput input;
 	ObjManager& objManager = ObjManager::get();
 	AudioController& audioController = AudioController::get();
+
+	float x_bound = 630.0f;
+	float y_bound = 360.0f;
 };
