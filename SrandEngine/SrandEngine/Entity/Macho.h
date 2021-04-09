@@ -24,17 +24,19 @@ public:
 	}
 
 	void Update() override final {
-		rigidBody->Update_Gravity();
-		if (isActive) { 
-			Input_Movement(false); 
-			ThrowAbility();
+		if (!isOut) {
+			rigidBody->Update_Gravity();
+			if (isActive) {
+				Input_Movement(false);
+				ThrowAbility();
+			}
+			//SR_SYSTEM_TRACE("Pick: {0}", isPickUp);
+			if (isPickUp) { cc_Carry(); }
+			AnimationController();
+			Collision_Check();
+			Execute();
+			Boundary();
 		}
-		//SR_SYSTEM_TRACE("Pick: {0}", isPickUp);
-		if (isPickUp) { cc_Carry(); }
-		AnimationController();
-		Collision_Check();
-		Execute();
-		Boundary();
 	}
 
 	void cc_Carry() {

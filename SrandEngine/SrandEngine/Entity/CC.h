@@ -28,8 +28,8 @@ public:						// Not sure if this the best way to implement it.
 	ccTag GetTag() { return tag; }	// to check CC type.
 
 
-	void SetUp() { 
-		transform = &gameObject->GetComponent<Transform>(); 
+	void SetUp() {
+		transform = &gameObject->GetComponent<Transform>();
 		rigidBody = &gameObject->GetComponent<RigidBody>();
 		boxCollider2D = &gameObject->GetComponent<BoxCollider2D>();
 		renderer = &gameObject->GetComponent<SpriteRenderer>();
@@ -41,10 +41,10 @@ public:						// Not sure if this the best way to implement it.
 
 	void Input_Movement(bool canJump) {	// basic movement
 
-		
+
 		if (boxCollider2D->GetIsGround()) { rigidBody->SetVelocityY(0.0f); }
-		
-		if(input.IsKeyPressed(SR_KEY_UP) && canJump && boxCollider2D->GetIsGround()) {
+
+		if (input.IsKeyPressed(SR_KEY_UP) && canJump && boxCollider2D->GetIsGround()) {
 			rigidBody->SetVelocityY(8.0f);
 			audioController.Play("Char_jump");
 		}
@@ -52,23 +52,24 @@ public:						// Not sure if this the best way to implement it.
 		if (input.IsKeyPressed(SR_KEY_LEFT) && input.IsKeyPressed(SR_KEY_RIGHT)) {} // do nothing
 		else if (input.IsKeyPressed(SR_KEY_LEFT)) {
 			rigidBody->SetVelocityX(-3.0f);
-		}else if (input.IsKeyPressed(SR_KEY_RIGHT)) {
+		}
+		else if (input.IsKeyPressed(SR_KEY_RIGHT)) {
 			rigidBody->SetVelocityX(3.0f);
-		}	
+		}
 
 		//SR_TRACE("VelX: {0}", rigidBody->GetVelocityX());
 
 	}
-	void Collision_Check() { 
+	void Collision_Check() {
 		boxCollider2D->SetIsGround(false);	// reset 
 		for (int i = 0; i < objManager.VectorSize(); i++) {
 			if (gameObject == objManager[i]) { continue; }
-			Collision::CC_AABB(*gameObject,*objManager[i]);
+			Collision::CC_AABB(*gameObject, *objManager[i]);
 		}
 		/*std::cout << "\nisGround:" << boxCollider2D->GetIsGround() << std::endl;
 		std::cout << "\n**************** END LOOP ****************\n\n";*/
 	}
-	void Execute() { 
+	void Execute() {
 		transform->Translate(rigidBody->GetVelocity());
 	}
 
@@ -78,6 +79,14 @@ public:						// Not sure if this the best way to implement it.
 		if (transform->position.y < -y_bound) { transform->SetPosition(Vector2D_float(transform->position.x, -y_bound)); }
 		if (transform->position.y > y_bound) { transform->SetPosition(Vector2D_float(transform->position.x, y_bound)); }
 	}
+
+	void OutOfLevel() {
+		isOut = true;
+		renderer->SetAlpha(0.0f);
+	}
+
+	bool GetIsOut() { return isOut; }
+	bool GetIsActive() { return isActive; }
 
 	virtual void AnimationController() = 0;
 
@@ -94,6 +103,9 @@ protected:
 	ObjManager& objManager = ObjManager::get();
 	AudioController& audioController = AudioController::get();
 
+	bool isOut = false;
+
+	// screen boundary
 	float x_bound = 630.0f;
 	float y_bound = 360.0f;
 };
