@@ -194,10 +194,10 @@ void Collision::CC_Collision_Push(RigidBody& rigA, BoxCollider2D& colA, BoxColli
 	bool checkX = !((colB.GetTag() == BoxCollider2D::DOOR_COLLISION) && (transformB.rotationAngle < 45.0f));
 	bool checkY = !((colB.GetTag() == BoxCollider2D::DOOR_COLLISION) && (transformB.rotationAngle > 45.0f));
 
-	if (colB.GetTag() == BoxCollider2D::DOOR_COLLISION) {
+	/*if (colB.GetTag() == BoxCollider2D::DOOR_COLLISION) {
 		SR_SYSTEM_TRACE("checkX: {0}", checkX);
 		SR_SYSTEM_TRACE("checkY: {0}", checkY);
-	}
+	}*/
 
 	/*if (checkX) {*/
 		// Y_right

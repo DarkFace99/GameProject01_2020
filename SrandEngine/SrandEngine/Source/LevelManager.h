@@ -51,6 +51,8 @@ namespace Srand
 		unsigned int cc_At = 0;
 		bool useAbility = false;
 
+		int npc_Count = 1; // hardcode
+
 		bool isLevelClear = false;
 		int cc_Count = 0;
 		/*float xPoint;
@@ -239,7 +241,7 @@ namespace Srand
 
 				// ActivateAbility
 				if (input.IsKeyPressed(SR_KEY_Z)) {
-					SR_SYSTEM_TRACE("Choosing...");
+					//SR_SYSTEM_TRACE("Choosing...");
 					choosingStage = true; 
 				}
 				else if(choosingStage && (input.IsKeyReleased(SR_KEY_Z))){
@@ -287,7 +289,7 @@ namespace Srand
 					cc_At = cc_At % inRange_Tag.size(); // mod incase if the cc_At exceeds Tag size or Tag size decrease
 
 					/*-------debug-------*/
-					SR_SYSTEM_TRACE("inRange_Size: {0}", inRange_Tag.size());
+					//SR_SYSTEM_TRACE("inRange_Size: {0}", inRange_Tag.size());
 					if (inRange_Tag[cc_At] == CC::ccTag::MACHO) {
 						SR_SYSTEM_TRACE("Choose: MACHO");
 					}
@@ -371,40 +373,45 @@ namespace Srand
 			goalCollider = &gameobj.GetComponent<BoxCollider2D>();
 		}
 
+		void NpcFound() { npc_Count--; }
+
 		void CheckGoal() {
-			bool cc_Out = false;
-			for (int i = 0; i < cc_List.size(); i++) {
-				if (Collision::AABB(*goalCollider, cc_List[i]->GetComponent<BoxCollider2D>())) {
-					if (cc_Tag[i] == CC::ccTag::MACHO && !macho->GetIsOut()) {
-						macho->OutOfLevel();
-						cc_Out = true;
-						cc_Count--;
-					}
-					else if (cc_Tag[i] == CC::ccTag::CHERRY && !cherry->GetIsOut()) {
-						cherry->OutOfLevel();
-						cc_Out = true;
-						cc_Count--;
-					}
-					else if (cc_Tag[i] == CC::ccTag::PEAR && !pear->GetIsOut()) {
-						pear->OutOfLevel();
-						cc_Out = true;
-						cc_Count--;
-					}
-					else if (cc_Tag[i] == CC::ccTag::BARTER && !barter->GetIsOut()) {
-						barter->OutOfLevel();
-						cc_Out = true;
-						cc_Count--;
-					}
-					else if (cc_Tag[i] == CC::ccTag::BENNY && cc_Count == 1 /* last one */) {
-						benny->OutOfLevel();
-						cc_Count--;
-						isLevelClear = true;
+			if (npc_Count <= 0) {
+				bool cc_Out = false;
+				for (int i = 0; i < cc_List.size(); i++) {
+					if (Collision::AABB(*goalCollider, cc_List[i]->GetComponent<BoxCollider2D>())) {
+						if (cc_Tag[i] == CC::ccTag::MACHO && !macho->GetIsOut()) {
+							macho->OutOfLevel();
+							cc_Out = true;
+							cc_Count--;
+						}
+						else if (cc_Tag[i] == CC::ccTag::CHERRY && !cherry->GetIsOut()) {
+							cherry->OutOfLevel();
+							cc_Out = true;
+							cc_Count--;
+						}
+						else if (cc_Tag[i] == CC::ccTag::PEAR && !pear->GetIsOut()) {
+							pear->OutOfLevel();
+							cc_Out = true;
+							cc_Count--;
+						}
+						else if (cc_Tag[i] == CC::ccTag::BARTER && !barter->GetIsOut()) {
+							barter->OutOfLevel();
+							cc_Out = true;
+							cc_Count--;
+						}
+						else if (cc_Tag[i] == CC::ccTag::BENNY && cc_Count == 1 /* last one */) {
+							benny->OutOfLevel();
+							cc_Count--;
+							isLevelClear = true;
+						}
+
+						if (cc_Out) {
+							if (!(cc_Tag[i] != CC::ccTag::MACHO && macho->GetIsActive()))
+								isCancel = true;
+						}
 					}
 
-					if (cc_Out) {
-						if(!(cc_Tag[i] != CC::ccTag::MACHO && macho->GetIsActive()))
-						isCancel = true;
-					}
 				}
 			}
 			if (isLevelClear) { SR_SYSTEM_TRACE("-----------------LEVEL_CLEAR----------------"); }

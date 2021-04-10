@@ -3,6 +3,7 @@
 #include "Source/SceneManager.h"
 
 #include "ecspch.h"
+#include "Source/LevelManager.h"
 
 using namespace Srand;
 
@@ -57,6 +58,7 @@ public:
 					animator->PlayState("NPC_HAPPY");
 					AudioController::get().Play("NPC_rescue");
 					isCollide = true;
+					LevelManager::get().NpcFound();
 					/*spriteRenderer->SetAlpha(0.0f);*/
 				}
 			}
