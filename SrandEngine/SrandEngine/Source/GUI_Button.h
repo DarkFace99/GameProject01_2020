@@ -4,14 +4,14 @@
 
 namespace Srand 
 {
-	class GUI_Button 
+	class GUI_Button : GUI
 	{
 	public:
 		GUI_Button();
-		GUI_Button(Vector2D_float center, Vector2D_float dimension);
+		~GUI_Button();
 		
 	private:
-
+		std::string name = "";
 
 	};
 }

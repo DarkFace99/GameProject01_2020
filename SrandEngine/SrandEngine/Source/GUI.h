@@ -2,23 +2,22 @@
 
 #include <srpch.h>
 #include "Vector2D.h"
-#include "WindowsInput.h"
 
 namespace Srand
 {
 	class GUI
 	{
 	public:
-		GUI();
-		GUI(Vector2D_float center, Vector2D_float dimension);
+		GUI() {}
+		GUI(Vector2D_float center, Vector2D_float dimension)
+			: center(center), dimension(dimension)
+		{}
 
-		void OnClick();
-		void OnHold();
+		virtual void OnSelect() {}
+		virtual void OnActivate() {}
 
 	private:
 		Vector2D_float center;
 		Vector2D_float dimension;
-
-		WindowsInput input;
 	};
 }

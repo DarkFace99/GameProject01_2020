@@ -292,6 +292,9 @@
     <ClCompile Include="Game\Scenes\Level3.cpp">
       <Filter>Game\GameScene\Level3</Filter>
     </ClCompile>
+    <ClCompile Include="Source\GUI_Array.cpp">
+      <Filter>SrandEngine\Graphic User Interface</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="SrandEngine.rc" />
