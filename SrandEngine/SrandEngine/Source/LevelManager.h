@@ -51,7 +51,7 @@ namespace Srand
 		unsigned int cc_At = 0;
 		bool useAbility = false;
 
-		int npc_Count = 1; // hardcode
+		int npc_Count = 0; 
 
 		bool isLevelClear = false;
 		int cc_Count = 0;
@@ -120,6 +120,7 @@ namespace Srand
 			goalObj = nullptr;
 			isLevelClear = false;
 			cc_Count = 0;
+			npc_Count = 0;
 		}
 
 		inline int VectorSize() { return cc_List.size(); }
@@ -186,6 +187,10 @@ namespace Srand
 				}
 			}
 			if (isMachoFound) { macho->CopyCC_List(cc_List); }
+		}
+
+		inline void AddNPC() {
+			npc_Count++;
 		}
 
 		void CheckInRange() {

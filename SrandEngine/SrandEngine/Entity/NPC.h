@@ -34,6 +34,7 @@ public:
 		spriteRenderer = &gameObject->GetComponent<SpriteRenderer>();
 		collider = &gameObject->GetComponent<BoxCollider2D>();
 		animator = &gameObject->GetComponent<Animator>();
+		LevelManager::get().AddNPC();
 		return true;
 	}
 	void Update() 
