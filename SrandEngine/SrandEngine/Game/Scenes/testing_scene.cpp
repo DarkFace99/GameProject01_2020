@@ -480,8 +480,8 @@ void TestingScene::Init()
     {
         gameObject = new GameObject();
         manager->AddEntity(gameObject);
-        gameObject->GetComponent<Transform>().position = Vector2D_float(650.0f, 50.0f);
-        gameObject->GetComponent<Transform>().scale = Vector2D_float(1.0f , 400.0f);
+        gameObject->GetComponent<Transform>().position = Vector2D_float(650.0f, -100.0f);
+        gameObject->GetComponent<Transform>().scale = Vector2D_float(1.0f, 800.0f);
         gameObject->AddComponent<SpriteRenderer>(SpriteRenderer::CHARACTER_LAYER, "BENNY_ANIM_MESH", "BENNY_ANIM_TEX", 0.0f, &camera, false);
         gameObject->AddComponent<BoxCollider2D>(BoxCollider2D::GOAL_COLLISION, gameObject->GetComponent<Transform>().scale.x, gameObject->GetComponent<Transform>().scale.y,
             true /* overlap */, false /* movable */, "BENNY_ANIM_MESH" /* any mesh is fine as long as 1:1 */, &camera);

@@ -398,9 +398,13 @@ namespace Srand
 							break;
 						}
 
+						
 						if (cc_Out) {
-							if (!(cc_Tag[i] != CC::ccTag::MACHO && macho->GetIsActive()))
-								isCancel = true;
+							if (macho != nullptr) {
+								if (!(cc_Tag[i] != CC::ccTag::MACHO && macho->GetIsActive()))
+									isCancel = true;
+							}
+							else { isCancel = true; }
 						}
 					}
 

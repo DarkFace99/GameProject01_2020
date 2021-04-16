@@ -194,6 +194,30 @@ void Level3::Init()
         levelManager.AddObject(gameObject);
     }
 
+    // Pear
+    {
+        gameObject = new GameObject();
+        manager->AddEntity(gameObject);
+        gameObject->GetComponent<Transform>().position = Vector2D_float(140.0f, -270.0f);
+        gameObject->GetComponent<Transform>().scale = Vector2D_float(24.0f * RATIO, 24.0f * RATIO);
+        gameObject->AddComponent<SpriteRenderer>(SpriteRenderer::CHARACTER_LAYER, "PEAR_ANIM_MESH", "PEAR_ANIM_TEX", 1.0f, &camera, false);
+        gameObject->AddComponent<RigidBody>(2.0f);
+        // anim_set
+        gameObject->AddComponent<Animator>(18, 100);
+        gameObject->GetComponent<Animator>().SetState("PEAR_IDLE", 1, 6);
+        gameObject->GetComponent<Animator>().SetState("PEAR_RUN", 7, 16);
+        gameObject->GetComponent<Animator>().SetState("PEAR_JUMP", 17, 17);
+        gameObject->GetComponent<Animator>().SetState("PEAR_FALL", 18, 18);
+        gameObject->GetComponent<Animator>().SetState("IDLE", 1, 6);
+        gameObject->AddComponent<BoxCollider2D>(BoxCollider2D::CHARACTER_COLLISION, gameObject->GetComponent<Transform>().scale.x - 20, gameObject->GetComponent<Transform>().scale.y,
+            false /* overlap */, true /* movable *//*, "BENNY_ANIM_MESH", &camera*/);
+
+        gameObject->AddComponent<Pear>();
+
+        objManager.PushObject(gameObject);
+        levelManager.AddObject(gameObject);
+    }
+
     // Macho (last due to the Carry())
     {
         gameObject = new GameObject();
@@ -215,6 +239,20 @@ void Level3::Init()
         objManager.PushObject(gameObject);
         levelManager.AddObject(gameObject);
 
+    }
+
+    // Goal
+    {
+        gameObject = new GameObject();
+        manager->AddEntity(gameObject);
+        gameObject->GetComponent<Transform>().position = Vector2D_float(650.0f, -100.0f);
+        gameObject->GetComponent<Transform>().scale = Vector2D_float(1.0f, 800.0f);
+        gameObject->AddComponent<SpriteRenderer>(SpriteRenderer::CHARACTER_LAYER, "BENNY_ANIM_MESH", "BENNY_ANIM_TEX", 0.0f, &camera, false);
+        gameObject->AddComponent<BoxCollider2D>(BoxCollider2D::GOAL_COLLISION, gameObject->GetComponent<Transform>().scale.x, gameObject->GetComponent<Transform>().scale.y,
+            true /* overlap */, false /* movable */, "BENNY_ANIM_MESH" /* any mesh is fine as long as 1:1 */, &camera);
+
+        objManager.PushObject(gameObject);
+        levelManager.SetGoal(*gameObject);
     }
 
     levelManager.SetUpCC();
@@ -240,5 +278,6 @@ void Level3::Draw()
 void Level3::Update()
 {
     manager->Update();
+    levelManager.CheckGoal();
     levelManager.AbilityControl();
 }
