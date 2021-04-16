@@ -2,18 +2,18 @@
 
 #include "GUI.h"
 
-namespace Srand 
+namespace Srand
 {
-	class GUI_Button : GUI
+	class GUI_Slider : GUI
 	{
 	public:
-		GUI_Button();
-		GUI_Button(std::string name);
-		~GUI_Button();
+		GUI_Slider();
+		GUI_Slider(std::string name);
+		~GUI_Slider();
 
 		virtual void OnSelect() override;
 		virtual void OnActivate() override;
-		
+
 	private:
 		std::string name = "";
 

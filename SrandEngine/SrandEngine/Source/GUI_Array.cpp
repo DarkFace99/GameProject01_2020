@@ -19,17 +19,19 @@ Srand::GUI_Array::~GUI_Array()
 
 void Srand::GUI_Array::OnUpdate()
 {
-	if (input.IsKeyPressed(SR_KEY_UP)) 
+	m_vector[m_index]->OnSelect();
+
+	if (input.IsKeyReleased(SR_KEY_UP)) 
 	{
 		m_index = Abs((m_index - 1) % VectorSize());
 	}
-	else if (input.IsKeyPressed(SR_KEY_DOWN)) 
+	else if (input.IsKeyReleased(SR_KEY_DOWN))
 	{
 		m_index = Abs((m_index + 1) % VectorSize());
 	}
 
 	/* Activate key */
-	if (input.IsKeyPressed(SR_KEY_SPACE))
+	if (input.IsKeyReleased(SR_KEY_SPACE))
 	{
 		m_vector[m_index]->OnActivate();
 	}

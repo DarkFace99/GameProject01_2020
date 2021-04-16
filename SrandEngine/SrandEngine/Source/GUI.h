@@ -1,6 +1,8 @@
 #pragma once
 
 #include <srpch.h>
+
+#include "WindowsInput.h"
 #include "Vector2D.h"
 
 namespace Srand
@@ -16,8 +18,10 @@ namespace Srand
 		virtual void OnSelect() {}
 		virtual void OnActivate() {}
 
-	private:
+	protected:
 		Vector2D_float center;
 		Vector2D_float dimension;
+
+		WindowsInput input;
 	};
 }

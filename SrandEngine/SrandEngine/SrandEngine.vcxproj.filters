@@ -212,6 +212,9 @@
     <ClInclude Include="Source\GUI.h">
       <Filter>SrandEngine\Graphic User Interface</Filter>
     </ClInclude>
+    <ClInclude Include="Source\GUI_Slider.h">
+      <Filter>SrandEngine\Graphic User Interface</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="imgui\imgui.cpp">

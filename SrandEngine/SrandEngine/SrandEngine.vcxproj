@@ -57,6 +57,7 @@
     <ClInclude Include="Source\GUI.h" />
     <ClInclude Include="Source\GUI_Array.h" />
     <ClInclude Include="Source\GUI_Button.h" />
+    <ClInclude Include="Source\GUI_Slider.h" />
     <ClInclude Include="Source\Input.h" />
     <ClInclude Include="Source\KeyCode.h" />
     <ClInclude Include="Source\LevelManager.h" />
