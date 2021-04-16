@@ -193,6 +193,8 @@ namespace Srand
 			npc_Count++;
 		}
 
+		inline void NpcFound() { npc_Count--; }
+
 		void CheckInRange() {
 			Vector2D_float deltaVect;
 			float magnitude;
@@ -310,21 +312,6 @@ namespace Srand
 					
 				}
 				
-
-				// CancelAbility
-
-				//if (input.IsKeyPressed(SR_KEY_1)) {			// Cherry
-				//	ActivateCherry();
-				//	useAbility = true;
-				//}
-				//else if (input.IsKeyPressed(SR_KEY_2)) {	// Pear
-				//	ActivatePear();
-				//	useAbility = true;
-				//}
-				//else if (input.IsKeyPressed(SR_KEY_3)) {	// Barter
-				//	ActivateBarter();
-				//	useAbility = true;
-				//}
 			}
 			else { // if (useAbility)
 
@@ -378,10 +365,8 @@ namespace Srand
 			goalCollider = &gameobj.GetComponent<BoxCollider2D>();
 		}
 
-		void NpcFound() { npc_Count--; }
-
 		void CheckGoal() {
-			if (npc_Count <= 0) {
+			if (npc_Count <= 0 && !isLevelClear) {
 				bool cc_Out = false;
 				for (int i = 0; i < cc_List.size(); i++) {
 					if (Collision::AABB(*goalCollider, cc_List[i]->GetComponent<BoxCollider2D>())) {
@@ -409,6 +394,8 @@ namespace Srand
 							benny->OutOfLevel();
 							cc_Count--;
 							isLevelClear = true;
+							Engine::get().NextScene();
+							break;
 						}
 
 						if (cc_Out) {
