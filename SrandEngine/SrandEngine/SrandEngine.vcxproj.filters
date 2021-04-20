@@ -215,6 +215,9 @@
     <ClInclude Include="Source\GUI_Slider.h">
       <Filter>SrandEngine\Graphic User Interface</Filter>
     </ClInclude>
+    <ClInclude Include="Source\GUI_Manager.h">
+      <Filter>SrandEngine\Manager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="imgui\imgui.cpp">
@@ -296,6 +299,9 @@
       <Filter>Game\GameScene\Level3</Filter>
     </ClCompile>
     <ClCompile Include="Source\GUI_Array.cpp">
+      <Filter>SrandEngine\Graphic User Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GUI.cpp">
       <Filter>SrandEngine\Graphic User Interface</Filter>
     </ClCompile>
   </ItemGroup>

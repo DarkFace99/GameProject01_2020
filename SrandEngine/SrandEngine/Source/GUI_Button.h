@@ -9,7 +9,7 @@ namespace Srand
 	public:
 		GUI_Button();
 		GUI_Button(std::string name);
-		~GUI_Button();
+		virtual ~GUI_Button();
 
 		virtual void OnSelect() override;
 		virtual void OnActivate() override;

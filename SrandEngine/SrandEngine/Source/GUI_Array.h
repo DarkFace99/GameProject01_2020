@@ -5,6 +5,7 @@
 #include "WindowsInput.h"
 #include "KeyCode.h"
 #include "GUI_Button.h"
+#include "GUI_Slider.h"
 
 namespace Srand
 {

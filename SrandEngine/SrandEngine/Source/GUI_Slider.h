@@ -9,7 +9,7 @@ namespace Srand
 	public:
 		GUI_Slider();
 		GUI_Slider(std::string name);
-		~GUI_Slider();
+		virtual ~GUI_Slider();
 
 		virtual void OnSelect() override;
 		virtual void OnActivate() override;
