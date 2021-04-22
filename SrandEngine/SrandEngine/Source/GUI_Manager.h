@@ -1,5 +1,7 @@
 #pragma once
 
+#include <srpch.h>
+
 #include "GUI_Array.h"
 
 namespace Srand 
@@ -14,11 +16,16 @@ namespace Srand
 
 			return *s_instance;
 		}
-		virtual ~GUI_Manager();
+		virtual ~GUI_Manager() {}
+
+		void AddGUI(GUI_Array* arr);
+
 
 	private:
 		static GUI_Manager* s_instance;
 		GUI_Manager();
+
+		std::unordered_map<std::string, GUI_Array*> m_map;
 
 	};
 }

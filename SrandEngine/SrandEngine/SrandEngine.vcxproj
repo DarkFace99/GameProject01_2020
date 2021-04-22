@@ -92,6 +92,8 @@
     <ClCompile Include="Source\Audio.cpp" />
     <ClCompile Include="Source\GUI.cpp" />
     <ClCompile Include="Source\GUI_Array.cpp" />
+    <ClCompile Include="Source\GUI_Button.cpp" />
+    <ClCompile Include="Source\GUI_Slider.cpp" />
     <ClCompile Include="Source\LevelManager.cpp" />
     <ClCompile Include="Source\ObjectManager.cpp" />
     <ClCompile Include="Source\Scene.cpp" />

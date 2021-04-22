@@ -304,6 +304,12 @@
     <ClCompile Include="Source\GUI.cpp">
       <Filter>SrandEngine\Graphic User Interface</Filter>
     </ClCompile>
+    <ClCompile Include="Source\GUI_Button.cpp">
+      <Filter>SrandEngine\Graphic User Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GUI_Slider.cpp">
+      <Filter>SrandEngine\Graphic User Interface</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="SrandEngine.rc" />

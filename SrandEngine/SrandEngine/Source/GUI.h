@@ -14,11 +14,20 @@ namespace Srand
 	class GUI : public Component
 	{
 	public:
-		enum state 
+		enum class State 
 		{
 			SELECT,
 			ACTIVATE
 		};
+		enum class Type
+		{
+			DEFAULT,
+			BUTTON,
+			SLIDER
+		};
+
+		inline void SetType(Type tag) { m_type = tag; }
+		inline Type GetType() const { return m_type; }
 
 		GUI();
 		GUI(Vector2D_float center, Vector2D_float dimension);
@@ -35,6 +44,7 @@ namespace Srand
 		Vector2D_float dimension;
 
 		_FUNC m_function = nullptr;
+		Type m_type = Type::DEFAULT;
 
 		WindowsInput input;
 
