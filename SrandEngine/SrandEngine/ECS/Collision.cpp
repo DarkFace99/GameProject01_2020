@@ -100,6 +100,7 @@ bool Collision::AABB(BoxCollider2D& colA, BoxCollider2D& colB) {
 bool Collision::CC_AABB(GameObject& objA, GameObject& objB) {	// A is main Obj
 	BoxCollider2D& colA = objA.GetComponent<BoxCollider2D>();
 	BoxCollider2D& colB = objB.GetComponent<BoxCollider2D>();
+	Transform& transformB = *colB.transform;
 	RigidBody& rigA = objA.GetComponent<RigidBody>();
 		
 	//bool isCollide = (colA.modifyPosition.x + (colA.width / 2.0f) + rigA.GetVelocityX() >= colB.modifyPosition.x - (colB.width / 2.0f)) &&		// right_A >= left_B
@@ -120,7 +121,7 @@ bool Collision::CC_AABB(GameObject& objA, GameObject& objB) {	// A is main Obj
 	// calulate next translation
 	if (isCollide) {
 		if (((colA.allowOverlap || colB.allowOverlap) == false) && (colA.movable != colB.movable)) {
-			CC_Collision_Push(rigA, colA, colB);
+			CC_Collision_Push(rigA, colA, colB, transformB);
 		}
 		//IsOnGround(objA, objB);
 	}
@@ -178,7 +179,7 @@ bool Collision::CC_AABB(GameObject& objA, GameObject& objB) {	// A is main Obj
 //
 //}
 
-void Collision::CC_Collision_Push(RigidBody& rigA, BoxCollider2D& colA, BoxCollider2D& colB) {
+void Collision::CC_Collision_Push(RigidBody& rigA, BoxCollider2D& colA, BoxCollider2D& colB, Transform& transformB) {
 
 	// hotspot var
 	std::vector<int> collideSpot;
@@ -190,57 +191,70 @@ void Collision::CC_Collision_Push(RigidBody& rigA, BoxCollider2D& colA, BoxColli
 	float betweenPoint_X = (colA.width * (100.0f - (percent_Offset * 2)) / 100.0f) / (float)(hPerSide - 1);
 	float betweenPoint_Y = (colA.height * (100.0f - (percent_Offset * 2)) / 100.0f) / (float)(hPerSide - 1);
 	
-	// Y_right
-	for (int i = 0; i < hPerSide; i++) {
-		Vector2D_float hPoint = colA.modifyPosition + rigA.GetVelocity() + Vector2D_float(colA.width / 2.0f, colA.height / 2.0f)/*top-right*/
-			+ Vector2D_float(0.0f, -(firstOffset_Y + (float)(betweenPoint_Y * i)));
-		bool isCollide = (hPoint.x >= colB.modifyPosition.x - (colB.width / 2.0f)) &&
-			(hPoint.x <= colB.modifyPosition.x + (colB.width / 2.0f)) &&
-			(hPoint.y >= colB.modifyPosition.y - (colB.height / 2.0f)) &&
-			(hPoint.y <= colB.modifyPosition.y + (colB.height / 2.0f));
-		
-		if (isCollide) { collideSpot.push_back(1); } // 1 => right
-	}
+	bool checkX = !((colB.GetTag() == BoxCollider2D::DOOR_COLLISION) && (transformB.rotationAngle < 45.0f));
+	bool checkY = !((colB.GetTag() == BoxCollider2D::DOOR_COLLISION) && (transformB.rotationAngle > 45.0f));
 
-	// Y_left
-	for (int i = 0; i < hPerSide; i++) {
-		Vector2D_float hPoint = colA.modifyPosition + rigA.GetVelocity() + Vector2D_float(-colA.width / 2.0f, colA.height / 2.0f)/*top-left*/
-			+ Vector2D_float(0.0f, -(firstOffset_Y + (float)(betweenPoint_Y * i)));
-		bool isCollide = (hPoint.x >= colB.modifyPosition.x - (colB.width / 2.0f)) &&
-			(hPoint.x <= colB.modifyPosition.x + (colB.width / 2.0f)) &&
-			(hPoint.y >= colB.modifyPosition.y - (colB.height / 2.0f)) &&
-			(hPoint.y <= colB.modifyPosition.y + (colB.height / 2.0f));
+	/*if (colB.GetTag() == BoxCollider2D::DOOR_COLLISION) {
+		SR_SYSTEM_TRACE("checkX: {0}", checkX);
+		SR_SYSTEM_TRACE("checkY: {0}", checkY);
+	}*/
 
-		if (isCollide) { collideSpot.push_back(2); } // 2 => left
-	}
+	/*if (checkX) {*/
+		// Y_right
+		for (int i = 0; i < hPerSide; i++) {
+			Vector2D_float hPoint = colA.modifyPosition + rigA.GetVelocity() + Vector2D_float(colA.width / 2.0f, colA.height / 2.0f)/*top-right*/
+				+ Vector2D_float(0.0f, -(firstOffset_Y + (float)(betweenPoint_Y * i)));
+			bool isCollide = (hPoint.x >= colB.modifyPosition.x - (colB.width / 2.0f)) &&
+				(hPoint.x <= colB.modifyPosition.x + (colB.width / 2.0f)) &&
+				(hPoint.y >= colB.modifyPosition.y - (colB.height / 2.0f)) &&
+				(hPoint.y <= colB.modifyPosition.y + (colB.height / 2.0f));
 
-	// X_Top
-	for (int i = 0; i < hPerSide; i++) {
-		Vector2D_float hPoint = colA.modifyPosition + rigA.GetVelocity() + Vector2D_float(-colA.width / 2.0f, colA.height / 2.0f)/*top-left*/
-			+ Vector2D_float((firstOffset_X + (float)(betweenPoint_X * i)), 0.0f);
-		bool isCollide = (hPoint.x >= colB.modifyPosition.x - (colB.width / 2.0f)) &&
-			(hPoint.x <= colB.modifyPosition.x + (colB.width / 2.0f)) &&
-			(hPoint.y >= colB.modifyPosition.y - (colB.height / 2.0f)) &&
-			(hPoint.y <= colB.modifyPosition.y + (colB.height / 2.0f));
+			if (isCollide) { collideSpot.push_back(1); } // 1 => right
+		}
 
-		if (isCollide) { collideSpot.push_back(3); } // 3 => top
-	}
 
-	// X_Bottom
-	for (int i = 0; i < hPerSide; i++) {
-		Vector2D_float hPoint = colA.modifyPosition + rigA.GetVelocity() + Vector2D_float(-colA.width / 2.0f, -colA.height / 2.0f)/*bottom-left*/
-			+ Vector2D_float((firstOffset_X + (float)(betweenPoint_X * i)), 0.0f);
+		// Y_left
+		for (int i = 0; i < hPerSide; i++) {
+			Vector2D_float hPoint = colA.modifyPosition + rigA.GetVelocity() + Vector2D_float(-colA.width / 2.0f, colA.height / 2.0f)/*top-left*/
+				+ Vector2D_float(0.0f, -(firstOffset_Y + (float)(betweenPoint_Y * i)));
+			bool isCollide = (hPoint.x >= colB.modifyPosition.x - (colB.width / 2.0f)) &&
+				(hPoint.x <= colB.modifyPosition.x + (colB.width / 2.0f)) &&
+				(hPoint.y >= colB.modifyPosition.y - (colB.height / 2.0f)) &&
+				(hPoint.y <= colB.modifyPosition.y + (colB.height / 2.0f));
 
-		hPoint.x = roundf(hPoint.x * 100.0f) / 100.0f;
-		hPoint.y = roundf(hPoint.y * 100.0f) / 100.0f;
+			if (isCollide) { collideSpot.push_back(2); } // 2 => left
+		}
+	/*}
 
-		bool isCollide = (hPoint.x >= colB.modifyPosition.x - (colB.width / 2.0f)) &&
-			(hPoint.x <= colB.modifyPosition.x + (colB.width / 2.0f)) &&
-			(hPoint.y >= colB.modifyPosition.y - (colB.height / 2.0f)) &&
-			(hPoint.y <= colB.modifyPosition.y + (colB.height / 2.0f));
+	if (checkY) {*/
+		// X_Top
+		for (int i = 0; i < hPerSide; i++) {
+			Vector2D_float hPoint = colA.modifyPosition + rigA.GetVelocity() + Vector2D_float(-colA.width / 2.0f, colA.height / 2.0f)/*top-left*/
+				+ Vector2D_float((firstOffset_X + (float)(betweenPoint_X * i)), 0.0f);
+			bool isCollide = (hPoint.x >= colB.modifyPosition.x - (colB.width / 2.0f)) &&
+				(hPoint.x <= colB.modifyPosition.x + (colB.width / 2.0f)) &&
+				(hPoint.y >= colB.modifyPosition.y - (colB.height / 2.0f)) &&
+				(hPoint.y <= colB.modifyPosition.y + (colB.height / 2.0f));
 
-		if (isCollide) { collideSpot.push_back(4); } // 4 => bottom
-	}
+			if (isCollide) { collideSpot.push_back(3); } // 3 => top
+		}
+
+		// X_Bottom
+		for (int i = 0; i < hPerSide; i++) {
+			Vector2D_float hPoint = colA.modifyPosition + rigA.GetVelocity() + Vector2D_float(-colA.width / 2.0f, -colA.height / 2.0f)/*bottom-left*/
+				+ Vector2D_float((firstOffset_X + (float)(betweenPoint_X * i)), 0.0f);
+
+			hPoint.x = roundf(hPoint.x * 100.0f) / 100.0f;
+			hPoint.y = roundf(hPoint.y * 100.0f) / 100.0f;
+
+			bool isCollide = (hPoint.x >= colB.modifyPosition.x - (colB.width / 2.0f)) &&
+				(hPoint.x <= colB.modifyPosition.x + (colB.width / 2.0f)) &&
+				(hPoint.y >= colB.modifyPosition.y - (colB.height / 2.0f)) &&
+				(hPoint.y <= colB.modifyPosition.y + (colB.height / 2.0f));
+
+			if (isCollide) { collideSpot.push_back(4); } // 4 => bottom
+		}
+	/*}*/
 	
 	if (collideSpot.empty()) { return; }
 

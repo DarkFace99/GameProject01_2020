@@ -184,6 +184,11 @@ namespace Srand
 		inline bool IsRunning() {
 			return running;
 		}
+
+		void NextScene();
+	
+	protected:
+		int nextScene_Num = 0; // Engine.cpp line.138
 	};
 
 

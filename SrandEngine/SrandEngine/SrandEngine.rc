@@ -61,7 +61,7 @@ IDI_ICON1              ICON                    "Assets\\icon.ico"
 // PNG
 //
 
-IDB_PNG1                PNG                     "D:\\Projects\\Project\\GameProject01_2020\\SrandEngine\\SrandEngine\\Assets\\icon.png"
+//IDB_PNG1                PNG                     "D:\\Projects\\Project\\GameProject01_2020\\SrandEngine\\SrandEngine\\Assets\\icon.png" /*different path*/
 
 #endif    // English (United States) resources
 /////////////////////////////////////////////////////////////////////////////

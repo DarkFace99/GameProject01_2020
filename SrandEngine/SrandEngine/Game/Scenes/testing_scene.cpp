@@ -234,7 +234,7 @@ void TestingScene::Init()
         gameObject->AddComponent<TileSelector>(10, 13);
         gameObject->GetComponent<TileSelector>().SetTile(1, 8);
 
-        gameObject->AddComponent<BoxCollider2D>(BoxCollider2D::ASSET_COLLISION, gameObject->GetComponent<Transform>().scale.x, gameObject->GetComponent<Transform>().scale.y,
+        gameObject->AddComponent<BoxCollider2D>(BoxCollider2D::DOOR_COLLISION, gameObject->GetComponent<Transform>().scale.x, gameObject->GetComponent<Transform>().scale.y,
             false, false/*, "DOOR_MESH", &camera*/);
         gameObject->AddComponent<Door>();
         gameObject->GetComponent<Door>().AddConnectedButtons(button1);
@@ -253,7 +253,7 @@ void TestingScene::Init()
         gameObject->AddComponent<TileSelector>(10, 13);
         gameObject->GetComponent<TileSelector>().SetTile(3, 8);
 
-        gameObject->AddComponent<BoxCollider2D>(BoxCollider2D::ASSET_COLLISION, gameObject->GetComponent<Transform>().scale.x, gameObject->GetComponent<Transform>().scale.y,
+        gameObject->AddComponent<BoxCollider2D>(BoxCollider2D::DOOR_COLLISION, gameObject->GetComponent<Transform>().scale.x, gameObject->GetComponent<Transform>().scale.y,
             false, false/*, "DOOR_MESH", &camera*/);
         gameObject->AddComponent<Door>(false);
         gameObject->GetComponent<Door>().AddConnectedButtons(button2);
@@ -275,7 +275,7 @@ void TestingScene::Init()
         gameObject->AddComponent<TileSelector>(10, 13);
         gameObject->GetComponent<TileSelector>().SetTile(1, 4);
 
-        gameObject->AddComponent<BoxCollider2D>(BoxCollider2D::ASSET_COLLISION, gameObject->GetComponent<Transform>().scale.x, gameObject->GetComponent<Transform>().scale.y / 8.0f,
+        gameObject->AddComponent<BoxCollider2D>(BoxCollider2D::ELEVATOR_COLLISION, gameObject->GetComponent<Transform>().scale.x, gameObject->GetComponent<Transform>().scale.y / 8.0f,
             false, false/*, "ELEVATOR_MESH", &camera*/);
         gameObject->GetComponent<BoxCollider2D>().SetOffset(0.0f, -2.0f * RATIO);
         gameObject->AddComponent<Elevator>(4 * 16 * RATIO);
@@ -294,7 +294,7 @@ void TestingScene::Init()
         gameObject->AddComponent<TileSelector>(10, 13);
         gameObject->GetComponent<TileSelector>().SetTile(4, 4);
 
-        gameObject->AddComponent<BoxCollider2D>(BoxCollider2D::ASSET_COLLISION, gameObject->GetComponent<Transform>().scale.x, gameObject->GetComponent<Transform>().scale.y / 8.0f,
+        gameObject->AddComponent<BoxCollider2D>(BoxCollider2D::ELEVATOR_COLLISION, gameObject->GetComponent<Transform>().scale.x, gameObject->GetComponent<Transform>().scale.y / 8.0f,
             false, false/*, "ELEVATOR_MESH", &camera*/);
         gameObject->GetComponent<BoxCollider2D>().SetOffset(0.0f, -2.0f * RATIO);
         gameObject->AddComponent<Elevator>(5 * 16 * RATIO);
@@ -476,7 +476,22 @@ void TestingScene::Init()
 
     }
 
+    // Goal
+    {
+        gameObject = new GameObject();
+        manager->AddEntity(gameObject);
+        gameObject->GetComponent<Transform>().position = Vector2D_float(650.0f, -100.0f);
+        gameObject->GetComponent<Transform>().scale = Vector2D_float(1.0f, 800.0f);
+        gameObject->AddComponent<SpriteRenderer>(SpriteRenderer::CHARACTER_LAYER, "BENNY_ANIM_MESH", "BENNY_ANIM_TEX", 0.0f, &camera, false);
+        gameObject->AddComponent<BoxCollider2D>(BoxCollider2D::GOAL_COLLISION, gameObject->GetComponent<Transform>().scale.x, gameObject->GetComponent<Transform>().scale.y,
+            true /* overlap */, false /* movable */, "BENNY_ANIM_MESH" /* any mesh is fine as long as 1:1 */, &camera);
+
+        objManager.PushObject(gameObject);
+        levelManager.SetGoal(*gameObject);
+    }
+
     levelManager.SetUpCC();
+
 
 #pragma endregion
     
@@ -497,7 +512,9 @@ void TestingScene::Draw()
 void TestingScene::Update()
 {
     manager->Update();
+    levelManager.CheckGoal();
     levelManager.AbilityControl();
+    
     // Check Collision
     //for (int i = 0; i < objManager.VectorSize() - 1; i++)
     //{

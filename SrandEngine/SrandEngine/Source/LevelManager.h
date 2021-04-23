@@ -28,6 +28,9 @@ namespace Srand
 		GameObject* cherryObj = nullptr;
 		GameObject* pearObj = nullptr;
 		GameObject* barterObj = nullptr;
+
+		GameObject* goalObj = nullptr;
+		BoxCollider2D* goalCollider = nullptr;
 		
 		bool isSwitchCC_Down = false;
 		bool isCancel = false;
@@ -47,6 +50,15 @@ namespace Srand
 		bool choosingStage = false;
 		unsigned int cc_At = 0;
 		bool useAbility = false;
+
+		int npc_Count = 0; 
+
+		bool isLevelClear = false;
+		int cc_Count = 0;
+		/*float xPoint;
+		float yPoint;
+		float yLine_Min;
+		float yLine_Max;*/
 
 		CC::ccTag controlled_Tag = CC::ccTag::DEFAULT;
 		Transform* controlled_Transform = nullptr;
@@ -103,6 +115,12 @@ namespace Srand
 			useAbility = false;
 			isSwitchCC_Down = false;
 			isCancel = false;
+
+			goalCollider = nullptr;
+			goalObj = nullptr;
+			isLevelClear = false;
+			cc_Count = 0;
+			npc_Count = 0;
 		}
 
 		inline int VectorSize() { return cc_List.size(); }
@@ -123,6 +141,7 @@ namespace Srand
 					bennyTransform = &bennyObj->GetComponent<Transform>();
 					benny = &bennyObj->GetComponent<Benny>();
 					cc_Tag.push_back(benny->GetTag());
+					cc_Count++;
 				}
 			}
 
@@ -135,6 +154,7 @@ namespace Srand
 					macho = &machoObj->GetComponent<Macho>();
 					cc_Tag.push_back(macho->GetTag());
 					isMachoFound = true;
+					cc_Count++;
 				}
 				else if (cc_List[i]->HasComponent<Cherry>()) {
 					SR_SYSTEM_TRACE("Level: Found Cherry");
@@ -144,7 +164,7 @@ namespace Srand
 					cherryTransform = &cherryObj->GetComponent<Transform>();
 					cherry = &cherryObj->GetComponent<Cherry>();
 					cc_Tag.push_back(cherry->GetTag());
-
+					cc_Count++;
 				}
 				else if (cc_List[i]->HasComponent<Pear>()) {
 					pearObj = cc_List[i];
@@ -153,6 +173,7 @@ namespace Srand
 					pearTransform = &pearObj->GetComponent<Transform>();
 					pear = &pearObj->GetComponent<Pear>();
 					cc_Tag.push_back(pear->GetTag());
+					cc_Count++;
 				}
 				else if (cc_List[i]->HasComponent<Barter>()) {
 					barterObj = cc_List[i];
@@ -162,11 +183,17 @@ namespace Srand
 					barterTransform = &barterObj->GetComponent<Transform>();
 					barter = &barterObj->GetComponent<Barter>();
 					cc_Tag.push_back(barter->GetTag());
-					
+					cc_Count++;
 				}
 			}
 			if (isMachoFound) { macho->CopyCC_List(cc_List); }
 		}
+
+		inline void AddNPC() {
+			npc_Count++;
+		}
+
+		inline void NpcFound() { npc_Count--; }
 
 		void CheckInRange() {
 			Vector2D_float deltaVect;
@@ -178,6 +205,12 @@ namespace Srand
 			for (int i = 0; i < cc_Tag.size()-1; i++) { // exclude Benny
 				closestMag = benny->GetRadius(); //reset closestMag
 				for (int j = 0; j < cc_Tag.size(); j++) {
+
+					if (cc_Tag[j] == CC::ccTag::MACHO && macho->GetIsOut()) { continue; }
+					else if (cc_Tag[j] == CC::ccTag::CHERRY && cherry->GetIsOut()) { continue; }
+					else if (cc_Tag[j] == CC::ccTag::PEAR && pear->GetIsOut()) { continue; }
+					else if (cc_Tag[j] == CC::ccTag::BARTER && barter->GetIsOut()) { continue; }
+
 					if (cc_Tag[j] != CC::ccTag::BENNY) {
 
 						if (cc_Tag[j] == CC::ccTag::MACHO) { deltaVect = bennyTransform->position - machoTransform->position; }
@@ -215,7 +248,7 @@ namespace Srand
 
 				// ActivateAbility
 				if (input.IsKeyPressed(SR_KEY_Z)) {
-					SR_SYSTEM_TRACE("Choosing...");
+					//SR_SYSTEM_TRACE("Choosing...");
 					choosingStage = true; 
 				}
 				else if(choosingStage && (input.IsKeyReleased(SR_KEY_Z))){
@@ -263,7 +296,7 @@ namespace Srand
 					cc_At = cc_At % inRange_Tag.size(); // mod incase if the cc_At exceeds Tag size or Tag size decrease
 
 					/*-------debug-------*/
-					SR_SYSTEM_TRACE("inRange_Size: {0}", inRange_Tag.size());
+					//SR_SYSTEM_TRACE("inRange_Size: {0}", inRange_Tag.size());
 					if (inRange_Tag[cc_At] == CC::ccTag::MACHO) {
 						SR_SYSTEM_TRACE("Choose: MACHO");
 					}
@@ -279,21 +312,6 @@ namespace Srand
 					
 				}
 				
-
-				// CancelAbility
-
-				//if (input.IsKeyPressed(SR_KEY_1)) {			// Cherry
-				//	ActivateCherry();
-				//	useAbility = true;
-				//}
-				//else if (input.IsKeyPressed(SR_KEY_2)) {	// Pear
-				//	ActivatePear();
-				//	useAbility = true;
-				//}
-				//else if (input.IsKeyPressed(SR_KEY_3)) {	// Barter
-				//	ActivateBarter();
-				//	useAbility = true;
-				//}
 			}
 			else { // if (useAbility)
 
@@ -342,6 +360,62 @@ namespace Srand
 			ClearInRange();
 		}
 
+		void SetGoal(GameObject& gameobj) {
+			goalObj = &gameobj;
+			goalCollider = &gameobj.GetComponent<BoxCollider2D>();
+		}
+
+		void CheckGoal() {
+			if (npc_Count <= 0 && !isLevelClear) {
+				bool cc_Out = false;
+				for (int i = 0; i < cc_List.size(); i++) {
+					if (Collision::AABB(*goalCollider, cc_List[i]->GetComponent<BoxCollider2D>())) {
+						if (cc_Tag[i] == CC::ccTag::MACHO && !macho->GetIsOut()) {
+							macho->OutOfLevel();
+							cc_Out = true;
+							cc_Count--;
+						}
+						else if (cc_Tag[i] == CC::ccTag::CHERRY && !cherry->GetIsOut()) {
+							cherry->OutOfLevel();
+							cc_Out = true;
+							cc_Count--;
+						}
+						else if (cc_Tag[i] == CC::ccTag::PEAR && !pear->GetIsOut()) {
+							pear->OutOfLevel();
+							cc_Out = true;
+							cc_Count--;
+						}
+						else if (cc_Tag[i] == CC::ccTag::BARTER && !barter->GetIsOut()) {
+							barter->OutOfLevel();
+							cc_Out = true;
+							cc_Count--;
+						}
+						else if (cc_Tag[i] == CC::ccTag::BENNY && cc_Count == 1 /* last one */) {
+							benny->OutOfLevel();
+							cc_Count--;
+							isLevelClear = true;
+							Engine::get().NextScene();
+							break;
+						}
+
+						
+						if (cc_Out) {
+							if (macho != nullptr) {
+								if (!(cc_Tag[i] != CC::ccTag::MACHO && macho->GetIsActive()))
+									isCancel = true;
+							}
+							else { isCancel = true; }
+						}
+					}
+
+				}
+			}
+			if (isLevelClear) { SR_SYSTEM_TRACE("-----------------LEVEL_CLEAR----------------"); }
+		}
+
+
+		// discarded f()
+
 		/*void ActivateCherry() {
 			cherry->SetActive(true);
 			benny->SetActive(false);
@@ -358,6 +432,35 @@ namespace Srand
 			cherry->SetActive(false);
 			pear->SetActive(false);
 			barter->SetActive(false);
+		}*/
+
+		/*void Set_FinishPoint(Vector2D_float point){
+			xPoint = point.x;
+			yPoint = point.y;
+			isFinishPoint = true;
+		}*/
+		
+		/*void Set_FinishLine(float x, float yMax, float yMin) {
+			xPoint = x;
+			yLine_Min = yMin;
+			yLine_Max = yMax;
+			isFinishPoint = false;
+		}*/
+
+		/*void CC_Exit() {
+			if (isFinishPoint) {
+				for (int i = 0; i < cc_List.size(); i++) {
+					BoxCollider2D* col = &cc_List[i]->GetComponent<BoxCollider2D>();
+					bool x_Axis = 
+					bool y_Axis =
+					if()
+				}
+			}
+			else {
+				for (int i = 0; i < cc_List.size(); i++) {
+
+				}
+			}
 		}*/
 	};
 }
