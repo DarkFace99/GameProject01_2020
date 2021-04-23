@@ -107,6 +107,20 @@ namespace Srand
         AssetManager::get().LoadMesh("ELEVATOR_STAND_MESH", 10, 13, 2, 1);
         AssetManager::get().LoadMesh("BUTTON_MESH", 10, 13, 2, 1);
 
+        AssetManager::get().LoadMesh("UI_BUTTON_MESH", 22, 22, 7, 2);
+        AssetManager::get().LoadMesh("UI_WORD6_MESH", 22, 22, 6, 1);
+        AssetManager::get().LoadMesh("UI_WORD5_MESH", 22, 22, 5, 1);
+        AssetManager::get().LoadMesh("UI_WORD3_MESH", 22, 22, 3, 1);
+        AssetManager::get().LoadMesh("UI_KEY_MESH", 22, 22);
+
+        AssetManager::get().LoadMesh("UI_BOARD_MESH", 22, 22, 20, 13);
+        AssetManager::get().LoadMesh("UI_DEFAULT_MESH", 22, 22, 6, 3);
+        AssetManager::get().LoadMesh("UI_SLIDER_BAR_MESH", 22, 22, 7, 1);
+        AssetManager::get().LoadMesh("UI_SLOT_ONOFF_MESH", 22, 22, 5, 1);
+
+        AssetManager::get().LoadMesh("UI_SELECT_MESH", 22, 22, 14, 3);
+        AssetManager::get().LoadMesh("UI_SLOT_LEVEL_MESH", 22, 22, 2, 2);
+
         /* Texture */
         AssetManager::get().LoadTexture("BG_TEX", "Background.png");
         AssetManager::get().LoadTexture("B_TEX", "b.png");
@@ -118,6 +132,9 @@ namespace Srand
         AssetManager::get().LoadTexture("BARTER_ANIM_TEX", "Barther.png");
         AssetManager::get().LoadTexture("NPC_ANIM_TEX", "NPC_Animation_Sheet.png");
         AssetManager::get().LoadTexture("LEVEL_ASSET_TEX", "Level_Assets_00.png");
+        AssetManager::get().LoadTexture("LEVEL_SELECT_ASSET_TEX", "NEW_ASSETS/ART_BENNY/UI/ASSETS/level_select_ui.png");
+        AssetManager::get().LoadTexture("MENU_ASSET_TEX", "NEW_ASSETS/ART_BENNY/UI/ASSETS/menu_ui.png");
+        AssetManager::get().LoadTexture("SETTING_ASSET_TEX", "NEW_ASSETS/ART_BENNY/UI/ASSETS/setting_ui.png");
 
         /* Audio */
         audioController.AddAudioSource(new AudioSource("BGM", BGM_VOLUME, true, "The Happy Man.mp3"));

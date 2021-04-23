@@ -60,26 +60,76 @@ void MainMenu::Init()
     }
 #pragma endregion
 
-#pragma region GUI_LOADING
+#pragma region UI_Button
 
+    // button1
     tempgui = new GameObject();
-    //EntityManager::get().AddEntity(tempgui);
+    tempgui->GetComponent<Transform>().position = Vector2D_float(((6.5 * _tileSize) + _midPointX) * RATIO, ((14 * _tileSize) + _midPointY) * RATIO);
+    tempgui->GetComponent<Transform>().scale = Vector2D_float(7*16 * RATIO, 2*16 * RATIO);
 
-    tempgui->GetComponent<Transform>().scale = Vector2D_float(32.0f * RATIO, 16.0f * RATIO);
+    tempgui->AddComponent<SpriteRenderer>(SpriteRenderer::GUI_LAYER, "UI_BUTTON_MESH", "MENU_ASSET_TEX", 1.0f, &camera, false);
+    tempgui->AddComponent<TileSelector>(22, 22);
+    tempgui->GetComponent<TileSelector>().SetTile(1, 16);
 
-    tempgui->AddComponent<SpriteRenderer>(SpriteRenderer::GUI_LAYER, "B_MESH", "B_TEX", 1.0f, &camera, false);
-    tempgui->AddComponent<GUI_Button>("TestButton1");
+    tempgui->AddComponent<GUI_Button>("PlayButton");
     tempgui->GetComponent<GUI_Button>().m_function = StartGame;
+    
     gui_arr.PushGUI(tempgui);
 
+    // button2
     tempgui = new GameObject();
-    //EntityManager::get().AddEntity(tempgui);
+    tempgui->GetComponent<Transform>().position = Vector2D_float(((6.5 * _tileSize) + _midPointX) * RATIO, ((11 * _tileSize) + _midPointY) * RATIO);
+    tempgui->GetComponent<Transform>().scale = Vector2D_float(7 * 16 * RATIO, 2 * 16 * RATIO);
 
-    tempgui->AddComponent<Transform>(0, 100);
-    tempgui->GetComponent<Transform>().scale = Vector2D_float(32.0f * RATIO, 16.0f * RATIO);
+    tempgui->AddComponent<SpriteRenderer>(SpriteRenderer::GUI_LAYER, "UI_BUTTON_MESH", "MENU_ASSET_TEX", 1.0f, &camera, false);
+    tempgui->AddComponent<TileSelector>(22, 22);
+    tempgui->GetComponent<TileSelector>().SetTile(1, 16);
 
-    tempgui->AddComponent<SpriteRenderer>(SpriteRenderer::GUI_LAYER, "B_MESH", "B_TEX", 1.0f, &camera, false);
-    tempgui->AddComponent<GUI_Button>("TestButton2");
+    tempgui->AddComponent<GUI_Button>("PlayButton");
+    tempgui->GetComponent<GUI_Button>().m_function = StartGame;
+
+    gui_arr.PushGUI(tempgui);
+
+    // button3
+    tempgui = new GameObject();
+    tempgui->GetComponent<Transform>().position = Vector2D_float(((6.5 * _tileSize) + _midPointX) * RATIO, ((8 * _tileSize) + _midPointY) * RATIO);
+    tempgui->GetComponent<Transform>().scale = Vector2D_float(7 * 16 * RATIO, 2 * 16 * RATIO);
+
+    tempgui->AddComponent<SpriteRenderer>(SpriteRenderer::GUI_LAYER, "UI_BUTTON_MESH", "MENU_ASSET_TEX", 1.0f, &camera, false);
+    tempgui->AddComponent<TileSelector>(22, 22);
+    tempgui->GetComponent<TileSelector>().SetTile(1, 16);
+
+    tempgui->AddComponent<GUI_Button>("PlayButton");
+    tempgui->GetComponent<GUI_Button>().m_function = StartGame;
+
+    gui_arr.PushGUI(tempgui);
+
+    // button4
+    tempgui = new GameObject();
+    tempgui->GetComponent<Transform>().position = Vector2D_float(((6.5 * _tileSize) + _midPointX) * RATIO, ((5 * _tileSize) + _midPointY) * RATIO);
+    tempgui->GetComponent<Transform>().scale = Vector2D_float(7 * 16 * RATIO, 2 * 16 * RATIO);
+
+    tempgui->AddComponent<SpriteRenderer>(SpriteRenderer::GUI_LAYER, "UI_BUTTON_MESH", "MENU_ASSET_TEX", 1.0f, &camera, false);
+    tempgui->AddComponent<TileSelector>(22, 22);
+    tempgui->GetComponent<TileSelector>().SetTile(1, 16);
+
+    tempgui->AddComponent<GUI_Button>("PlayButton");
+    tempgui->GetComponent<GUI_Button>().m_function = StartGame;
+
+    gui_arr.PushGUI(tempgui);
+
+#pragma endregion
+
+#pragma region TEXT
+
+    // Play
+    tempgui = new GameObject();
+    tempgui->GetComponent<Transform>().position = Vector2D_float(((10 * _tileSize) + _midPointX) * RATIO, ((14 * _tileSize) + _midPointY) * RATIO);
+    tempgui->GetComponent<Transform>().scale = Vector2D_float(6 * 16 * RATIO, 1 * 16 * RATIO);
+
+    tempgui->AddComponent<SpriteRenderer>(SpriteRenderer::GUI_LAYER, "UI_WORD6_MESH", "MENU_ASSET_TEX", 1.0f, &camera, false);
+    tempgui->AddComponent<TileSelector>(22, 22);
+    tempgui->GetComponent<TileSelector>().SetTile(0, 14);
 
     gui_arr.PushGUI(tempgui);
 
