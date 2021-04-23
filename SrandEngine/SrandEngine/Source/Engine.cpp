@@ -146,26 +146,26 @@ namespace Srand
 
 #pragma region GUI_LOADING
 
-        tempgui = new GameObject();
-        //EntityManager::get().AddEntity(tempgui);
+        //tempgui = new GameObject();
+        ////EntityManager::get().AddEntity(tempgui);
 
-        tempgui->GetComponent<Transform>().scale = Vector2D_float(32.0f * RATIO, 16.0f * RATIO);
+        //tempgui->GetComponent<Transform>().scale = Vector2D_float(32.0f * RATIO, 16.0f * RATIO);
 
-        tempgui->AddComponent<SpriteRenderer>(SpriteRenderer::GUI_LAYER, "B_MESH", "B_TEX", 1.0f, &tempCam, false);
-        tempgui->AddComponent<GUI_Button>("TestButton1");
+        //tempgui->AddComponent<SpriteRenderer>(SpriteRenderer::GUI_LAYER, "B_MESH", "B_TEX", 1.0f, &tempCam, false);
+        //tempgui->AddComponent<GUI_Button>("TestButton1");
 
-        gui_arr.PushGUI(tempgui);
+        //gui_arr.PushGUI(tempgui);
 
-        tempgui = new GameObject();
-        //EntityManager::get().AddEntity(tempgui);
+        //tempgui = new GameObject();
+        ////EntityManager::get().AddEntity(tempgui);
 
-        tempgui->AddComponent<Transform>(0, 100);
-        tempgui->GetComponent<Transform>().scale = Vector2D_float(32.0f * RATIO, 16.0f * RATIO);
+        //tempgui->AddComponent<Transform>(0, 100);
+        //tempgui->GetComponent<Transform>().scale = Vector2D_float(32.0f * RATIO, 16.0f * RATIO);
 
-        tempgui->AddComponent<SpriteRenderer>(SpriteRenderer::GUI_LAYER, "B_MESH", "B_TEX", 1.0f, &tempCam, false);
-        tempgui->AddComponent<GUI_Button>("TestButton2");
+        //tempgui->AddComponent<SpriteRenderer>(SpriteRenderer::GUI_LAYER, "B_MESH", "B_TEX", 1.0f, &tempCam, false);
+        //tempgui->AddComponent<GUI_Button>("TestButton2");
 
-        gui_arr.PushGUI(tempgui);
+        //gui_arr.PushGUI(tempgui);
 
 #pragma endregion
 
@@ -188,7 +188,7 @@ namespace Srand
     void Engine::Draw() {   
         //For Testing SceneManager Only
         currentScene->Draw();
-        gui_arr.OnDraw();
+        /*gui_arr.OnDraw();*/
 
         //user_interface.UpdateUserInterface();
 
@@ -202,7 +202,7 @@ namespace Srand
         //For Testing SceneManager Only
         currentScene->Update();
 
-        gui_arr.OnUpdate();
+        /*gui_arr.OnUpdate();*/
 
         glfwSetKeyCallback(WindowProperties::get(), window_key_callback);
         glfwSetWindowSizeCallback(WindowProperties::get(), window_size_callback);
