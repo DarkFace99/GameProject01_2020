@@ -69,10 +69,11 @@ void MainMenu::Init()
 
     tempgui->AddComponent<SpriteRenderer>(SpriteRenderer::GUI_LAYER, "UI_BUTTON_MESH", "MENU_ASSET_TEX", 1.0f, &camera, false);
     tempgui->AddComponent<TileSelector>(22, 22);
-    tempgui->GetComponent<TileSelector>().SetTile(1, 16);
+    tempgui->GetComponent<TileSelector>().SetTile(9, 9);
 
     tempgui->AddComponent<GUI_Button>("PlayButton");
     tempgui->GetComponent<GUI_Button>().m_function = StartGame;
+    tempgui->GetComponent<GUI_Button>().SelectedOffset(1, 13);
     
     gui_arr.PushGUI(tempgui);
 
@@ -83,10 +84,10 @@ void MainMenu::Init()
 
     tempgui->AddComponent<SpriteRenderer>(SpriteRenderer::GUI_LAYER, "UI_BUTTON_MESH", "MENU_ASSET_TEX", 1.0f, &camera, false);
     tempgui->AddComponent<TileSelector>(22, 22);
-    tempgui->GetComponent<TileSelector>().SetTile(1, 16);
-
-    tempgui->AddComponent<GUI_Button>("PlayButton");
-    tempgui->GetComponent<GUI_Button>().m_function = StartGame;
+    tempgui->GetComponent<TileSelector>().SetTile(9, 3);
+    
+    tempgui->AddComponent<GUI_Button>("SettingButton");
+    tempgui->GetComponent<GUI_Button>().SelectedOffset(1, 7);
 
     gui_arr.PushGUI(tempgui);
 
@@ -97,10 +98,10 @@ void MainMenu::Init()
 
     tempgui->AddComponent<SpriteRenderer>(SpriteRenderer::GUI_LAYER, "UI_BUTTON_MESH", "MENU_ASSET_TEX", 1.0f, &camera, false);
     tempgui->AddComponent<TileSelector>(22, 22);
-    tempgui->GetComponent<TileSelector>().SetTile(1, 16);
+    tempgui->GetComponent<TileSelector>().SetTile(9, 12);
 
-    tempgui->AddComponent<GUI_Button>("PlayButton");
-    tempgui->GetComponent<GUI_Button>().m_function = StartGame;
+    tempgui->AddComponent<GUI_Button>("LevelButton");
+    tempgui->GetComponent<GUI_Button>().SelectedOffset(1, 16);
 
     gui_arr.PushGUI(tempgui);
 
@@ -111,29 +112,16 @@ void MainMenu::Init()
 
     tempgui->AddComponent<SpriteRenderer>(SpriteRenderer::GUI_LAYER, "UI_BUTTON_MESH", "MENU_ASSET_TEX", 1.0f, &camera, false);
     tempgui->AddComponent<TileSelector>(22, 22);
-    tempgui->GetComponent<TileSelector>().SetTile(1, 16);
+    tempgui->GetComponent<TileSelector>().SetTile(9, 15);
 
-    tempgui->AddComponent<GUI_Button>("PlayButton");
-    tempgui->GetComponent<GUI_Button>().m_function = StartGame;
-
-    gui_arr.PushGUI(tempgui);
-
-#pragma endregion
-
-#pragma region TEXT
-
-    // Play
-    tempgui = new GameObject();
-    tempgui->GetComponent<Transform>().position = Vector2D_float(((10 * _tileSize) + _midPointX) * RATIO, ((14 * _tileSize) + _midPointY) * RATIO);
-    tempgui->GetComponent<Transform>().scale = Vector2D_float(6 * 16 * RATIO, 1 * 16 * RATIO);
-
-    tempgui->AddComponent<SpriteRenderer>(SpriteRenderer::GUI_LAYER, "UI_WORD6_MESH", "MENU_ASSET_TEX", 1.0f, &camera, false);
-    tempgui->AddComponent<TileSelector>(22, 22);
-    tempgui->GetComponent<TileSelector>().SetTile(0, 14);
+    tempgui->AddComponent<GUI_Button>("ExitButton");
+    tempgui->GetComponent<GUI_Button>().SelectedOffset(1, 19);
 
     gui_arr.PushGUI(tempgui);
 
 #pragma endregion
+
+ 
 }
 
 void MainMenu::Clean()
