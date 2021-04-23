@@ -6,6 +6,7 @@
 #include "Source/WindowsInput.h"
 #include "Source/SceneManager.h"
 
+#include "Game/Scenes/MainMenu.h"
 #include "Game/Scenes/testing_scene.h"
 #include "Game/Scenes/Level2.h"
 #include "Game/Scenes/Level3.h"
@@ -136,7 +137,7 @@ namespace Srand
 #pragma endregion
 
 #pragma region SceneLoading
-
+        sceneManager.PushScene(new MainMenu());
         sceneManager.PushScene(new TestingScene());
         sceneManager.PushScene(new Level2());
         sceneManager.PushScene(new Level3());
@@ -254,7 +255,7 @@ namespace Srand
             Engine::get().NextScene();
         }
 
-        if (key == SR_KEY_1 && action == GLFW_PRESS) 
+        /*if (key == SR_KEY_1 && action == GLFW_PRESS) 
         {
             currentScene->Clean();
             currentScene = sceneManager[0];
@@ -271,6 +272,6 @@ namespace Srand
             currentScene->Clean();
             currentScene = sceneManager[2];
             currentScene->Init();
-        }
+        }*/
     }
 }
