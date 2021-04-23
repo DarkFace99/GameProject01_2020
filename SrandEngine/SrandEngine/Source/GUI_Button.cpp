@@ -14,11 +14,31 @@ Srand::GUI_Button::~GUI_Button()
 
 }
 
+bool Srand::GUI_Button::Init()
+{
+	Initialize();
+	return true;
+}
+
+void Srand::GUI_Button::Update()
+{
+	OnSelect();
+}
 void Srand::GUI_Button::OnSelect()
 {
 	SR_TRACE("Button {0}: Selected", name);
 }
 void Srand::GUI_Button::OnActivate()
 {
-	SR_TRACE("Button {0}: Activated", name);
+	//SR_TRACE("Button {0}: Activated", name);
+}
+
+void Srand::GUI_Button::SetIndex(int i)
+{
+	currentIndex = i;
+}
+
+int Srand::GUI_Button::GetIndex()
+{
+	return currentIndex;
 }

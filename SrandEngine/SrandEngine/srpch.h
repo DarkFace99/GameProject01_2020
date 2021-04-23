@@ -26,6 +26,6 @@ namespace Srand
 	template<typename T>
 	T Abs(T num) 
 	{
-		return (num > 0) ? num : -num;
+		return (num > 0) ? num : num * -1;
 	}
 }

@@ -18,7 +18,7 @@ namespace Srand
 		}
 		virtual ~GUI_Manager() {}
 
-		void AddGUI(GUI_Array* arr);
+		void AddGUI(GUI_Array arr);
 
 
 	private:

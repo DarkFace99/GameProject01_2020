@@ -5,6 +5,7 @@
 
 #include "Source/ObjectManager.h"
 #include "Source/LevelManager.h"
+#include "Source/GUI_Manager.h"
 
 #include "Source/Camera.h"
 
@@ -37,6 +38,7 @@ namespace Srand
 		ObjManager& objManager = ObjManager::get();
 		LevelManager& levelManager = LevelManager::get();
 		AudioController& audioController = AudioController::get();
+		//GUI_Manager& guiManager = GUI_Manager::get();
 
 		GameObject* gameObject = nullptr;
 		GameObject* button1 = nullptr;

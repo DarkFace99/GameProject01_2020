@@ -4,12 +4,12 @@ namespace Srand
 {
 	GUI::GUI()
 	{
-		Initialize();
+		//Initialize();
 	}
 	GUI::GUI(Vector2D_float center, Vector2D_float dimension)
 		:center(center), dimension(dimension)
 	{
-		Initialize();
+		//Initialize();
 	}
 
 	void GUI::Initialize() 
@@ -18,10 +18,10 @@ namespace Srand
 		renderer = &gameObject->GetComponent<SpriteRenderer>();
 	}
 
-	void GUI::Connect(_FUNC func)
+	/*void GUI::Connect(_FUNC func)
 	{
 		m_function = func;
-	}
+	}*/
 
 	void GUI::OnSelect()
 	{
@@ -30,5 +30,6 @@ namespace Srand
 	void GUI::OnActivate()
 	{
 		m_function();
+		SR_TRACE("Button {0}: Activated");
 	}
 }

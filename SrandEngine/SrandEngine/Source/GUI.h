@@ -34,21 +34,22 @@ namespace Srand
 
 		virtual void Initialize();
 
-		void Connect(_FUNC func);
+		//void Connect(_FUNC func);
 
 		virtual void OnSelect();
 		virtual void OnActivate();
+
+		_FUNC m_function = nullptr;
 
 	protected:
 		Vector2D_float center;
 		Vector2D_float dimension;
 
-		_FUNC m_function = nullptr;
+		Transform* transform = nullptr;
+		SpriteRenderer* renderer = nullptr;
+
 		Type m_type = Type::DEFAULT;
 
 		WindowsInput input;
-
-		Transform* transform = nullptr;
-		SpriteRenderer* renderer = nullptr;
 	};
 }
