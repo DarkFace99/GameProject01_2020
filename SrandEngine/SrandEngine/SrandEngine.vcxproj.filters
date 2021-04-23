@@ -218,6 +218,7 @@
     <ClInclude Include="Source\GUI_Manager.h">
       <Filter>SrandEngine\Manager</Filter>
     </ClInclude>
+    <ClInclude Include="Game\Scenes\MainMenu.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="imgui\imgui.cpp">
@@ -310,6 +311,7 @@
     <ClCompile Include="Source\GUI_Slider.cpp">
       <Filter>SrandEngine\Graphic User Interface</Filter>
     </ClCompile>
+    <ClCompile Include="Game\Scenes\MainMenu.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="SrandEngine.rc" />

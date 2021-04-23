@@ -186,6 +186,7 @@ namespace Srand
 		}
 
 		void NextScene();
+		void GoToScene(int);
 	
 	protected:
 		int nextScene_Num = 0; // Engine.cpp line.138

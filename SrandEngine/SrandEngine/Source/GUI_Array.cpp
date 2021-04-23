@@ -35,28 +35,28 @@ void Srand::GUI_Array::OnUpdate()
 	{
 		m_vector[m_index]->GetComponent<GUI_Button>().OnSelect();
 
-		if (input.IsKeyPressed(SR_KEY_UP) && !isPressed)
+		if (input.IsKeyPressed(SR_KEY_UP) && !isUpPressed)
 		{
 			m_index = Abs((m_index - 1) % VectorSize());
-			isPressed = true;
+			isUpPressed = true;
 			SR_TRACE("Index: {0}", m_index);
 		}
-		else if (input.IsKeyPressed(SR_KEY_DOWN) && !isPressed)
+		else if (input.IsKeyPressed(SR_KEY_DOWN) && !isDownPressed)
 		{
 			m_index = Abs((m_index + 1) % VectorSize());
-			isPressed = true;
+			isDownPressed = true;
 			SR_TRACE("Index: {0}", m_index);
 		}
-		else if (input.IsKeyReleased(SR_KEY_UP) && isPressed)
+		else if (input.IsKeyReleased(SR_KEY_UP) && isUpPressed)
 		{
 			//m_index = Abs((m_index - 1) % VectorSize());
-			isPressed = false;
+			isUpPressed = false;
 			//SR_TRACE("Index: {0}", m_index);
 		}
-		else if (input.IsKeyReleased(SR_KEY_DOWN) && isPressed)
+		else if (input.IsKeyReleased(SR_KEY_DOWN) && isDownPressed)
 		{
 			//m_index = Abs((m_index + 1) % VectorSize());
-			isPressed = false;
+			isDownPressed = false;
 			//SR_TRACE("Index: {0}", m_index);
 		}
 		/*else if (temp->GetComponent<GUI>().GetType() == GUI::Type::SLIDER && input.IsKeyReleased(SR_KEY_RIGHT))
