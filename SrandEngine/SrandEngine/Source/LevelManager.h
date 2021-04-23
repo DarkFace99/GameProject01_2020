@@ -147,7 +147,6 @@ namespace Srand
 
 			for (int i = 0; i < cc_List.size(); i++) {		// other CCs
 				if (cc_List[i]->HasComponent<Macho>()) {
-					SR_SYSTEM_TRACE("Level: Found Macho");
 					machoObj = cc_List[i];
 
 					machoTransform = &machoObj->GetComponent<Transform>();
@@ -155,9 +154,9 @@ namespace Srand
 					cc_Tag.push_back(macho->GetTag());
 					isMachoFound = true;
 					cc_Count++;
+					SR_SYSTEM_TRACE("Level: Found Macho");
 				}
 				else if (cc_List[i]->HasComponent<Cherry>()) {
-					SR_SYSTEM_TRACE("Level: Found Cherry");
 					cherryObj = cc_List[i];
 					cc_List[i]->GetComponent<Cherry>().SetCherry(bennyObj);
 
@@ -165,25 +164,26 @@ namespace Srand
 					cherry = &cherryObj->GetComponent<Cherry>();
 					cc_Tag.push_back(cherry->GetTag());
 					cc_Count++;
+					SR_SYSTEM_TRACE("Level: Found Cherry");
 				}
 				else if (cc_List[i]->HasComponent<Pear>()) {
 					pearObj = cc_List[i];
-					SR_SYSTEM_TRACE("Level: Found Pear");
 
 					pearTransform = &pearObj->GetComponent<Transform>();
 					pear = &pearObj->GetComponent<Pear>();
 					cc_Tag.push_back(pear->GetTag());
 					cc_Count++;
+					SR_SYSTEM_TRACE("Level: Found Pear");
 				}
 				else if (cc_List[i]->HasComponent<Barter>()) {
 					barterObj = cc_List[i];
 					cc_List[i]->GetComponent<Barter>().SetBarter(bennyObj);
-					SR_SYSTEM_TRACE("Level: Found Barter");
 
 					barterTransform = &barterObj->GetComponent<Transform>();
 					barter = &barterObj->GetComponent<Barter>();
 					cc_Tag.push_back(barter->GetTag());
 					cc_Count++;
+					SR_SYSTEM_TRACE("Level: Found Barter");
 				}
 			}
 			if (isMachoFound) { macho->CopyCC_List(cc_List); }

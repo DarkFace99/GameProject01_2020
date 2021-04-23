@@ -30,7 +30,8 @@ void Srand::GUI_Button::OnSelect()
 }
 void Srand::GUI_Button::OnActivate()
 {
-	//SR_TRACE("Button {0}: Activated", name);
+	SR_TRACE("Button {0}: Activated", name);
+	if(m_function != nullptr){ m_function(); }
 }
 
 void Srand::GUI_Button::SetIndex(int i)

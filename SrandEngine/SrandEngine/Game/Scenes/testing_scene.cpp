@@ -491,6 +491,7 @@ void TestingScene::Init()
     }
 
     levelManager.SetUpCC();
+    
 
 
 #pragma endregion

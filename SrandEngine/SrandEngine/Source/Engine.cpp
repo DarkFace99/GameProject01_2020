@@ -6,6 +6,7 @@
 #include "Source/WindowsInput.h"
 #include "Source/SceneManager.h"
 
+#include "Game/Scenes/MainMenu.h"
 #include "Game/Scenes/testing_scene.h"
 #include "Game/Scenes/Level2.h"
 #include "Game/Scenes/Level3.h"
@@ -136,7 +137,7 @@ namespace Srand
 #pragma endregion
 
 #pragma region SceneLoading
-
+        sceneManager.PushScene(new MainMenu());
         sceneManager.PushScene(new TestingScene());
         sceneManager.PushScene(new Level2());
         sceneManager.PushScene(new Level3());
@@ -145,26 +146,26 @@ namespace Srand
 
 #pragma region GUI_LOADING
 
-        tempgui = new GameObject();
-        //EntityManager::get().AddEntity(tempgui);
+        //tempgui = new GameObject();
+        ////EntityManager::get().AddEntity(tempgui);
 
-        tempgui->GetComponent<Transform>().scale = Vector2D_float(32.0f * RATIO, 16.0f * RATIO);
+        //tempgui->GetComponent<Transform>().scale = Vector2D_float(32.0f * RATIO, 16.0f * RATIO);
 
-        tempgui->AddComponent<SpriteRenderer>(SpriteRenderer::GUI_LAYER, "B_MESH", "B_TEX", 1.0f, &tempCam, false);
-        tempgui->AddComponent<GUI_Button>("TestButton1");
+        //tempgui->AddComponent<SpriteRenderer>(SpriteRenderer::GUI_LAYER, "B_MESH", "B_TEX", 1.0f, &tempCam, false);
+        //tempgui->AddComponent<GUI_Button>("TestButton1");
 
-        gui_arr.PushGUI(tempgui);
+        //gui_arr.PushGUI(tempgui);
 
-        tempgui = new GameObject();
-        //EntityManager::get().AddEntity(tempgui);
+        //tempgui = new GameObject();
+        ////EntityManager::get().AddEntity(tempgui);
 
-        tempgui->AddComponent<Transform>(0, 100);
-        tempgui->GetComponent<Transform>().scale = Vector2D_float(32.0f * RATIO, 16.0f * RATIO);
+        //tempgui->AddComponent<Transform>(0, 100);
+        //tempgui->GetComponent<Transform>().scale = Vector2D_float(32.0f * RATIO, 16.0f * RATIO);
 
-        tempgui->AddComponent<SpriteRenderer>(SpriteRenderer::GUI_LAYER, "B_MESH", "B_TEX", 1.0f, &tempCam, false);
-        tempgui->AddComponent<GUI_Button>("TestButton2");
+        //tempgui->AddComponent<SpriteRenderer>(SpriteRenderer::GUI_LAYER, "B_MESH", "B_TEX", 1.0f, &tempCam, false);
+        //tempgui->AddComponent<GUI_Button>("TestButton2");
 
-        gui_arr.PushGUI(tempgui);
+        //gui_arr.PushGUI(tempgui);
 
 #pragma endregion
 
@@ -184,10 +185,18 @@ namespace Srand
         currentScene->Init();
     }
 
+    void Engine::GoToScene(int num) {
+        currentScene->Clean();
+        nextScene_Num = num;
+        nextScene_Num %= sceneManager.VectorSize();
+        currentScene = sceneManager[nextScene_Num];
+        currentScene->Init();
+    }
+
     void Engine::Draw() {   
         //For Testing SceneManager Only
         currentScene->Draw();
-        gui_arr.OnDraw();
+        /*gui_arr.OnDraw();*/
 
         //user_interface.UpdateUserInterface();
 
@@ -201,7 +210,7 @@ namespace Srand
         //For Testing SceneManager Only
         currentScene->Update();
 
-        gui_arr.OnUpdate();
+        /*gui_arr.OnUpdate();*/
 
         glfwSetKeyCallback(WindowProperties::get(), window_key_callback);
         glfwSetWindowSizeCallback(WindowProperties::get(), window_size_callback);
@@ -254,7 +263,7 @@ namespace Srand
             Engine::get().NextScene();
         }
 
-        if (key == SR_KEY_1 && action == GLFW_PRESS) 
+        /*if (key == SR_KEY_1 && action == GLFW_PRESS) 
         {
             currentScene->Clean();
             currentScene = sceneManager[0];
@@ -271,6 +280,6 @@ namespace Srand
             currentScene->Clean();
             currentScene = sceneManager[2];
             currentScene->Init();
-        }
+        }*/
     }
 }
