@@ -11,7 +11,7 @@
 #include "Source/AssetManager.h"
 
 using namespace Srand;
-
+//What?
 class Animator : public Component 
 {
 private:
