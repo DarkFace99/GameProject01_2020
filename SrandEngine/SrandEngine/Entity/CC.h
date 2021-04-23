@@ -84,7 +84,8 @@ public:						// Not sure if this the best way to implement it.
 		isOut = true;
 		renderer->SetAlpha(0.0f);
 	}
-
+	
+	void SetIsOut(bool state) { isOut = state; }
 	bool GetIsOut() { return isOut; }
 	bool GetIsActive() { return isActive; }
 
