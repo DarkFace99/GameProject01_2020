@@ -46,6 +46,9 @@
     <Filter Include="Game\GameScene\Level3">
       <UniqueIdentifier>{7e2ecfd8-394f-4f56-a2f4-bcd8a9b94ae7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="SrandEngine\Graphic User Interface">
+      <UniqueIdentifier>{7fcfb8a4-1c30-4cd0-a8ba-c771485161c2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="imgui\imconfig.h">
@@ -200,6 +203,21 @@
       <Filter>Game\GameScene\Level3</Filter>
     </ClInclude>
     <ClInclude Include="resource.h" />
+    <ClInclude Include="Source\GUI_Button.h">
+      <Filter>SrandEngine\Graphic User Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GUI_Array.h">
+      <Filter>SrandEngine\Graphic User Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GUI.h">
+      <Filter>SrandEngine\Graphic User Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GUI_Slider.h">
+      <Filter>SrandEngine\Graphic User Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GUI_Manager.h">
+      <Filter>SrandEngine\Manager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="imgui\imgui.cpp">
@@ -279,6 +297,18 @@
     </ClCompile>
     <ClCompile Include="Game\Scenes\Level3.cpp">
       <Filter>Game\GameScene\Level3</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GUI_Array.cpp">
+      <Filter>SrandEngine\Graphic User Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GUI.cpp">
+      <Filter>SrandEngine\Graphic User Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GUI_Button.cpp">
+      <Filter>SrandEngine\Graphic User Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GUI_Slider.cpp">
+      <Filter>SrandEngine\Graphic User Interface</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -19,6 +19,7 @@ public:
 		TILE_LAYER,
 		CHARACTER_LAYER,
 		ASSET_LAYER,
+		GUI_LAYER,
 		LAYER_END
 	};
 

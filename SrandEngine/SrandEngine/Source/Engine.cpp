@@ -27,6 +27,13 @@ namespace Srand
     SceneManager& sceneManager = SceneManager::get();
     Scene* currentScene = nullptr;
 
+    //GUI_Manager& guiManager = GUI_Manager::get();
+    GUI_Array gui_arr;
+
+    GameObject* tempgui = nullptr;
+
+    Camera tempCam;
+
     AudioController& audioController = AudioController::get();
 
     GLFWimage icons[1];
@@ -85,6 +92,7 @@ namespace Srand
 
         /* Mesh */
         AssetManager::get().LoadMesh("BG_MESH");
+        AssetManager::get().LoadMesh("B_MESH");
         AssetManager::get().LoadMesh("TILESET_MESH", 8, 8);
         AssetManager::get().LoadMesh("BENNY_ANIM_MESH", 21);
         AssetManager::get().LoadMesh("MACHO_ANIM_MESH", 20);
@@ -100,6 +108,7 @@ namespace Srand
 
         /* Texture */
         AssetManager::get().LoadTexture("BG_TEX", "Background.png");
+        AssetManager::get().LoadTexture("B_TEX", "b.png");
         AssetManager::get().LoadTexture("TILESET_TEX", "TILESET.png");
         AssetManager::get().LoadTexture("BENNY_ANIM_TEX", "Benny_Animations-Sheet.png");
         AssetManager::get().LoadTexture("MACHO_ANIM_TEX", "Macho_Animation-Sheet.png");
@@ -134,6 +143,31 @@ namespace Srand
 
 #pragma endregion
 
+#pragma region GUI_LOADING
+
+        tempgui = new GameObject();
+        //EntityManager::get().AddEntity(tempgui);
+
+        tempgui->GetComponent<Transform>().scale = Vector2D_float(32.0f * RATIO, 16.0f * RATIO);
+
+        tempgui->AddComponent<SpriteRenderer>(SpriteRenderer::GUI_LAYER, "B_MESH", "B_TEX", 1.0f, &tempCam, false);
+        tempgui->AddComponent<GUI_Button>("TestButton1");
+
+        gui_arr.PushGUI(tempgui);
+
+        tempgui = new GameObject();
+        //EntityManager::get().AddEntity(tempgui);
+
+        tempgui->AddComponent<Transform>(0, 100);
+        tempgui->GetComponent<Transform>().scale = Vector2D_float(32.0f * RATIO, 16.0f * RATIO);
+
+        tempgui->AddComponent<SpriteRenderer>(SpriteRenderer::GUI_LAYER, "B_MESH", "B_TEX", 1.0f, &tempCam, false);
+        tempgui->AddComponent<GUI_Button>("TestButton2");
+
+        gui_arr.PushGUI(tempgui);
+
+#pragma endregion
+
         //For Testing SceneManager Only
         currentScene = sceneManager[0];
 
@@ -145,6 +179,7 @@ namespace Srand
     void Engine::Draw() {   
         //For Testing SceneManager Only
         currentScene->Draw();
+        gui_arr.OnDraw();
 
         //user_interface.UpdateUserInterface();
 
@@ -157,6 +192,8 @@ namespace Srand
 
         //For Testing SceneManager Only
         currentScene->Update();
+
+        gui_arr.OnUpdate();
 
         glfwSetKeyCallback(WindowProperties::get(), window_key_callback);
         glfwSetWindowSizeCallback(WindowProperties::get(), window_size_callback);
