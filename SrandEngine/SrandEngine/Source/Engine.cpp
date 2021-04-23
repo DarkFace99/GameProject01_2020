@@ -185,6 +185,14 @@ namespace Srand
         currentScene->Init();
     }
 
+    void Engine::GoToScene(int num) {
+        currentScene->Clean();
+        nextScene_Num = num;
+        nextScene_Num %= sceneManager.VectorSize();
+        currentScene = sceneManager[nextScene_Num];
+        currentScene->Init();
+    }
+
     void Engine::Draw() {   
         //For Testing SceneManager Only
         currentScene->Draw();

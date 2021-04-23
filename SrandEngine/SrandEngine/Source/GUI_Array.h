@@ -41,7 +41,8 @@ namespace Srand
 		int m_vectorIndex;
 
 		bool m_activate;
-		bool isPressed = false;
+		bool isUpPressed = false;
+		bool isDownPressed = false;
 
 		WindowsInput input;
 	};

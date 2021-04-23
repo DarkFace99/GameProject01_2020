@@ -21,4 +21,5 @@ void Srand::GUI_Slider::OnSelect()
 void Srand::GUI_Slider::OnActivate()
 {
 	SR_TRACE("Slider {0}: Activated", name);
+
 }

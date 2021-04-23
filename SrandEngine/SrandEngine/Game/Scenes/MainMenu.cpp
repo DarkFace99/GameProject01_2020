@@ -8,6 +8,9 @@ MainMenu::~MainMenu()
 	Clean();
 }
 
+void StartGame() { Engine::get().GoToScene(1); }
+
+
 void MainMenu::Init()
 {
 	manager = &EntityManager::get();
@@ -20,7 +23,7 @@ void MainMenu::Init()
 
     tempgui->AddComponent<SpriteRenderer>(SpriteRenderer::GUI_LAYER, "B_MESH", "B_TEX", 1.0f, &camera, false);
     tempgui->AddComponent<GUI_Button>("TestButton1");
-
+    tempgui->GetComponent<GUI_Button>().m_function = StartGame;
     gui_arr.PushGUI(tempgui);
 
     tempgui = new GameObject();
