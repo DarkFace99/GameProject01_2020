@@ -176,6 +176,14 @@ namespace Srand
         running = true;
     }
 
+    void Engine::NextScene() {      
+        currentScene->Clean();
+        nextScene_Num++;
+        nextScene_Num %= sceneManager.VectorSize();
+        currentScene = sceneManager[nextScene_Num];
+        currentScene->Init();
+    }
+
     void Engine::Draw() {   
         //For Testing SceneManager Only
         currentScene->Draw();
@@ -242,6 +250,10 @@ namespace Srand
     }
     void window_key_callback(GLFWwindow* window, int key, int scancode, int action, int mods) 
     {
+        if (key == SR_KEY_0 && action == GLFW_PRESS) {
+            Engine::get().NextScene();
+        }
+
         if (key == SR_KEY_1 && action == GLFW_PRESS) 
         {
             currentScene->Clean();

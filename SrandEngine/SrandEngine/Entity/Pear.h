@@ -17,12 +17,14 @@ public:
 	}
 
 	void Update() override final {
-		rigidBody->Update_Gravity();
-		if (isActive) { Input_Movement(true); }
-		AnimationController();
-		Collision_Check();
-		Execute();
-		Boundary();
+		if (!isOut) {
+			rigidBody->Update_Gravity();
+			if (isActive) { Input_Movement(true); }
+			AnimationController();
+			Collision_Check();
+			Execute();
+			Boundary();
+		}
 	}
 
 	void CC::AnimationController() override {

@@ -67,7 +67,7 @@ public:
 	void Update_Gravity() {
 		//velocity.x += (force.x - drag.x) * Srand::TimeStep::get();
 		velocity.x *= dragX_Value;
-		velocity.y += (force.x + drag.y + -(gravityScale * GRAVITY)) * Srand::TimeStep::get();
+		velocity.y += (force.x + drag.y + -(gravityScale * GRAVITY)) * 1.0f/60.0f /*Srand::TimeStep::get()*/;
 		if (velocity.y < -20) { velocity.y = -20; } // hard code
 		if (abs(velocity.x) < 0.01f) { velocity.x = 0; }
 	}

@@ -10,8 +10,10 @@ namespace Srand
 		for (int i = SpriteRenderer::LAYER_START; i < SpriteRenderer::LAYER_END; i++) { // loop through each layer
 			for (auto& gameObject : gameObjects)
 			{
-				if (gameObject->GetComponent<SpriteRenderer>().GetTag() == i) {
-					gameObject->Draw();
+				if (gameObject->HasComponent<SpriteRenderer>()) {
+					if (gameObject->GetComponent<SpriteRenderer>().GetTag() == i) {
+						gameObject->Draw();
+					}
 				}
 			}
 		}

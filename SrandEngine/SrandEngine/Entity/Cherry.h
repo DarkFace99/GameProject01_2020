@@ -18,13 +18,15 @@ public:
 	}
 
 	void Update() override final {
-		rigidBody->Update_Gravity();
-		if (isActive) { Input_Movement(true); }
-		AnimationController(); 
-		Collision_Check();
-		Execute();
-		AmplifyAbility();
-		Boundary();
+		if (!isOut) {
+			rigidBody->Update_Gravity();
+			if (isActive) { Input_Movement(true); }
+			AnimationController();
+			Collision_Check();
+			Execute();
+			AmplifyAbility();
+			Boundary();
+		}
 	}
 
 	void AmplifyAbility() {
