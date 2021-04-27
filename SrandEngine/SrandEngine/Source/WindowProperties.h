@@ -27,14 +27,16 @@ namespace Srand
 		WindowProperties()
 		{
 			/* Create a windowed mode window and its OpenGL context */
-			//SR_SYSTEM_INFO("Initializing Window...");
-			//monitor = glfwGetPrimaryMonitor();
-			window = glfwCreateWindow(GetWidth(), GetHeight(), window_name, (GetFullScreenStatus()) ? glfwGetPrimaryMonitor() : NULL, NULL);
+			SR_SYSTEM_INFO("Initializing Window...");
+			monitor = glfwGetPrimaryMonitor();
+			window = glfwCreateWindow(GetWidth(), GetHeight(), window_name, (GetFullScreenStatus()) ? monitor : NULL, NULL);
 			if (!window)
 			{
 				glfwTerminate();
-				//SR_SYSTEM_ERROR("Error! Cannot create window");
+				SR_SYSTEM_ERROR("Error! Cannot create window");
 			}
+
+			glfwSetWindowPos(window, 400, 540);
 
 			/* Make the window's context current */
 			glfwMakeContextCurrent(window);

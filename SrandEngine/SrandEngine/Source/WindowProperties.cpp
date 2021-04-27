@@ -6,9 +6,6 @@ namespace Srand
 
 	void WindowProperties::Update()
 	{
-		glfwGetWindowPos(window, &wndPos[0], &wndPos[1]);
-		glfwGetWindowSize(window, &wndSize[0], &wndSize[1]);
-
 		const GLFWvidmode* mode = glfwGetVideoMode(monitor);
 		if (enableFullScreen) 
 		{
@@ -16,7 +13,7 @@ namespace Srand
 		}
 		else 
 		{
-			glfwSetWindowMonitor(window, nullptr, wndPos[0], wndPos[1], wndSize[0], wndSize[1], GLFW_DONT_CARE);
+			glfwSetWindowMonitor(window, nullptr, 0, 0, screen_width, screen_height, GLFW_DONT_CARE);
 		}
 	}
 }
