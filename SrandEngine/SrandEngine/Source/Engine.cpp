@@ -23,17 +23,11 @@ namespace Srand
     WindowsInput windowsInput;
 
     Engine* Engine::s_instance = nullptr;
-    WindowProperties* WindowProperties::s_instance = nullptr;
 
     SceneManager& sceneManager = SceneManager::get();
     Scene* currentScene = nullptr;
 
-    //GUI_Manager& guiManager = GUI_Manager::get();
-    GUI_Array gui_arr;
-
-    GameObject* tempgui = nullptr;
-
-    Camera tempCam;
+    WindowProperties& wndProp = WindowProperties::get();
 
     AudioController& audioController = AudioController::get();
 
@@ -54,7 +48,7 @@ namespace Srand
             SR_SYSTEM_ERROR("Error! Cannot initializing GLFW");
         }
 
-        WindowProperties::get();
+        //wndProp = WindowProperties::get();
 
         /*Initializing GLEW*/
         SR_SYSTEM_INFO("Initializing GLEW...");
@@ -63,10 +57,10 @@ namespace Srand
             SR_SYSTEM_ERROR("Error! Cannot initializing GLEW");
         }
 
-        SR_SYSTEM_INFO("Initializing UserInterface...");
+        //SR_SYSTEM_INFO("Initializing UserInterface...");
         //user_interface.InitUserInterface();
 
-        glfwSetInputMode(WindowProperties::get(), GLFW_STICKY_KEYS, GL_TRUE);
+        glfwSetInputMode((GLFWwindow*)wndProp, GLFW_STICKY_KEYS, GL_TRUE);
         std::cout << "--------------------------------------------------------------------------------" << std::endl;
         std::cout << "                            |--System Initialized--|                            " << std::endl;
         std::cout << "--------------------------------------------------------------------------------" << std::endl;
@@ -74,10 +68,10 @@ namespace Srand
         std::cout << "--------------------------------------------------------------------------------" << std::endl;
 
         icons[0].pixels = SOIL_load_image("Assets/icon.png", &icons[0].width, &icons[0].height, 0, SOIL_LOAD_RGBA);
-        glfwSetWindowIcon(WindowProperties::get(), 1, icons);
+        glfwSetWindowIcon((GLFWwindow*)wndProp, 1, icons);
         SOIL_free_image_data(icons[0].pixels);
 
-        glfwSetWindowPos(WindowProperties::get(), 100, 100);
+        glfwSetWindowPos((GLFWwindow*)wndProp, 100, 100);
 
 #pragma endregion
 
@@ -217,7 +211,7 @@ namespace Srand
 
         //user_interface.UpdateUserInterface();
 
-        glfwSwapBuffers(WindowProperties::get());
+        glfwSwapBuffers((GLFWwindow*)wndProp);
     }
 
     void Engine::Update() {
@@ -229,14 +223,15 @@ namespace Srand
 
         /*gui_arr.OnUpdate();*/
 
-        glfwSetKeyCallback(WindowProperties::get(), window_key_callback);
-        glfwSetWindowSizeCallback(WindowProperties::get(), window_size_callback);
-        glfwSetWindowCloseCallback(WindowProperties::get(), window_close_callback);
+        WindowProperties::get().Update();
+        glfwSetKeyCallback((GLFWwindow*)wndProp, window_key_callback);
+        glfwSetWindowSizeCallback((GLFWwindow*)wndProp, window_size_callback);
+        glfwSetWindowCloseCallback((GLFWwindow*)wndProp, window_close_callback);
     }
 
     void Engine::FixedUpdate(TimeStep ts) 
     {
- 
+    
     }
 
     void Engine::Event() {
@@ -268,7 +263,7 @@ namespace Srand
     void window_size_callback(GLFWwindow* window, int width, int height)
     {
         glfwGetWindowSize(window, &width, &height);
-        WindowProperties::get().SetScreenSize(width, height);
+        wndProp.SetScreenSize(width, height);
     }
     void window_close_callback(GLFWwindow* window)
     {
@@ -279,7 +274,10 @@ namespace Srand
         if (key == SR_KEY_0 && action == GLFW_PRESS) {
             Engine::get().NextScene();
         }
-
+        if (key == SR_KEY_I && action == GLFW_PRESS) {
+            bool isFull = wndProp.GetFullScreenStatus();
+            wndProp.SetFullScreen(!isFull);
+        }
         /*if (key == SR_KEY_1 && action == GLFW_PRESS) 
         {
             currentScene->Clean();
