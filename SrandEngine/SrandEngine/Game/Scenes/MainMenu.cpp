@@ -30,6 +30,89 @@ void MainMenu::Init()
         gameObject->AddComponent<SpriteRenderer>("BG_MESH", "BG_TEX", 1.0f, &camera, false);
     }
 
+    /* Decor */
+    {
+        // sign1
+        gameObject = new GameObject();
+        manager->AddEntity(gameObject);
+
+        gameObject->GetComponent<Transform>().position = Vector2D_float(((2 * _tileSize) + _midPointX) * RATIO, ((1.75 * _tileSize) + _midPointY) * RATIO);
+        gameObject->GetComponent<Transform>().scale = Vector2D_float(2 * 16 * RATIO, 2 * 16 * RATIO);
+
+        gameObject->AddComponent<SpriteRenderer>("2x2_MESH", "LEVEL_ASSET_TEX", 1.0f, &camera, false);
+        gameObject->AddComponent<TileSelector>(14, 14);
+        gameObject->GetComponent<TileSelector>().SetTile(7, 8);
+
+        // sign2
+        gameObject = new GameObject();
+        manager->AddEntity(gameObject);
+
+        gameObject->GetComponent<Transform>().position = Vector2D_float(((28 * _tileSize) + _midPointX) * RATIO, ((1.75 * _tileSize) + _midPointY) * RATIO);
+        gameObject->GetComponent<Transform>().scale = Vector2D_float(2 * 16 * RATIO, 2 * 16 * RATIO);
+
+        gameObject->AddComponent<SpriteRenderer>("2x2_MESH", "LEVEL_ASSET_TEX", 1.0f, &camera, false);
+        gameObject->AddComponent<TileSelector>(14, 14);
+        gameObject->GetComponent<TileSelector>().SetTile(7, 8);
+
+        // keys-left
+        gameObject = new GameObject();
+        manager->AddEntity(gameObject);
+        gameObject->GetComponent<Transform>().position = Vector2D_float(((5 * _tileSize) + _midPointX) * RATIO, ((2.75 * _tileSize) + _midPointY) * RATIO);
+        gameObject->GetComponent<Transform>().scale = Vector2D_float(1 * 16 * RATIO, 1 * 16 * RATIO);
+        gameObject->AddComponent<SpriteRenderer>("UI_KEY_MESH", "MENU_ASSET_TEX", 1.0f, &camera, false);
+        gameObject->AddComponent<TileSelector>(22, 22);
+        gameObject->GetComponent<TileSelector>().SetTile(9, 20);
+
+        gameObject = new GameObject();
+        manager->AddEntity(gameObject);
+        gameObject->GetComponent<Transform>().position = Vector2D_float(((5 * _tileSize) + _midPointX) * RATIO, ((1.75 * _tileSize) + _midPointY) * RATIO);
+        gameObject->GetComponent<Transform>().scale = Vector2D_float(1 * 16 * RATIO, 1 * 16 * RATIO);
+        gameObject->AddComponent<SpriteRenderer>("UI_KEY_MESH", "MENU_ASSET_TEX", 1.0f, &camera, false);
+        gameObject->AddComponent<TileSelector>(22, 22);
+        gameObject->GetComponent<TileSelector>().SetTile(11, 20);
+
+        gameObject = new GameObject();
+        manager->AddEntity(gameObject);
+        gameObject->GetComponent<Transform>().position = Vector2D_float(((4 * _tileSize) + _midPointX) * RATIO, ((1.75 * _tileSize) + _midPointY) * RATIO);
+        gameObject->GetComponent<Transform>().scale = Vector2D_float(1 * 16 * RATIO, 1 * 16 * RATIO);
+        gameObject->AddComponent<SpriteRenderer>("UI_KEY_MESH", "MENU_ASSET_TEX", 1.0f, &camera, false);
+        gameObject->AddComponent<TileSelector>(22, 22);
+        gameObject->GetComponent<TileSelector>().SetTile(13, 20);
+
+        gameObject = new GameObject();
+        manager->AddEntity(gameObject);
+        gameObject->GetComponent<Transform>().position = Vector2D_float(((6 * _tileSize) + _midPointX) * RATIO, ((1.75 * _tileSize) + _midPointY) * RATIO);
+        gameObject->GetComponent<Transform>().scale = Vector2D_float(1 * 16 * RATIO, 1 * 16 * RATIO);
+        gameObject->AddComponent<SpriteRenderer>("UI_KEY_MESH", "MENU_ASSET_TEX", 1.0f, &camera, false);
+        gameObject->AddComponent<TileSelector>(22, 22);
+        gameObject->GetComponent<TileSelector>().SetTile(15, 20);
+
+        // keys-right
+        gameObject = new GameObject();
+        manager->AddEntity(gameObject);
+        gameObject->GetComponent<Transform>().position = Vector2D_float(((24 * _tileSize) + _midPointX) * RATIO, ((2 * _tileSize) + _midPointY) * RATIO);
+        gameObject->GetComponent<Transform>().scale = Vector2D_float(1 * 16 * RATIO, 1 * 16 * RATIO);
+        gameObject->AddComponent<SpriteRenderer>("UI_KEY_MESH", "MENU_ASSET_TEX", 1.0f, &camera, false);
+        gameObject->AddComponent<TileSelector>(22, 22);
+        gameObject->GetComponent<TileSelector>().SetTile(11, 18);
+
+        gameObject = new GameObject();
+        manager->AddEntity(gameObject);
+        gameObject->GetComponent<Transform>().position = Vector2D_float(((25 * _tileSize) + _midPointX) * RATIO, ((2 * _tileSize) + _midPointY) * RATIO);
+        gameObject->GetComponent<Transform>().scale = Vector2D_float(1 * 16 * RATIO, 1 * 16 * RATIO);
+        gameObject->AddComponent<SpriteRenderer>("UI_KEY_MESH", "MENU_ASSET_TEX", 1.0f, &camera, false);
+        gameObject->AddComponent<TileSelector>(22, 22);
+        gameObject->GetComponent<TileSelector>().SetTile(13, 18);
+
+        gameObject = new GameObject();
+        manager->AddEntity(gameObject);
+        gameObject->GetComponent<Transform>().position = Vector2D_float(((26 * _tileSize) + _midPointX) * RATIO, ((2 * _tileSize) + _midPointY) * RATIO);
+        gameObject->GetComponent<Transform>().scale = Vector2D_float(1 * 16 * RATIO, 1 * 16 * RATIO);
+        gameObject->AddComponent<SpriteRenderer>("UI_KEY_MESH", "MENU_ASSET_TEX", 1.0f, &camera, false);
+        gameObject->AddComponent<TileSelector>(22, 22);
+        gameObject->GetComponent<TileSelector>().SetTile(9, 18);
+    }
+
 #pragma region TileSet
 
     for (int i = 0; i < 30; i++) {
@@ -230,6 +313,17 @@ void MainMenu::Init()
 
 #pragma endregion
 
+    tempgui = new GameObject();
+    tempgui->GetComponent<Transform>().position = Vector2D_float(((20 * _tileSize) + _midPointX) * RATIO, ((11 * _tileSize) + _midPointY) * RATIO);
+    tempgui->GetComponent<Transform>().scale = Vector2D_float(20/1.2f * 16 * RATIO, 7/1.2f * 16 * RATIO);
+
+    tempgui->AddComponent<SpriteRenderer>(SpriteRenderer::GUI_LAYER, "TITLE_MESH", "TITLE_TEX", 1.0f, &camera, false);
+    tempgui->AddComponent<TileSelector>(22, 22);
+    tempgui->GetComponent<TileSelector>().SetTile(0, 9);
+
+    tempgui->AddComponent<GUI_Text>("Levels");
+
+    gui_arr.PushGUI(tempgui);
  
 }
 

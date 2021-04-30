@@ -8,6 +8,7 @@ LevelSelect::~LevelSelect()
     Clean();
 }
 
+
 void LevelSelect::Init()
 {
     manager = &EntityManager::get();
@@ -24,6 +25,51 @@ void LevelSelect::Init()
 
         gameObject->AddComponent<SpriteRenderer>("BG_MESH", "BG_TEX", 1.0f, &camera, false);
     }
+
+    //sign
+    gameObject = new GameObject();
+    manager->AddEntity(gameObject);
+
+    gameObject->GetComponent<Transform>().position = Vector2D_float(((2 * _tileSize) + _midPointX) * RATIO, ((2.75 * _tileSize) + _midPointY) * RATIO);
+    gameObject->GetComponent<Transform>().scale = Vector2D_float(2 * 16 * RATIO, 2 * 16 * RATIO);
+
+    gameObject->AddComponent<SpriteRenderer>("2x2_MESH", "LEVEL_ASSET_TEX", 1.0f, &camera, false);
+    gameObject->AddComponent<TileSelector>(14, 14);
+    gameObject->GetComponent<TileSelector>().SetTile(7, 11);
+
+    // button
+    gameObject = new GameObject();
+    manager->AddEntity(gameObject);
+
+    gameObject->GetComponent<Transform>().position = Vector2D_float(((5 * _tileSize) + _midPointX) * RATIO, ((2.5 * _tileSize) + _midPointY) * RATIO);
+    gameObject->GetComponent<Transform>().scale = Vector2D_float(2 * 16 * RATIO, 1 * 16 * RATIO);
+
+    gameObject->AddComponent<SpriteRenderer>(SpriteRenderer::ASSET_LAYER, "BUTTON_MESH", "LEVEL_ASSET_TEX", 1.0f, &camera, false);
+    gameObject->AddComponent<TileSelector>(14, 14);
+    gameObject->GetComponent<TileSelector>().SetTile(7, 3);
+
+    // elevator
+    gameObject = new GameObject();
+    manager->AddEntity(gameObject);
+
+    gameObject->GetComponent<Transform>().position = Vector2D_float(((26 * _tileSize) + _midPointX) * RATIO, ((2 * _tileSize) + _midPointY) * RATIO);
+    gameObject->GetComponent<Transform>().scale = Vector2D_float(2 * 16 * RATIO, 2 * 16 * RATIO);
+
+    gameObject->AddComponent<SpriteRenderer>(SpriteRenderer::ASSET_LAYER, "2x2_MESH", "LEVEL_ASSET_TEX", 1.0f, &camera, false);
+    gameObject->AddComponent<TileSelector>(14, 14);
+    gameObject->GetComponent<TileSelector>().SetTile(7, 5);
+
+    //stand 
+    // elevator
+    gameObject = new GameObject();
+    manager->AddEntity(gameObject);
+
+    gameObject->GetComponent<Transform>().position = Vector2D_float(((26 * _tileSize) + _midPointX) * RATIO, ((1.5 * _tileSize) + _midPointY) * RATIO);
+    gameObject->GetComponent<Transform>().scale = Vector2D_float(2 * 16 * RATIO, 1 * 16 * RATIO);
+
+    gameObject->AddComponent<SpriteRenderer>(SpriteRenderer::ASSET_LAYER, "ELEVATOR_STAND_MESH", "LEVEL_ASSET_TEX", 1.0f, &camera, false);
+    gameObject->AddComponent<TileSelector>(14, 14);
+    gameObject->GetComponent<TileSelector>().SetTile(7, 4);
 
 #pragma region TileSet
 
@@ -109,7 +155,6 @@ void LevelSelect::Init()
 
         gui_arr.PushGUI(tempgui);
     }
-
 
 
     {
@@ -269,6 +314,8 @@ void LevelSelect::Init()
     }
 
 #pragma endregion
+
+    
 }
 
 void LevelSelect::Clean()

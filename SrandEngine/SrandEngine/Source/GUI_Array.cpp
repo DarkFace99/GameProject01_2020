@@ -109,3 +109,4 @@ void Srand::GUI_Array::PushGUI(GameObject* gui)
 		m_interactable.push_back(gui);
 	}
 }
+

@@ -11,6 +11,7 @@ private:
 
 	// for testing
 	int progress = 3;
+	WindowsInput input;
 
 public:
 	LevelSelect();

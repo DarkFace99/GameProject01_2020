@@ -95,11 +95,11 @@ namespace Srand
         AssetManager::get().LoadMesh("PEAR_ANIM_MESH", 19);
         AssetManager::get().LoadMesh("BARTER_ANIM_MESH");
         AssetManager::get().LoadMesh("NPC_ANIM_MESH", 2);
-        AssetManager::get().LoadMesh("DOOR_STAND_MESH", 10, 13);
-        AssetManager::get().LoadMesh("DOOR_MESH", 10, 13, 1, 4);
-        AssetManager::get().LoadMesh("ELEVATOR_MESH", 10, 13, 2, 2);
-        AssetManager::get().LoadMesh("ELEVATOR_STAND_MESH", 10, 13, 2, 1);
-        AssetManager::get().LoadMesh("BUTTON_MESH", 10, 13, 2, 1);
+        AssetManager::get().LoadMesh("1x1_MESH", 14, 14);
+        AssetManager::get().LoadMesh("DOOR_MESH", 14, 14, 1, 4);
+        AssetManager::get().LoadMesh("2x2_MESH", 14, 14, 2, 2);
+        AssetManager::get().LoadMesh("ELEVATOR_STAND_MESH", 14, 14, 2, 1);
+        AssetManager::get().LoadMesh("BUTTON_MESH", 14, 14, 2, 1);
 
         AssetManager::get().LoadMesh("UI_BUTTON_MESH", 22, 22, 7, 2);
         AssetManager::get().LoadMesh("UI_WORD6_MESH", 22, 22, 6, 1);
@@ -114,6 +114,8 @@ namespace Srand
 
         AssetManager::get().LoadMesh("UI_SELECT_MESH", 22, 22, 14, 3);
         AssetManager::get().LoadMesh("UI_SLOT_LEVEL_MESH", 22, 22, 2, 2);
+        AssetManager::get().LoadMesh("UI_SLOT_SELECT_MESH", 22, 22, 19, 3);
+        AssetManager::get().LoadMesh("TITLE_MESH", 20, 16, 20, 7);
 
         /* Texture */
         AssetManager::get().LoadTexture("BG_TEX", "Background.png");
@@ -125,10 +127,11 @@ namespace Srand
         AssetManager::get().LoadTexture("PEAR_ANIM_TEX", "Pear_SpriteShee.png");
         AssetManager::get().LoadTexture("BARTER_ANIM_TEX", "Barther.png");
         AssetManager::get().LoadTexture("NPC_ANIM_TEX", "NPC_Animation_Sheet.png");
-        AssetManager::get().LoadTexture("LEVEL_ASSET_TEX", "Level_Assets_00.png");
+        AssetManager::get().LoadTexture("LEVEL_ASSET_TEX", "NEW_ASSETS/ART_BENNY/LEVEL_COMPONENT/ASSETS/ingame_assets.png");
         AssetManager::get().LoadTexture("LEVEL_SELECT_ASSET_TEX", "NEW_ASSETS/ART_BENNY/UI/ASSETS/level_select_ui.png");
         AssetManager::get().LoadTexture("MENU_ASSET_TEX", "NEW_ASSETS/ART_BENNY/UI/ASSETS/menu_ui.png");
         AssetManager::get().LoadTexture("SETTING_ASSET_TEX", "NEW_ASSETS/ART_BENNY/UI/ASSETS/setting_ui.png");
+        AssetManager::get().LoadTexture("TITLE_TEX", "NEW_ASSETS/ART_BENNY/TITLE/TITLE.png");
 
         /* Audio */
         audioController.AddAudioSource(new AudioSource("BGM", BGM_VOLUME, true, "The Happy Man.mp3"));
