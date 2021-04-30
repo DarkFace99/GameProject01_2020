@@ -133,6 +133,9 @@ namespace Srand
 	
 	protected:
 		int nextScene_Num = 0; // Engine.cpp line.138
+
+		void LoadSave();
+		void WriteSave();
 	};
 
 

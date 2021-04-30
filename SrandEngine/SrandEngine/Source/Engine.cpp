@@ -199,6 +199,34 @@ namespace Srand
         currentScene->Init();
     }
 
+    void Engine::LoadSave()
+    {
+        std::ifstream inStream("saveFile.dat");
+        if (!inStream.is_open()) 
+        {
+            SR_SYSTEM_ERROR("ERROR: Cannot Load Save File");
+            SR_SYSTEM_WARN("Reset Progress to default");
+            return;
+        }
+        else 
+        {
+            
+        }
+    }
+    void Engine::WriteSave()
+    {
+        std::ofstream outStream("saveFile.dat");
+        if (!outStream.is_open()) 
+        {
+            SR_SYSTEM_ERROR("ERROR: Cannot Write Save File");
+            return;
+        }
+        else 
+        {
+            
+        }
+    }
+
     void Engine::Draw() {   
         //For Testing SceneManager Only
         currentScene->Draw();
