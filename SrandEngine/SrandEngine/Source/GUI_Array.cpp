@@ -35,40 +35,39 @@ void Srand::GUI_Array::OnUpdate()
 	{
 		m_vector[m_index]->GetComponent<GUI_Button>().OnSelect();
 
-		if (input.IsKeyPressed(SR_KEY_UP) && !isUpPressed)
+		if (m_overrideFunc == nullptr)
 		{
-			m_vector[m_index]->GetComponent<GUI_Button>().DeSelect();
-			m_index = Abs((m_index - 1) % VectorSize());
-			isUpPressed = true;
-			SR_TRACE("Index: {0}", m_index);
+			if (input.IsKeyPressed(SR_KEY_UP) && !isUpPressed)
+			{
+				m_vector[m_index]->GetComponent<GUI_Button>().DeSelect();
+				m_index = Abs((m_index - 1) % VectorSize());
+				isUpPressed = true;
+				SR_TRACE("Index: {0}", m_index);
+			}
+			else if (input.IsKeyPressed(SR_KEY_DOWN) && !isDownPressed)
+			{
+				m_vector[m_index]->GetComponent<GUI_Button>().DeSelect();
+				m_index = Abs((m_index + 1) % VectorSize());
+				isDownPressed = true;
+				SR_TRACE("Index: {0}", m_index);
+			}
+			else if (input.IsKeyReleased(SR_KEY_UP) && isUpPressed)
+			{
+				//m_index = Abs((m_index - 1) % VectorSize());
+				isUpPressed = false;
+				//SR_TRACE("Index: {0}", m_index);
+			}
+			else if (input.IsKeyReleased(SR_KEY_DOWN) && isDownPressed)
+			{
+				//m_index = Abs((m_index + 1) % VectorSize());
+				isDownPressed = false;
+				//SR_TRACE("Index: {0}", m_index);
+			}
 		}
-		else if (input.IsKeyPressed(SR_KEY_DOWN) && !isDownPressed)
+		else 
 		{
-			m_vector[m_index]->GetComponent<GUI_Button>().DeSelect();
-			m_index = Abs((m_index + 1) % VectorSize());
-			isDownPressed = true;
-			SR_TRACE("Index: {0}", m_index);
+			m_overrideFunc();
 		}
-		else if (input.IsKeyReleased(SR_KEY_UP) && isUpPressed)
-		{
-			//m_index = Abs((m_index - 1) % VectorSize());
-			isUpPressed = false;
-			//SR_TRACE("Index: {0}", m_index);
-		}
-		else if (input.IsKeyReleased(SR_KEY_DOWN) && isDownPressed)
-		{
-			//m_index = Abs((m_index + 1) % VectorSize());
-			isDownPressed = false;
-			//SR_TRACE("Index: {0}", m_index);
-		}
-		/*else if (temp->GetComponent<GUI>().GetType() == GUI::Type::SLIDER && input.IsKeyReleased(SR_KEY_RIGHT))
-		{
-
-		}
-		else if (temp->GetComponent<GUI>().GetType() == GUI::Type::SLIDER && input.IsKeyReleased(SR_KEY_LEFT))
-		{
-
-		}*/
 
 		/* Activate key */
 		if (input.IsKeyPressed(SR_KEY_SPACE))
@@ -84,6 +83,16 @@ void Srand::GUI_Array::Clear()
 	m_vectorIndex = 0;
 	name.clear();
 	m_activate = true;
+}
+
+void Srand::GUI_Array::Override(_FUNC func)
+{
+	m_overrideFunc = func;
+}
+
+void Srand::GUI_Array::ResetOverride()
+{
+	m_overrideFunc = nullptr;
 }
 
 void Srand::GUI_Array::PushGUI(GameObject* gui)
