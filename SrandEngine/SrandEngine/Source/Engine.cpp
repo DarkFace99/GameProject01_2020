@@ -221,7 +221,7 @@ namespace Srand
 
         /*gui_arr.OnUpdate();*/
 
-        WindowProperties::get().Update();
+        //WindowProperties::get().Update();
         glfwSetKeyCallback(WindowProperties::get(), window_key_callback);
         glfwSetWindowSizeCallback(WindowProperties::get(), window_size_callback);
         glfwSetWindowCloseCallback(WindowProperties::get(), window_close_callback);
@@ -273,8 +273,10 @@ namespace Srand
             Engine::get().NextScene();
         }
         if (key == SR_KEY_I && action == GLFW_PRESS) {
-            bool isFull = WindowProperties::get().GetFullScreenStatus();
-            WindowProperties::get().SetFullScreen(!isFull);
+            WindowProperties::get().SetFullScreen(true);
+        }
+        else if (key == SR_KEY_O && action == GLFW_PRESS) {
+            WindowProperties::get().SetFullScreen(false);
         }
         /*if (key == SR_KEY_1 && action == GLFW_PRESS) 
         {

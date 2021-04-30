@@ -60,10 +60,8 @@ namespace Srand
 			return window;
 		}
 
-		void Update();
-
 		inline void SetScreenSize(int width, int height) { screen_width = width; screen_height = height; }
-		inline void SetFullScreen(bool isFullScreen) { this->enableFullScreen = isFullScreen; }
+		void SetFullScreen(bool isFullScreen);
 		inline void SetVsync(bool enableVsync) { this->enableVsync = enableVsync; }
 
 		inline int GetWidth() const { return screen_width; }
