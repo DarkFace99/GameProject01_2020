@@ -8,7 +8,9 @@ MainMenu::~MainMenu()
 	Clean();
 }
 
-void StartGame() { Engine::get().GoToScene(1); }
+void StartGame() { Engine::get().GoToScene(3); }
+void GoTo_Setting() { /*Engine::get().GoToScene(2);*/ }
+void GoTo_LevelSelect() { Engine::get().GoToScene(2); }
 void QuitGame() { Engine::get().Quit(); }
 
 void MainMenu::Init()
@@ -137,6 +139,7 @@ void MainMenu::Init()
     tempgui->GetComponent<TileSelector>().SetTile(9, 3);
     
     tempgui->AddComponent<GUI_Button>("SettingButton");
+    tempgui->GetComponent<GUI_Button>().m_function = GoTo_Setting;
     tempgui->GetComponent<GUI_Button>().SelectedOffset(1, 7);
 
     gui_arr.PushGUI(tempgui);
@@ -151,6 +154,7 @@ void MainMenu::Init()
     tempgui->GetComponent<TileSelector>().SetTile(9, 12);
 
     tempgui->AddComponent<GUI_Button>("LevelButton");
+    tempgui->GetComponent<GUI_Button>().m_function = GoTo_LevelSelect;
     tempgui->GetComponent<GUI_Button>().SelectedOffset(1, 16);
 
     gui_arr.PushGUI(tempgui);

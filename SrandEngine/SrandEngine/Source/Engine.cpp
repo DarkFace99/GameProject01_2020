@@ -7,6 +7,8 @@
 #include "Source/SceneManager.h"
 
 #include "Game/Scenes/MainMenu.h"
+#include "Game/Scenes/Setting.h"
+#include "Game/Scenes/LevelSelect.h"
 #include "Game/Scenes/testing_scene.h"
 #include "Game/Scenes/Level2.h"
 #include "Game/Scenes/Level3.h"
@@ -147,6 +149,8 @@ namespace Srand
 
 #pragma region SceneLoading
         sceneManager.PushScene(new MainMenu());
+        sceneManager.PushScene(new Setting());
+        sceneManager.PushScene(new LevelSelect());
         sceneManager.PushScene(new TestingScene());
         sceneManager.PushScene(new Level2());
         sceneManager.PushScene(new Level3());
