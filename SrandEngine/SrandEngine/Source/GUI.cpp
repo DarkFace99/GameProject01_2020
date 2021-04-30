@@ -23,6 +23,11 @@ namespace Srand
 		m_function = func;
 	}*/
 
+	void GUI::DeSelect()
+	{
+
+	}
+
 	void GUI::OnSelect()
 	{
 

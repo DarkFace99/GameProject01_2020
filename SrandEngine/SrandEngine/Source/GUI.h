@@ -37,10 +37,11 @@ namespace Srand
 		//void Connect(_FUNC func);
 
 		virtual void OnSelect();
+		virtual void DeSelect();
 		virtual void OnActivate();
 
-		_FUNC m_function = nullptr;
-
+		_FUNC m_function = nullptr; // on activated
+		//_FUNC n_function = nullptr; // on selected
 	protected:
 		Vector2D_float center;
 		Vector2D_float dimension;

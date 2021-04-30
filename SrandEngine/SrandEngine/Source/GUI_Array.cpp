@@ -37,12 +37,14 @@ void Srand::GUI_Array::OnUpdate()
 
 		if (input.IsKeyPressed(SR_KEY_UP) && !isUpPressed)
 		{
+			m_vector[m_index]->GetComponent<GUI_Button>().DeSelect();
 			m_index = Abs((m_index - 1) % VectorSize());
 			isUpPressed = true;
 			SR_TRACE("Index: {0}", m_index);
 		}
 		else if (input.IsKeyPressed(SR_KEY_DOWN) && !isDownPressed)
 		{
+			m_vector[m_index]->GetComponent<GUI_Button>().DeSelect();
 			m_index = Abs((m_index + 1) % VectorSize());
 			isDownPressed = true;
 			SR_TRACE("Index: {0}", m_index);
