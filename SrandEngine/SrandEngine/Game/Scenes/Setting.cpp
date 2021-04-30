@@ -10,7 +10,8 @@ Setting::~Setting()
 
 void Setting::Init()
 {
-
+	manager = &EntityManager::get();
+	GameObject* tempgui = nullptr;
 }
 void Setting::Clean()
 {

@@ -9,7 +9,7 @@ MainMenu::~MainMenu()
 }
 
 void StartGame() { Engine::get().GoToScene(3); }
-void GoTo_Setting() { /*Engine::get().GoToScene(2);*/ }
+void GoTo_Setting() { Engine::get().GoToScene(1); }
 void GoTo_LevelSelect() { Engine::get().GoToScene(2); }
 void QuitGame() { Engine::get().Quit(); }
 
@@ -186,6 +186,45 @@ void MainMenu::Init()
     tempgui->GetComponent<TileSelector>().SetTile(0, 14);
 
     tempgui->AddComponent<GUI_Text>("Play");
+
+    gui_arr.PushGUI(tempgui);
+
+    // text2
+    tempgui = new GameObject();
+    tempgui->GetComponent<Transform>().position = Vector2D_float(((6.5 * _tileSize) + _midPointX) * RATIO, ((11 * _tileSize) + _midPointY) * RATIO);
+    tempgui->GetComponent<Transform>().scale = Vector2D_float(6 * 16 * RATIO, 1 * 16 * RATIO);
+
+    tempgui->AddComponent<SpriteRenderer>(SpriteRenderer::GUI_LAYER, "UI_WORD6_MESH", "MENU_ASSET_TEX", 1.0f, &camera, false);
+    tempgui->AddComponent<TileSelector>(22, 22);
+    tempgui->GetComponent<TileSelector>().SetTile(1, 12);
+
+    tempgui->AddComponent<GUI_Text>("Setting");
+
+    gui_arr.PushGUI(tempgui);
+
+    // text3
+    tempgui = new GameObject();
+    tempgui->GetComponent<Transform>().position = Vector2D_float(((6.5 * _tileSize) + _midPointX) * RATIO, ((8 * _tileSize) + _midPointY) * RATIO);
+    tempgui->GetComponent<Transform>().scale = Vector2D_float(5 * 16 * RATIO, 1 * 16 * RATIO);
+
+    tempgui->AddComponent<SpriteRenderer>(SpriteRenderer::GUI_LAYER, "UI_WORD5_MESH", "MENU_ASSET_TEX", 1.0f, &camera, false);
+    tempgui->AddComponent<TileSelector>(22, 22);
+    tempgui->GetComponent<TileSelector>().SetTile(1, 10);
+
+    tempgui->AddComponent<GUI_Text>("Levels");
+
+    gui_arr.PushGUI(tempgui);
+
+    // text3
+    tempgui = new GameObject();
+    tempgui->GetComponent<Transform>().position = Vector2D_float(((6.5 * _tileSize) + _midPointX) * RATIO, ((5 * _tileSize) + _midPointY) * RATIO);
+    tempgui->GetComponent<Transform>().scale = Vector2D_float(3 * 16 * RATIO, 1 * 16 * RATIO);
+
+    tempgui->AddComponent<SpriteRenderer>(SpriteRenderer::GUI_LAYER, "UI_WORD3_MESH", "MENU_ASSET_TEX", 1.0f, &camera, false);
+    tempgui->AddComponent<TileSelector>(22, 22);
+    tempgui->GetComponent<TileSelector>().SetTile(1, 8);
+
+    tempgui->AddComponent<GUI_Text>("Levels");
 
     gui_arr.PushGUI(tempgui);
 
