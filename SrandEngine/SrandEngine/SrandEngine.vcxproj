@@ -61,6 +61,7 @@
     <ClInclude Include="Source\GUI_Array.h" />
     <ClInclude Include="Source\GUI_Button.h" />
     <ClInclude Include="Source\GUI_Manager.h" />
+    <ClInclude Include="Source\GUI_Text.h" />
     <ClInclude Include="Source\GUI_Slider.h" />
     <ClInclude Include="Source\Input.h" />
     <ClInclude Include="Source\KeyCode.h" />
@@ -101,6 +102,7 @@
     <ClCompile Include="Source\GUI_Array.cpp" />
     <ClCompile Include="Source\GUI_Button.cpp" />
     <ClCompile Include="Source\GUI_Slider.cpp" />
+    <ClCompile Include="Source\GUI_Text.cpp" />
     <ClCompile Include="Source\LevelManager.cpp" />
     <ClCompile Include="Source\ObjectManager.cpp" />
     <ClCompile Include="Source\Scene.cpp" />

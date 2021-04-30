@@ -6,6 +6,7 @@
 #include "KeyCode.h"
 #include "GUI_Button.h"
 #include "GUI_Slider.h"
+#include "GUI_Text.h"
 
 namespace Srand
 {
@@ -39,8 +40,9 @@ namespace Srand
 
 		_FUNC m_overrideFunc = nullptr;
 
+		std::vector<GameObject*> m_interactable;
 	private:
-		std::vector<GameObject*> m_vector;
+		std::vector<GameObject*> m_vector;	
 		std::string name;
 		unsigned int m_index;
 		int m_vectorIndex;
