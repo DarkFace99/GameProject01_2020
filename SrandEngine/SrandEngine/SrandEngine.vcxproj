@@ -42,6 +42,7 @@
     <ClInclude Include="Entity\NPC.h" />
     <ClInclude Include="Game\Scenes\Level2.h" />
     <ClInclude Include="Game\Scenes\Level3.h" />
+    <ClInclude Include="Game\Scenes\LevelSelect.h" />
     <ClInclude Include="Game\Scenes\MainMenu.h" />
     <ClInclude Include="Game\Scenes\Setting.h" />
     <ClInclude Include="Game\Scenes\testing_scene.h" />
@@ -60,6 +61,7 @@
     <ClInclude Include="Source\GUI_Array.h" />
     <ClInclude Include="Source\GUI_Button.h" />
     <ClInclude Include="Source\GUI_Manager.h" />
+    <ClInclude Include="Source\GUI_Text.h" />
     <ClInclude Include="Source\GUI_Slider.h" />
     <ClInclude Include="Source\Input.h" />
     <ClInclude Include="Source\KeyCode.h" />
@@ -83,6 +85,7 @@
     <ClCompile Include="ECS\Collision.cpp" />
     <ClCompile Include="Game\Scenes\Level2.cpp" />
     <ClCompile Include="Game\Scenes\Level3.cpp" />
+    <ClCompile Include="Game\Scenes\LevelSelect.cpp" />
     <ClCompile Include="Game\Scenes\MainMenu.cpp" />
     <ClCompile Include="Game\Scenes\Setting.cpp" />
     <ClCompile Include="Game\Scenes\testing_scene.cpp" />
@@ -99,6 +102,7 @@
     <ClCompile Include="Source\GUI_Array.cpp" />
     <ClCompile Include="Source\GUI_Button.cpp" />
     <ClCompile Include="Source\GUI_Slider.cpp" />
+    <ClCompile Include="Source\GUI_Text.cpp" />
     <ClCompile Include="Source\LevelManager.cpp" />
     <ClCompile Include="Source\ObjectManager.cpp" />
     <ClCompile Include="Source\Scene.cpp" />

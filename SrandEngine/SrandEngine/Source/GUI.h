@@ -23,7 +23,8 @@ namespace Srand
 		{
 			DEFAULT,
 			BUTTON,
-			SLIDER
+			SLIDER,
+			TEXT
 		};
 
 		inline void SetType(Type tag) { m_type = tag; }
