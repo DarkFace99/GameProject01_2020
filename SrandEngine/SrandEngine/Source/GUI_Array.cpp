@@ -41,9 +41,17 @@ void Srand::GUI_Array::OnUpdate()
 		{
 			if (input.IsKeyPressed(SR_KEY_UP) && !isUpPressed)
 			{
+				m_interactable[m_index]->GetComponent<GUI_Button>().DeSelect();
+				m_index = Abs((m_index - 1) % m_interactable.size());
+				isUpPressed = true;
+				SR_TRACE("Index: {0}", m_index);
 			}
 			else if (input.IsKeyPressed(SR_KEY_DOWN) && !isDownPressed)
 			{
+				m_interactable[m_index]->GetComponent<GUI_Button>().DeSelect();
+				m_index = Abs((m_index + 1) % m_interactable.size());
+				isDownPressed = true;
+				SR_TRACE("Index: {0}", m_index);
 			}
 			else if (input.IsKeyReleased(SR_KEY_UP) && isUpPressed)
 			{
@@ -57,18 +65,11 @@ void Srand::GUI_Array::OnUpdate()
 				isDownPressed = false;
 				//SR_TRACE("Index: {0}", m_index);
 			}
-			m_interactable[m_index]->GetComponent<GUI_Button>().DeSelect();
-			m_index = Abs((m_index - 1) % m_interactable.size());
-			isUpPressed = true;
-			SR_TRACE("Index: {0}", m_index);
+			
 		}
 		else 
 		{
 			m_overrideFunc();
-			m_interactable[m_index]->GetComponent<GUI_Button>().DeSelect();
-			m_index = Abs((m_index + 1) % m_interactable.size());
-			isDownPressed = true;
-			SR_TRACE("Index: {0}", m_index);
 		}
 
 		/* Activate key */
