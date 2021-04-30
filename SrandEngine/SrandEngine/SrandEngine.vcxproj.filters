@@ -49,6 +49,15 @@
     <Filter Include="SrandEngine\Graphic User Interface">
       <UniqueIdentifier>{7fcfb8a4-1c30-4cd0-a8ba-c771485161c2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game\GameScene\MainMenu">
+      <UniqueIdentifier>{078269e5-d099-4423-b3fd-7227d4bef677}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\GameScene\Setting">
+      <UniqueIdentifier>{28649b5e-3248-484e-98d0-fc556af2db93}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SrandEngine\Window">
+      <UniqueIdentifier>{b847e2e2-2bbe-4179-adf5-91948e7c80dc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="imgui\imconfig.h">
@@ -218,7 +227,15 @@
     <ClInclude Include="Source\GUI_Manager.h">
       <Filter>SrandEngine\Manager</Filter>
     </ClInclude>
-    <ClInclude Include="Game\Scenes\MainMenu.h" />
+    <ClInclude Include="Game\Scenes\MainMenu.h">
+      <Filter>Game\GameScene\MainMenu</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Scenes\Setting.h">
+      <Filter>Game\GameScene\Setting</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\WindowProperties.h">
+      <Filter>SrandEngine\Window</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="imgui\imgui.cpp">
@@ -311,7 +328,15 @@
     <ClCompile Include="Source\GUI_Slider.cpp">
       <Filter>SrandEngine\Graphic User Interface</Filter>
     </ClCompile>
-    <ClCompile Include="Game\Scenes\MainMenu.cpp" />
+    <ClCompile Include="Game\Scenes\MainMenu.cpp">
+      <Filter>Game\GameScene\MainMenu</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Scenes\Setting.cpp">
+      <Filter>Game\GameScene\Setting</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\WindowProperties.cpp">
+      <Filter>SrandEngine\Window</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="SrandEngine.rc" />

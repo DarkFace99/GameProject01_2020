@@ -9,7 +9,7 @@ MainMenu::~MainMenu()
 }
 
 void StartGame() { Engine::get().GoToScene(1); }
-
+void QuitGame() { Engine::get().Quit(); }
 
 void MainMenu::Init()
 {
@@ -165,6 +165,7 @@ void MainMenu::Init()
     tempgui->GetComponent<TileSelector>().SetTile(9, 15);
 
     tempgui->AddComponent<GUI_Button>("ExitButton");
+    tempgui->GetComponent<GUI_Button>().m_function = QuitGame;
     tempgui->GetComponent<GUI_Button>().SelectedOffset(1, 19);
 
     gui_arr.PushGUI(tempgui);

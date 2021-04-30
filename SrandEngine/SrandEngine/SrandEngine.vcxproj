@@ -43,6 +43,7 @@
     <ClInclude Include="Game\Scenes\Level2.h" />
     <ClInclude Include="Game\Scenes\Level3.h" />
     <ClInclude Include="Game\Scenes\MainMenu.h" />
+    <ClInclude Include="Game\Scenes\Setting.h" />
     <ClInclude Include="Game\Scenes\testing_scene.h" />
     <ClInclude Include="Entity\Pear.h" />
     <ClInclude Include="imgui\imconfig.h" />
@@ -74,6 +75,7 @@
     <ClInclude Include="Source\TimeStep.h" />
     <ClInclude Include="Source\Vector2D.h" />
     <ClInclude Include="Source\Vertex.h" />
+    <ClInclude Include="Source\WindowProperties.h" />
     <ClInclude Include="Source\WindowsInput.h" />
     <ClInclude Include="srpch.h" />
   </ItemGroup>
@@ -82,6 +84,7 @@
     <ClCompile Include="Game\Scenes\Level2.cpp" />
     <ClCompile Include="Game\Scenes\Level3.cpp" />
     <ClCompile Include="Game\Scenes\MainMenu.cpp" />
+    <ClCompile Include="Game\Scenes\Setting.cpp" />
     <ClCompile Include="Game\Scenes\testing_scene.cpp" />
     <ClCompile Include="imgui\imgui.cpp" />
     <ClCompile Include="imgui\imgui_demo.cpp" />
@@ -108,6 +111,7 @@
     <ClCompile Include="Source\Shader.cpp" />
     <ClCompile Include="Source\Vertex.cpp" />
     <ClCompile Include="Source\TimeStep.cpp" />
+    <ClCompile Include="Source\WindowProperties.cpp" />
     <ClCompile Include="Source\WindowsInput.cpp" />
   </ItemGroup>
   <ItemGroup>

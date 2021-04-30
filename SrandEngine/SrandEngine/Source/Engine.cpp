@@ -23,17 +23,9 @@ namespace Srand
     WindowsInput windowsInput;
 
     Engine* Engine::s_instance = nullptr;
-    WindowProperties* WindowProperties::s_instance = nullptr;
 
     SceneManager& sceneManager = SceneManager::get();
     Scene* currentScene = nullptr;
-
-    //GUI_Manager& guiManager = GUI_Manager::get();
-    GUI_Array gui_arr;
-
-    GameObject* tempgui = nullptr;
-
-    Camera tempCam;
 
     AudioController& audioController = AudioController::get();
 
@@ -63,7 +55,7 @@ namespace Srand
             SR_SYSTEM_ERROR("Error! Cannot initializing GLEW");
         }
 
-        SR_SYSTEM_INFO("Initializing UserInterface...");
+        //SR_SYSTEM_INFO("Initializing UserInterface...");
         //user_interface.InitUserInterface();
 
         glfwSetInputMode(WindowProperties::get(), GLFW_STICKY_KEYS, GL_TRUE);
@@ -229,6 +221,7 @@ namespace Srand
 
         /*gui_arr.OnUpdate();*/
 
+        //WindowProperties::get().Update();
         glfwSetKeyCallback(WindowProperties::get(), window_key_callback);
         glfwSetWindowSizeCallback(WindowProperties::get(), window_size_callback);
         glfwSetWindowCloseCallback(WindowProperties::get(), window_close_callback);
@@ -236,7 +229,7 @@ namespace Srand
 
     void Engine::FixedUpdate(TimeStep ts) 
     {
- 
+    
     }
 
     void Engine::Event() {
@@ -279,7 +272,12 @@ namespace Srand
         if (key == SR_KEY_0 && action == GLFW_PRESS) {
             Engine::get().NextScene();
         }
-
+        if (key == SR_KEY_I && action == GLFW_PRESS) {
+            WindowProperties::get().SetFullScreen(true);
+        }
+        else if (key == SR_KEY_O && action == GLFW_PRESS) {
+            WindowProperties::get().SetFullScreen(false);
+        }
         /*if (key == SR_KEY_1 && action == GLFW_PRESS) 
         {
             currentScene->Clean();
