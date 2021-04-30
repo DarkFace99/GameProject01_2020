@@ -107,10 +107,10 @@ namespace Srand
         AssetManager::get().LoadMesh("UI_WORD3_MESH", 22, 22, 3, 1);
         AssetManager::get().LoadMesh("UI_KEY_MESH", 22, 22);
 
-        AssetManager::get().LoadMesh("UI_BOARD_MESH", 22, 22, 20, 13);
-        AssetManager::get().LoadMesh("UI_DEFAULT_MESH", 22, 22, 6, 3);
-        AssetManager::get().LoadMesh("UI_SLIDER_BAR_MESH", 22, 22, 7, 1);
-        AssetManager::get().LoadMesh("UI_SLOT_ONOFF_MESH", 22, 22, 5, 1);
+        AssetManager::get().LoadMesh("UI_BOARD_MESH", 44, 44, 40, 25);
+        AssetManager::get().LoadMesh("UI_DEFAULT_MESH", 44, 44, 10, 4);
+        AssetManager::get().LoadMesh("UI_SLIDER_BAR_MESH", 44, 44, 14, 2);
+        AssetManager::get().LoadMesh("UI_SLOT_ONOFF_MESH", 44, 44, 10, 2);
 
         AssetManager::get().LoadMesh("UI_SELECT_MESH", 22, 22, 14, 3);
         AssetManager::get().LoadMesh("UI_SLOT_LEVEL_MESH", 22, 22, 2, 2);
@@ -130,7 +130,7 @@ namespace Srand
         AssetManager::get().LoadTexture("LEVEL_ASSET_TEX", "NEW_ASSETS/ART_BENNY/LEVEL_COMPONENT/ASSETS/ingame_assets.png");
         AssetManager::get().LoadTexture("LEVEL_SELECT_ASSET_TEX", "NEW_ASSETS/ART_BENNY/UI/ASSETS/level_select_ui.png");
         AssetManager::get().LoadTexture("MENU_ASSET_TEX", "NEW_ASSETS/ART_BENNY/UI/ASSETS/menu_ui.png");
-        AssetManager::get().LoadTexture("SETTING_ASSET_TEX", "NEW_ASSETS/ART_BENNY/UI/ASSETS/setting_ui.png");
+        AssetManager::get().LoadTexture("SETTING_ASSET_TEX", "NEW_ASSETS/ART_BENNY/UI/ASSETS/setting_ui_old.png");
         AssetManager::get().LoadTexture("TITLE_TEX", "NEW_ASSETS/ART_BENNY/TITLE/TITLE.png");
 
         /* Audio */
@@ -186,7 +186,7 @@ namespace Srand
 #pragma endregion
 
         //For Testing SceneManager Only
-        currentScene = sceneManager[0];
+        currentScene = sceneManager[1];
 
         currentScene->Init();
         
