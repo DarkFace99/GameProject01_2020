@@ -13,9 +13,6 @@
 
 #include "Source/Audio.h"
 
-#define SFX_VOLUME 0.3f
-#define BGM_VOLUME 0.2f
-
 namespace Srand
 {
     // System-wide Initialization
@@ -129,19 +126,19 @@ namespace Srand
         AssetManager::get().LoadTexture("SETTING_ASSET_TEX", "NEW_ASSETS/ART_BENNY/UI/ASSETS/setting_ui.png");
 
         /* Audio */
-        audioController.AddAudioSource(new AudioSource("BGM", BGM_VOLUME, true, "The Happy Man.mp3"));
-        audioController.AddAudioSource(new AudioSource("Activate", SFX_VOLUME, false, "Activate.mp3"));
-        audioController.AddAudioSource(new AudioSource("Barter_swap", SFX_VOLUME, false, "Barter_swap.mp3"));
-        audioController.AddAudioSource(new AudioSource("Char_fall", SFX_VOLUME, false, "Char_fall.mp3"));
-        audioController.AddAudioSource(new AudioSource("Char_jump", SFX_VOLUME, false, "Char_jump.mp3"));
-        audioController.AddAudioSource(new AudioSource("Cherry_inRange", SFX_VOLUME, false, "Cherry_inRange.mp3"));
-        audioController.AddAudioSource(new AudioSource("Cherry_outRange", SFX_VOLUME, false, "Cherry_outRange.mp3"));
-        audioController.AddAudioSource(new AudioSource("Deactivate", SFX_VOLUME, false, "Deactivate.mp3"));
-        audioController.AddAudioSource(new AudioSource("Door_open-close", SFX_VOLUME, false, "Door_open-close.mp3"));
-        audioController.AddAudioSource(new AudioSource("Elevator", SFX_VOLUME, false, "Elevator.mp3"));
-        audioController.AddAudioSource(new AudioSource("Macho_pickup", SFX_VOLUME, false, "Macho_pickup.mp3"));
-        audioController.AddAudioSource(new AudioSource("Macho_throw", SFX_VOLUME, false, "Macho_throw.mp3"));
-        audioController.AddAudioSource(new AudioSource("NPC_rescue", SFX_VOLUME, false, "NPC_rescue.mp3"));
+        audioController.AddAudioSource(new AudioSource("BGM", 1.0f, true, "The Happy Man.mp3", SoundType::MUSIC));
+        audioController.AddAudioSource(new AudioSource("Activate", 1.0f, false, "Activate.mp3", SoundType::EFFECT));
+        audioController.AddAudioSource(new AudioSource("Barter_swap", 1.0f, false, "Barter_swap.mp3", SoundType::EFFECT));
+        audioController.AddAudioSource(new AudioSource("Char_fall", 1.0f, false, "Char_fall.mp3", SoundType::EFFECT));
+        audioController.AddAudioSource(new AudioSource("Char_jump", 1.0f, false, "Char_jump.mp3", SoundType::EFFECT));
+        audioController.AddAudioSource(new AudioSource("Cherry_inRange", 1.0f, false, "Cherry_inRange.mp3", SoundType::EFFECT));
+        audioController.AddAudioSource(new AudioSource("Cherry_outRange", 1.0f, false, "Cherry_outRange.mp3", SoundType::EFFECT));
+        audioController.AddAudioSource(new AudioSource("Deactivate", 1.0f, false, "Deactivate.mp3", SoundType::EFFECT));
+        audioController.AddAudioSource(new AudioSource("Door_open-close", 1.0f, false, "Door_open-close.mp3", SoundType::EFFECT));
+        audioController.AddAudioSource(new AudioSource("Elevator", 1.0f, false, "Elevator.mp3", SoundType::EFFECT));
+        audioController.AddAudioSource(new AudioSource("Macho_pickup", 1.0f, false, "Macho_pickup.mp3", SoundType::EFFECT));
+        audioController.AddAudioSource(new AudioSource("Macho_throw", 1.0f, false, "Macho_throw.mp3", SoundType::EFFECT));
+        audioController.AddAudioSource(new AudioSource("NPC_rescue", 1.0f, false, "NPC_rescue.mp3", SoundType::EFFECT));
 
 #pragma endregion
 
