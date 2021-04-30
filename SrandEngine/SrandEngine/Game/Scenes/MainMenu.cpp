@@ -174,6 +174,21 @@ void MainMenu::Init()
 
     gui_arr.PushGUI(tempgui);
 
+    //Text
+
+    // text1
+    tempgui = new GameObject();
+    tempgui->GetComponent<Transform>().position = Vector2D_float(((6.5 * _tileSize) + _midPointX) * RATIO, ((14 * _tileSize) + _midPointY) * RATIO);
+    tempgui->GetComponent<Transform>().scale = Vector2D_float(6 * 16 * RATIO, 1 * 16 * RATIO);
+
+    tempgui->AddComponent<SpriteRenderer>(SpriteRenderer::GUI_LAYER, "UI_WORD6_MESH", "MENU_ASSET_TEX", 1.0f, &camera, false);
+    tempgui->AddComponent<TileSelector>(22, 22);
+    tempgui->GetComponent<TileSelector>().SetTile(0, 14);
+
+    tempgui->AddComponent<GUI_Text>("Play");
+
+    gui_arr.PushGUI(tempgui);
+
 #pragma endregion
 
  

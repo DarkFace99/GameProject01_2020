@@ -3,6 +3,7 @@
 Srand::GUI_Array::GUI_Array()
 {
 	m_vector.clear();
+	m_interactable.clear();
 	m_index = 0;
 	m_vectorIndex = 0;
 	name = "";
@@ -11,6 +12,7 @@ Srand::GUI_Array::GUI_Array()
 Srand::GUI_Array::GUI_Array(std::string name)
 {
 	m_vector.clear();
+	m_interactable.clear();
 	m_index = 0;
 	m_vectorIndex = 0;
 	this->name = name;
@@ -33,19 +35,19 @@ void Srand::GUI_Array::OnUpdate()
 {
 	if (m_activate)
 	{
-		m_vector[m_index]->GetComponent<GUI_Button>().OnSelect();
+		m_interactable[m_index]->GetComponent<GUI_Button>().OnSelect();
 
 		if (input.IsKeyPressed(SR_KEY_UP) && !isUpPressed)
 		{
-			m_vector[m_index]->GetComponent<GUI_Button>().DeSelect();
-			m_index = Abs((m_index - 1) % VectorSize());
+			m_interactable[m_index]->GetComponent<GUI_Button>().DeSelect();
+			m_index = Abs((m_index - 1) % m_interactable.size());
 			isUpPressed = true;
 			SR_TRACE("Index: {0}", m_index);
 		}
 		else if (input.IsKeyPressed(SR_KEY_DOWN) && !isDownPressed)
 		{
-			m_vector[m_index]->GetComponent<GUI_Button>().DeSelect();
-			m_index = Abs((m_index + 1) % VectorSize());
+			m_interactable[m_index]->GetComponent<GUI_Button>().DeSelect();
+			m_index = Abs((m_index + 1) % m_interactable.size());
 			isDownPressed = true;
 			SR_TRACE("Index: {0}", m_index);
 		}
@@ -73,13 +75,14 @@ void Srand::GUI_Array::OnUpdate()
 		/* Activate key */
 		if (input.IsKeyPressed(SR_KEY_SPACE))
 		{
-			m_vector[m_index]->GetComponent<GUI_Button>().OnActivate();
+			m_interactable[m_index]->GetComponent<GUI_Button>().OnActivate();
 		}
 	}
 }
 void Srand::GUI_Array::Clear()
 {
 	m_vector.clear();
+	m_interactable.clear();
 	m_index = 0;
 	m_vectorIndex = 0;
 	name.clear();
@@ -89,6 +92,10 @@ void Srand::GUI_Array::Clear()
 void Srand::GUI_Array::PushGUI(GameObject* gui)
 {
 	m_vector.emplace(m_vector.begin() + m_vectorIndex, gui);
-	m_vector[m_vectorIndex]->GetComponent<GUI_Button>().SetIndex(m_vectorIndex);
+	/*m_vector[m_vectorIndex]->GetComponent<GUI_Button>().SetIndex(m_vectorIndex);*/
 	m_vectorIndex++;
+
+	if (gui->HasComponent<GUI_Button>() || gui->HasComponent<GUI_Slider>()) {
+		m_interactable.push_back(gui);
+	}
 }

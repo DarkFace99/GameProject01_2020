@@ -237,6 +237,7 @@
       <Filter>SrandEngine\Window</Filter>
     </ClInclude>
     <ClInclude Include="Game\Scenes\LevelSelect.h" />
+    <ClInclude Include="Source\GUI_Text.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="imgui\imgui.cpp">
@@ -339,6 +340,7 @@
       <Filter>SrandEngine\Window</Filter>
     </ClCompile>
     <ClCompile Include="Game\Scenes\LevelSelect.cpp" />
+    <ClCompile Include="Source\GUI_Text.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="SrandEngine.rc" />
