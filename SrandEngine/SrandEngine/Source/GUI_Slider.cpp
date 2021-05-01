@@ -23,6 +23,7 @@ bool Srand::GUI_Slider::Init()
 void Srand::GUI_Slider::Update()
 {
 	OnSelect();
+	
 }
 
 void Srand::GUI_Slider::Conceal() {
@@ -32,11 +33,13 @@ void Srand::GUI_Slider::Conceal() {
 
 void Srand::GUI_Slider::OnSelect()
 {
-	SR_TRACE("Slider {0}: Selected", name);
-	if(!isSelected && isConcealed) {
+	//SR_TRACE("Slider {0}: Selected", name);
+	if (!isSelected) {
 		isSelected = true;
-		renderer->SetAlpha(1.0f);
+		if (isConcealed) { renderer->SetAlpha(1.0f); }
 	}
+	if (isSelected) { AdjustStep(); }
+	
 }
 
 void Srand::GUI_Slider::DeSelect()
@@ -49,4 +52,29 @@ void Srand::GUI_Slider::OnActivate()
 {
 	SR_TRACE("Slider {0}: Activated", name);
 
+}
+
+void Srand::GUI_Slider::AdjustStep() {
+	if (input.IsKeyPressed(SR_KEY_RIGHT) && !isRightPressed)
+	{
+		isRightPressed = true;
+		if (m_function != nullptr) { m_function; }
+	}
+	else if (input.IsKeyPressed(SR_KEY_LEFT) && !isLeftPressed)
+	{
+		isLeftPressed = true;
+		if (n_function != nullptr) { n_function; }
+	}
+	else if (input.IsKeyReleased(SR_KEY_RIGHT) && isRightPressed)
+	{
+		//m_index = Abs((m_index - 1) % VectorSize());
+		isRightPressed = false;
+		//SR_TRACE("Index: {0}", m_index);
+	}
+	else if (input.IsKeyReleased(SR_KEY_LEFT) && isLeftPressed)
+	{
+		//m_index = Abs((m_index + 1) % VectorSize());
+		isLeftPressed = false;
+		//SR_TRACE("Index: {0}", m_index);
+	}
 }

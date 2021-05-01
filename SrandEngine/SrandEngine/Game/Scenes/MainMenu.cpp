@@ -325,6 +325,9 @@ void MainMenu::Init()
 
     gui_arr.PushGUI(tempgui);
  
+
+
+    audioController.Play("Menu");
 }
 
 void MainMenu::Clean()

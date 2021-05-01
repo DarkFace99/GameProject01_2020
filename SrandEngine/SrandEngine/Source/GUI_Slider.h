@@ -18,6 +18,7 @@ namespace Srand
 		virtual void DeSelect() override;
 		virtual void OnActivate() override;
 
+		void AdjustStep();
 		void Conceal();
 
 	private:
@@ -25,5 +26,7 @@ namespace Srand
 		std::string name = "";
 		bool isSelected = false;
 		bool isConcealed = false;
+		bool isRightPressed = false;
+		bool isLeftPressed = false;
 	};
 }

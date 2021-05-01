@@ -9,7 +9,9 @@ Setting::~Setting()
 }
 
 void GoTo_MenuS() { Engine::get().GoToScene(0); }
-
+void Increase_MU() { SR_TRACE("Slider_MU: +"); }
+void Decrease_MU() { SR_TRACE("Slider_MU: -");
+}
 //place_holder
 bool full = false;
 void ToggleFullScreen() {
@@ -178,6 +180,8 @@ void Setting::Init()
 
     tempgui->AddComponent<GUI_Slider>("SLOT3");
     tempgui->GetComponent<GUI_Slider>().Conceal();
+    tempgui->GetComponent<GUI_Slider>().m_function = Increase_MU;
+    tempgui->GetComponent<GUI_Slider>().n_function = Decrease_MU;
     gui_arr.PushGUI(tempgui);
 
     //Slot4
@@ -223,6 +227,8 @@ void Setting::Init()
     gui_arr.PushGUI(tempgui);
 #pragma endregion
 
+
+    audioController.Play("Menu");
 }
 
 void Setting::Clean()

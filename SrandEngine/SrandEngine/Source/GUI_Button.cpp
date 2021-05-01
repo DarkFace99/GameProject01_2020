@@ -42,7 +42,7 @@ void Srand::GUI_Button::Conceal() {
 
 void Srand::GUI_Button::OnSelect()
 {
-	SR_TRACE("Button {0}: Selected", name);
+	//SR_TRACE("Button {0}: Selected", name);
 	if (!isSelected && isShifted) {
 		isSelected = true;
 		tileSelector->SetTile(shiftX, shiftY);
