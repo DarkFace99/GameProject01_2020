@@ -111,6 +111,7 @@ namespace Srand
         AssetManager::get().LoadMesh("UI_DEFAULT_MESH", 44, 44, 10, 4);
         AssetManager::get().LoadMesh("UI_SLIDER_BAR_MESH", 44, 44, 14, 2);
         AssetManager::get().LoadMesh("UI_SLOT_ONOFF_MESH", 44, 44, 10, 2);
+        AssetManager::get().LoadMesh("UI_PIN_MESH", 44, 44, 2, 2);
 
         AssetManager::get().LoadMesh("UI_SELECT_MESH", 22, 22, 14, 3);
         AssetManager::get().LoadMesh("UI_SLOT_LEVEL_MESH", 22, 22, 2, 2);
@@ -186,7 +187,7 @@ namespace Srand
 #pragma endregion
 
         //For Testing SceneManager Only
-        currentScene = sceneManager[1];
+        currentScene = sceneManager[0];
 
         currentScene->Init();
         
@@ -276,8 +277,11 @@ namespace Srand
     }
     void window_key_callback(GLFWwindow* window, int key, int scancode, int action, int mods) 
     {
-        if (key == SR_KEY_0 && action == GLFW_PRESS) {
+        if (key == SR_KEY_N && action == GLFW_PRESS) {
             Engine::get().NextScene();
+        }
+        if (key == SR_KEY_M && action == GLFW_PRESS) {
+            Engine::get().GoToScene(0);
         }
         if (key == SR_KEY_I && action == GLFW_PRESS) {
             WindowProperties::get().SetFullScreen(true);

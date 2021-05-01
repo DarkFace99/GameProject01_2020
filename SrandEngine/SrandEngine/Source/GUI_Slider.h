@@ -4,18 +4,26 @@
 
 namespace Srand
 {
-	class GUI_Slider : GUI
+	class GUI_Slider : public GUI
 	{
 	public:
 		GUI_Slider();
 		GUI_Slider(std::string name);
 		virtual ~GUI_Slider();
 
+		virtual bool Init() override final;
+		virtual void Update() override final;
+
 		virtual void OnSelect() override;
+		virtual void DeSelect() override;
 		virtual void OnActivate() override;
 
-	private:
-		std::string name = "";
+		void Conceal();
 
+	private:
+		std::vector<float> step;
+		std::string name = "";
+		bool isSelected = false;
+		bool isConcealed = false;
 	};
 }

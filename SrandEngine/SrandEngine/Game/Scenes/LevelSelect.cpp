@@ -8,6 +8,7 @@ LevelSelect::~LevelSelect()
     Clean();
 }
 
+void GoTo_MenuL() { Engine::get().GoToScene(0); }
 
 void LevelSelect::Init()
 {
@@ -156,6 +157,20 @@ void LevelSelect::Init()
         gui_arr.PushGUI(tempgui);
     }
 
+    // Back
+
+    tempgui = new GameObject();
+    tempgui->GetComponent<Transform>().position = Vector2D_float(((15 * _tileSize) + _midPointX) * RATIO, ((3.5 * _tileSize) + _midPointY) * RATIO);
+    tempgui->GetComponent<Transform>().scale = Vector2D_float(1 * 16 * RATIO, 1 * 16 * RATIO);
+
+    tempgui->AddComponent<SpriteRenderer>(SpriteRenderer::GUI_LAYER, "1x1_MESH", "LEVEL_ASSET_TEX", 1.0f, &camera, false);
+    tempgui->AddComponent<TileSelector>(14, 14);
+    tempgui->GetComponent<TileSelector>().SetTile(10, 9);
+
+    tempgui->AddComponent<GUI_Button>("Back");
+    tempgui->GetComponent<GUI_Button>().SelectedOffset(12, 9);
+    tempgui->GetComponent<GUI_Button>().m_function = GoTo_MenuL;
+    gui_arr.PushGUI(tempgui);
 
     {
         //// button2

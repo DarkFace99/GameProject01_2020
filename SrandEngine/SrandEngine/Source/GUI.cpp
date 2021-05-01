@@ -37,4 +37,5 @@ namespace Srand
 		m_function();
 		SR_TRACE("Button {0}: Activated");
 	}
+
 }
