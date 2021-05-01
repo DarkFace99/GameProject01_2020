@@ -133,6 +133,7 @@ namespace Srand
 
         /* Audio */
         audioController.AddAudioSource(new AudioSource("BGM", 1.0f, true, "The Happy Man.mp3", SoundType::MUSIC));
+        audioController.AddAudioSource(new AudioSource("Menu", 1.0f, true, "So_Happy_World.mp3", SoundType::MUSIC));
         audioController.AddAudioSource(new AudioSource("Activate", 1.0f, false, "Activate.mp3", SoundType::EFFECT));
         audioController.AddAudioSource(new AudioSource("Barter_swap", 1.0f, false, "Barter_swap.mp3", SoundType::EFFECT));
         audioController.AddAudioSource(new AudioSource("Char_fall", 1.0f, false, "Char_fall.mp3", SoundType::EFFECT));

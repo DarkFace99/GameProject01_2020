@@ -9,9 +9,23 @@ Setting::~Setting()
 }
 
 void GoTo_MenuS() { Engine::get().GoToScene(0); }
-void Increase_MU() { SR_TRACE("Slider_MU: +"); }
-void Decrease_MU() { SR_TRACE("Slider_MU: -");
+void Increase_MU() { 
+    SR_TRACE("Slider_MU: +"); 
+    AudioController::get().ChangeVolume(1, SoundType::MUSIC);
 }
+void Decrease_MU() { 
+    SR_TRACE("Slider_MU: -");
+    AudioController::get().ChangeVolume(0, SoundType::MUSIC);
+}
+void Increase_SF() {
+    SR_TRACE("Slider_SF: +");
+    AudioController::get().ChangeVolume(1, SoundType::EFFECT);
+}
+void Decrease_SF() {
+    SR_TRACE("Slider_SF: -");
+    AudioController::get().ChangeVolume(0, SoundType::EFFECT);
+}
+
 //place_holder
 bool full = false;
 void ToggleFullScreen() {
@@ -155,19 +169,19 @@ void Setting::Init()
     tempgui->GetComponent<GUI_Button>().m_function = ToggleFullScreen;
     gui_arr.PushGUI(tempgui);
 
-    //Pin
+    ////Pin
 
-    tempgui = new GameObject();
-    tempgui->GetComponent<Transform>().position = Vector2D_float(((14.75 * _tileSize) + _midPointX) * RATIO, ((11.10 * _tileSize) + _midPointY) * RATIO);
-    tempgui->GetComponent<Transform>().scale = Vector2D_float(1 * 16 * RATIO, 1 * 16 * RATIO);
+    //tempgui = new GameObject();
+    //tempgui->GetComponent<Transform>().position = Vector2D_float(((14.75 * _tileSize) + _midPointX) * RATIO, ((11.10 * _tileSize) + _midPointY) * RATIO);
+    //tempgui->GetComponent<Transform>().scale = Vector2D_float(1 * 16 * RATIO, 1 * 16 * RATIO);
 
-    tempgui->AddComponent<SpriteRenderer>(SpriteRenderer::GUI_LAYER, "UI_PIN_MESH", "SETTING_ASSET_TEX", 1.0f, &camera, false);
-    tempgui->AddComponent<TileSelector>(44, 44);
-    tempgui->GetComponent<TileSelector>().SetTile(14, 6);
+    //tempgui->AddComponent<SpriteRenderer>(SpriteRenderer::GUI_LAYER, "UI_PIN_MESH", "SETTING_ASSET_TEX", 1.0f, &camera, false);
+    //tempgui->AddComponent<TileSelector>(44, 44);
+    //tempgui->GetComponent<TileSelector>().SetTile(14, 6);
 
-    tempgui->AddComponent<GUI_Text>("SLOT2_PIN");
+    //tempgui->AddComponent<GUI_Text>("SLOT2_PIN");
 
-    gui_arr.PushGUI(tempgui);
+    //gui_arr.PushGUI(tempgui);
 
     //Slot3
     tempgui = new GameObject();
@@ -195,6 +209,8 @@ void Setting::Init()
 
     tempgui->AddComponent<GUI_Slider>("SLOT4");
     tempgui->GetComponent<GUI_Slider>().Conceal();
+    tempgui->GetComponent<GUI_Slider>().m_function = Increase_SF;
+    tempgui->GetComponent<GUI_Slider>().n_function = Decrease_SF;
     gui_arr.PushGUI(tempgui);
     
     //default

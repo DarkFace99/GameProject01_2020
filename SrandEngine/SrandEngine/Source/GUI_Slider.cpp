@@ -58,12 +58,12 @@ void Srand::GUI_Slider::AdjustStep() {
 	if (input.IsKeyPressed(SR_KEY_RIGHT) && !isRightPressed)
 	{
 		isRightPressed = true;
-		if (m_function != nullptr) { m_function; }
+		if (m_function != nullptr) { m_function(); }
 	}
 	else if (input.IsKeyPressed(SR_KEY_LEFT) && !isLeftPressed)
 	{
 		isLeftPressed = true;
-		if (n_function != nullptr) { n_function; }
+		if (n_function != nullptr) { n_function(); }
 	}
 	else if (input.IsKeyReleased(SR_KEY_RIGHT) && isRightPressed)
 	{

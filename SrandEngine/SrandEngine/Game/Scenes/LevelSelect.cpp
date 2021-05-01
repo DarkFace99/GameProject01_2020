@@ -330,7 +330,7 @@ void LevelSelect::Init()
 
 #pragma endregion
 
-    
+    audioController.Play("Menu");
 }
 
 void LevelSelect::Clean()
