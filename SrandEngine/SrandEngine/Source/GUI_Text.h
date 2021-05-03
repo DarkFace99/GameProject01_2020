@@ -13,7 +13,6 @@ namespace Srand
 
 		virtual bool Init() override final;
 
-
 	private:
 		std::string name = "";
 

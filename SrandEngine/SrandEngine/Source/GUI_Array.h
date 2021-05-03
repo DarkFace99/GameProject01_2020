@@ -30,6 +30,8 @@ namespace Srand
 		void PushGUI(GameObject* gui);
 
 		inline unsigned int Index() { return m_index; }
+		inline unsigned int SetIndex(int num) { m_index = num; }
+
 		inline bool GetStatus() { return m_activate; }
 
 		inline int VectorSize() { return m_vector.size(); }
@@ -41,6 +43,7 @@ namespace Srand
 		_FUNC m_overrideFunc = nullptr;
 
 		std::vector<GameObject*> m_interactable;
+
 	private:
 		std::vector<GameObject*> m_vector;	
 		std::string name;

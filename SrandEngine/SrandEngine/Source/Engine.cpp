@@ -15,9 +15,6 @@
 
 #include "Source/Audio.h"
 
-#define SFX_VOLUME 0.3f
-#define BGM_VOLUME 0.2f
-
 namespace Srand
 {
     // System-wide Initialization
@@ -95,11 +92,11 @@ namespace Srand
         AssetManager::get().LoadMesh("PEAR_ANIM_MESH", 19);
         AssetManager::get().LoadMesh("BARTER_ANIM_MESH");
         AssetManager::get().LoadMesh("NPC_ANIM_MESH", 2);
-        AssetManager::get().LoadMesh("DOOR_STAND_MESH", 10, 13);
-        AssetManager::get().LoadMesh("DOOR_MESH", 10, 13, 1, 4);
-        AssetManager::get().LoadMesh("ELEVATOR_MESH", 10, 13, 2, 2);
-        AssetManager::get().LoadMesh("ELEVATOR_STAND_MESH", 10, 13, 2, 1);
-        AssetManager::get().LoadMesh("BUTTON_MESH", 10, 13, 2, 1);
+        AssetManager::get().LoadMesh("1x1_MESH", 14, 14);
+        AssetManager::get().LoadMesh("DOOR_MESH", 14, 14, 1, 4);
+        AssetManager::get().LoadMesh("2x2_MESH", 14, 14, 2, 2);
+        AssetManager::get().LoadMesh("ELEVATOR_STAND_MESH", 14, 14, 2, 1);
+        AssetManager::get().LoadMesh("BUTTON_MESH", 14, 14, 2, 1);
 
         AssetManager::get().LoadMesh("UI_BUTTON_MESH", 22, 22, 7, 2);
         AssetManager::get().LoadMesh("UI_WORD6_MESH", 22, 22, 6, 1);
@@ -107,13 +104,16 @@ namespace Srand
         AssetManager::get().LoadMesh("UI_WORD3_MESH", 22, 22, 3, 1);
         AssetManager::get().LoadMesh("UI_KEY_MESH", 22, 22);
 
-        AssetManager::get().LoadMesh("UI_BOARD_MESH", 22, 22, 20, 13);
-        AssetManager::get().LoadMesh("UI_DEFAULT_MESH", 22, 22, 6, 3);
-        AssetManager::get().LoadMesh("UI_SLIDER_BAR_MESH", 22, 22, 7, 1);
-        AssetManager::get().LoadMesh("UI_SLOT_ONOFF_MESH", 22, 22, 5, 1);
+        AssetManager::get().LoadMesh("UI_BOARD_MESH", 44, 44, 40, 25);
+        AssetManager::get().LoadMesh("UI_DEFAULT_MESH", 44, 44, 10, 4);
+        AssetManager::get().LoadMesh("UI_SLIDER_BAR_MESH", 44, 44, 14, 2);
+        AssetManager::get().LoadMesh("UI_SLOT_ONOFF_MESH", 44, 44, 10, 2);
+        AssetManager::get().LoadMesh("UI_PIN_MESH", 44, 44, 2, 2);
 
         AssetManager::get().LoadMesh("UI_SELECT_MESH", 22, 22, 14, 3);
         AssetManager::get().LoadMesh("UI_SLOT_LEVEL_MESH", 22, 22, 2, 2);
+        AssetManager::get().LoadMesh("UI_SLOT_SELECT_MESH", 22, 22, 19, 3);
+        AssetManager::get().LoadMesh("TITLE_MESH", 20, 16, 20, 7);
 
         /* Texture */
         AssetManager::get().LoadTexture("BG_TEX", "Background.png");
@@ -125,25 +125,27 @@ namespace Srand
         AssetManager::get().LoadTexture("PEAR_ANIM_TEX", "Pear_SpriteShee.png");
         AssetManager::get().LoadTexture("BARTER_ANIM_TEX", "Barther.png");
         AssetManager::get().LoadTexture("NPC_ANIM_TEX", "NPC_Animation_Sheet.png");
-        AssetManager::get().LoadTexture("LEVEL_ASSET_TEX", "Level_Assets_00.png");
+        AssetManager::get().LoadTexture("LEVEL_ASSET_TEX", "NEW_ASSETS/ART_BENNY/LEVEL_COMPONENT/ASSETS/ingame_assets.png");
         AssetManager::get().LoadTexture("LEVEL_SELECT_ASSET_TEX", "NEW_ASSETS/ART_BENNY/UI/ASSETS/level_select_ui.png");
         AssetManager::get().LoadTexture("MENU_ASSET_TEX", "NEW_ASSETS/ART_BENNY/UI/ASSETS/menu_ui.png");
-        AssetManager::get().LoadTexture("SETTING_ASSET_TEX", "NEW_ASSETS/ART_BENNY/UI/ASSETS/setting_ui.png");
+        AssetManager::get().LoadTexture("SETTING_ASSET_TEX", "NEW_ASSETS/ART_BENNY/UI/ASSETS/setting_ui_old.png");
+        AssetManager::get().LoadTexture("TITLE_TEX", "NEW_ASSETS/ART_BENNY/TITLE/TITLE.png");
 
         /* Audio */
-        audioController.AddAudioSource(new AudioSource("BGM", BGM_VOLUME, true, "The Happy Man.mp3"));
-        audioController.AddAudioSource(new AudioSource("Activate", SFX_VOLUME, false, "Activate.mp3"));
-        audioController.AddAudioSource(new AudioSource("Barter_swap", SFX_VOLUME, false, "Barter_swap.mp3"));
-        audioController.AddAudioSource(new AudioSource("Char_fall", SFX_VOLUME, false, "Char_fall.mp3"));
-        audioController.AddAudioSource(new AudioSource("Char_jump", SFX_VOLUME, false, "Char_jump.mp3"));
-        audioController.AddAudioSource(new AudioSource("Cherry_inRange", SFX_VOLUME, false, "Cherry_inRange.mp3"));
-        audioController.AddAudioSource(new AudioSource("Cherry_outRange", SFX_VOLUME, false, "Cherry_outRange.mp3"));
-        audioController.AddAudioSource(new AudioSource("Deactivate", SFX_VOLUME, false, "Deactivate.mp3"));
-        audioController.AddAudioSource(new AudioSource("Door_open-close", SFX_VOLUME, false, "Door_open-close.mp3"));
-        audioController.AddAudioSource(new AudioSource("Elevator", SFX_VOLUME, false, "Elevator.mp3"));
-        audioController.AddAudioSource(new AudioSource("Macho_pickup", SFX_VOLUME, false, "Macho_pickup.mp3"));
-        audioController.AddAudioSource(new AudioSource("Macho_throw", SFX_VOLUME, false, "Macho_throw.mp3"));
-        audioController.AddAudioSource(new AudioSource("NPC_rescue", SFX_VOLUME, false, "NPC_rescue.mp3"));
+        audioController.AddAudioSource(new AudioSource("BGM", 1.0f, true, "The Happy Man.mp3", SoundType::MUSIC));
+        audioController.AddAudioSource(new AudioSource("Menu", 1.0f, true, "So_Happy_World.mp3", SoundType::MUSIC));
+        audioController.AddAudioSource(new AudioSource("Activate", 1.0f, false, "Activate.mp3", SoundType::EFFECT));
+        audioController.AddAudioSource(new AudioSource("Barter_swap", 1.0f, false, "Barter_swap.mp3", SoundType::EFFECT));
+        audioController.AddAudioSource(new AudioSource("Char_fall", 1.0f, false, "Char_fall.mp3", SoundType::EFFECT));
+        audioController.AddAudioSource(new AudioSource("Char_jump", 1.0f, false, "Char_jump.mp3", SoundType::EFFECT));
+        audioController.AddAudioSource(new AudioSource("Cherry_inRange", 1.0f, false, "Cherry_inRange.mp3", SoundType::EFFECT));
+        audioController.AddAudioSource(new AudioSource("Cherry_outRange", 1.0f, false, "Cherry_outRange.mp3", SoundType::EFFECT));
+        audioController.AddAudioSource(new AudioSource("Deactivate", 1.0f, false, "Deactivate.mp3", SoundType::EFFECT));
+        audioController.AddAudioSource(new AudioSource("Door_open-close", 1.0f, false, "Door_open-close.mp3", SoundType::EFFECT));
+        audioController.AddAudioSource(new AudioSource("Elevator", 1.0f, false, "Elevator.mp3", SoundType::EFFECT));
+        audioController.AddAudioSource(new AudioSource("Macho_pickup", 1.0f, false, "Macho_pickup.mp3", SoundType::EFFECT));
+        audioController.AddAudioSource(new AudioSource("Macho_throw", 1.0f, false, "Macho_throw.mp3", SoundType::EFFECT));
+        audioController.AddAudioSource(new AudioSource("NPC_rescue", 1.0f, false, "NPC_rescue.mp3", SoundType::EFFECT));
 
 #pragma endregion
 
@@ -204,6 +206,34 @@ namespace Srand
         nextScene_Num %= sceneManager.VectorSize();
         currentScene = sceneManager[nextScene_Num];
         currentScene->Init();
+    }
+
+    void Engine::LoadSave()
+    {
+        std::ifstream inStream("saveFile.dat");
+        if (!inStream.is_open()) 
+        {
+            SR_SYSTEM_ERROR("ERROR: Cannot Load Save File");
+            SR_SYSTEM_WARN("Reset Progress to default");
+            return;
+        }
+        else 
+        {
+            
+        }
+    }
+    void Engine::WriteSave()
+    {
+        std::ofstream outStream("saveFile.dat");
+        if (!outStream.is_open()) 
+        {
+            SR_SYSTEM_ERROR("ERROR: Cannot Write Save File");
+            return;
+        }
+        else 
+        {
+            
+        }
     }
 
     void Engine::Draw() {   
@@ -273,8 +303,11 @@ namespace Srand
     }
     void window_key_callback(GLFWwindow* window, int key, int scancode, int action, int mods) 
     {
-        if (key == SR_KEY_0 && action == GLFW_PRESS) {
+        if (key == SR_KEY_N && action == GLFW_PRESS) {
             Engine::get().NextScene();
+        }
+        if (key == SR_KEY_M && action == GLFW_PRESS) {
+            Engine::get().GoToScene(0);
         }
         if (key == SR_KEY_I && action == GLFW_PRESS) {
             WindowProperties::get().SetFullScreen(true);

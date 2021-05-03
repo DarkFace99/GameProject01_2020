@@ -49,7 +49,7 @@ int main(int argc, char** argv) {
 		{
 			timeStep.updates = timeStep.frames = 0;
 			SR_SYSTEM_TRACE("Time: {0}		Frames: {1}		Updates: {2}", (float)timeStep, timeStep.frames, timeStep.updates);
-			Sleep(timeStep.GetMilliseconds());
+			//Sleep(timeStep.GetMilliseconds());
 		}
 	}
 

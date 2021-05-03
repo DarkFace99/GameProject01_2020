@@ -20,3 +20,4 @@ bool Srand::GUI_Text::Init()
 	return true;
 }
 
+
