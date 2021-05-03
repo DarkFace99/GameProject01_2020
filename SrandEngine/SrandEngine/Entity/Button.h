@@ -36,7 +36,7 @@ public:
 
 	bool CheckCollideActivate() 
 	{
-		for (int i = 0; i < ObjManager::get().VectorSize() - 1; i++) {
+		for (int i = 0; i < ObjManager::get().VectorSize(); i++) {
 			if (ObjManager::get()[i]->GetComponent<BoxCollider2D>().GetTag() == BoxCollider2D::CHARACTER_COLLISION)
 			{
 				if (Collision::AABB(*collider, ObjManager::get()[i]->GetComponent<BoxCollider2D>())) {

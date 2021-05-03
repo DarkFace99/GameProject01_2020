@@ -8,6 +8,8 @@
 
 namespace Srand 
 {
+	class Scene;
+
 	class SceneManager 
 	{
 	private:
@@ -43,6 +45,5 @@ namespace Srand
 
 		std::vector<Scene*>::iterator begin() { return m_sceneVector.begin(); }
 		std::vector<Scene*>::iterator end() { return m_sceneVector.end(); }
-		
 	};
 }

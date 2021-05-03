@@ -50,10 +50,8 @@
 
 class Benny : public CC {
 private:
-	GameObject* targetCC = nullptr;
-	Transform* targetTransform = nullptr;
 	float radius = 400.0f;	// place holder 
-	std::vector<CC*>connectList;
+
 public:
 	Benny() { SetTag(ccTag::BENNY); }
 	Benny(float r) { 
@@ -68,17 +66,17 @@ public:
 		return true;
 	}
 
-	void Update() override final {
-		std::cout << "Benny: ";
-		rigidBody->Update_Gravity();
-		if (isActive) { Input_Movement(true); }
-		AnimationController(); // place before collision check because, it will change velocity and may result in weird animation  
-		Collision_Check();
-		std::cout << boxCollider2D->GetIsGround() << std::endl;
-		Execute();
-	}
 
-	
+	void Update() override final {
+		if (!isOut) {
+			rigidBody->Update_Gravity();
+			if (isActive) { Input_Movement(true); }
+			AnimationController(); // place before collision check because, it will change velocity and may result in weird animation  
+			Collision_Check();
+			Execute();
+			Boundary();
+		}
+	}
 
 	void CC::AnimationController() override {
 

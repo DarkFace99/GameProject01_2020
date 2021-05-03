@@ -3,8 +3,7 @@
 // Include GLFW
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
-
-#include <srpch.h>
+#include "WindowProperties.h"
 
 /* Custom Header */
 #include "AssetManager.h"
@@ -32,62 +31,6 @@
 
 namespace Srand
 {
-	class WindowProperties
-	{
-	private:
-		static WindowProperties* s_instance;
-		GLFWwindow* window;
-
-		//Initial Properties
-		int screen_width = 1280;
-		int screen_height = 720;
-		bool enableFullScreen = false;
-		bool enableVsync = true;
-
-		WindowProperties()
-		{
-			/* Create a windowed mode window and its OpenGL context */
-			SR_SYSTEM_INFO("Initializing Window...");
-			window = glfwCreateWindow(GetWidth(), GetHeight(), WINDOW_NAME, (GetFullScreenStatus()) ? glfwGetPrimaryMonitor() : NULL, NULL);
-			if (!window)
-			{
-				glfwTerminate();
-				SR_SYSTEM_ERROR("Error! Cannot create window");
-			}
-
-			/* Make the window's context current */
-			glfwMakeContextCurrent(window);
-
-			/*Vsync on = 1, off = 0*/
-			glfwSwapInterval(enableVsync);
-		}
-
-	public:
-		inline static WindowProperties& get()
-		{
-			if (s_instance == nullptr)
-			{
-				s_instance = new WindowProperties();
-			}
-			return *s_instance;
-		}
-
-		operator GLFWwindow* () const
-		{
-			return window;
-		}
-
-		inline void SetScreenSize(int width, int height) { screen_width = width; screen_height = height; }
-		inline void SetFullScreen(bool isFullScreen) { this->enableFullScreen = isFullScreen; }
-		inline void SetVsync(bool enableVsync) { this->enableVsync = enableVsync; }
-
-		inline int GetWidth() const { return screen_width; }
-		inline int GetHeight() const { return screen_height; }
-		inline bool GetFullScreenStatus() const { return enableFullScreen; }
-		inline bool GetVsyncStatus() const { return enableVsync; }
-
-	};
-
 	class UserInterface
 	{
 	private:
@@ -184,10 +127,19 @@ namespace Srand
 		inline bool IsRunning() {
 			return running;
 		}
+
+		void NextScene();
+		void GoToScene(int);
+	
+	protected:
+		int nextScene_Num = 0; // Engine.cpp line.138
+
+		void LoadSave();
+		void WriteSave();
 	};
 
 
 	void window_size_callback(GLFWwindow* window, int width, int height);
 	void window_close_callback(GLFWwindow* window);
-
+	void window_key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
 }

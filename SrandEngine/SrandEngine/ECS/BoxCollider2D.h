@@ -16,8 +16,11 @@ public:
 		COLLISION_START = 0,
 		TILE_COLLISION,
 		CHARACTER_COLLISION,
+		DOOR_COLLISION,
+		ELEVATOR_COLLISION,
 		ASSET_COLLISION,
 		BUTTON_COLLISION,
+		GOAL_COLLISION,
 		COLLISION_END
 	};
 
@@ -56,6 +59,9 @@ public:
 
 	int GetTag() { return tag; }
 	bool GetOverlap() { return allowOverlap; }
+
+	float GetWidth() { return width; }
+	float GetHeight() { return height; }
 
 	void SetOffset(float offsetX, float offsetY) {
 		BoxCollider2D::offsetX = offsetX;

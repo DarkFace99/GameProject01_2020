@@ -71,5 +71,18 @@ namespace Srand
 
         play = false;
     }
+    void AudioController::ChangeVolume(int mode, SoundType type)
+    {
+        for (auto& src : m_soundSource) 
+        {
+            if (src.second->type == type) 
+            {
+                if(mode == 1)
+                    src.second->volume += src.second->volume * (0.1f);
+                else
+                    src.second->volume -= src.second->volume * (0.1f);
+            }
+        }
+    }
 }
 

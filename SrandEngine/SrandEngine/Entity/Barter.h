@@ -15,6 +15,8 @@ public:
 		transform->SetPosition(temp);
 		boxCollider2D->SetOverlap(false);
 		BennyCollider->SetOverlap(false);
+
+		audioController.Play("Barter_swap");
 	}	
 
 	bool Init() override final {
@@ -24,13 +26,16 @@ public:
 	}
 
 	void Update() override final {
-		if (isActive) { 
-			SwapAbility(); 
-			SetActive(false);
+		if (!isOut) {
+			if (isActive) {
+				SwapAbility();
+				SetActive(false);
+			}
+			rigidBody->Update_Gravity();
+			Collision_Check();
+			Execute();
+			Boundary();
 		}
-		rigidBody->Update_Gravity();
-		Collision_Check();
-		Execute();
 	}
 
 	void SetBarter(GameObject* benny) {
