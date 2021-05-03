@@ -243,7 +243,7 @@ void Setting::Init()
     gui_arr.PushGUI(tempgui);
 #pragma endregion
 
-
+    audioController.Stop();
     audioController.Play("Menu");
 }
 

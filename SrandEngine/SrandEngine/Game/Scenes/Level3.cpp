@@ -259,7 +259,8 @@ void Level3::Init()
 
 #pragma endregion
 
-    //audioController.Play("BGM");
+    audioController.Stop();
+    audioController.Play("BGM");
 }
 
 void Level3::Clean()
