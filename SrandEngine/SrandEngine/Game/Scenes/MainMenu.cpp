@@ -163,7 +163,7 @@ void MainMenu::Init()
         false /* overlap */, true /* movable *//*, "BENNY_ANIM_MESH", &camera*/);
 
     gameObject->AddComponent<Benny>(); // test CC mechanics
-    gameObject->GetComponent<Benny>().SetActive(false);
+   // gameObject->GetComponent<Benny>().SetActive(false);
 
     //player = gameObject; // check collision
     //benny = player;
@@ -187,7 +187,22 @@ void MainMenu::Init()
         false /* overlap */, true /* movable *//*, "BENNY_ANIM_MESH", &camera*/);
 
     gameObject->AddComponent<Cherry>(); // test CC mechanics
-    gameObject->GetComponent<Cherry>().SetActive(false);
+    //gameObject->GetComponent<Cherry>().SetActive(false);
+
+    objManager.PushObject(gameObject);
+    levelManager.AddObject(gameObject);
+
+    //UI_Box
+    gameObject = new GameObject();
+    manager->AddEntity(gameObject);
+    gameObject->GetComponent<Transform>().position = Vector2D_float(((6 * _tileSize) + _midPointX) * RATIO, ((6 * _tileSize) + _midPointY) * RATIO);
+    gameObject->GetComponent<Transform>().scale = Vector2D_float(5 * 16 * RATIO, 5 * 16 * RATIO);
+    gameObject->AddComponent<SpriteRenderer>("B_MESH", "B_TEX", 0.0f, &camera, false);
+    
+    gameObject->AddComponent<BoxCollider2D>(BoxCollider2D::ASSET_COLLISION, gameObject->GetComponent<Transform>().scale.x, gameObject->GetComponent<Transform>().scale.y ,
+        true /* overlap */, false /* movable */, "BENNY_ANIM_MESH", &camera);
+    gameObject->AddComponent<UI_Box>();
+    gameObject->GetComponent<UI_Box>().Attach(&gui_arr);
 
     objManager.PushObject(gameObject);
     levelManager.AddObject(gameObject);
@@ -348,5 +363,6 @@ void MainMenu::Draw()
 void MainMenu::Update()
 {
     manager->Update();
+    levelManager.AbilityControl();
     gui_arr.OnUpdate();
 }

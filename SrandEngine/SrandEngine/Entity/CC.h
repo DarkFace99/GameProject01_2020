@@ -17,7 +17,8 @@ public:						// Not sure if this the best way to implement it.
 		MACHO,
 		CHERRY,
 		PEAR,
-		BARTER
+		BARTER,
+		UI_Box
 	};
 
 
