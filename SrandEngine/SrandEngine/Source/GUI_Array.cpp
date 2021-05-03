@@ -35,20 +35,24 @@ void Srand::GUI_Array::OnUpdate()
 {
 	if (m_activate)
 	{
-		m_interactable[m_index]->GetComponent<GUI_Button>().OnSelect();
+		bool isButton = m_interactable[m_index]->HasComponent<GUI_Button>();
+		if (isButton) { m_interactable[m_index]->GetComponent<GUI_Button>().OnSelect(); }
+		else { m_interactable[m_index]->GetComponent<GUI_Slider>().OnSelect(); }
 
 		if (m_overrideFunc == nullptr)
 		{
 			if (input.IsKeyPressed(SR_KEY_UP) && !isUpPressed)
 			{
-				m_interactable[m_index]->GetComponent<GUI_Button>().DeSelect();
+				if (isButton) { m_interactable[m_index]->GetComponent<GUI_Button>().DeSelect(); }
+				else { m_interactable[m_index]->GetComponent<GUI_Slider>().DeSelect(); }
 				m_index = Abs((m_index - 1) % m_interactable.size());
 				isUpPressed = true;
 				SR_TRACE("Index: {0}", m_index);
 			}
 			else if (input.IsKeyPressed(SR_KEY_DOWN) && !isDownPressed)
 			{
-				m_interactable[m_index]->GetComponent<GUI_Button>().DeSelect();
+				if (isButton) { m_interactable[m_index]->GetComponent<GUI_Button>().DeSelect(); }
+				else { m_interactable[m_index]->GetComponent<GUI_Slider>().DeSelect(); }
 				m_index = Abs((m_index + 1) % m_interactable.size());
 				isDownPressed = true;
 				SR_TRACE("Index: {0}", m_index);
@@ -73,7 +77,7 @@ void Srand::GUI_Array::OnUpdate()
 		}
 
 		/* Activate key */
-		if (input.IsKeyPressed(SR_KEY_SPACE))
+		if (input.IsKeyPressed(SR_KEY_SPACE) && isButton)
 		{
 			m_interactable[m_index]->GetComponent<GUI_Button>().OnActivate();
 		}
@@ -109,3 +113,4 @@ void Srand::GUI_Array::PushGUI(GameObject* gui)
 		m_interactable.push_back(gui);
 	}
 }
+

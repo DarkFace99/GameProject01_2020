@@ -22,6 +22,7 @@ namespace Srand
 		void SetIndex(int i);
 		int GetIndex();
 		
+		void Conceal();
 		void SelectedOffset(int, int);
 	private:
 		std::string name = "";
@@ -31,5 +32,6 @@ namespace Srand
 		int originX, originY, shiftX, shiftY;
 		bool isSelected = false;
 		bool isShifted = false;
+		bool isConcealed = false;
 	};
 }

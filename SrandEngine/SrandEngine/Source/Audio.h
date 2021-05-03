@@ -9,20 +9,29 @@ using namespace irrklang;
 
 namespace Srand
 {
+	enum class SoundType
+	{
+		DEFAULT,
+		MUSIC,
+		EFFECT
+	};
+
 	struct AudioSource 
 	{
 		std::string name;
 		std::string filePath;
 		float volume;
 		bool isLoopable;
+		SoundType type;
 
 		AudioSource() = default;
-		AudioSource(std::string name, float volume, bool isLoopable, std::string filePath)
+		AudioSource(std::string name, float volume, bool isLoopable, std::string filePath, SoundType type = SoundType::DEFAULT)
 		{
 			this->name = name;
 			this->filePath = filePath;
 			this->volume = volume;
 			this->isLoopable = isLoopable;
+			this->type = type;
 		}
 	};
 
@@ -96,5 +105,12 @@ namespace Srand
 		/// Stop current playing audio and drop its pointer
 		/// </summary>
 		void Stop();
+
+		/// <summary>
+		/// Change volume of selected sound type by a 10% step
+		/// </summary>
+		/// <param name="mode"> : 1 for increase the volume and else for decrease</param>
+		/// <param name="type"> : type of sound that need volume change</param>
+		void ChangeVolume(int mode = 1, SoundType type = SoundType::DEFAULT);
 	};
 }
