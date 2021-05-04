@@ -24,6 +24,8 @@ namespace Srand
 		bool isLoopable;
 		SoundType type;
 
+		bool isPlayed = false;
+
 		AudioSource() = default;
 		AudioSource(std::string name, float volume, bool isLoopable, std::string filePath, SoundType type = SoundType::DEFAULT)
 		{

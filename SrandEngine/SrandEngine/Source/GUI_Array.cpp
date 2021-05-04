@@ -77,9 +77,14 @@ void Srand::GUI_Array::OnUpdate()
 		}
 
 		/* Activate key */
-		if (input.IsKeyPressed(SR_KEY_SPACE) && isButton)
+		if (input.IsKeyPressed(SR_KEY_SPACE) && isButton && !isSpacePressed)
 		{
 			m_interactable[m_index]->GetComponent<GUI_Button>().OnActivate();
+			isSpacePressed = true;
+		}
+		else if (input.IsKeyReleased(SR_KEY_SPACE) && isButton && isSpacePressed)
+		{
+			isSpacePressed = false;
 		}
 	}
 }

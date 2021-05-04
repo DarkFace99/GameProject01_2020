@@ -309,12 +309,12 @@ namespace Srand
         if (key == SR_KEY_M && action == GLFW_PRESS) {
             Engine::get().GoToScene(0);
         }
-        if (key == SR_KEY_I && action == GLFW_PRESS) {
+        /*if (key == SR_KEY_I && action == GLFW_PRESS) {
             WindowProperties::get().SetFullScreen(true);
         }
         else if (key == SR_KEY_O && action == GLFW_PRESS) {
             WindowProperties::get().SetFullScreen(false);
-        }
+        }*/
         /*if (key == SR_KEY_1 && action == GLFW_PRESS) 
         {
             currentScene->Clean();

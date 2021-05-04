@@ -53,6 +53,7 @@ namespace Srand
 		bool m_activate;
 		bool isUpPressed = false;
 		bool isDownPressed = false;
+		bool isSpacePressed = false;
 
 		WindowsInput input;
 	};
