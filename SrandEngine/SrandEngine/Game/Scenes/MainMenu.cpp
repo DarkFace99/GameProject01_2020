@@ -326,7 +326,7 @@ void MainMenu::Init()
     gui_arr.PushGUI(tempgui);
  
 
-
+    audioController.Stop();
     audioController.Play("Menu");
 }
 

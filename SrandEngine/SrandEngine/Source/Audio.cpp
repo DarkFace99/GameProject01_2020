@@ -65,7 +65,7 @@ namespace Srand
             return;
 
         sound->stop();
-        sound->drop();
+        //sound->drop();
 
         sound = nullptr;
 
@@ -77,10 +77,20 @@ namespace Srand
         {
             if (src.second->type == type) 
             {
+                //float volAmount = src.second->volume * (0.1f);
+
                 if(mode == 1)
-                    src.second->volume += src.second->volume * (0.1f);
+                    src.second->volume += 0.1f;
                 else
-                    src.second->volume -= src.second->volume * (0.1f);
+                    src.second->volume -= 0.1f;
+
+
+                if (src.second->volume < 0) 
+                    src.second->volume = 0.0f;
+                if (src.second->volume > 1)
+                    src.second->volume = 1.0f;
+
+                //SR_SYSTEM_TRACE("Vol: {0}", src.second->volume);
             }
         }
     }

@@ -496,6 +496,7 @@ void TestingScene::Init()
 
 #pragma endregion
     
+    audioController.Stop();
     audioController.Play("BGM");
 
 }
