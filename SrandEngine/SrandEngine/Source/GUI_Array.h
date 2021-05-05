@@ -44,6 +44,17 @@ namespace Srand
 
 		std::vector<GameObject*> m_interactable;
 
+		inline unsigned int isControl() { return m_inControl; }
+		inline void SetControl(bool con) { 
+			m_inControl = con; 
+			if (!con) {
+				bool isButton = m_interactable[m_index]->HasComponent<GUI_Button>();
+				if (isButton) { m_interactable[m_index]->GetComponent<GUI_Button>().DeSelect(); }
+				else { m_interactable[m_index]->GetComponent<GUI_Slider>().DeSelect(); }
+				m_index = 0;
+			}
+		}
+
 	private:
 		std::vector<GameObject*> m_vector;	
 		std::string name;
@@ -51,8 +62,10 @@ namespace Srand
 		int m_vectorIndex;
 
 		bool m_activate;
+		bool m_inControl = true;
 		bool isUpPressed = false;
 		bool isDownPressed = false;
+		bool isSpacePressed = false;
 
 		WindowsInput input;
 	};

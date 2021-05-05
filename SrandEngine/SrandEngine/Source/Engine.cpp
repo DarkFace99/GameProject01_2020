@@ -98,21 +98,20 @@ namespace Srand
         AssetManager::get().LoadMesh("ELEVATOR_STAND_MESH", 14, 14, 2, 1);
         AssetManager::get().LoadMesh("BUTTON_MESH", 14, 14, 2, 1);
 
-        AssetManager::get().LoadMesh("UI_BUTTON_MESH", 22, 22, 7, 2);
-        AssetManager::get().LoadMesh("UI_WORD6_MESH", 22, 22, 6, 1);
-        AssetManager::get().LoadMesh("UI_WORD5_MESH", 22, 22, 5, 1);
-        AssetManager::get().LoadMesh("UI_WORD3_MESH", 22, 22, 3, 1);
-        AssetManager::get().LoadMesh("UI_KEY_MESH", 22, 22);
+        AssetManager::get().LoadMesh("UI_BUTTON_MESH", 25, 25, 7, 2);
+        AssetManager::get().LoadMesh("UI_WORD6_MESH", 25, 25, 6, 1);
+        AssetManager::get().LoadMesh("UI_WORD5_MESH", 25, 25, 5, 1);
+        AssetManager::get().LoadMesh("UI_WORD3_MESH", 25, 25, 3, 1);
+        AssetManager::get().LoadMesh("UI_KEY_MESH", 25, 25);
 
-        AssetManager::get().LoadMesh("UI_BOARD_MESH", 44, 44, 40, 25);
-        AssetManager::get().LoadMesh("UI_DEFAULT_MESH", 44, 44, 10, 4);
-        AssetManager::get().LoadMesh("UI_SLIDER_BAR_MESH", 44, 44, 14, 2);
-        AssetManager::get().LoadMesh("UI_SLOT_ONOFF_MESH", 44, 44, 10, 2);
-        AssetManager::get().LoadMesh("UI_PIN_MESH", 44, 44, 2, 2);
+        AssetManager::get().LoadMesh("UI_BOARD_MESH", 25, 25, 20, 13);
+        AssetManager::get().LoadMesh("UI_DEFAULT_MESH", 25, 25, 6, 3);
+        AssetManager::get().LoadMesh("UI_SLIDER_BAR_MESH", 25, 25, 14, 2);
+        AssetManager::get().LoadMesh("UI_PIN_MESH", 25, 25);
 
-        AssetManager::get().LoadMesh("UI_SELECT_MESH", 22, 22, 14, 3);
-        AssetManager::get().LoadMesh("UI_SLOT_LEVEL_MESH", 22, 22, 2, 2);
-        AssetManager::get().LoadMesh("UI_SLOT_SELECT_MESH", 22, 22, 19, 3);
+        AssetManager::get().LoadMesh("UI_SELECT_MESH", 25, 25, 14, 3);
+        AssetManager::get().LoadMesh("UI_SLOT_LEVEL_MESH", 25, 25, 2, 2);
+        AssetManager::get().LoadMesh("UI_SLOT_SELECT_MESH", 25, 25, 19, 3);
         AssetManager::get().LoadMesh("TITLE_MESH", 20, 16, 20, 7);
 
         /* Texture */
@@ -309,12 +308,12 @@ namespace Srand
         if (key == SR_KEY_M && action == GLFW_PRESS) {
             Engine::get().GoToScene(0);
         }
-        if (key == SR_KEY_I && action == GLFW_PRESS) {
+        /*if (key == SR_KEY_I && action == GLFW_PRESS) {
             WindowProperties::get().SetFullScreen(true);
         }
         else if (key == SR_KEY_O && action == GLFW_PRESS) {
             WindowProperties::get().SetFullScreen(false);
-        }
+        }*/
         /*if (key == SR_KEY_1 && action == GLFW_PRESS) 
         {
             currentScene->Clean();

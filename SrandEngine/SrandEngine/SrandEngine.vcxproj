@@ -80,6 +80,7 @@
     <ClInclude Include="Source\WindowProperties.h" />
     <ClInclude Include="Source\WindowsInput.h" />
     <ClInclude Include="srpch.h" />
+    <ClInclude Include="Entity\UI_Box.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ECS\Collision.cpp" />

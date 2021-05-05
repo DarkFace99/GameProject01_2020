@@ -240,6 +240,9 @@
     <ClInclude Include="Source\GUI_Text.h">
       <Filter>SrandEngine\Graphic User Interface</Filter>
     </ClInclude>
+    <ClInclude Include="Entity\UI_Box.h">
+      <Filter>SrandEngine\Entity</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="imgui\imgui.cpp">

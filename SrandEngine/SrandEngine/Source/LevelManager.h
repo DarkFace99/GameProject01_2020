@@ -8,7 +8,7 @@
 #include "Entity/Cherry.h"
 #include "Entity/Pear.h"
 #include "Entity/Barter.h"
-
+#include "Entity/UI_Box.h"
 
 namespace Srand
 {
@@ -28,6 +28,7 @@ namespace Srand
 		GameObject* cherryObj = nullptr;
 		GameObject* pearObj = nullptr;
 		GameObject* barterObj = nullptr;
+		GameObject* ui_BoxObj = nullptr;
 
 		GameObject* goalObj = nullptr;
 		BoxCollider2D* goalCollider = nullptr;
@@ -47,6 +48,9 @@ namespace Srand
 		Transform* barterTransform = nullptr;
 		Barter* barter = nullptr;
 
+		Transform* ui_BoxTransform = nullptr;
+		UI_Box* ui_Box = nullptr;
+
 		bool choosingStage = false;
 		unsigned int cc_At = 0;
 		bool useAbility = false;
@@ -55,6 +59,7 @@ namespace Srand
 
 		bool isLevelClear = false;
 		int cc_Count = 0;
+		bool isUI_BoxPresent = false;
 		/*float xPoint;
 		float yPoint;
 		float yLine_Min;
@@ -98,6 +103,7 @@ namespace Srand
 			cherryObj = nullptr;
 			pearObj = nullptr;
 			barterObj = nullptr;
+			ui_BoxObj = nullptr;
 
 			bennyTransform = nullptr;
 			benny = nullptr;
@@ -121,6 +127,11 @@ namespace Srand
 			isLevelClear = false;
 			cc_Count = 0;
 			npc_Count = 0;
+
+			Transform* ui_BoxTransform = nullptr;
+			Barter* ui_Box = nullptr;
+
+			isUI_BoxPresent = false;
 		}
 
 		inline int VectorSize() { return cc_List.size(); }
@@ -185,6 +196,15 @@ namespace Srand
 					cc_Count++;
 					SR_SYSTEM_TRACE("Level: Found Barter");
 				}
+				else if (cc_List[i]->HasComponent<UI_Box>()) { // UI_Box
+					ui_BoxObj = cc_List[i];
+
+					isUI_BoxPresent = true;
+					ui_BoxTransform = &ui_BoxObj->GetComponent<Transform>();
+					ui_Box = &ui_BoxObj->GetComponent<UI_Box>();;
+					cc_Tag.push_back(CC::ccTag::UI_Box);
+					SR_SYSTEM_TRACE("Level: Found UI_Box");
+				}
 			}
 			if (isMachoFound) { macho->CopyCC_List(cc_List); }
 		}
@@ -217,7 +237,7 @@ namespace Srand
 						else if (cc_Tag[j] == CC::ccTag::CHERRY) { deltaVect = bennyTransform->position - cherryTransform->position; }
 						else if (cc_Tag[j] == CC::ccTag::PEAR) { deltaVect = bennyTransform->position - pearTransform->position; }
 						else if (cc_Tag[j] == CC::ccTag::BARTER) { deltaVect = bennyTransform->position - barterTransform->position; }
-						else { SR_SYSTEM_TRACE("CheckInRange: Error"); }
+						else if (cc_Tag[j] == CC::ccTag::UI_Box) { deltaVect = bennyTransform->position - ui_BoxTransform->position; }
 
 						magnitude = sqrt(pow(deltaVect.x, 2) + pow(deltaVect.y, 2));
 
@@ -274,7 +294,11 @@ namespace Srand
 						controlled_Tag = CC::ccTag::BARTER;
 						controlled_Transform = barterTransform;
 						barter->SetActive(true);
-
+					}if (inRange_Tag[cc_At] == CC::ccTag::UI_Box) {
+						controlled_Tag = CC::ccTag::UI_Box;
+						controlled_Transform = ui_BoxTransform;
+						benny->SetActive(false);
+						ui_Box->SetAttach(true);
 					}
 
 					useAbility = true;
@@ -309,6 +333,9 @@ namespace Srand
 					else if (inRange_Tag[cc_At] == CC::ccTag::BARTER) {
 						SR_SYSTEM_TRACE("Choose: BARTER");
 					}
+					else if (inRange_Tag[cc_At] == CC::ccTag::UI_Box) {
+						SR_SYSTEM_TRACE("Choose: UI_Box");
+					}
 					
 				}
 				
@@ -318,7 +345,7 @@ namespace Srand
 				
 				Vector2D_float deltaVect = bennyTransform->position - controlled_Transform->position;;
 				float magnitude = sqrt(pow(deltaVect.x, 2) + pow(deltaVect.y, 2));
-				SR_SYSTEM_TRACE("Magnitude: {0}\t({1})", magnitude, benny->GetRadius());
+				//SR_SYSTEM_TRACE("Magnitude: {0}\t({1})", magnitude, benny->GetRadius());
 				if (magnitude > benny->GetRadius()) { isCancel = true; } //disconnect
 				else if (input.IsKeyPressed(SR_KEY_X)) { isCancel = true; } // manual
 				else if (controlled_Tag == CC::ccTag::BARTER) { isCancel = true; } // Barter
@@ -339,6 +366,10 @@ namespace Srand
 					}
 					else if (controlled_Tag == CC::ccTag::PEAR) {
 						pear->SetActive(false);
+					}
+					else if (controlled_Tag == CC::ccTag::UI_Box) {
+						benny->SetActive(true);
+						ui_Box->SetAttach(false);
 					}
 					/*else if (controlled_Tag == CC::ccTag::BARTER) {
 						barter->SetActive(false);
