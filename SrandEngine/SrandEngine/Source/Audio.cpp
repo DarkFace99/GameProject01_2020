@@ -64,10 +64,9 @@ namespace Srand
         if (sound == nullptr)
             return;
 
-        sound->stop();
-        //sound->drop();
+        m_engine->stopAllSounds();
 
-        sound = nullptr;
+        //sound = nullptr;
 
         play = false;
     }
@@ -94,5 +93,38 @@ namespace Srand
             }
         }
     }
+
+    std::pair<float, float> AudioController::GetVolume()
+    {
+        bool foundM = false;
+        bool foundE = false;
+
+        std::pair<float, float> return_pair;
+
+        for (auto& src : m_soundSource) 
+        {
+            if (!foundM && src.second->type == SoundType::MUSIC) 
+            {
+                return_pair.first = src.second->volume;
+                foundM = true;
+            }
+            else if (foundM)
+            {
+                continue;
+            }
+            if (!foundE && src.second->type == SoundType::EFFECT)
+            {
+                return_pair.second = src.second->volume;
+                foundE = true;
+            }
+            else if (foundE)
+            {
+                continue;
+            }
+        }
+
+        return return_pair;
+    }
+    
 }
 

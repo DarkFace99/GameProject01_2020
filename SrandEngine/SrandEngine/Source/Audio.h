@@ -114,5 +114,7 @@ namespace Srand
 		/// <param name="mode"> : 1 for increase the volume and else for decrease</param>
 		/// <param name="type"> : type of sound that need volume change</param>
 		void ChangeVolume(int mode = 1, SoundType type = SoundType::DEFAULT);
+
+		std::pair<float, float> GetVolume();
 	};
 }
