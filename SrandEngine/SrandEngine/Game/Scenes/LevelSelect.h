@@ -10,7 +10,7 @@ private:
 	GUI_Array gui_arr;
 
 	// for testing
-	int progress = 3;
+	
 	WindowsInput input;
 
 public:

@@ -207,7 +207,7 @@ namespace Srand
         currentScene->Init();
     }
 
-    void Engine::LoadSave()
+    void Engine::LoadSave(bool &fullscreen, float &volM, float &volE, int &proc)
     {
         std::ifstream inStream("saveFile.dat");
         if (!inStream.is_open()) 
@@ -218,7 +218,17 @@ namespace Srand
         }
         else 
         {
-            
+            std::string line;
+            std::string full, mvol, evol, lproc;
+            while (std::getline(inStream, line)) 
+            {
+                std::stringstream lineStream(line);
+
+                std::getline(lineStream, full);
+                std::getline(lineStream, mvol);
+                std::getline(lineStream, evol);
+                std::getline(lineStream, lproc);
+            }
         }
     }
     void Engine::WriteSave()
@@ -231,7 +241,17 @@ namespace Srand
         }
         else 
         {
-            
+            /* Window */
+            outStream << WindowProperties::get().GetFullScreenStatus() << std::endl;
+
+            /* Audio */
+            outStream << audioController.GetVolume().first << std::endl;
+            outStream << audioController.GetVolume().second << std::endl;
+
+            /* Stage */
+            outStream << currentScene->GetProgress() << std::endl;
+
+            outStream.close();
         }
     }
 
