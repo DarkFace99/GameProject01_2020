@@ -7,6 +7,8 @@
 #include "Source/SceneManager.h"
 
 #include "Game/Scenes/MainMenu.h"
+#include "Game/Scenes/Setting.h"
+#include "Game/Scenes/LevelSelect.h"
 #include "Game/Scenes/testing_scene.h"
 #include "Game/Scenes/Level2.h"
 #include "Game/Scenes/Level3.h"
@@ -90,11 +92,11 @@ namespace Srand
         AssetManager::get().LoadMesh("PEAR_ANIM_MESH", 19);
         AssetManager::get().LoadMesh("BARTER_ANIM_MESH");
         AssetManager::get().LoadMesh("NPC_ANIM_MESH", 2);
-        AssetManager::get().LoadMesh("DOOR_STAND_MESH", 10, 13);
-        AssetManager::get().LoadMesh("DOOR_MESH", 10, 13, 1, 4);
-        AssetManager::get().LoadMesh("ELEVATOR_MESH", 10, 13, 2, 2);
-        AssetManager::get().LoadMesh("ELEVATOR_STAND_MESH", 10, 13, 2, 1);
-        AssetManager::get().LoadMesh("BUTTON_MESH", 10, 13, 2, 1);
+        AssetManager::get().LoadMesh("1x1_MESH", 14, 14);
+        AssetManager::get().LoadMesh("DOOR_MESH", 14, 14, 1, 4);
+        AssetManager::get().LoadMesh("2x2_MESH", 14, 14, 2, 2);
+        AssetManager::get().LoadMesh("ELEVATOR_STAND_MESH", 14, 14, 2, 1);
+        AssetManager::get().LoadMesh("BUTTON_MESH", 14, 14, 2, 1);
 
         AssetManager::get().LoadMesh("UI_BUTTON_MESH", 22, 22, 7, 2);
         AssetManager::get().LoadMesh("UI_WORD6_MESH", 22, 22, 6, 1);
@@ -102,13 +104,16 @@ namespace Srand
         AssetManager::get().LoadMesh("UI_WORD3_MESH", 22, 22, 3, 1);
         AssetManager::get().LoadMesh("UI_KEY_MESH", 22, 22);
 
-        AssetManager::get().LoadMesh("UI_BOARD_MESH", 22, 22, 20, 13);
-        AssetManager::get().LoadMesh("UI_DEFAULT_MESH", 22, 22, 6, 3);
-        AssetManager::get().LoadMesh("UI_SLIDER_BAR_MESH", 22, 22, 7, 1);
-        AssetManager::get().LoadMesh("UI_SLOT_ONOFF_MESH", 22, 22, 5, 1);
+        AssetManager::get().LoadMesh("UI_BOARD_MESH", 44, 44, 40, 25);
+        AssetManager::get().LoadMesh("UI_DEFAULT_MESH", 44, 44, 10, 4);
+        AssetManager::get().LoadMesh("UI_SLIDER_BAR_MESH", 44, 44, 14, 2);
+        AssetManager::get().LoadMesh("UI_SLOT_ONOFF_MESH", 44, 44, 10, 2);
+        AssetManager::get().LoadMesh("UI_PIN_MESH", 44, 44, 2, 2);
 
         AssetManager::get().LoadMesh("UI_SELECT_MESH", 22, 22, 14, 3);
         AssetManager::get().LoadMesh("UI_SLOT_LEVEL_MESH", 22, 22, 2, 2);
+        AssetManager::get().LoadMesh("UI_SLOT_SELECT_MESH", 22, 22, 19, 3);
+        AssetManager::get().LoadMesh("TITLE_MESH", 20, 16, 20, 7);
 
         /* Texture */
         AssetManager::get().LoadTexture("BG_TEX", "Background.png");
@@ -120,13 +125,15 @@ namespace Srand
         AssetManager::get().LoadTexture("PEAR_ANIM_TEX", "Pear_SpriteShee.png");
         AssetManager::get().LoadTexture("BARTER_ANIM_TEX", "Barther.png");
         AssetManager::get().LoadTexture("NPC_ANIM_TEX", "NPC_Animation_Sheet.png");
-        AssetManager::get().LoadTexture("LEVEL_ASSET_TEX", "Level_Assets_00.png");
+        AssetManager::get().LoadTexture("LEVEL_ASSET_TEX", "NEW_ASSETS/ART_BENNY/LEVEL_COMPONENT/ASSETS/ingame_assets.png");
         AssetManager::get().LoadTexture("LEVEL_SELECT_ASSET_TEX", "NEW_ASSETS/ART_BENNY/UI/ASSETS/level_select_ui.png");
         AssetManager::get().LoadTexture("MENU_ASSET_TEX", "NEW_ASSETS/ART_BENNY/UI/ASSETS/menu_ui.png");
-        AssetManager::get().LoadTexture("SETTING_ASSET_TEX", "NEW_ASSETS/ART_BENNY/UI/ASSETS/setting_ui.png");
+        AssetManager::get().LoadTexture("SETTING_ASSET_TEX", "NEW_ASSETS/ART_BENNY/UI/ASSETS/setting_ui_old.png");
+        AssetManager::get().LoadTexture("TITLE_TEX", "NEW_ASSETS/ART_BENNY/TITLE/TITLE.png");
 
         /* Audio */
         audioController.AddAudioSource(new AudioSource("BGM", 1.0f, true, "The Happy Man.mp3", SoundType::MUSIC));
+        audioController.AddAudioSource(new AudioSource("Menu", 1.0f, true, "So_Happy_World.mp3", SoundType::MUSIC));
         audioController.AddAudioSource(new AudioSource("Activate", 1.0f, false, "Activate.mp3", SoundType::EFFECT));
         audioController.AddAudioSource(new AudioSource("Barter_swap", 1.0f, false, "Barter_swap.mp3", SoundType::EFFECT));
         audioController.AddAudioSource(new AudioSource("Char_fall", 1.0f, false, "Char_fall.mp3", SoundType::EFFECT));
@@ -144,6 +151,8 @@ namespace Srand
 
 #pragma region SceneLoading
         sceneManager.PushScene(new MainMenu());
+        sceneManager.PushScene(new Setting());
+        sceneManager.PushScene(new LevelSelect());
         sceneManager.PushScene(new TestingScene());
         sceneManager.PushScene(new Level2());
         sceneManager.PushScene(new Level3());
@@ -294,8 +303,11 @@ namespace Srand
     }
     void window_key_callback(GLFWwindow* window, int key, int scancode, int action, int mods) 
     {
-        if (key == SR_KEY_0 && action == GLFW_PRESS) {
+        if (key == SR_KEY_N && action == GLFW_PRESS) {
             Engine::get().NextScene();
+        }
+        if (key == SR_KEY_M && action == GLFW_PRESS) {
+            Engine::get().GoToScene(0);
         }
         if (key == SR_KEY_I && action == GLFW_PRESS) {
             WindowProperties::get().SetFullScreen(true);

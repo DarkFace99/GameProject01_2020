@@ -23,7 +23,8 @@ namespace Srand
 		{
 			DEFAULT,
 			BUTTON,
-			SLIDER
+			SLIDER,
+			TEXT
 		};
 
 		inline void SetType(Type tag) { m_type = tag; }
@@ -40,8 +41,8 @@ namespace Srand
 		virtual void DeSelect();
 		virtual void OnActivate();
 
-		_FUNC m_function = nullptr; // on activated
-		//_FUNC n_function = nullptr; // on selected
+		_FUNC m_function = nullptr; 
+		_FUNC n_function = nullptr; 
 	protected:
 		Vector2D_float center;
 		Vector2D_float dimension;

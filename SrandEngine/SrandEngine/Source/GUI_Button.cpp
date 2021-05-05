@@ -35,22 +35,31 @@ void Srand::GUI_Button::SelectedOffset(int x, int y) {
 	isShifted = true;
 }
 
+void Srand::GUI_Button::Conceal() {
+	isConcealed = true;
+	renderer->SetAlpha(0.0f);
+}
+
 void Srand::GUI_Button::OnSelect()
 {
-	SR_TRACE("Button {0}: Selected", name);
+	//SR_TRACE("Button {0}: Selected", name);
 	if (!isSelected && isShifted) {
 		isSelected = true;
 		tileSelector->SetTile(shiftX, shiftY);
+	}
+	else if (!isSelected && isConcealed) {
+		isSelected = true;
+		renderer->SetAlpha(1.0f);
 	}
 	
 }
 
 void Srand::GUI_Button::DeSelect()
 {
-	if (isShifted) {
-		isSelected = false;
+	isSelected = false;
+	if (isShifted) {	
 		tileSelector->SetTile(originX, originY);
-	}
+	}if (isConcealed) { renderer->SetAlpha(0.0f); }
 }
 
 void Srand::GUI_Button::OnActivate()

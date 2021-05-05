@@ -145,8 +145,8 @@ void TestingScene::Init()
         gameObject->GetComponent<Transform>().scale = Vector2D_float(32.0f * RATIO, 16.0f * RATIO);
 
         gameObject->AddComponent<SpriteRenderer>(SpriteRenderer::ASSET_LAYER, "BUTTON_MESH", "LEVEL_ASSET_TEX", 1.0f, &camera, false);
-        gameObject->AddComponent<TileSelector>(10, 13);
-        gameObject->GetComponent<TileSelector>().SetTile(1, 2);
+        gameObject->AddComponent<TileSelector>(14, 14);
+        gameObject->GetComponent<TileSelector>().SetTile(1, 3);
 
         gameObject->AddComponent<BoxCollider2D>(BoxCollider2D::ASSET_COLLISION, gameObject->GetComponent<Transform>().scale.x, gameObject->GetComponent<Transform>().scale.y / 2.0f,
             true, false/*, "BUTTON_MESH", &camera*/);
@@ -164,8 +164,8 @@ void TestingScene::Init()
         gameObject->GetComponent<Transform>().scale = Vector2D_float(32.0f * RATIO, 16.0f * RATIO);
 
         gameObject->AddComponent<SpriteRenderer>(SpriteRenderer::ASSET_LAYER, "BUTTON_MESH", "LEVEL_ASSET_TEX", 1.0f, &camera, false);
-        gameObject->AddComponent<TileSelector>(10, 13);
-        gameObject->GetComponent<TileSelector>().SetTile(4, 2);
+        gameObject->AddComponent<TileSelector>(14, 14);
+        gameObject->GetComponent<TileSelector>().SetTile(4, 3);
 
         gameObject->AddComponent<BoxCollider2D>(BoxCollider2D::ASSET_COLLISION, gameObject->GetComponent<Transform>().scale.x, gameObject->GetComponent<Transform>().scale.y / 2.0f,
             true, false/*, "BUTTON_MESH", &camera*/);
@@ -183,8 +183,8 @@ void TestingScene::Init()
         gameObject->GetComponent<Transform>().scale = Vector2D_float(32.0f * RATIO, 16.0f * RATIO);
 
         gameObject->AddComponent<SpriteRenderer>(SpriteRenderer::ASSET_LAYER, "BUTTON_MESH", "LEVEL_ASSET_TEX", 1.0f, &camera, false);
-        gameObject->AddComponent<TileSelector>(10, 13);
-        gameObject->GetComponent<TileSelector>().SetTile(4, 2);
+        gameObject->AddComponent<TileSelector>(14, 14);
+        gameObject->GetComponent<TileSelector>().SetTile(4, 3);
 
         gameObject->AddComponent<BoxCollider2D>(BoxCollider2D::ASSET_COLLISION, gameObject->GetComponent<Transform>().scale.x, gameObject->GetComponent<Transform>().scale.y / 2.0f,
             true, false/*, "BUTTON_MESH", &camera*/);
@@ -204,9 +204,9 @@ void TestingScene::Init()
         gameObject->GetComponent<Transform>().position = Vector2D_float((-240.0f + 8 + (14 * 16)) * RATIO, (_midPointY + _offset + (10 * _tileSize)) * RATIO);
         gameObject->GetComponent<Transform>().scale = Vector2D_float(16.0f * RATIO, 16.0f * RATIO);
 
-        gameObject->AddComponent<SpriteRenderer>(SpriteRenderer::ASSET_LAYER, "DOOR_STAND_MESH", "LEVEL_ASSET_TEX", 1.0f, &camera, false);
-        gameObject->AddComponent<TileSelector>(10, 13);
-        gameObject->GetComponent<TileSelector>().SetTile(1, 6);
+        gameObject->AddComponent<SpriteRenderer>(SpriteRenderer::ASSET_LAYER, "1x1_MESH", "LEVEL_ASSET_TEX", 1.0f, &camera, false);
+        gameObject->AddComponent<TileSelector>(14, 14);
+        gameObject->GetComponent<TileSelector>().SetTile(1, 7);
 
         // 2
         gameObject = new GameObject();
@@ -216,9 +216,9 @@ void TestingScene::Init()
         gameObject->GetComponent<Transform>().scale = Vector2D_float(16.0f * RATIO, 16.0f * RATIO);
         gameObject->GetComponent<Transform>().rotationAngle = 90;
 
-        gameObject->AddComponent<SpriteRenderer>(SpriteRenderer::ASSET_LAYER, "DOOR_STAND_MESH", "LEVEL_ASSET_TEX", 1.0f, &camera, false);
-        gameObject->AddComponent<TileSelector>(10, 13);
-        gameObject->GetComponent<TileSelector>().SetTile(3, 6);
+        gameObject->AddComponent<SpriteRenderer>(SpriteRenderer::ASSET_LAYER, "1x1_MESH", "LEVEL_ASSET_TEX", 1.0f, &camera, false);
+        gameObject->AddComponent<TileSelector>(14, 14);
+        gameObject->GetComponent<TileSelector>().SetTile(3, 7);
     }
 
     // DOOR
@@ -231,8 +231,8 @@ void TestingScene::Init()
         gameObject->GetComponent<Transform>().scale = Vector2D_float(16.0f * RATIO, 64.0f * RATIO);
 
         gameObject->AddComponent<SpriteRenderer>(SpriteRenderer::ASSET_LAYER, "DOOR_MESH", "LEVEL_ASSET_TEX", 1.0f, &camera, false);
-        gameObject->AddComponent<TileSelector>(10, 13);
-        gameObject->GetComponent<TileSelector>().SetTile(1, 8);
+        gameObject->AddComponent<TileSelector>(14, 14);
+        gameObject->GetComponent<TileSelector>().SetTile(1, 9);
 
         gameObject->AddComponent<BoxCollider2D>(BoxCollider2D::DOOR_COLLISION, gameObject->GetComponent<Transform>().scale.x, gameObject->GetComponent<Transform>().scale.y,
             false, false/*, "DOOR_MESH", &camera*/);
@@ -250,8 +250,8 @@ void TestingScene::Init()
         gameObject->GetComponent<Transform>().rotationAngle = 90;
 
         gameObject->AddComponent<SpriteRenderer>(SpriteRenderer::ASSET_LAYER, "DOOR_MESH", "LEVEL_ASSET_TEX", 1.0f, &camera, false);
-        gameObject->AddComponent<TileSelector>(10, 13);
-        gameObject->GetComponent<TileSelector>().SetTile(3, 8);
+        gameObject->AddComponent<TileSelector>(14, 14);
+        gameObject->GetComponent<TileSelector>().SetTile(3, 9);
 
         gameObject->AddComponent<BoxCollider2D>(BoxCollider2D::DOOR_COLLISION, gameObject->GetComponent<Transform>().scale.x, gameObject->GetComponent<Transform>().scale.y,
             false, false/*, "DOOR_MESH", &camera*/);
@@ -271,9 +271,9 @@ void TestingScene::Init()
         gameObject->GetComponent<Transform>().position = Vector2D_float((-240.0f + (7 * 16)) * RATIO, (-135.0f + 16) * RATIO);
         gameObject->GetComponent<Transform>().scale = Vector2D_float(32.0f * RATIO, 32.0f * RATIO);
 
-        gameObject->AddComponent<SpriteRenderer>(SpriteRenderer::ASSET_LAYER, "ELEVATOR_MESH", "LEVEL_ASSET_TEX", 1.0f, &camera, false);
-        gameObject->AddComponent<TileSelector>(10, 13);
-        gameObject->GetComponent<TileSelector>().SetTile(1, 4);
+        gameObject->AddComponent<SpriteRenderer>(SpriteRenderer::ASSET_LAYER, "2x2_MESH", "LEVEL_ASSET_TEX", 1.0f, &camera, false);
+        gameObject->AddComponent<TileSelector>(14, 14);
+        gameObject->GetComponent<TileSelector>().SetTile(1, 5);
 
         gameObject->AddComponent<BoxCollider2D>(BoxCollider2D::ELEVATOR_COLLISION, gameObject->GetComponent<Transform>().scale.x, gameObject->GetComponent<Transform>().scale.y / 8.0f,
             false, false/*, "ELEVATOR_MESH", &camera*/);
@@ -290,9 +290,9 @@ void TestingScene::Init()
         gameObject->GetComponent<Transform>().position = Vector2D_float((-240.0f + (25 * 16)) * RATIO, (-135.0f + 80) * RATIO);
         gameObject->GetComponent<Transform>().scale = Vector2D_float(32.0f * RATIO, 32.0f * RATIO);
 
-        gameObject->AddComponent<SpriteRenderer>(SpriteRenderer::ASSET_LAYER, "ELEVATOR_MESH", "LEVEL_ASSET_TEX", 1.0f, &camera, false);
-        gameObject->AddComponent<TileSelector>(10, 13);
-        gameObject->GetComponent<TileSelector>().SetTile(4, 4);
+        gameObject->AddComponent<SpriteRenderer>(SpriteRenderer::ASSET_LAYER, "2x2_MESH", "LEVEL_ASSET_TEX", 1.0f, &camera, false);
+        gameObject->AddComponent<TileSelector>(14, 14);
+        gameObject->GetComponent<TileSelector>().SetTile(4, 5);
 
         gameObject->AddComponent<BoxCollider2D>(BoxCollider2D::ELEVATOR_COLLISION, gameObject->GetComponent<Transform>().scale.x, gameObject->GetComponent<Transform>().scale.y / 8.0f,
             false, false/*, "ELEVATOR_MESH", &camera*/);
@@ -314,8 +314,8 @@ void TestingScene::Init()
         gameObject->GetComponent<Transform>().scale = Vector2D_float(32.0f * RATIO, 16.0f * RATIO);
 
         gameObject->AddComponent<SpriteRenderer>(SpriteRenderer::ASSET_LAYER, "ELEVATOR_STAND_MESH", "LEVEL_ASSET_TEX", 1.0f, &camera, false);
-        gameObject->AddComponent<TileSelector>(10, 13);
-        gameObject->GetComponent<TileSelector>().SetTile(1, 3);
+        gameObject->AddComponent<TileSelector>(14, 14);
+        gameObject->GetComponent<TileSelector>().SetTile(1, 4);
 
         // 2
         gameObject = new GameObject();
@@ -325,8 +325,8 @@ void TestingScene::Init()
         gameObject->GetComponent<Transform>().scale = Vector2D_float(32.0f * RATIO, 16.0f * RATIO);
 
         gameObject->AddComponent<SpriteRenderer>(SpriteRenderer::ASSET_LAYER, "ELEVATOR_STAND_MESH", "LEVEL_ASSET_TEX", 1.0f, &camera, false);
-        gameObject->AddComponent<TileSelector>(10, 13);
-        gameObject->GetComponent<TileSelector>().SetTile(4, 3);
+        gameObject->AddComponent<TileSelector>(14, 14);
+        gameObject->GetComponent<TileSelector>().SetTile(4, 4);
     }
 
 #pragma endregion
@@ -496,6 +496,7 @@ void TestingScene::Init()
 
 #pragma endregion
     
+    audioController.Stop();
     audioController.Play("BGM");
 
 }

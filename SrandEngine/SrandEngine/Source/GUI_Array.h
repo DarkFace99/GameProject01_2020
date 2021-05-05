@@ -6,6 +6,7 @@
 #include "KeyCode.h"
 #include "GUI_Button.h"
 #include "GUI_Slider.h"
+#include "GUI_Text.h"
 
 namespace Srand
 {
@@ -20,12 +21,17 @@ namespace Srand
 		void OnUpdate();
 		void Clear();
 
+		void Override(_FUNC func);
+		void ResetOverride();
+
 		inline void SetName(std::string name) { this->name = name; }
 		inline void SetStatus(bool status) { this->m_activate = status; }
 
 		void PushGUI(GameObject* gui);
 
 		inline unsigned int Index() { return m_index; }
+		inline unsigned int SetIndex(int num) { m_index = num; }
+
 		inline bool GetStatus() { return m_activate; }
 
 		inline int VectorSize() { return m_vector.size(); }
@@ -34,8 +40,12 @@ namespace Srand
 		inline std::vector<GameObject*>::iterator begin() { return m_vector.begin(); }
 		inline std::vector<GameObject*>::iterator end() { return m_vector.end(); }
 
+		_FUNC m_overrideFunc = nullptr;
+
+		std::vector<GameObject*> m_interactable;
+
 	private:
-		std::vector<GameObject*> m_vector;
+		std::vector<GameObject*> m_vector;	
 		std::string name;
 		unsigned int m_index;
 		int m_vectorIndex;
