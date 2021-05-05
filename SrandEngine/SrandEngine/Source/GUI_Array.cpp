@@ -33,7 +33,7 @@ void Srand::GUI_Array::OnDraw()
 }
 void Srand::GUI_Array::OnUpdate()
 {
-	if (m_activate)
+	if (m_activate && m_inControl)
 	{
 		bool isButton = m_interactable[m_index]->HasComponent<GUI_Button>();
 		if (isButton) { m_interactable[m_index]->GetComponent<GUI_Button>().OnSelect(); }

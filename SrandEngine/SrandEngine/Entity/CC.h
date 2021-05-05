@@ -57,6 +57,9 @@ public:						// Not sure if this the best way to implement it.
 		else if (input.IsKeyPressed(SR_KEY_RIGHT)) {
 			rigidBody->SetVelocityX(3.0f);
 		}
+		else if (input.IsKeyPressed(SR_KEY_DOWN)) {
+		// do nothing
+		}
 
 		//SR_TRACE("VelX: {0}", rigidBody->GetVelocityX());
 

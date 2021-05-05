@@ -298,7 +298,7 @@ namespace Srand
 						controlled_Tag = CC::ccTag::UI_Box;
 						controlled_Transform = ui_BoxTransform;
 						benny->SetActive(false);
-						ui_Box->SetActive(true);
+						ui_Box->SetAttach(true);
 					}
 
 					useAbility = true;
@@ -369,7 +369,7 @@ namespace Srand
 					}
 					else if (controlled_Tag == CC::ccTag::UI_Box) {
 						benny->SetActive(true);
-						ui_Box->SetActive(false);
+						ui_Box->SetAttach(false);
 					}
 					/*else if (controlled_Tag == CC::ccTag::BARTER) {
 						barter->SetActive(false);

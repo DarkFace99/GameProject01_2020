@@ -18,5 +18,5 @@ public:
 		this->gui_arr = gui_arr;
 	}
 
-	inline void SetActive(bool con) { isActive = con; }
+	inline void SetAttach(bool con) { gui_arr->SetControl(con); }
 };
