@@ -24,8 +24,10 @@ namespace Srand
 		int wndPos[2];
 		int wndSize[2];
 
-		WindowProperties()
+		WindowProperties(bool fullscreen = false)
 		{
+			this->enableFullScreen = fullscreen;
+
 			/* Create a windowed mode window and its OpenGL context */
 			SR_SYSTEM_INFO("Initializing Window...");
 			monitor = glfwGetPrimaryMonitor();
@@ -51,6 +53,14 @@ namespace Srand
 			if (s_instance == nullptr)
 			{
 				s_instance = new WindowProperties();
+			}
+			return *s_instance;
+		}
+		inline static WindowProperties& get(bool full)
+		{
+			if (s_instance == nullptr)
+			{
+				s_instance = new WindowProperties(full);
 			}
 			return *s_instance;
 		}
