@@ -88,6 +88,8 @@ void Srand::GUI_Array::OnUpdate()
 			isSpacePressed = false;
 		}
 	}
+
+	selector->Move();
 }
 void Srand::GUI_Array::Clear()
 {
