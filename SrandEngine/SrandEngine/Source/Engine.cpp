@@ -209,6 +209,7 @@ namespace Srand
         nextScene_Num %= sceneManager.VectorSize();
         currentScene = sceneManager[nextScene_Num];
         sceneManager.SetMaxIndex(nextScene_Num - 2);
+        sce->SetProgress(sceneManager.GetMaxIndex());
         currentScene->Init();
     }
 
@@ -218,6 +219,7 @@ namespace Srand
         nextScene_Num %= sceneManager.VectorSize();
         currentScene = sceneManager[nextScene_Num];
         sceneManager.SetMaxIndex(nextScene_Num - 2);
+        sce->SetProgress(sceneManager.GetMaxIndex());
         currentScene->Init();
     }
 
