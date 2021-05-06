@@ -505,6 +505,8 @@ void TestingScene::Init()
     audioController.Play("BGM");
     audioController.Find("BGM")->isPlayed = true;
 
+    //progress = 1;
+
 }
 void TestingScene::Clean()
 {
