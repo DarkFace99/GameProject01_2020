@@ -10,7 +10,7 @@ private:
 	GUI_Array gui_arr;
 
 	// for testing
-	
+	int progress;
 	WindowsInput input;
 
 public:
@@ -21,4 +21,7 @@ public:
 	virtual void Clean() override;
 	virtual void Draw() override;
 	virtual void Update() override;
+
+	inline void SetProgress(int proc) { progress = proc; }
+	inline int GetProgress() { return progress; }
 };

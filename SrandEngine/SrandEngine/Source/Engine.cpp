@@ -26,13 +26,15 @@ namespace Srand
     SceneManager& sceneManager = SceneManager::get();
     Scene* currentScene = nullptr;
 
+    LevelSelect* sce = nullptr;
+
     AudioController& audioController = AudioController::get();
 
     GLFWimage icons[1];
 
     bool isFullScreen = false;
     float volMusic = 1.0f, volEffect = 1.0f;
-    int levelProgress = 3;
+    int levelProgress = 0;
 
     Engine::Engine() {
         running = false;
@@ -192,7 +194,10 @@ namespace Srand
 
         //For Testing SceneManager Only
         currentScene = sceneManager[0];
-        currentScene->SetProgress(levelProgress);
+        //currentScene->SetProgress(levelProgress);
+        sceneManager.SetMaxIndex(levelProgress);
+        sce = dynamic_cast<LevelSelect*>(sceneManager.Search("LevelSelect"));
+        sce->SetProgress(levelProgress);
         currentScene->Init();
         
         running = true;
@@ -203,6 +208,7 @@ namespace Srand
         nextScene_Num++;
         nextScene_Num %= sceneManager.VectorSize();
         currentScene = sceneManager[nextScene_Num];
+        sceneManager.SetMaxIndex(nextScene_Num - 2);
         currentScene->Init();
     }
 
@@ -211,6 +217,7 @@ namespace Srand
         nextScene_Num = num;
         nextScene_Num %= sceneManager.VectorSize();
         currentScene = sceneManager[nextScene_Num];
+        sceneManager.SetMaxIndex(nextScene_Num - 2);
         currentScene->Init();
     }
 
@@ -264,7 +271,8 @@ namespace Srand
             outStream << audioController.GetVolume().second << std::endl;
 
             /* Stage */
-            outStream << currentScene->GetProgress() << std::endl;
+            if(sceneManager.GetMaxIndex() >= levelProgress)
+                outStream << sceneManager.GetMaxIndex() << std::endl;
 
             outStream.close();
         }
@@ -310,6 +318,7 @@ namespace Srand
         AssetManager::get().Clean();
         Shader::get()->DeleteShader();
 
+        //sce->SetProgress(sceneManager.GetMaxIndex());
         WriteSave();
         //For Testing SceneManager Only
         currentScene->Clean();

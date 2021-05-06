@@ -267,6 +267,8 @@ void Level3::Init()
 
     audioController.Play("BGM");
     audioController.Find("BGM")->isPlayed = true;
+
+    //progress = 3;
 }
 
 void Level3::Clean()
