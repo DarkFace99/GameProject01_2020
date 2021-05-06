@@ -24,7 +24,8 @@ namespace Srand
 			DEFAULT,
 			BUTTON,
 			SLIDER,
-			TEXT
+			TEXT,
+			SELECTOR
 		};
 
 		inline void SetType(Type tag) { m_type = tag; }

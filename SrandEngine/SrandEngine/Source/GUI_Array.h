@@ -7,6 +7,7 @@
 #include "GUI_Button.h"
 #include "GUI_Slider.h"
 #include "GUI_Text.h"
+#include "GUI_Selector.h"
 
 namespace Srand
 {
@@ -45,8 +46,8 @@ namespace Srand
 		std::vector<GameObject*> m_interactable;
 
 		inline unsigned int isControl() { return m_inControl; }
-		inline void SetControl(bool con) { 
-			m_inControl = con; 
+		inline void SetControl(bool con) {
+			m_inControl = con;
 			if (!con) {
 				bool isButton = m_interactable[m_index]->HasComponent<GUI_Button>();
 				if (isButton) { m_interactable[m_index]->GetComponent<GUI_Button>().DeSelect(); }
@@ -54,6 +55,8 @@ namespace Srand
 				m_index = 0;
 			}
 		}
+
+		void SetSelector(GUI_Selector* selector){ this->selector = selector; }
 
 	private:
 		std::vector<GameObject*> m_vector;	
@@ -66,6 +69,7 @@ namespace Srand
 		bool isUpPressed = false;
 		bool isDownPressed = false;
 		bool isSpacePressed = false;
+		GUI_Selector* selector = nullptr;
 
 		WindowsInput input;
 	};

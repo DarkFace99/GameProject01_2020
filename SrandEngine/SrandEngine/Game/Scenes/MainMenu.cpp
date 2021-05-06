@@ -345,6 +345,21 @@ void MainMenu::Init()
 
 #pragma endregion
 
+    // selector
+
+    tempgui = new GameObject();
+    //tempgui->GetComponent<Transform>().position = Vector2D_float(((6.5 * _tileSize) + _midPointX) * RATIO, (((13.95 - (i * 3)) * _tileSize) + _midPointY) * RATIO);
+    tempgui->GetComponent<Transform>().scale = Vector2D_float(8 * RATIO, 8 * RATIO);
+
+    tempgui->AddComponent<SpriteRenderer>(SpriteRenderer::GUI_LAYER, "B_MESH", "B_TEX", 1.0f, &camera, false);
+    tempgui->AddComponent<GUI_Selector>();
+    levelManager.SetSelector(&tempgui->GetComponent<GUI_Selector>());
+
+    gui_arr.SetSelector(&tempgui->GetComponent<GUI_Selector>());
+    gui_arr.PushGUI(tempgui);
+    
+
+    // title
     tempgui = new GameObject();
     tempgui->GetComponent<Transform>().position = Vector2D_float(((20 * _tileSize) + _midPointX) * RATIO, ((11 * _tileSize) + _midPointY) * RATIO);
     tempgui->GetComponent<Transform>().scale = Vector2D_float(20/1.2f * 16 * RATIO, 7/1.2f * 16 * RATIO);

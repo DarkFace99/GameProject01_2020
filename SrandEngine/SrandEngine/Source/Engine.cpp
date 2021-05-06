@@ -125,7 +125,7 @@ namespace Srand
 
         /* Texture */
         AssetManager::get().LoadTexture("BG_TEX", "Background.png");
-        AssetManager::get().LoadTexture("B_TEX", "b.png");
+        AssetManager::get().LoadTexture("B_TEX", "blank.png");
         AssetManager::get().LoadTexture("TILESET_TEX", "TILESET.png");
         AssetManager::get().LoadTexture("BENNY_ANIM_TEX", "NEW_ASSETS/ART_BENNY/CHARACTERS/IN_CONTROL/Benny_Sheet.png");
         AssetManager::get().LoadTexture("MACHO_ANIM_TEX", "Macho_Animation-Sheet.png");

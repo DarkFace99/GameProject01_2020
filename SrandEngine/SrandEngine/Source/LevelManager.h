@@ -10,6 +10,8 @@
 #include "Entity/Barter.h"
 #include "Entity/UI_Box.h"
 
+#include "Source/GUI_Selector.h"
+
 namespace Srand
 {
 	class LevelManager
@@ -51,6 +53,8 @@ namespace Srand
 
 		Transform* ui_BoxTransform = nullptr;
 		UI_Box* ui_Box = nullptr;
+
+		GUI_Selector* selector = nullptr;
 
 		bool choosingStage = false;
 		unsigned int cc_At = 0;
@@ -129,8 +133,10 @@ namespace Srand
 			cc_Count = 0;
 			npc_Count = 0;
 
-			Transform* ui_BoxTransform = nullptr;
-			Barter* ui_Box = nullptr;
+			ui_BoxTransform = nullptr;
+			ui_Box = nullptr;
+
+			selector = nullptr;
 
 			isUI_BoxPresent = false;
 		}
@@ -213,6 +219,12 @@ namespace Srand
 		inline void AddNPC() {
 			npc_Count++;
 		}
+		inline void SetSelector(GUI_Selector* selector) { 
+			this->selector = selector; 
+			selector->AttachOrigin(bennyTransform);
+		}
+
+		//inline bool GetIsChoosing() { return choosingStage; }
 
 		inline void NpcFound() { npc_Count--; }
 
@@ -270,7 +282,18 @@ namespace Srand
 				// ActivateAbility
 				if (input.IsKeyPressed(SR_KEY_Z) && !choosingStage) {
 					//SR_SYSTEM_TRACE("Choosing...");
-					choosingStage = true; 
+					
+					// empty->cancel
+					if (inRange_Tag.empty()) {
+						cc_At = 0; // reset
+						choosingStage = false;
+						selector->IsChoosing(choosingStage);
+					}
+					else {
+						choosingStage = true;
+						selector->IsChoosing(choosingStage);
+						//selector->SetDestination(&inRange_List[cc_At]->GetComponent<Transform>());
+					}
 				}
 				else if(choosingStage && (input.IsKeyReleased(SR_KEY_Z))){
 
@@ -304,14 +327,15 @@ namespace Srand
 
 					useAbility = true;
 					choosingStage = false;
+					selector->IsChoosing(choosingStage);
 					SR_SYSTEM_TRACE("Done_Choosing");
 					AudioController::get().Play("Activate");
 				}
 
-				// empty->cancel
 				if (choosingStage && inRange_Tag.empty()) {
 					cc_At = 0; // reset
 					choosingStage = false;
+					selector->IsChoosing(choosingStage);
 				}
 
 				if (choosingStage) {
@@ -333,12 +357,16 @@ namespace Srand
 					else if (inRange_Tag[cc_At] == CC::ccTag::UI_Box) {
 						SR_SYSTEM_TRACE("Choose: UI_Box");
 					}
-
-					if (input.IsKeyPressed(SR_KEY_X) && delay) { delay = false; }
-					else if (input.IsKeyPressed(SR_KEY_X) && !isSwitchCC_Down) { cc_At++; isSwitchCC_Down = true; }
-					else if (isSwitchCC_Down && !input.IsKeyPressed(SR_KEY_X)) {  isSwitchCC_Down = false;}
 					
-					cc_At = cc_At % inRange_Tag.size(); // mod incase if the cc_At exceeds Tag size or Tag size decrease
+					if (input.IsKeyPressed(SR_KEY_X) && delay) { delay = false; }
+					else if (isSwitchCC_Down && !input.IsKeyPressed(SR_KEY_X)) { isSwitchCC_Down = false; }
+					else if (input.IsKeyPressed(SR_KEY_X) && !isSwitchCC_Down) { 
+						cc_At++; 
+						cc_At = cc_At % inRange_Tag.size(); // mod incase if the cc_At exceeds Tag size or Tag size decrease
+						isSwitchCC_Down = true;
+						//selector->SetDestination(&inRange_List[cc_At]->GetComponent<Transform>());
+					}
+					selector->SetDestination(&inRange_List[cc_At]->GetComponent<Transform>());
 				}
 				
 			}
