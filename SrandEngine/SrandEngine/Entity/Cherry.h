@@ -48,13 +48,26 @@ public:
 		else if (rigidBody->GetVelocityX() < 0) { renderer->SetFlip(true); }
 
 		// Animation
-		if (boxCollider2D->GetIsGround()) {	// on ground
-			if (rigidBody->GetVelocityX() != 0) {
-				animator->PlayState("CHERRY_RUN");
+		if (isActive) {
+			if (boxCollider2D->GetIsGround()) {	// on ground
+				if (rigidBody->GetVelocityX() != 0) {
+					animator->PlayState("CHERRY_RUN");
+				}
+				else {
+					animator->PlayState("CHERRY_IDLE");
+				}
 			}
-			else {
-				animator->PlayState("CHERRY_IDLE");
+			else { // airborne
+				if (rigidBody->GetVelocityY() > 0) {
+					animator->PlayState("CHERRY_JUMP");
+				}
+				else {
+					animator->PlayState("CHERRY_FALL");
+				}
 			}
+		}
+		else {
+			animator->PlayState("CHERRY_OUT");
 		}
 	}
 

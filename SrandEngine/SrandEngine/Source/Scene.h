@@ -45,6 +45,8 @@ namespace Srand
 		GameObject* button2 = nullptr;
 		GameObject* button3 = nullptr;
 
+		int progress = 3;
+
 	public:
 		Scene(const std::string& name = "Scene")
 			: m_DebugName(name) 
@@ -57,5 +59,8 @@ namespace Srand
 		virtual void Update() {}
 
 		inline const std::string& GetName() const { return m_DebugName; }
+
+		inline void SetProgress(int proc) { progress = proc; }
+		inline int GetProgress() { return progress; }
 	};
 }

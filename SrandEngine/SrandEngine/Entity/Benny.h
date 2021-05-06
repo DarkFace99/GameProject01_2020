@@ -85,21 +85,26 @@ public:
 		else if(rigidBody->GetVelocityX() < 0) { renderer->SetFlip(true); }
 
 		// Animation
-		if (boxCollider2D->GetIsGround()) {	// on ground
-			if (rigidBody->GetVelocityX() != 0) {
-				animator->PlayState("BENNY_RUN");
+		if (isActive) {
+			if (boxCollider2D->GetIsGround()) {	// on ground
+				if (rigidBody->GetVelocityX() != 0) {
+					animator->PlayState("BENNY_RUN");
+				}
+				else {
+					animator->PlayState("BENNY_IDLE");
+				}
 			}
-			else {
-				animator->PlayState("BENNY_IDLE");
+			else { // airborne
+				if (rigidBody->GetVelocityY() > 0) {
+					animator->PlayState("BENNY_JUMP");
+				}
+				else {
+					animator->PlayState("BENNY_FALL");
+				}
 			}
 		}
-		else{ // airborne
-			if (rigidBody->GetVelocityY() > 0) {
-				animator->PlayState("BENNY_JUMP");
-			}
-			else {
-				animator->PlayState("BENNY_FALL");
-			}
+		else {
+			animator->PlayState("BENNY_OUT");
 		}
 	}
 

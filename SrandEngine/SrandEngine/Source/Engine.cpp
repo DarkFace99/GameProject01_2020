@@ -30,6 +30,10 @@ namespace Srand
 
     GLFWimage icons[1];
 
+    bool isFullScreen = false;
+    float volMusic = 1.0f, volEffect = 1.0f;
+    int levelProgress = 3;
+
     Engine::Engine() {
         running = false;
     }
@@ -38,6 +42,8 @@ namespace Srand
 
 #pragma region InitializeEngine
 
+        LoadSave(isFullScreen, volMusic, volEffect, levelProgress);
+
         /* Initialize the library */
         SR_SYSTEM_INFO("Initializing GLFW...");
         if (!glfwInit())
@@ -45,7 +51,7 @@ namespace Srand
             SR_SYSTEM_ERROR("Error! Cannot initializing GLFW");
         }
 
-        WindowProperties::get();
+        WindowProperties::get(isFullScreen);
 
         /*Initializing GLEW*/
         SR_SYSTEM_INFO("Initializing GLEW...");
@@ -86,9 +92,9 @@ namespace Srand
         AssetManager::get().LoadMesh("BG_MESH");
         AssetManager::get().LoadMesh("B_MESH");
         AssetManager::get().LoadMesh("TILESET_MESH", 8, 8);
-        AssetManager::get().LoadMesh("BENNY_ANIM_MESH", 21);
+        AssetManager::get().LoadMesh("BENNY_ANIM_MESH", 18);
         AssetManager::get().LoadMesh("MACHO_ANIM_MESH", 20);
-        AssetManager::get().LoadMesh("CHERRY_ANIM_MESH", 19);
+        AssetManager::get().LoadMesh("CHERRY_ANIM_MESH", 18);
         AssetManager::get().LoadMesh("PEAR_ANIM_MESH", 19);
         AssetManager::get().LoadMesh("BARTER_ANIM_MESH");
         AssetManager::get().LoadMesh("NPC_ANIM_MESH", 2);
@@ -98,30 +104,30 @@ namespace Srand
         AssetManager::get().LoadMesh("ELEVATOR_STAND_MESH", 14, 14, 2, 1);
         AssetManager::get().LoadMesh("BUTTON_MESH", 14, 14, 2, 1);
 
-        AssetManager::get().LoadMesh("UI_BUTTON_MESH", 22, 22, 7, 2);
-        AssetManager::get().LoadMesh("UI_WORD6_MESH", 22, 22, 6, 1);
-        AssetManager::get().LoadMesh("UI_WORD5_MESH", 22, 22, 5, 1);
-        AssetManager::get().LoadMesh("UI_WORD3_MESH", 22, 22, 3, 1);
-        AssetManager::get().LoadMesh("UI_KEY_MESH", 22, 22);
+        AssetManager::get().LoadMesh("UI_BUTTON_MESH", 25, 25, 7, 2);
+        AssetManager::get().LoadMesh("UI_OUTLINE_MESH", 25, 25, 8, 3);
+        AssetManager::get().LoadMesh("UI_WORD6_MESH", 25, 25, 6, 1);
+        AssetManager::get().LoadMesh("UI_WORD5_MESH", 25, 25, 5, 1);
+        AssetManager::get().LoadMesh("UI_WORD3_MESH", 25, 25, 3, 1);
+        AssetManager::get().LoadMesh("UI_KEY_MESH", 25, 25);
 
-        AssetManager::get().LoadMesh("UI_BOARD_MESH", 44, 44, 40, 25);
-        AssetManager::get().LoadMesh("UI_DEFAULT_MESH", 44, 44, 10, 4);
-        AssetManager::get().LoadMesh("UI_SLIDER_BAR_MESH", 44, 44, 14, 2);
-        AssetManager::get().LoadMesh("UI_SLOT_ONOFF_MESH", 44, 44, 10, 2);
-        AssetManager::get().LoadMesh("UI_PIN_MESH", 44, 44, 2, 2);
+        AssetManager::get().LoadMesh("UI_BOARD_MESH", 25, 25, 20, 13);
+        AssetManager::get().LoadMesh("UI_DEFAULT_MESH", 25, 25, 6, 3);
+        AssetManager::get().LoadMesh("UI_SLIDER_BAR_MESH", 25, 25, 14, 2);
+        AssetManager::get().LoadMesh("UI_PIN_MESH", 25, 25);
 
-        AssetManager::get().LoadMesh("UI_SELECT_MESH", 22, 22, 14, 3);
-        AssetManager::get().LoadMesh("UI_SLOT_LEVEL_MESH", 22, 22, 2, 2);
-        AssetManager::get().LoadMesh("UI_SLOT_SELECT_MESH", 22, 22, 19, 3);
+        AssetManager::get().LoadMesh("UI_SELECT_MESH", 25, 25, 14, 3);
+        AssetManager::get().LoadMesh("UI_SLOT_LEVEL_MESH", 25, 25, 2, 2);
+        AssetManager::get().LoadMesh("UI_SLOT_SELECT_MESH", 25, 25, 19, 3);
         AssetManager::get().LoadMesh("TITLE_MESH", 20, 16, 20, 7);
 
         /* Texture */
         AssetManager::get().LoadTexture("BG_TEX", "Background.png");
         AssetManager::get().LoadTexture("B_TEX", "b.png");
         AssetManager::get().LoadTexture("TILESET_TEX", "TILESET.png");
-        AssetManager::get().LoadTexture("BENNY_ANIM_TEX", "Benny_Animations-Sheet.png");
+        AssetManager::get().LoadTexture("BENNY_ANIM_TEX", "NEW_ASSETS/ART_BENNY/CHARACTERS/IN_CONTROL/Benny_Sheet.png");
         AssetManager::get().LoadTexture("MACHO_ANIM_TEX", "Macho_Animation-Sheet.png");
-        AssetManager::get().LoadTexture("CHERRY_ANIM_TEX", "Cherry_SpriteSheet.png");
+        AssetManager::get().LoadTexture("CHERRY_ANIM_TEX", "NEW_ASSETS/ART_BENNY/CHARACTERS/IN_CONTROL/Cherry_Sheet.png");
         AssetManager::get().LoadTexture("PEAR_ANIM_TEX", "Pear_SpriteShee.png");
         AssetManager::get().LoadTexture("BARTER_ANIM_TEX", "Barther.png");
         AssetManager::get().LoadTexture("NPC_ANIM_TEX", "NPC_Animation_Sheet.png");
@@ -132,20 +138,20 @@ namespace Srand
         AssetManager::get().LoadTexture("TITLE_TEX", "NEW_ASSETS/ART_BENNY/TITLE/TITLE.png");
 
         /* Audio */
-        audioController.AddAudioSource(new AudioSource("BGM", 1.0f, true, "The Happy Man.mp3", SoundType::MUSIC));
-        audioController.AddAudioSource(new AudioSource("Menu", 1.0f, true, "So_Happy_World.mp3", SoundType::MUSIC));
-        audioController.AddAudioSource(new AudioSource("Activate", 1.0f, false, "Activate.mp3", SoundType::EFFECT));
-        audioController.AddAudioSource(new AudioSource("Barter_swap", 1.0f, false, "Barter_swap.mp3", SoundType::EFFECT));
-        audioController.AddAudioSource(new AudioSource("Char_fall", 1.0f, false, "Char_fall.mp3", SoundType::EFFECT));
-        audioController.AddAudioSource(new AudioSource("Char_jump", 1.0f, false, "Char_jump.mp3", SoundType::EFFECT));
-        audioController.AddAudioSource(new AudioSource("Cherry_inRange", 1.0f, false, "Cherry_inRange.mp3", SoundType::EFFECT));
-        audioController.AddAudioSource(new AudioSource("Cherry_outRange", 1.0f, false, "Cherry_outRange.mp3", SoundType::EFFECT));
-        audioController.AddAudioSource(new AudioSource("Deactivate", 1.0f, false, "Deactivate.mp3", SoundType::EFFECT));
-        audioController.AddAudioSource(new AudioSource("Door_open-close", 1.0f, false, "Door_open-close.mp3", SoundType::EFFECT));
-        audioController.AddAudioSource(new AudioSource("Elevator", 1.0f, false, "Elevator.mp3", SoundType::EFFECT));
-        audioController.AddAudioSource(new AudioSource("Macho_pickup", 1.0f, false, "Macho_pickup.mp3", SoundType::EFFECT));
-        audioController.AddAudioSource(new AudioSource("Macho_throw", 1.0f, false, "Macho_throw.mp3", SoundType::EFFECT));
-        audioController.AddAudioSource(new AudioSource("NPC_rescue", 1.0f, false, "NPC_rescue.mp3", SoundType::EFFECT));
+        audioController.AddAudioSource(new AudioSource("BGM", volMusic, true, "The Happy Man.mp3", SoundType::MUSIC));
+        audioController.AddAudioSource(new AudioSource("Menu", volMusic, true, "So_Happy_World.mp3", SoundType::MUSIC));
+        audioController.AddAudioSource(new AudioSource("Activate", volEffect, false, "Activate.mp3", SoundType::EFFECT));
+        audioController.AddAudioSource(new AudioSource("Barter_swap", volEffect, false, "Barter_swap.mp3", SoundType::EFFECT));
+        audioController.AddAudioSource(new AudioSource("Char_fall", volEffect, false, "Char_fall.mp3", SoundType::EFFECT));
+        audioController.AddAudioSource(new AudioSource("Char_jump", volEffect, false, "Char_jump.mp3", SoundType::EFFECT));
+        audioController.AddAudioSource(new AudioSource("Cherry_inRange", volEffect, false, "Cherry_inRange.mp3", SoundType::EFFECT));
+        audioController.AddAudioSource(new AudioSource("Cherry_outRange", volEffect, false, "Cherry_outRange.mp3", SoundType::EFFECT));
+        audioController.AddAudioSource(new AudioSource("Deactivate", volEffect, false, "Deactivate.mp3", SoundType::EFFECT));
+        audioController.AddAudioSource(new AudioSource("Door_open-close", volEffect, false, "Door_open-close.mp3", SoundType::EFFECT));
+        audioController.AddAudioSource(new AudioSource("Elevator", volEffect, false, "Elevator.mp3", SoundType::EFFECT));
+        audioController.AddAudioSource(new AudioSource("Macho_pickup", volEffect, false, "Macho_pickup.mp3", SoundType::EFFECT));
+        audioController.AddAudioSource(new AudioSource("Macho_throw", volEffect, false, "Macho_throw.mp3", SoundType::EFFECT));
+        audioController.AddAudioSource(new AudioSource("NPC_rescue", volEffect, false, "NPC_rescue.mp3", SoundType::EFFECT));
 
 #pragma endregion
 
@@ -186,7 +192,7 @@ namespace Srand
 
         //For Testing SceneManager Only
         currentScene = sceneManager[0];
-
+        currentScene->SetProgress(levelProgress);
         currentScene->Init();
         
         running = true;
@@ -208,7 +214,7 @@ namespace Srand
         currentScene->Init();
     }
 
-    void Engine::LoadSave()
+    void Engine::LoadSave(bool &fullscreen, float &volM, float &volE, int &proc)
     {
         std::ifstream inStream("saveFile.dat");
         if (!inStream.is_open()) 
@@ -219,7 +225,25 @@ namespace Srand
         }
         else 
         {
-            
+            std::string line;
+            std::string data[4];
+            int i = 0;
+            while (std::getline(inStream, line)) 
+            {
+                data[i] = line;
+                i++;
+            }
+            inStream.close();
+
+            fullscreen = std::stoi(data[0]);
+            volM = std::stof(data[1]);
+            volE = std::stof(data[2]);
+            proc = std::stoi(data[3]);
+
+            SR_SYSTEM_TRACE("full: {0}", fullscreen);
+            SR_SYSTEM_TRACE("VolM: {0}", volM);
+            SR_SYSTEM_TRACE("VolE: {0}", volE);
+            SR_SYSTEM_TRACE("Progress: {0}", proc);
         }
     }
     void Engine::WriteSave()
@@ -232,7 +256,17 @@ namespace Srand
         }
         else 
         {
-            
+            /* Window */
+            outStream << WindowProperties::get().GetFullScreenStatus() << std::endl;
+
+            /* Audio */
+            outStream << audioController.GetVolume().first << std::endl;
+            outStream << audioController.GetVolume().second << std::endl;
+
+            /* Stage */
+            outStream << currentScene->GetProgress() << std::endl;
+
+            outStream.close();
         }
     }
 
@@ -276,6 +310,7 @@ namespace Srand
         AssetManager::get().Clean();
         Shader::get()->DeleteShader();
 
+        WriteSave();
         //For Testing SceneManager Only
         currentScene->Clean();
 
@@ -309,12 +344,12 @@ namespace Srand
         if (key == SR_KEY_M && action == GLFW_PRESS) {
             Engine::get().GoToScene(0);
         }
-        if (key == SR_KEY_I && action == GLFW_PRESS) {
+        /*if (key == SR_KEY_I && action == GLFW_PRESS) {
             WindowProperties::get().SetFullScreen(true);
         }
         else if (key == SR_KEY_O && action == GLFW_PRESS) {
             WindowProperties::get().SetFullScreen(false);
-        }
+        }*/
         /*if (key == SR_KEY_1 && action == GLFW_PRESS) 
         {
             currentScene->Clean();

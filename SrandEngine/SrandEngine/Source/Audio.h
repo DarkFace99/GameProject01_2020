@@ -24,6 +24,8 @@ namespace Srand
 		bool isLoopable;
 		SoundType type;
 
+		bool isPlayed = false;
+
 		AudioSource() = default;
 		AudioSource(std::string name, float volume, bool isLoopable, std::string filePath, SoundType type = SoundType::DEFAULT)
 		{
@@ -112,5 +114,7 @@ namespace Srand
 		/// <param name="mode"> : 1 for increase the volume and else for decrease</param>
 		/// <param name="type"> : type of sound that need volume change</param>
 		void ChangeVolume(int mode = 1, SoundType type = SoundType::DEFAULT);
+
+		std::pair<float, float> GetVolume();
 	};
 }
