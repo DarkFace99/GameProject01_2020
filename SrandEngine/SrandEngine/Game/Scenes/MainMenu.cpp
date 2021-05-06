@@ -18,6 +18,7 @@ void MainMenu::Init()
 	manager = &EntityManager::get();
     std::vector<glm::vec4> tile_info;
     GameObject* tempgui = nullptr;
+    GameObject* stored = nullptr;
 
     /* BACKGROUND */
     {
@@ -178,12 +179,12 @@ void MainMenu::Init()
     gameObject->AddComponent<SpriteRenderer>(SpriteRenderer::CHARACTER_LAYER, "CHERRY_ANIM_MESH", "CHERRY_ANIM_TEX", 1.0f, &camera, false);
     gameObject->AddComponent<RigidBody>(2.0f);
     // anim_set
-    gameObject->AddComponent<Animator>(19, 100);
+    gameObject->AddComponent<Animator>(18, 100);
+    gameObject->GetComponent<Animator>().SetState("CHERRY_OUT", 0, 0);
     gameObject->GetComponent<Animator>().SetState("CHERRY_IDLE", 1, 6);
     gameObject->GetComponent<Animator>().SetState("CHERRY_RUN", 7, 15);
     gameObject->GetComponent<Animator>().SetState("CHERRY_JUMP", 16, 16);
     gameObject->GetComponent<Animator>().SetState("CHERRY_FALL", 17, 17);
-    gameObject->GetComponent<Animator>().SetState("IDLE", 1, 6);
     gameObject->AddComponent<BoxCollider2D>(BoxCollider2D::CHARACTER_COLLISION, gameObject->GetComponent<Transform>().scale.x - 20, gameObject->GetComponent<Transform>().scale.y - 5,
         false /* overlap */, true /* movable *//*, "BENNY_ANIM_MESH", &camera*/);
 
@@ -195,6 +196,7 @@ void MainMenu::Init()
 
     //UI_Box
     gameObject = new GameObject();
+    stored = gameObject;
     manager->AddEntity(gameObject);
     gameObject->GetComponent<Transform>().position = Vector2D_float(((7 * _tileSize) + _midPointX) * RATIO, ((6 * _tileSize) + _midPointY) * RATIO);
     gameObject->GetComponent<Transform>().scale = Vector2D_float(5 * 16 * RATIO, 5 * 16 * RATIO);
@@ -314,7 +316,7 @@ void MainMenu::Init()
 
     gui_arr.PushGUI(tempgui);
 
-    // text3
+    // text4
     tempgui = new GameObject();
     tempgui->GetComponent<Transform>().position = Vector2D_float(((6.5 * _tileSize) + _midPointX) * RATIO, ((5 * _tileSize) + _midPointY) * RATIO);
     tempgui->GetComponent<Transform>().scale = Vector2D_float(3 * 16 * RATIO, 1 * 16 * RATIO);
@@ -326,6 +328,20 @@ void MainMenu::Init()
     tempgui->AddComponent<GUI_Text>("Exit");
 
     gui_arr.PushGUI(tempgui);
+
+    for (int i = 0; i < 4; i++) {
+        tempgui = new GameObject();
+        tempgui->GetComponent<Transform>().position = Vector2D_float(((6.5 * _tileSize) + _midPointX) * RATIO, (((13.95 - (i * 3)) * _tileSize) + _midPointY) * RATIO);
+        tempgui->GetComponent<Transform>().scale = Vector2D_float(8 * 16 * RATIO, 3 * 16 * RATIO);
+
+        tempgui->AddComponent<SpriteRenderer>(SpriteRenderer::GUI_LAYER, "UI_OUTLINE_MESH", "MENU_ASSET_TEX", 1.0f, &camera, false);
+        tempgui->AddComponent<TileSelector>(25, 25);
+        tempgui->GetComponent<TileSelector>().SetTile(13, 13);
+        
+        gui_arr.PushGUI(tempgui);
+        stored->GetComponent<UI_Box>().Add(tempgui);
+        stored->GetComponent<UI_Box>().SetRender(false);
+    }
 
 #pragma endregion
 

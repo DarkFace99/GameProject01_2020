@@ -88,7 +88,7 @@ namespace Srand
         AssetManager::get().LoadMesh("TILESET_MESH", 8, 8);
         AssetManager::get().LoadMesh("BENNY_ANIM_MESH", 18);
         AssetManager::get().LoadMesh("MACHO_ANIM_MESH", 20);
-        AssetManager::get().LoadMesh("CHERRY_ANIM_MESH", 19);
+        AssetManager::get().LoadMesh("CHERRY_ANIM_MESH", 18);
         AssetManager::get().LoadMesh("PEAR_ANIM_MESH", 19);
         AssetManager::get().LoadMesh("BARTER_ANIM_MESH");
         AssetManager::get().LoadMesh("NPC_ANIM_MESH", 2);
@@ -99,6 +99,7 @@ namespace Srand
         AssetManager::get().LoadMesh("BUTTON_MESH", 14, 14, 2, 1);
 
         AssetManager::get().LoadMesh("UI_BUTTON_MESH", 25, 25, 7, 2);
+        AssetManager::get().LoadMesh("UI_OUTLINE_MESH", 25, 25, 8, 3);
         AssetManager::get().LoadMesh("UI_WORD6_MESH", 25, 25, 6, 1);
         AssetManager::get().LoadMesh("UI_WORD5_MESH", 25, 25, 5, 1);
         AssetManager::get().LoadMesh("UI_WORD3_MESH", 25, 25, 3, 1);
@@ -120,7 +121,7 @@ namespace Srand
         AssetManager::get().LoadTexture("TILESET_TEX", "TILESET.png");
         AssetManager::get().LoadTexture("BENNY_ANIM_TEX", "NEW_ASSETS/ART_BENNY/CHARACTERS/IN_CONTROL/Benny_Sheet.png");
         AssetManager::get().LoadTexture("MACHO_ANIM_TEX", "Macho_Animation-Sheet.png");
-        AssetManager::get().LoadTexture("CHERRY_ANIM_TEX", "Cherry_SpriteSheet.png");
+        AssetManager::get().LoadTexture("CHERRY_ANIM_TEX", "NEW_ASSETS/ART_BENNY/CHARACTERS/IN_CONTROL/Cherry_Sheet.png");
         AssetManager::get().LoadTexture("PEAR_ANIM_TEX", "Pear_SpriteShee.png");
         AssetManager::get().LoadTexture("BARTER_ANIM_TEX", "Barther.png");
         AssetManager::get().LoadTexture("NPC_ANIM_TEX", "NPC_Animation_Sheet.png");
