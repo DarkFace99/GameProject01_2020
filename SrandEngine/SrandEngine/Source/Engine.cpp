@@ -30,6 +30,10 @@ namespace Srand
 
     GLFWimage icons[1];
 
+    bool isFullScreen = false;
+    float volMusic = 1.0f, volEffect = 1.0f;
+    int levelProgress = 3;
+
     Engine::Engine() {
         running = false;
     }
@@ -38,6 +42,8 @@ namespace Srand
 
 #pragma region InitializeEngine
 
+        LoadSave(isFullScreen, volMusic, volEffect, levelProgress);
+
         /* Initialize the library */
         SR_SYSTEM_INFO("Initializing GLFW...");
         if (!glfwInit())
@@ -45,7 +51,7 @@ namespace Srand
             SR_SYSTEM_ERROR("Error! Cannot initializing GLFW");
         }
 
-        WindowProperties::get();
+        WindowProperties::get(isFullScreen);
 
         /*Initializing GLEW*/
         SR_SYSTEM_INFO("Initializing GLEW...");
@@ -132,20 +138,20 @@ namespace Srand
         AssetManager::get().LoadTexture("TITLE_TEX", "NEW_ASSETS/ART_BENNY/TITLE/TITLE.png");
 
         /* Audio */
-        audioController.AddAudioSource(new AudioSource("BGM", 1.0f, true, "The Happy Man.mp3", SoundType::MUSIC));
-        audioController.AddAudioSource(new AudioSource("Menu", 1.0f, true, "So_Happy_World.mp3", SoundType::MUSIC));
-        audioController.AddAudioSource(new AudioSource("Activate", 1.0f, false, "Activate.mp3", SoundType::EFFECT));
-        audioController.AddAudioSource(new AudioSource("Barter_swap", 1.0f, false, "Barter_swap.mp3", SoundType::EFFECT));
-        audioController.AddAudioSource(new AudioSource("Char_fall", 1.0f, false, "Char_fall.mp3", SoundType::EFFECT));
-        audioController.AddAudioSource(new AudioSource("Char_jump", 1.0f, false, "Char_jump.mp3", SoundType::EFFECT));
-        audioController.AddAudioSource(new AudioSource("Cherry_inRange", 1.0f, false, "Cherry_inRange.mp3", SoundType::EFFECT));
-        audioController.AddAudioSource(new AudioSource("Cherry_outRange", 1.0f, false, "Cherry_outRange.mp3", SoundType::EFFECT));
-        audioController.AddAudioSource(new AudioSource("Deactivate", 1.0f, false, "Deactivate.mp3", SoundType::EFFECT));
-        audioController.AddAudioSource(new AudioSource("Door_open-close", 1.0f, false, "Door_open-close.mp3", SoundType::EFFECT));
-        audioController.AddAudioSource(new AudioSource("Elevator", 1.0f, false, "Elevator.mp3", SoundType::EFFECT));
-        audioController.AddAudioSource(new AudioSource("Macho_pickup", 1.0f, false, "Macho_pickup.mp3", SoundType::EFFECT));
-        audioController.AddAudioSource(new AudioSource("Macho_throw", 1.0f, false, "Macho_throw.mp3", SoundType::EFFECT));
-        audioController.AddAudioSource(new AudioSource("NPC_rescue", 1.0f, false, "NPC_rescue.mp3", SoundType::EFFECT));
+        audioController.AddAudioSource(new AudioSource("BGM", volMusic, true, "The Happy Man.mp3", SoundType::MUSIC));
+        audioController.AddAudioSource(new AudioSource("Menu", volMusic, true, "So_Happy_World.mp3", SoundType::MUSIC));
+        audioController.AddAudioSource(new AudioSource("Activate", volEffect, false, "Activate.mp3", SoundType::EFFECT));
+        audioController.AddAudioSource(new AudioSource("Barter_swap", volEffect, false, "Barter_swap.mp3", SoundType::EFFECT));
+        audioController.AddAudioSource(new AudioSource("Char_fall", volEffect, false, "Char_fall.mp3", SoundType::EFFECT));
+        audioController.AddAudioSource(new AudioSource("Char_jump", volEffect, false, "Char_jump.mp3", SoundType::EFFECT));
+        audioController.AddAudioSource(new AudioSource("Cherry_inRange", volEffect, false, "Cherry_inRange.mp3", SoundType::EFFECT));
+        audioController.AddAudioSource(new AudioSource("Cherry_outRange", volEffect, false, "Cherry_outRange.mp3", SoundType::EFFECT));
+        audioController.AddAudioSource(new AudioSource("Deactivate", volEffect, false, "Deactivate.mp3", SoundType::EFFECT));
+        audioController.AddAudioSource(new AudioSource("Door_open-close", volEffect, false, "Door_open-close.mp3", SoundType::EFFECT));
+        audioController.AddAudioSource(new AudioSource("Elevator", volEffect, false, "Elevator.mp3", SoundType::EFFECT));
+        audioController.AddAudioSource(new AudioSource("Macho_pickup", volEffect, false, "Macho_pickup.mp3", SoundType::EFFECT));
+        audioController.AddAudioSource(new AudioSource("Macho_throw", volEffect, false, "Macho_throw.mp3", SoundType::EFFECT));
+        audioController.AddAudioSource(new AudioSource("NPC_rescue", volEffect, false, "NPC_rescue.mp3", SoundType::EFFECT));
 
 #pragma endregion
 
@@ -186,7 +192,7 @@ namespace Srand
 
         //For Testing SceneManager Only
         currentScene = sceneManager[0];
-
+        currentScene->SetProgress(levelProgress);
         currentScene->Init();
         
         running = true;
@@ -208,7 +214,7 @@ namespace Srand
         currentScene->Init();
     }
 
-    void Engine::LoadSave()
+    void Engine::LoadSave(bool &fullscreen, float &volM, float &volE, int &proc)
     {
         std::ifstream inStream("saveFile.dat");
         if (!inStream.is_open()) 
@@ -219,7 +225,25 @@ namespace Srand
         }
         else 
         {
-            
+            std::string line;
+            std::string data[4];
+            int i = 0;
+            while (std::getline(inStream, line)) 
+            {
+                data[i] = line;
+                i++;
+            }
+            inStream.close();
+
+            fullscreen = std::stoi(data[0]);
+            volM = std::stof(data[1]);
+            volE = std::stof(data[2]);
+            proc = std::stoi(data[3]);
+
+            SR_SYSTEM_TRACE("full: {0}", fullscreen);
+            SR_SYSTEM_TRACE("VolM: {0}", volM);
+            SR_SYSTEM_TRACE("VolE: {0}", volE);
+            SR_SYSTEM_TRACE("Progress: {0}", proc);
         }
     }
     void Engine::WriteSave()
@@ -232,7 +256,17 @@ namespace Srand
         }
         else 
         {
-            
+            /* Window */
+            outStream << WindowProperties::get().GetFullScreenStatus() << std::endl;
+
+            /* Audio */
+            outStream << audioController.GetVolume().first << std::endl;
+            outStream << audioController.GetVolume().second << std::endl;
+
+            /* Stage */
+            outStream << currentScene->GetProgress() << std::endl;
+
+            outStream.close();
         }
     }
 
@@ -276,6 +310,7 @@ namespace Srand
         AssetManager::get().Clean();
         Shader::get()->DeleteShader();
 
+        WriteSave();
         //For Testing SceneManager Only
         currentScene->Clean();
 
