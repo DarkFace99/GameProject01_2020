@@ -259,8 +259,14 @@ void Level3::Init()
 
 #pragma endregion
 
-    audioController.Stop();
+    if (audioController.Find("Menu")->isPlayed == true)
+    {
+        audioController.Stop();
+        audioController.Find("Menu")->isPlayed = false;
+    }
+
     audioController.Play("BGM");
+    audioController.Find("BGM")->isPlayed = true;
 }
 
 void Level3::Clean()
@@ -268,7 +274,7 @@ void Level3::Clean()
     manager->Clean();
     objManager.Clean();
     levelManager.Clean();
-    audioController.Stop();
+    //audioController.Stop();
 }
 
 void Level3::Draw()
