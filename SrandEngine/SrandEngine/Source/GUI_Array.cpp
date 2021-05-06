@@ -69,11 +69,12 @@ void Srand::GUI_Array::OnUpdate()
 				isDownPressed = false;
 				//SR_TRACE("Index: {0}", m_index);
 			}
+			else if (input.IsKeyPressed(SR_KEY_Z)) {} // delay for next scene
 			
 		}
 		else 
 		{
-			m_overrideFunc();
+			//m_overrideFunc(); 
 		}
 
 		/* Activate key */
