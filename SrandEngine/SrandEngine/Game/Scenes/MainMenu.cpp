@@ -358,8 +358,14 @@ void MainMenu::Init()
     gui_arr.PushGUI(tempgui);
     gui_arr.SetControl(false);
 
-    audioController.Stop();
+    if (audioController.Find("BGM")->isPlayed == true) 
+    {
+        audioController.Stop();
+        audioController.Find("BGM")->isPlayed = false;
+    }
+    
     audioController.Play("Menu");
+    audioController.Find("Menu")->isPlayed = true;
 }
 
 void MainMenu::Clean()
@@ -367,7 +373,7 @@ void MainMenu::Clean()
     manager->Clean();
     objManager.Clean();
     levelManager.Clean();
-    audioController.Stop();
+    //audioController.Stop();
     gui_arr.Clear();
 }
 
