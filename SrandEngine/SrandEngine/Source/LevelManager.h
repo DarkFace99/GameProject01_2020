@@ -35,6 +35,7 @@ namespace Srand
 		
 		bool isSwitchCC_Down = false;
 		bool isCancel = false;
+		bool delay = false;
 
 	protected:
 		Transform* bennyTransform = nullptr;
@@ -267,7 +268,7 @@ namespace Srand
 				CheckInRange();
 
 				// ActivateAbility
-				if (input.IsKeyPressed(SR_KEY_Z)) {
+				if (input.IsKeyPressed(SR_KEY_Z) && !choosingStage) {
 					//SR_SYSTEM_TRACE("Choosing...");
 					choosingStage = true; 
 				}
@@ -314,11 +315,7 @@ namespace Srand
 				}
 
 				if (choosingStage) {
-					if (input.IsKeyPressed(SR_KEY_X)) { isSwitchCC_Down = true; /*SR_SYSTEM_TRACE("cc_AT++_cc_AT++_cc_AT++_cc_AT++_");*/  } // Minor Promblem
-					else if (isSwitchCC_Down && !input.IsKeyPressed(SR_KEY_X)) { cc_At++; isSwitchCC_Down = false;}
 					
-					cc_At = cc_At % inRange_Tag.size(); // mod incase if the cc_At exceeds Tag size or Tag size decrease
-
 					/*-------debug-------*/
 					//SR_SYSTEM_TRACE("inRange_Size: {0}", inRange_Tag.size());
 					if (inRange_Tag[cc_At] == CC::ccTag::MACHO) {
@@ -336,7 +333,12 @@ namespace Srand
 					else if (inRange_Tag[cc_At] == CC::ccTag::UI_Box) {
 						SR_SYSTEM_TRACE("Choose: UI_Box");
 					}
+
+					if (input.IsKeyPressed(SR_KEY_X) && delay) { delay = false; }
+					else if (input.IsKeyPressed(SR_KEY_X) && !isSwitchCC_Down) { cc_At++; isSwitchCC_Down = true; }
+					else if (isSwitchCC_Down && !input.IsKeyPressed(SR_KEY_X)) {  isSwitchCC_Down = false;}
 					
+					cc_At = cc_At % inRange_Tag.size(); // mod incase if the cc_At exceeds Tag size or Tag size decrease
 				}
 				
 			}
@@ -347,7 +349,9 @@ namespace Srand
 				float magnitude = sqrt(pow(deltaVect.x, 2) + pow(deltaVect.y, 2));
 				//SR_SYSTEM_TRACE("Magnitude: {0}\t({1})", magnitude, benny->GetRadius());
 				if (magnitude > benny->GetRadius()) { isCancel = true; } //disconnect
-				else if (input.IsKeyPressed(SR_KEY_X)) { isCancel = true; } // manual
+				else if (input.IsKeyPressed(SR_KEY_Z)) {  } 
+				else if (input.IsKeyPressed(SR_KEY_X)) { isCancel = true; delay = true; } // manual
+				//else if (input.IsKeyReleased(SR_KEY_X) && isCancel) {}
 				else if (controlled_Tag == CC::ccTag::BARTER) { isCancel = true; } // Barter
 				
 				if (isCancel) {
