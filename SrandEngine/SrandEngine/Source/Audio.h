@@ -104,6 +104,11 @@ namespace Srand
 		void Pause();
 
 		/// <summary>
+		/// Pause current playing audio
+		/// </summary>
+		void UnPause();
+
+		/// <summary>
 		/// Stop current playing audio and drop its pointer
 		/// </summary>
 		void Stop();
@@ -115,6 +120,10 @@ namespace Srand
 		/// <param name="type"> : type of sound that need volume change</param>
 		void ChangeVolume(int mode = 1, SoundType type = SoundType::DEFAULT);
 
+		void SetAllVolume(float vol);
+
+		void SetMusicVolume(float vol);
+		void SetEffectVolume(float vol);
 		std::pair<float, float> GetVolume();
 	};
 }

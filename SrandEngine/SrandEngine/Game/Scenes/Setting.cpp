@@ -33,6 +33,26 @@ void ToggleFullScreen() {
     WindowProperties::get().SetFullScreen(full);
 }
 
+void NonSaveSettings() 
+{
+    bool isFullScreen = false;
+    float volMusic = 1.0f, volEffect = 1.0f;
+
+    int temp; //IGNORED
+
+    Engine::get().LoadSave(isFullScreen, volMusic, volEffect, temp);
+
+    WindowProperties::get().SetFullScreen(isFullScreen);
+    AudioController::get().SetMusicVolume(volMusic);
+    AudioController::get().SetMusicVolume(volEffect);
+}
+
+void DefaultSetting()
+{
+    WindowProperties::get().SetFullScreen(false);
+    AudioController::get().SetAllVolume(1.0f);
+}
+
 void Setting::Init()
 {
 	manager = &EntityManager::get();
