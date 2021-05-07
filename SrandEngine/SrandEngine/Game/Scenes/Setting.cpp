@@ -179,6 +179,7 @@ void Setting::Init()
     gameObject->GetComponent<TileSelector>().SetTile(1, 7);
 
 #pragma region BOARD
+    // board
     tempgui = new GameObject();
     tempgui->GetComponent<Transform>().position = Vector2D_float(((15 * _tileSize) + _midPointX) * RATIO, ((8.5 * _tileSize) + _midPointY) * RATIO);
     tempgui->GetComponent<Transform>().scale = Vector2D_float(20 * 16 * RATIO, 13 * 16 * RATIO);
@@ -189,6 +190,20 @@ void Setting::Init()
 
     tempgui->AddComponent<GUI_Text>("BOARD");
     gui_arr.PushGUI(tempgui);
+
+    // save
+    tempgui = new GameObject();
+    tempgui->GetComponent<Transform>().position = Vector2D_float(((14.75 * _tileSize) + _midPointX) * RATIO, ((7.40 * _tileSize) + _midPointY) * RATIO);
+    tempgui->GetComponent<Transform>().scale = Vector2D_float(3 * 16 * RATIO, 1 * 16 * RATIO);
+
+    tempgui->AddComponent<SpriteRenderer>(SpriteRenderer::GUI_LAYER, "UI_WORD3_MESH", "SETTING_ASSET_TEX", 1.0f, &camera, false);
+    tempgui->AddComponent<TileSelector>(25, 25);
+    tempgui->GetComponent<TileSelector>().SetTile(14, 10);
+
+    tempgui->AddComponent<GUI_Text>("SAVE");
+    gui_arr.PushGUI(tempgui);
+
+    //--------------------------------------------
 
     //Slot1
     tempgui = new GameObject();
@@ -237,7 +252,7 @@ void Setting::Init()
     //Slot4
     tempgui = new GameObject();
     tempgui->GetComponent<Transform>().position = Vector2D_float(((14.75 * _tileSize) + _midPointX) * RATIO, ((7.40 * _tileSize) + _midPointY) * RATIO);
-    tempgui->GetComponent<Transform>().scale = Vector2D_float(19 * 16 * RATIO, 3 * 16 * RATIO);
+    tempgui->GetComponent<Transform>().scale = Vector2D_float(9 * 16 * RATIO, 3 * 16 * RATIO);
 
     tempgui->AddComponent<SpriteRenderer>(SpriteRenderer::GUI_LAYER, "UI_SLOT_SELECT_MESH", "SETTING_ASSET_TEX", 1.0f, &camera, false);
     tempgui->AddComponent<TileSelector>(25, 25);
@@ -251,7 +266,7 @@ void Setting::Init()
     //default
 
     tempgui = new GameObject();
-    tempgui->GetComponent<Transform>().position = Vector2D_float(((15 * _tileSize) + _midPointX) * RATIO, ((3 * _tileSize) + _midPointY) * RATIO);
+    tempgui->GetComponent<Transform>().position = Vector2D_float(((15 * _tileSize) + _midPointX) * RATIO, ((4 * _tileSize) + _midPointY) * RATIO);
     tempgui->GetComponent<Transform>().scale = Vector2D_float(6 * 16 * RATIO, 3 * 16 * RATIO);
 
     tempgui->AddComponent<SpriteRenderer>(SpriteRenderer::GUI_LAYER, "UI_DEFAULT_MESH", "SETTING_ASSET_TEX", 1.0f, &camera, false);
