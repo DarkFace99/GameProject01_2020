@@ -33,7 +33,7 @@ void Srand::GUI_Array::OnDraw()
 }
 void Srand::GUI_Array::OnUpdate()
 {
-	//if (selector != nullptr) { selector->Move(); }
+	if (selector != nullptr) { selector->Move(); }
 	
 
 	if (m_activate && m_inControl)

@@ -15,14 +15,25 @@ namespace Srand
 
 		void AttachOrigin(Transform* transform);
 		void SetDestination(Transform* transform);
-		void IsChoosing(bool con);
+		void IsActive(bool con);
 
 		void Move();
+		
+		void SetOffset(float x, float y);
 
 	private:
 		std::string name = "";
 
 		bool activate = false;
+		bool reset = false;
+
+		float xOffset, yOffset;
+		bool offsetEnable = false;
+		
+		/*int steps = 60;
+		int stepsCount = 0;
+		bool stepsEnd = false;*/
+
 		Transform* origin = nullptr;
 		Transform* destination = nullptr;
 	};

@@ -293,22 +293,21 @@ namespace Srand
 					if (inRange_Tag.empty()) {
 						cc_At = 0; // reset
 						choosingStage = false;
-						selector->IsChoosing(choosingStage);
 					}
 					else {
 						choosingStage = true;
-						selector->IsChoosing(choosingStage);
 						//selector->SetDestination(&inRange_List[cc_At]->GetComponent<Transform>());
 					}
 				}
 				else if(choosingStage && (input.IsKeyReleased(SR_KEY_Z))){
-
+					
 					if (inRange_Tag[cc_At] == CC::ccTag::MACHO) {
 						controlled_Tag = CC::ccTag::MACHO;
 						controlled_Transform = machoTransform;
 						macho->Chosen(false);
 						macho->SetActive(true);
 						benny->SetActive(false);
+						selector->SetDestination(machoTransform);
 					}
 					else if (inRange_Tag[cc_At] == CC::ccTag::CHERRY) {
 						controlled_Tag = CC::ccTag::CHERRY;
@@ -316,22 +315,29 @@ namespace Srand
 						cherry->Chosen(false);
 						cherry->SetActive(true);
 						benny->SetActive(false);
+						selector->SetDestination(cherryTransform);
+						selector->SetOffset(0, 50);
 					}
 					else if (inRange_Tag[cc_At] == CC::ccTag::PEAR) {
 						controlled_Tag = CC::ccTag::PEAR;
 						controlled_Transform = pearTransform;
 						pear->Chosen(false);
 						pear->SetActive(true);
+						selector->SetDestination(pearTransform);
 					}
 					else if (inRange_Tag[cc_At] == CC::ccTag::BARTER) {
 						controlled_Tag = CC::ccTag::BARTER;
 						controlled_Transform = barterTransform;
 						barter->Chosen(false);
 						barter->SetActive(true);
+						selector->SetDestination(barterTransform);
+						
 					}if (inRange_Tag[cc_At] == CC::ccTag::UI_Box) {
 						controlled_Tag = CC::ccTag::UI_Box;
 						controlled_Transform = ui_BoxTransform;
-						
+						selector->SetDestination(ui_BoxTransform);
+						selector->SetOffset(-20, 150);
+
 						ui_Box->Chosen(false);
 						benny->SetActive(false);
 						ui_Box->SetAttach(true);
@@ -340,8 +346,8 @@ namespace Srand
 					lastCC_Control = CC::ccTag::DEFAULT;
 
 					useAbility = true;
+					
 					choosingStage = false;
-					selector->IsChoosing(choosingStage);
 					SR_SYSTEM_TRACE("Done_Choosing");
 					AudioController::get().Play("Activate");
 				}
@@ -349,7 +355,7 @@ namespace Srand
 				if (choosingStage && inRange_Tag.empty()) {
 					cc_At = 0; // reset
 					choosingStage = false;
-					selector->IsChoosing(choosingStage);
+					
 				}
 
 				if (choosingStage) {
@@ -453,9 +459,11 @@ namespace Srand
 
 					cc_At = 0; // reset
 					useAbility = false; 
+					
 				}
 			}
-
+			selector->IsActive(useAbility);
+			
 			//if (input.IsKeyPressed(SR_KEY_4)) {			// Cancel
 			//	ClearActivation();
 			//	useAbility = false;
