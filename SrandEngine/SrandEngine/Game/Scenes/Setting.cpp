@@ -8,6 +8,10 @@ Setting::~Setting()
 	Clean();
 }
 
+GameObject* buttonF = nullptr;
+GameObject* sliderM = nullptr;
+GameObject* sliderS = nullptr;
+
 void GoTo_MenuS() { Engine::get().GoToScene(0); }
 void Increase_MU() { 
     SR_TRACE("Slider_MU: +"); 
@@ -30,6 +34,7 @@ void Decrease_SF() {
 bool full = false;
 void ToggleFullScreen() {
     full = !full;
+    buttonF->GetComponent<GUI_Button>().SetAttach(full);
     WindowProperties::get().SetFullScreen(full);
 }
 
@@ -227,6 +232,7 @@ void Setting::Init()
 
     //Slot1
     tempgui = new GameObject();
+    buttonF = tempgui;
     tempgui->GetComponent<Transform>().position = Vector2D_float(((14.75 * _tileSize) + _midPointX) * RATIO, ((11.70 * _tileSize) + _midPointY) * RATIO);
     tempgui->GetComponent<Transform>().scale = Vector2D_float(19 * 16 * RATIO, 3 * 16 * RATIO);
 
@@ -239,8 +245,26 @@ void Setting::Init()
     tempgui->GetComponent<GUI_Button>().m_function = ToggleFullScreen;
     gui_arr.PushGUI(tempgui);
 
+    //pin1 
+
+    tempgui = new GameObject();
+    tempgui->GetComponent<Transform>().position = Vector2D_float(((22.8 * _tileSize) + _midPointX) * RATIO, ((11.75 * _tileSize) + _midPointY) * RATIO);
+    tempgui->GetComponent<Transform>().scale = Vector2D_float(1 * 16 * RATIO, 1 * 16 * RATIO);
+
+    tempgui->AddComponent<SpriteRenderer>(SpriteRenderer::GUI_LAYER, "UI_KEY_MESH", "SETTING_ASSET_TEX", (full)? 1.0f : 0.0f, &camera, false);
+    tempgui->AddComponent<TileSelector>(25, 25);
+    tempgui->GetComponent<TileSelector>().SetTile(7, 6);
+
+    tempgui->AddComponent<GUI_Text>("PIN1");
+
+    buttonF->GetComponent<GUI_Button>().AttachObj(tempgui);
+
+    gui_arr.PushGUI(tempgui);
+    
+
     //Slot2
     tempgui = new GameObject();
+    sliderM = tempgui;
     tempgui->GetComponent<Transform>().position = Vector2D_float(((14.75 * _tileSize) + _midPointX) * RATIO, ((10.30 * _tileSize) + _midPointY) * RATIO);
     tempgui->GetComponent<Transform>().scale = Vector2D_float(19 * 16 * RATIO, 3 * 16 * RATIO);
 
@@ -256,6 +280,7 @@ void Setting::Init()
 
     //Slot3
     tempgui = new GameObject();
+    sliderS = tempgui;
     tempgui->GetComponent<Transform>().position = Vector2D_float(((14.75 * _tileSize) + _midPointX) * RATIO, ((8.80 * _tileSize) + _midPointY) * RATIO);
     tempgui->GetComponent<Transform>().scale = Vector2D_float(19 * 16 * RATIO, 3 * 16 * RATIO);
 

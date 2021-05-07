@@ -77,3 +77,6 @@ int Srand::GUI_Button::GetIndex()
 {
 	return currentIndex;
 }
+
+void Srand::GUI_Button::AttachObj(GameObject* obj) { attachedObj = obj; }
+void Srand::GUI_Button::SetAttach(bool state) { attachedObj->GetComponent<SpriteRenderer>().SetAlpha(state ? 1.0f : 0.0f); }

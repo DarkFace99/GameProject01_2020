@@ -17,5 +17,6 @@ public:
 	virtual void Clean() override;
 	virtual void Draw() override;
 	virtual void Update() override;
+
 };
 

@@ -24,9 +24,13 @@ namespace Srand
 		
 		void Conceal();
 		void SelectedOffset(int, int);
+
+		void AttachObj(GameObject* obj);
+		void SetAttach(bool);
 	private:
 		std::string name = "";
 		int currentIndex = 0;
+		GameObject* attachedObj = nullptr;
 
 		TileSelector* tileSelector = nullptr;
 		int originX, originY, shiftX, shiftY;
