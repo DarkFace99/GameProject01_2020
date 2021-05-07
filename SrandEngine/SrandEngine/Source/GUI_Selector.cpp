@@ -47,9 +47,9 @@ void Srand::GUI_Selector::Move() {
 		transform->SetPosition(Vector2D_float(chaseX, chaseY));
 
 		// State
-		if (percentRange <= 0.7) {}
-		else if (percentRange <= 0.9) {}
-		else {}
+		if (percentRange <= 0.6) {animator->PlayState("WHITE"); }
+		else if (percentRange <= 0.8) {animator->PlayState("YELLOW"); }
+		else {animator->PlayState("RED"); }
 	}
 	else if(!activate){
 		offsetEnable = false;

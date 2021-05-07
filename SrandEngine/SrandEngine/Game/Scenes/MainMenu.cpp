@@ -413,7 +413,7 @@ void MainMenu::Init()
     //tempgui->GetComponent<Transform>().position = Vector2D_float(((6.5 * _tileSize) + _midPointX) * RATIO, (((13.95 - (i * 3)) * _tileSize) + _midPointY) * RATIO);
     tempgui->GetComponent<Transform>().scale = Vector2D_float(8 * RATIO, 8 * RATIO);
 
-    tempgui->AddComponent<SpriteRenderer>(SpriteRenderer::GUI_LAYER, "B_MESH", "B_TEX", 1.0f, &camera, false);
+    tempgui->AddComponent<SpriteRenderer>(SpriteRenderer::GUI_LAYER, "SELECTOR_MESH", "SELECTOR_TEX", 1.0f, &camera, false);
     tempgui->AddComponent<Animator>(3, 100);
     tempgui->GetComponent<Animator>().SetState("WHITE", 0, 0);
     tempgui->GetComponent<Animator>().SetState("YELLOW", 1, 1);
