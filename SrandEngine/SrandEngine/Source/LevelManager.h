@@ -385,8 +385,9 @@ namespace Srand
 						//selector->SetDestination(&inRange_List[cc_At]->GetComponent<Transform>());
 					}
 					//selector->SetDestination(&inRange_List[cc_At]->GetComponent<Transform>());
-
-					if (inRange_Tag[cc_At] != lastCC_Control) {
+					
+					cc_At = cc_At % inRange_Tag.size();
+					if (inRange_Tag[cc_At] != lastCC_Control) { // problem
 						if (lastUI_Control) {
 							lastUI_Control = false;
 							ui_Box->Chosen(false);
@@ -420,7 +421,7 @@ namespace Srand
 						lastCC_Control = CC::ccTag::PEAR;
 					}
 					else if (inRange_Tag[cc_At] == CC::ccTag::BARTER) {
-						pear->Chosen(true);
+						barter->Chosen(true);
 						lastCC_Control = CC::ccTag::BARTER;
 					}
 					else if (inRange_Tag[cc_At] == CC::ccTag::UI_Box) {

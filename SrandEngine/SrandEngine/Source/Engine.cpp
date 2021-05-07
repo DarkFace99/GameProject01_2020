@@ -14,6 +14,9 @@
 #include "Game/Scenes/Level3.h"
 
 #include "Game/Scenes/Lv1.h"
+#include "Game/Scenes/Lv4.h"
+#include "Game/Scenes/Lv7.h"
+#include "Game/Scenes/Lv10.h"
 
 #include "Source/Audio.h"
 
@@ -101,8 +104,8 @@ namespace Srand
         AssetManager::get().LoadMesh("BENNY_ANIM_MESH", 18);
         AssetManager::get().LoadMesh("MACHO_ANIM_MESH", 21);
         AssetManager::get().LoadMesh("CHERRY_ANIM_MESH", 25);
-        AssetManager::get().LoadMesh("PEAR_ANIM_MESH", 19);
-        AssetManager::get().LoadMesh("BARTER_ANIM_MESH");
+        AssetManager::get().LoadMesh("PEAR_ANIM_MESH", 20);
+        AssetManager::get().LoadMesh("BARTER_ANIM_MESH", 11);
         AssetManager::get().LoadMesh("NPC_ANIM_MESH", 2);
         AssetManager::get().LoadMesh("1x1_MESH", 14, 14);
         AssetManager::get().LoadMesh("DOOR_MESH", 14, 14, 1, 4);
@@ -168,10 +171,13 @@ namespace Srand
         sceneManager.PushScene(new MainMenu());
         sceneManager.PushScene(new Setting());
         sceneManager.PushScene(new LevelSelect());
-        sceneManager.PushScene(new Lv1());
         sceneManager.PushScene(new TestingScene());
         sceneManager.PushScene(new Level2());
         sceneManager.PushScene(new Level3());
+        sceneManager.PushScene(new Lv1());
+        sceneManager.PushScene(new Lv4());
+        sceneManager.PushScene(new Lv7());
+        sceneManager.PushScene(new Lv10());
 
 #pragma endregion
 
@@ -201,7 +207,7 @@ namespace Srand
 #pragma endregion
 
         //For Testing SceneManager Only
-        currentScene = sceneManager[3];
+        currentScene = sceneManager[9];
         //currentScene->SetProgress(levelProgress);
         sceneManager.SetMaxIndex(levelProgress);
         sce = dynamic_cast<LevelSelect*>(sceneManager.Search("LevelSelect"));

@@ -44,6 +44,9 @@
     <ClInclude Include="Game\Scenes\Level3.h" />
     <ClInclude Include="Game\Scenes\LevelSelect.h" />
     <ClInclude Include="Game\Scenes\Lv1.h" />
+    <ClInclude Include="Game\Scenes\Lv10.h" />
+    <ClInclude Include="Game\Scenes\Lv4.h" />
+    <ClInclude Include="Game\Scenes\Lv7.h" />
     <ClInclude Include="Game\Scenes\MainMenu.h" />
     <ClInclude Include="Game\Scenes\Setting.h" />
     <ClInclude Include="Game\Scenes\testing_scene.h" />
@@ -90,6 +93,9 @@
     <ClCompile Include="Game\Scenes\Level3.cpp" />
     <ClCompile Include="Game\Scenes\LevelSelect.cpp" />
     <ClCompile Include="Game\Scenes\Lv1.cpp" />
+    <ClCompile Include="Game\Scenes\Lv10.cpp" />
+    <ClCompile Include="Game\Scenes\Lv4.cpp" />
+    <ClCompile Include="Game\Scenes\Lv7.cpp" />
     <ClCompile Include="Game\Scenes\MainMenu.cpp" />
     <ClCompile Include="Game\Scenes\Setting.cpp" />
     <ClCompile Include="Game\Scenes\testing_scene.cpp" />
