@@ -36,6 +36,8 @@ namespace Srand
     float volMusic = 1.0f, volEffect = 1.0f;
     int levelProgress = 0;
 
+    int frameCount = 0;
+
     Engine::Engine() {
         running = false;
     }
@@ -96,7 +98,7 @@ namespace Srand
         AssetManager::get().LoadMesh("TILESET_MESH", 8, 8);
         AssetManager::get().LoadMesh("BENNY_ANIM_MESH", 18);
         AssetManager::get().LoadMesh("MACHO_ANIM_MESH", 20);
-        AssetManager::get().LoadMesh("CHERRY_ANIM_MESH", 18);
+        AssetManager::get().LoadMesh("CHERRY_ANIM_MESH", 25);
         AssetManager::get().LoadMesh("PEAR_ANIM_MESH", 19);
         AssetManager::get().LoadMesh("BARTER_ANIM_MESH");
         AssetManager::get().LoadMesh("NPC_ANIM_MESH", 2);
@@ -352,8 +354,19 @@ namespace Srand
         if (key == SR_KEY_N && action == GLFW_PRESS) {
             Engine::get().NextScene();
         }
-        if (key == SR_KEY_M && action == GLFW_PRESS) {
+        /*if (key == SR_KEY_M && action == GLFW_PRESS) {
             Engine::get().GoToScene(0);
+        }*/
+
+        if (key == SR_KEY_M && action == GLFW_REPEAT) 
+        {
+            frameCount++;
+
+            if (frameCount > 60) 
+            {
+                Engine::get().GoToScene(0);
+                frameCount = 0;
+            }
         }
         /*if (key == SR_KEY_I && action == GLFW_PRESS) {
             WindowProperties::get().SetFullScreen(true);
