@@ -103,6 +103,9 @@ public:
 				}
 			}
 		}
+		else if (isChosen) {
+			animator->PlayState("BENNY_IDLE");
+		}
 		else {
 			animator->PlayState("BENNY_OUT");
 		}

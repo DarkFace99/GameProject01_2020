@@ -36,4 +36,8 @@ public:
 		SetRender(con);
 		gui_arr->SetControl(con); 
 	}
+
+	inline void Chosen(bool state) {
+		SetRender(state);
+	}
 };
