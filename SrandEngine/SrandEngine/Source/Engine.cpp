@@ -139,7 +139,7 @@ namespace Srand
         AssetManager::get().LoadTexture("LEVEL_ASSET_TEX", "NEW_ASSETS/ART_BENNY/LEVEL_COMPONENT/ASSETS/ingame_assets.png");
         AssetManager::get().LoadTexture("LEVEL_SELECT_ASSET_TEX", "NEW_ASSETS/ART_BENNY/UI/ASSETS/level_select_ui.png");
         AssetManager::get().LoadTexture("MENU_ASSET_TEX", "NEW_ASSETS/ART_BENNY/UI/ASSETS/menu_ui.png");
-        AssetManager::get().LoadTexture("SETTING_ASSET_TEX", "NEW_ASSETS/ART_BENNY/UI/ASSETS/setting_ui_old.png");
+        AssetManager::get().LoadTexture("SETTING_ASSET_TEX", "NEW_ASSETS/ART_BENNY/UI/ASSETS/setting_ui.png");
         AssetManager::get().LoadTexture("TITLE_TEX", "NEW_ASSETS/ART_BENNY/TITLE/TITLE.png");
         AssetManager::get().LoadTexture("SELECTOR_TEX", "NEW_ASSETS/ART_BENNY/LEVEL_COMPONENT/ASSETS/balls_Sheet.png");
         

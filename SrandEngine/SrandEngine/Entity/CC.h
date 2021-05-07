@@ -61,9 +61,9 @@ public:						// Not sure if this the best way to implement it.
 		else if (input.IsKeyPressed(SR_KEY_DOWN)) {
 		// do nothing
 		}
+		else if (input.IsKeyPressed(SR_KEY_SPACE)) {}
 
 		//SR_TRACE("VelX: {0}", rigidBody->GetVelocityX());
-
 	}
 	void Collision_Check() {
 		boxCollider2D->SetIsGround(false);	// reset 

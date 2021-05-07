@@ -63,8 +63,8 @@ void Setting::Init()
         - 1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,
         - 1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,
         - 1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,
-        - 1,46,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,14,-1,-1,-1,
-        - 1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,22,-1,-1,-1,
+        - 1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,14,-1,-1,-1,
+        - 1,46,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,22,-1,-1,-1,
         - 1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,22,-1,-1,-1,
         - 1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,22,-1,-1,-1,
         - 1,-1,-1,41,42,42,43,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,41,27,-1,-1,-1,
@@ -138,7 +138,7 @@ void Setting::Init()
     gameObject = new GameObject();
     manager->AddEntity(gameObject);
 
-    gameObject->GetComponent<Transform>().position = Vector2D_float(((27.5 * _tileSize) + _midPointX) * RATIO, ((5.75 * _tileSize) + _midPointY) * RATIO);
+    gameObject->GetComponent<Transform>().position = Vector2D_float(((26.5 * _tileSize) + _midPointX) * RATIO, ((6.75 * _tileSize) + _midPointY) * RATIO);
     gameObject->GetComponent<Transform>().scale = Vector2D_float(2 * 16 * RATIO, 2 * 16 * RATIO);
 
     gameObject->AddComponent<SpriteRenderer>("2x2_MESH", "LEVEL_ASSET_TEX", 1.0f, &camera, false);
@@ -184,95 +184,82 @@ void Setting::Init()
     tempgui->GetComponent<Transform>().scale = Vector2D_float(20 * 16 * RATIO, 13 * 16 * RATIO);
 
     tempgui->AddComponent<SpriteRenderer>(SpriteRenderer::GUI_LAYER, "UI_BOARD_MESH", "SETTING_ASSET_TEX", 1.0f, &camera, false);
-    tempgui->AddComponent<TileSelector>(44, 44);
-    tempgui->GetComponent<TileSelector>().SetTile(2, 17);
+    tempgui->AddComponent<TileSelector>(25, 25);
+    tempgui->GetComponent<TileSelector>().SetTile(1, 11);
 
     tempgui->AddComponent<GUI_Text>("BOARD");
     gui_arr.PushGUI(tempgui);
 
     //Slot1
     tempgui = new GameObject();
-    tempgui->GetComponent<Transform>().position = Vector2D_float(((14.75 * _tileSize) + _midPointX) * RATIO, ((12.60 * _tileSize) + _midPointY) * RATIO);
+    tempgui->GetComponent<Transform>().position = Vector2D_float(((14.75 * _tileSize) + _midPointX) * RATIO, ((11.70 * _tileSize) + _midPointY) * RATIO);
     tempgui->GetComponent<Transform>().scale = Vector2D_float(19 * 16 * RATIO, 3 * 16 * RATIO);
 
     tempgui->AddComponent<SpriteRenderer>(SpriteRenderer::GUI_LAYER, "UI_SLOT_SELECT_MESH", "SETTING_ASSET_TEX", 1.0f, &camera, false);
-    tempgui->AddComponent<TileSelector>(44, 44);
-    tempgui->GetComponent<TileSelector>().SetTile(0, 0);
+    tempgui->AddComponent<TileSelector>(25, 25);
+    tempgui->GetComponent<TileSelector>().SetTile(0, 3);
 
-    tempgui->AddComponent<GUI_Button>("SLOT1");
-    tempgui->GetComponent<GUI_Button>().Conceal();
-    gui_arr.PushGUI(tempgui);
-
-    //Slot2
-    tempgui = new GameObject();
-    tempgui->GetComponent<Transform>().position = Vector2D_float(((14.75 * _tileSize) + _midPointX) * RATIO, ((11.10 * _tileSize) + _midPointY) * RATIO);
-    tempgui->GetComponent<Transform>().scale = Vector2D_float(19 * 16 * RATIO, 3 * 16 * RATIO);
-
-    tempgui->AddComponent<SpriteRenderer>(SpriteRenderer::GUI_LAYER, "UI_SLOT_SELECT_MESH", "SETTING_ASSET_TEX", 1.0f, &camera, false);
-    tempgui->AddComponent<TileSelector>(44, 44);
-    tempgui->GetComponent<TileSelector>().SetTile(0, 0);
-
-    tempgui->AddComponent<GUI_Button>("SLOT2");
+    tempgui->AddComponent<GUI_Button>("FULLSCREEN");
     tempgui->GetComponent<GUI_Button>().Conceal();
     tempgui->GetComponent<GUI_Button>().m_function = ToggleFullScreen;
     gui_arr.PushGUI(tempgui);
 
-    ////Pin
-
-    //tempgui = new GameObject();
-    //tempgui->GetComponent<Transform>().position = Vector2D_float(((14.75 * _tileSize) + _midPointX) * RATIO, ((11.10 * _tileSize) + _midPointY) * RATIO);
-    //tempgui->GetComponent<Transform>().scale = Vector2D_float(1 * 16 * RATIO, 1 * 16 * RATIO);
-
-    //tempgui->AddComponent<SpriteRenderer>(SpriteRenderer::GUI_LAYER, "UI_PIN_MESH", "SETTING_ASSET_TEX", 1.0f, &camera, false);
-    //tempgui->AddComponent<TileSelector>(44, 44);
-    //tempgui->GetComponent<TileSelector>().SetTile(14, 6);
-
-    //tempgui->AddComponent<GUI_Text>("SLOT2_PIN");
-
-    //gui_arr.PushGUI(tempgui);
-
-    //Slot3
+    //Slot2
     tempgui = new GameObject();
-    tempgui->GetComponent<Transform>().position = Vector2D_float(((14.75 * _tileSize) + _midPointX) * RATIO, ((9.60 * _tileSize) + _midPointY) * RATIO);
+    tempgui->GetComponent<Transform>().position = Vector2D_float(((14.75 * _tileSize) + _midPointX) * RATIO, ((10.30 * _tileSize) + _midPointY) * RATIO);
     tempgui->GetComponent<Transform>().scale = Vector2D_float(19 * 16 * RATIO, 3 * 16 * RATIO);
 
     tempgui->AddComponent<SpriteRenderer>(SpriteRenderer::GUI_LAYER, "UI_SLOT_SELECT_MESH", "SETTING_ASSET_TEX", 1.0f, &camera, false);
-    tempgui->AddComponent<TileSelector>(44, 44);
-    tempgui->GetComponent<TileSelector>().SetTile(0, 0);
+    tempgui->AddComponent<TileSelector>(25, 25);
+    tempgui->GetComponent<TileSelector>().SetTile(0, 3);
 
-    tempgui->AddComponent<GUI_Slider>("SLOT3");
+    tempgui->AddComponent<GUI_Slider>("MUSIC");
     tempgui->GetComponent<GUI_Slider>().Conceal();
     tempgui->GetComponent<GUI_Slider>().m_function = Increase_MU;
     tempgui->GetComponent<GUI_Slider>().n_function = Decrease_MU;
     gui_arr.PushGUI(tempgui);
 
-    //Slot4
+    //Slot3
     tempgui = new GameObject();
-    tempgui->GetComponent<Transform>().position = Vector2D_float(((14.75 * _tileSize) + _midPointX) * RATIO, ((8.10 * _tileSize) + _midPointY) * RATIO);
+    tempgui->GetComponent<Transform>().position = Vector2D_float(((14.75 * _tileSize) + _midPointX) * RATIO, ((8.80 * _tileSize) + _midPointY) * RATIO);
     tempgui->GetComponent<Transform>().scale = Vector2D_float(19 * 16 * RATIO, 3 * 16 * RATIO);
 
     tempgui->AddComponent<SpriteRenderer>(SpriteRenderer::GUI_LAYER, "UI_SLOT_SELECT_MESH", "SETTING_ASSET_TEX", 1.0f, &camera, false);
-    tempgui->AddComponent<TileSelector>(44, 44);
-    tempgui->GetComponent<TileSelector>().SetTile(0, 0);
+    tempgui->AddComponent<TileSelector>(25, 25);
+    tempgui->GetComponent<TileSelector>().SetTile(0, 3);
 
-    tempgui->AddComponent<GUI_Slider>("SLOT4");
+    tempgui->AddComponent<GUI_Slider>("SFX");
     tempgui->GetComponent<GUI_Slider>().Conceal();
     tempgui->GetComponent<GUI_Slider>().m_function = Increase_SF;
     tempgui->GetComponent<GUI_Slider>().n_function = Decrease_SF;
+    gui_arr.PushGUI(tempgui);
+
+    //Slot4
+    tempgui = new GameObject();
+    tempgui->GetComponent<Transform>().position = Vector2D_float(((14.75 * _tileSize) + _midPointX) * RATIO, ((7.40 * _tileSize) + _midPointY) * RATIO);
+    tempgui->GetComponent<Transform>().scale = Vector2D_float(19 * 16 * RATIO, 3 * 16 * RATIO);
+
+    tempgui->AddComponent<SpriteRenderer>(SpriteRenderer::GUI_LAYER, "UI_SLOT_SELECT_MESH", "SETTING_ASSET_TEX", 1.0f, &camera, false);
+    tempgui->AddComponent<TileSelector>(25, 25);
+    tempgui->GetComponent<TileSelector>().SetTile(0, 3);
+
+    tempgui->AddComponent<GUI_Button>("CONFIRM");
+    tempgui->GetComponent<GUI_Button>().Conceal();
+    //stempgui->GetComponent<GUI_Button>().m_function;
     gui_arr.PushGUI(tempgui);
     
     //default
 
     tempgui = new GameObject();
     tempgui->GetComponent<Transform>().position = Vector2D_float(((15 * _tileSize) + _midPointX) * RATIO, ((3 * _tileSize) + _midPointY) * RATIO);
-    tempgui->GetComponent<Transform>().scale = Vector2D_float(5 * 16 * RATIO, 2 * 16 * RATIO);
+    tempgui->GetComponent<Transform>().scale = Vector2D_float(6 * 16 * RATIO, 3 * 16 * RATIO);
 
     tempgui->AddComponent<SpriteRenderer>(SpriteRenderer::GUI_LAYER, "UI_DEFAULT_MESH", "SETTING_ASSET_TEX", 1.0f, &camera, false);
-    tempgui->AddComponent<TileSelector>(44, 44);
-    tempgui->GetComponent<TileSelector>().SetTile(3, 13);
+    tempgui->AddComponent<TileSelector>(25, 25);
+    tempgui->GetComponent<TileSelector>().SetTile(0, 0);
 
     tempgui->AddComponent<GUI_Button>("Default");
-    tempgui->GetComponent<GUI_Button>().SelectedOffset(15, 13);
+    tempgui->GetComponent<GUI_Button>().SelectedOffset(6, 0);
     gui_arr.PushGUI(tempgui);
 
     // Back
