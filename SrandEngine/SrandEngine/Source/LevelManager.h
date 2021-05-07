@@ -242,7 +242,9 @@ namespace Srand
 			int closestCC = -1;
 			
 			for (int i = 0; i < cc_Tag.size()-1; i++) { // exclude Benny
-				closestMag = benny->GetRadius(); //reset closestMag
+				if (benny) {
+					closestMag = benny->GetRadius();
+				} //reset closestMag
 				for (int j = 0; j < cc_Tag.size(); j++) {
 
 					if (cc_Tag[j] == CC::ccTag::MACHO && macho->GetIsOut()) { continue; }
@@ -266,10 +268,12 @@ namespace Srand
 						}
 					}
 				}
-				if (closestMag < benny->GetRadius()) {
-					inRange_List.push_back(cc_List[closestCC]);
-					inRange_Tag.push_back(cc_Tag[closestCC]);
-					prevMag = closestMag;
+				if (benny) {
+					if (closestMag < benny->GetRadius()) {
+						inRange_List.push_back(cc_List[closestCC]);
+						inRange_Tag.push_back(cc_Tag[closestCC]);
+						prevMag = closestMag;
+					}
 				}
 			}
 			//SR_SYSTEM_TRACE("inRange: {0}\n---------------------\n", inRange.size());

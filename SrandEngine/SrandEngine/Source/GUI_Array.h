@@ -48,7 +48,7 @@ namespace Srand
 		inline unsigned int isControl() { return m_inControl; }
 		inline void SetControl(bool con) {
 			m_inControl = con;
-			if (!con) {
+			if (!con && !m_interactable.empty()) {
 				bool isButton = m_interactable[m_index]->HasComponent<GUI_Button>();
 				if (isButton) { m_interactable[m_index]->GetComponent<GUI_Button>().DeSelect(); }
 				else { m_interactable[m_index]->GetComponent<GUI_Slider>().DeSelect(); }

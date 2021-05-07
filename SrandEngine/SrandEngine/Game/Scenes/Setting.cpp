@@ -33,6 +33,7 @@ void NonSaveSettings()
     AudioController::get().SetMusicVolume(volMusic);
     AudioController::get().SetMusicVolume(volEffect);
     sliderM->GetComponent<GUI_Slider>().currentStep = (int)volEffect * 10;
+    sliderS->GetComponent<GUI_Slider>().currentStep = (int)volEffect * 10;
 }
 
 void DefaultSetting()
@@ -297,8 +298,6 @@ void Setting::Init()
 
         tempgui->AddComponent<GUI_Text>("PIN2");
 
-        buttonF->GetComponent<GUI_Button>().AttachObj(tempgui);
-
         gui_arr.PushGUI(tempgui);
         sliderM->GetComponent<GUI_Slider>().steps.push_back(tempgui);
     }
@@ -334,8 +333,6 @@ void Setting::Init()
         tempgui->GetComponent<TileSelector>().SetTile(1 + i, 8);
 
         tempgui->AddComponent<GUI_Text>("PIN3");
-
-        buttonF->GetComponent<GUI_Button>().AttachObj(tempgui);
 
         gui_arr.PushGUI(tempgui);
         sliderS->GetComponent<GUI_Slider>().steps.push_back(tempgui);

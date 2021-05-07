@@ -13,6 +13,8 @@
 #include "Game/Scenes/Level2.h"
 #include "Game/Scenes/Level3.h"
 
+#include "Game/Scenes/Lv1.h"
+
 #include "Source/Audio.h"
 
 namespace Srand
@@ -97,7 +99,7 @@ namespace Srand
         AssetManager::get().LoadMesh("B_MESH");
         AssetManager::get().LoadMesh("TILESET_MESH", 8, 8);
         AssetManager::get().LoadMesh("BENNY_ANIM_MESH", 18);
-        AssetManager::get().LoadMesh("MACHO_ANIM_MESH", 20);
+        AssetManager::get().LoadMesh("MACHO_ANIM_MESH", 21);
         AssetManager::get().LoadMesh("CHERRY_ANIM_MESH", 25);
         AssetManager::get().LoadMesh("PEAR_ANIM_MESH", 19);
         AssetManager::get().LoadMesh("BARTER_ANIM_MESH");
@@ -131,10 +133,10 @@ namespace Srand
         AssetManager::get().LoadTexture("B_TEX", "blank.png");
         AssetManager::get().LoadTexture("TILESET_TEX", "TILESET.png");
         AssetManager::get().LoadTexture("BENNY_ANIM_TEX", "NEW_ASSETS/ART_BENNY/CHARACTERS/IN_CONTROL/Benny_Sheet.png");
-        AssetManager::get().LoadTexture("MACHO_ANIM_TEX", "Macho_Animation-Sheet.png");
+        AssetManager::get().LoadTexture("MACHO_ANIM_TEX", "NEW_ASSETS/ART_BENNY/CHARACTERS/IN_CONTROL/Macho_Sheet.png");
         AssetManager::get().LoadTexture("CHERRY_ANIM_TEX", "NEW_ASSETS/ART_BENNY/CHARACTERS/IN_CONTROL/Cherry_Sheet.png");
-        AssetManager::get().LoadTexture("PEAR_ANIM_TEX", "Pear_SpriteShee.png");
-        AssetManager::get().LoadTexture("BARTER_ANIM_TEX", "Barther.png");
+        AssetManager::get().LoadTexture("PEAR_ANIM_TEX", "NEW_ASSETS/ART_BENNY/CHARACTERS/IN_CONTROL/Pear_Sheet.png");
+        AssetManager::get().LoadTexture("BARTER_ANIM_TEX", "NEW_ASSETS/ART_BENNY/CHARACTERS/IN_CONTROL/Barther_Sheet.png");
         AssetManager::get().LoadTexture("NPC_ANIM_TEX", "NPC_Animation_Sheet.png");
         AssetManager::get().LoadTexture("LEVEL_ASSET_TEX", "NEW_ASSETS/ART_BENNY/LEVEL_COMPONENT/ASSETS/ingame_assets.png");
         AssetManager::get().LoadTexture("LEVEL_SELECT_ASSET_TEX", "NEW_ASSETS/ART_BENNY/UI/ASSETS/level_select_ui.png");
@@ -166,6 +168,7 @@ namespace Srand
         sceneManager.PushScene(new MainMenu());
         sceneManager.PushScene(new Setting());
         sceneManager.PushScene(new LevelSelect());
+        sceneManager.PushScene(new Lv1());
         sceneManager.PushScene(new TestingScene());
         sceneManager.PushScene(new Level2());
         sceneManager.PushScene(new Level3());
@@ -198,7 +201,7 @@ namespace Srand
 #pragma endregion
 
         //For Testing SceneManager Only
-        currentScene = sceneManager[0];
+        currentScene = sceneManager[3];
         //currentScene->SetProgress(levelProgress);
         sceneManager.SetMaxIndex(levelProgress);
         sce = dynamic_cast<LevelSelect*>(sceneManager.Search("LevelSelect"));
