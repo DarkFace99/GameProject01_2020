@@ -114,19 +114,80 @@ void MainMenu::Init()
         gameObject->GetComponent<TileSelector>().SetTile(9, 21);
     }
 
+    
+
+
+
+    // TILE SET
 #pragma region TileSet
 
-    for (int i = 0; i < 30; i++) {
-        tile_info.push_back(glm::vec4(i, 0, 2, 6));
-    }
+    //1.)create 2D array type int
+    //2.)store number from 1 to 16
+    //2.)for loop entire map
+    //2.)assign tile_info with if statements (Binary Search Method)
 
-    for (int i = 15; i < 21; i++) {
-        if      (i == 15) {     tile_info.push_back(glm::vec4(i, 3, 1, 2)); }
-        else if (i == 20) {     tile_info.push_back(glm::vec4(i, 3, 3, 2)); }
-        else {                  tile_info.push_back(glm::vec4(i, 3, 2, 2)); }
+    int tileMAP[16][30] = {
+        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, //16
+        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, //15
+        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, //14
+        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, //13
+        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, //12
+        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, //11
+        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, //10
+        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, //9
+        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, //8
+        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, //7
+        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, //6
+        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, //5
+        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 13, 14, 14, 14, 14, 15, 0, 0, 0, 16, 0, 0, 0, 16, 0}, //4
+        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, //3
+        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, //2
+        {2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2}, //1
+    };
+
+    for (int y = 0; y < 16; y++)
+    {
+        for (int x = 0; x < 30; x++)
+        {
+            switch (tileMAP[y][x])
+            {
+            default: printf("empty");
+                break;
+            case 1: tile_info.push_back(glm::vec4(x, 15 - y, 1, 6));
+                break;
+            case 2: tile_info.push_back(glm::vec4(x, 15 - y, 2, 6));
+                break;
+            case 3: tile_info.push_back(glm::vec4(x, 15 - y, 3, 6));
+                break;
+            case 4: tile_info.push_back(glm::vec4(x, 15 - y, 1, 5));
+                break;
+            case 5: tile_info.push_back(glm::vec4(x, 15 - y, 2, 5));
+                break;
+            case 6: tile_info.push_back(glm::vec4(x, 15 - y, 3, 5));
+                break;
+            case 7: tile_info.push_back(glm::vec4(x, 15 - y, 1, 4));
+                break;
+            case 8: tile_info.push_back(glm::vec4(x, 15 - y, 2, 4));
+                break;
+            case 9: tile_info.push_back(glm::vec4(x, 15 - y, 3, 4));
+                break;
+            case 10: tile_info.push_back(glm::vec4(x, 15 - y, 6, 6));
+                break;
+            case 11: tile_info.push_back(glm::vec4(x, 15 - y, 6, 5));
+                break;
+            case 12: tile_info.push_back(glm::vec4(x, 15 - y, 6, 4));
+                break;
+            case 13: tile_info.push_back(glm::vec4(x, 15 - y, 1, 2));
+                break;
+            case 14: tile_info.push_back(glm::vec4(x, 15 - y, 2, 2));
+                break;
+            case 15: tile_info.push_back(glm::vec4(x, 15 - y, 3, 2));
+                break;
+            case 16: tile_info.push_back(glm::vec4(x, 15 - y, 6, 2));
+                break;
+            }
+        }
     }
-    tile_info.push_back(glm::vec4(24, 3, 6, 2));
-    tile_info.push_back(glm::vec4(28, 3, 6, 2));
 
     for (int i = 0; i < tile_info.size(); i++)
     {
