@@ -17,6 +17,7 @@ Srand::GUI_Selector::~GUI_Selector()
 bool Srand::GUI_Selector::Init()
 {
 	Initialize();
+	animator = &gameObject->GetComponent<Animator>();
 	return true;
 }
 
@@ -32,7 +33,7 @@ void Srand::GUI_Selector::SetOffset(float x, float y) {
 void Srand::GUI_Selector::Move() {
 	if (activate) {
 		
-		renderer->SetAlpha(0.8f);
+		renderer->SetAlpha(1.0f);
 		float chaseX;
 		float chaseY;
 		if (offsetEnable) {
@@ -44,6 +45,11 @@ void Srand::GUI_Selector::Move() {
 			chaseY = transform->position.y + 0.1f * (destination->position.y - transform->position.y);
 		}
 		transform->SetPosition(Vector2D_float(chaseX, chaseY));
+
+		// State
+		if (percentRange <= 0.6) {animator->PlayState("WHITE"); }
+		else if (percentRange <= 0.8) {animator->PlayState("YELLOW"); }
+		else {animator->PlayState("RED"); }
 	}
 	else if(!activate){
 		offsetEnable = false;
@@ -51,3 +57,5 @@ void Srand::GUI_Selector::Move() {
 		transform->SetPosition(Vector2D_float(origin->position.x, origin->position.y));
 	}
 }
+
+void Srand::GUI_Selector::SetPercentRange(float percent) { percentRange = percent; }
