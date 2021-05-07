@@ -12,7 +12,7 @@ Level3::~Level3()
 void Level3::Init()
 {
     manager = &EntityManager::get();
-
+    GameObject* tempgui = nullptr;
     std::vector<glm::vec4> tile_info;
 
 #pragma region LevelAssets
@@ -229,6 +229,28 @@ void Level3::Init()
 
     levelManager.SetUpCC();
 
+#pragma region GUI
+
+    // selector
+
+    tempgui = new GameObject();
+    //tempgui->GetComponent<Transform>().position = Vector2D_float(((6.5 * _tileSize) + _midPointX) * RATIO, (((13.95 - (i * 3)) * _tileSize) + _midPointY) * RATIO);
+    tempgui->GetComponent<Transform>().scale = Vector2D_float(8 * RATIO, 8 * RATIO);
+
+    tempgui->AddComponent<SpriteRenderer>(SpriteRenderer::GUI_LAYER, "SELECTOR_MESH", "SELECTOR_TEX", 1.0f, &camera, false);
+    tempgui->AddComponent<Animator>(3, 100);
+    tempgui->GetComponent<Animator>().SetState("WHITE", 0, 0);
+    tempgui->GetComponent<Animator>().SetState("YELLOW", 1, 1);
+    tempgui->GetComponent<Animator>().SetState("RED", 2, 2);
+
+    tempgui->AddComponent<GUI_Selector>();
+    levelManager.SetSelector(&tempgui->GetComponent<GUI_Selector>());
+    gui_arr.SetSelector(&tempgui->GetComponent<GUI_Selector>());
+    gui_arr.PushGUI(tempgui);
+
+    gui_arr.SetControl(false);
+#pragma endregion
+
 #pragma endregion
 
     if (audioController.Find("Menu")->isPlayed == true)
@@ -248,17 +270,18 @@ void Level3::Clean()
     manager->Clean();
     objManager.Clean();
     levelManager.Clean();
-    //audioController.Stop();
+    gui_arr.Clear();
 }
-
 void Level3::Draw()
 {
     manager->Draw();
+    gui_arr.OnDraw();
 }
-
 void Level3::Update()
 {
     manager->Update();
     levelManager.CheckGoal();
     levelManager.AbilityControl();
+    gui_arr.OnUpdate();
+
 }

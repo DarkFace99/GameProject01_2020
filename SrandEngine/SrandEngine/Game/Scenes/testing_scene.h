@@ -7,7 +7,7 @@ class TestingScene : public Srand::Scene
 {
 private:
 	EntityManager* manager = nullptr;
-
+	GUI_Array gui_arr;
 public:
 	TestingScene();
 	~TestingScene();
