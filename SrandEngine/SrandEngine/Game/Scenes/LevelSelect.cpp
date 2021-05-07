@@ -162,8 +162,8 @@ void LevelSelect::Init()
     gameObject->GetComponent<Transform>().scale = Vector2D_float(14 * 16 * RATIO, 3 * 16 * RATIO);
 
     gameObject->AddComponent<SpriteRenderer>(SpriteRenderer::GUI_LAYER, "UI_SELECT_MESH", "LEVEL_SELECT_ASSET_TEX", 1.0f, &camera, false);
-    gameObject->AddComponent<TileSelector>(22, 22);
-    gameObject->GetComponent<TileSelector>().SetTile(1, 8);
+    gameObject->AddComponent<TileSelector>(25, 25);
+    gameObject->GetComponent<TileSelector>().SetTile(1, 11);
 #pragma endregion
 
 #pragma region UI_Button
@@ -175,11 +175,11 @@ void LevelSelect::Init()
             tempgui->GetComponent<Transform>().scale = Vector2D_float(2 * 16 * RATIO, 2 * 16 * RATIO);
 
             tempgui->AddComponent<SpriteRenderer>(SpriteRenderer::GUI_LAYER, "UI_SLOT_LEVEL_MESH", "LEVEL_SELECT_ASSET_TEX", 1.0f, &camera, false);
-            tempgui->AddComponent<TileSelector>(22, 22);
-            tempgui->GetComponent<TileSelector>().SetTile(7, 19);
+            tempgui->AddComponent<TileSelector>(25, 25);
+            tempgui->GetComponent<TileSelector>().SetTile(7, 22);
 
             tempgui->AddComponent<GUI_Button>("Button");
-            tempgui->GetComponent<GUI_Button>().SelectedOffset(4, 19);
+            tempgui->GetComponent<GUI_Button>().SelectedOffset(4, 22);
         }
         else {
             tempgui = new GameObject();
@@ -187,8 +187,8 @@ void LevelSelect::Init()
             tempgui->GetComponent<Transform>().scale = Vector2D_float(2 * 16 * RATIO, 2 * 16 * RATIO);
 
             tempgui->AddComponent<SpriteRenderer>(SpriteRenderer::GUI_LAYER, "UI_SLOT_LEVEL_MESH", "LEVEL_SELECT_ASSET_TEX", 1.0f, &camera, false);
-            tempgui->AddComponent<TileSelector>(22, 22);
-            tempgui->GetComponent<TileSelector>().SetTile(1, 16);
+            tempgui->AddComponent<TileSelector>(25, 25);
+            tempgui->GetComponent<TileSelector>().SetTile(1, 19);
 
             tempgui->AddComponent<GUI_Text>("Lock");
         }
@@ -204,8 +204,8 @@ void LevelSelect::Init()
         tempgui->GetComponent<Transform>().scale = Vector2D_float(2 * 16 * RATIO, 2 * 16 * RATIO);
 
         tempgui->AddComponent<SpriteRenderer>(SpriteRenderer::GUI_LAYER, "UI_SLOT_LEVEL_MESH", "LEVEL_SELECT_ASSET_TEX", 1.0f, &camera, false);
-        tempgui->AddComponent<TileSelector>(22, 22);
-        tempgui->GetComponent<TileSelector>().SetTile((i * 2 % 16) + 1, (i < 8 ? 14 : 12));
+        tempgui->AddComponent<TileSelector>(25, 25);
+        tempgui->GetComponent<TileSelector>().SetTile((i * 2 % 16) + 1, (i < 8 ? 17 : 15));
 
         tempgui->AddComponent<GUI_Text>("Number");
 
