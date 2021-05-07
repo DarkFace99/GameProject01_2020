@@ -21,8 +21,12 @@ namespace Srand
 		void AdjustStep();
 		void Conceal();
 
+		std::vector<GameObject*> steps;
+		int currentStep = 0;
+
+		void ChangeStep(int num);
+
 	private:
-		std::vector<float> step;
 		std::string name = "";
 		bool isSelected = false;
 		bool isConcealed = false;

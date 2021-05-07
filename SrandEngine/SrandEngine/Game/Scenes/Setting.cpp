@@ -13,49 +13,53 @@ GameObject* sliderM = nullptr;
 GameObject* sliderS = nullptr;
 
 void GoTo_MenuS() { Engine::get().GoToScene(0); }
-void Increase_MU() { 
-    SR_TRACE("Slider_MU: +"); 
-    AudioController::get().ChangeVolume(1, SoundType::MUSIC);
-}
-void Decrease_MU() { 
-    SR_TRACE("Slider_MU: -");
-    AudioController::get().ChangeVolume(0, SoundType::MUSIC);
-}
-void Increase_SF() {
-    SR_TRACE("Slider_SF: +");
-    AudioController::get().ChangeVolume(1, SoundType::EFFECT);
-}
-void Decrease_SF() {
-    SR_TRACE("Slider_SF: -");
-    AudioController::get().ChangeVolume(0, SoundType::EFFECT);
-}
 
 //place_holder
-bool full = false;
+bool isFullScreen = false;
+float volMusic = 1.0f, volEffect = 1.0f;
+int temp; //IGNORED
+
 void ToggleFullScreen() {
-    full = !full;
-    buttonF->GetComponent<GUI_Button>().SetAttach(full);
-    WindowProperties::get().SetFullScreen(full);
+    isFullScreen = !isFullScreen;
+    buttonF->GetComponent<GUI_Button>().SetAttach(isFullScreen);
+    WindowProperties::get().SetFullScreen(isFullScreen);
 }
 
 void NonSaveSettings() 
 {
-    bool isFullScreen = false;
-    float volMusic = 1.0f, volEffect = 1.0f;
-
-    int temp; //IGNORED
-
     Engine::get().LoadSave(isFullScreen, volMusic, volEffect, temp);
 
     WindowProperties::get().SetFullScreen(isFullScreen);
     AudioController::get().SetMusicVolume(volMusic);
     AudioController::get().SetMusicVolume(volEffect);
+    sliderM->GetComponent<GUI_Slider>().currentStep = (int)volEffect * 10;
 }
 
 void DefaultSetting()
 {
     WindowProperties::get().SetFullScreen(false);
     AudioController::get().SetAllVolume(1.0f);
+}
+
+void Increase_MU() {
+    SR_TRACE("Slider_MU: +");
+    sliderM->GetComponent<GUI_Slider>().ChangeStep(1);
+    AudioController::get().ChangeVolume(1, SoundType::MUSIC);
+}
+void Decrease_MU() {
+    SR_TRACE("Slider_MU: -");
+    sliderM->GetComponent<GUI_Slider>().ChangeStep(0);
+    AudioController::get().ChangeVolume(0, SoundType::MUSIC);
+}
+void Increase_SF() {
+    SR_TRACE("Slider_SF: +");
+    sliderS->GetComponent<GUI_Slider>().ChangeStep(1);
+    AudioController::get().ChangeVolume(1, SoundType::EFFECT);
+}
+void Decrease_SF() {
+    SR_TRACE("Slider_SF: -");
+    sliderS->GetComponent<GUI_Slider>().ChangeStep(0);
+    AudioController::get().ChangeVolume(0, SoundType::EFFECT);
 }
 
 void Setting::Init()
@@ -251,7 +255,7 @@ void Setting::Init()
     tempgui->GetComponent<Transform>().position = Vector2D_float(((22.8 * _tileSize) + _midPointX) * RATIO, ((11.75 * _tileSize) + _midPointY) * RATIO);
     tempgui->GetComponent<Transform>().scale = Vector2D_float(1 * 16 * RATIO, 1 * 16 * RATIO);
 
-    tempgui->AddComponent<SpriteRenderer>(SpriteRenderer::GUI_LAYER, "UI_KEY_MESH", "SETTING_ASSET_TEX", (full)? 1.0f : 0.0f, &camera, false);
+    tempgui->AddComponent<SpriteRenderer>(SpriteRenderer::GUI_LAYER, "UI_KEY_MESH", "SETTING_ASSET_TEX", (isFullScreen)? 1.0f : 0.0f, &camera, false);
     tempgui->AddComponent<TileSelector>(25, 25);
     tempgui->GetComponent<TileSelector>().SetTile(7, 6);
 
@@ -278,6 +282,27 @@ void Setting::Init()
     tempgui->GetComponent<GUI_Slider>().n_function = Decrease_MU;
     gui_arr.PushGUI(tempgui);
 
+    //pin2 
+    int pointM = sliderM->GetComponent<GUI_Slider>().currentStep;
+    for (int i = 0; i < 10; i++) {
+        tempgui = new GameObject();
+        tempgui->GetComponent<Transform>().position = Vector2D_float((((0.69*i+16.75) * _tileSize) + _midPointX) * RATIO, ((10.32 * _tileSize) + _midPointY) * RATIO);
+        tempgui->GetComponent<Transform>().scale = Vector2D_float(0.75 * 16 * RATIO, 1 * 16 * RATIO);
+        if (i < pointM) {
+            tempgui->AddComponent<SpriteRenderer>(SpriteRenderer::GUI_LAYER, "UI_KEY_MESH", "SETTING_ASSET_TEX", 1.0f, &camera, false);
+        }
+        else { tempgui->AddComponent<SpriteRenderer>(SpriteRenderer::GUI_LAYER, "UI_KEY_MESH", "SETTING_ASSET_TEX", 0.0f, &camera, false); }
+        tempgui->AddComponent<TileSelector>(25, 25);
+        tempgui->GetComponent<TileSelector>().SetTile(1 + i, 8);
+
+        tempgui->AddComponent<GUI_Text>("PIN2");
+
+        buttonF->GetComponent<GUI_Button>().AttachObj(tempgui);
+
+        gui_arr.PushGUI(tempgui);
+        sliderM->GetComponent<GUI_Slider>().steps.push_back(tempgui);
+    }
+
     //Slot3
     tempgui = new GameObject();
     sliderS = tempgui;
@@ -293,6 +318,28 @@ void Setting::Init()
     tempgui->GetComponent<GUI_Slider>().m_function = Increase_SF;
     tempgui->GetComponent<GUI_Slider>().n_function = Decrease_SF;
     gui_arr.PushGUI(tempgui);
+
+    //pin3
+    int pointS = sliderS->GetComponent<GUI_Slider>().currentStep;
+    for (int i = 0; i < 10; i++) {
+        tempgui = new GameObject();
+        tempgui->GetComponent<Transform>().position = Vector2D_float((((0.69 * i + 16.75) * _tileSize) + _midPointX) * RATIO, ((8.90 * _tileSize) + _midPointY) * RATIO);
+        tempgui->GetComponent<Transform>().scale = Vector2D_float(0.75 * 16 * RATIO, 1 * 16 * RATIO);
+
+        if (i < pointS) {
+            tempgui->AddComponent<SpriteRenderer>(SpriteRenderer::GUI_LAYER, "UI_KEY_MESH", "SETTING_ASSET_TEX", 1.0f, &camera, false);
+        }
+        else { tempgui->AddComponent<SpriteRenderer>(SpriteRenderer::GUI_LAYER, "UI_KEY_MESH", "SETTING_ASSET_TEX", 0.0f, &camera, false); }
+        tempgui->AddComponent<TileSelector>(25, 25);
+        tempgui->GetComponent<TileSelector>().SetTile(1 + i, 8);
+
+        tempgui->AddComponent<GUI_Text>("PIN3");
+
+        buttonF->GetComponent<GUI_Button>().AttachObj(tempgui);
+
+        gui_arr.PushGUI(tempgui);
+        sliderS->GetComponent<GUI_Slider>().steps.push_back(tempgui);
+    }
 
     //Slot4
     tempgui = new GameObject();
