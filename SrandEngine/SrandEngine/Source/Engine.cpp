@@ -26,13 +26,15 @@ namespace Srand
     SceneManager& sceneManager = SceneManager::get();
     Scene* currentScene = nullptr;
 
+    LevelSelect* sce = nullptr;
+
     AudioController& audioController = AudioController::get();
 
     GLFWimage icons[1];
 
     bool isFullScreen = false;
     float volMusic = 1.0f, volEffect = 1.0f;
-    int levelProgress = 3;
+    int levelProgress = 0;
 
     Engine::Engine() {
         running = false;
@@ -123,7 +125,7 @@ namespace Srand
 
         /* Texture */
         AssetManager::get().LoadTexture("BG_TEX", "Background.png");
-        AssetManager::get().LoadTexture("B_TEX", "b.png");
+        AssetManager::get().LoadTexture("B_TEX", "blank.png");
         AssetManager::get().LoadTexture("TILESET_TEX", "TILESET.png");
         AssetManager::get().LoadTexture("BENNY_ANIM_TEX", "NEW_ASSETS/ART_BENNY/CHARACTERS/IN_CONTROL/Benny_Sheet.png");
         AssetManager::get().LoadTexture("MACHO_ANIM_TEX", "Macho_Animation-Sheet.png");
@@ -139,7 +141,7 @@ namespace Srand
 
         /* Audio */
         audioController.AddAudioSource(new AudioSource("BGM", volMusic, true, "The Happy Man.mp3", SoundType::MUSIC));
-        audioController.AddAudioSource(new AudioSource("Menu", volMusic, true, "So_Happy_World.mp3", SoundType::MUSIC));
+        audioController.AddAudioSource(new AudioSource("Menu", volMusic, true, "Cheesy tunes.mp3", SoundType::MUSIC));
         audioController.AddAudioSource(new AudioSource("Activate", volEffect, false, "Activate.mp3", SoundType::EFFECT));
         audioController.AddAudioSource(new AudioSource("Barter_swap", volEffect, false, "Barter_swap.mp3", SoundType::EFFECT));
         audioController.AddAudioSource(new AudioSource("Char_fall", volEffect, false, "Char_fall.mp3", SoundType::EFFECT));
@@ -192,7 +194,10 @@ namespace Srand
 
         //For Testing SceneManager Only
         currentScene = sceneManager[0];
-        currentScene->SetProgress(levelProgress);
+        //currentScene->SetProgress(levelProgress);
+        sceneManager.SetMaxIndex(levelProgress);
+        sce = dynamic_cast<LevelSelect*>(sceneManager.Search("LevelSelect"));
+        sce->SetProgress(levelProgress);
         currentScene->Init();
         
         running = true;
@@ -203,6 +208,8 @@ namespace Srand
         nextScene_Num++;
         nextScene_Num %= sceneManager.VectorSize();
         currentScene = sceneManager[nextScene_Num];
+        sceneManager.SetMaxIndex(nextScene_Num - 2);
+        sce->SetProgress(sceneManager.GetMaxIndex());
         currentScene->Init();
     }
 
@@ -211,6 +218,8 @@ namespace Srand
         nextScene_Num = num;
         nextScene_Num %= sceneManager.VectorSize();
         currentScene = sceneManager[nextScene_Num];
+        sceneManager.SetMaxIndex(nextScene_Num - 2);
+        sce->SetProgress(sceneManager.GetMaxIndex());
         currentScene->Init();
     }
 
@@ -264,7 +273,8 @@ namespace Srand
             outStream << audioController.GetVolume().second << std::endl;
 
             /* Stage */
-            outStream << currentScene->GetProgress() << std::endl;
+            if(sceneManager.GetMaxIndex() >= levelProgress)
+                outStream << sceneManager.GetMaxIndex() << std::endl;
 
             outStream.close();
         }
@@ -310,6 +320,7 @@ namespace Srand
         AssetManager::get().Clean();
         Shader::get()->DeleteShader();
 
+        //sce->SetProgress(sceneManager.GetMaxIndex());
         WriteSave();
         //For Testing SceneManager Only
         currentScene->Clean();

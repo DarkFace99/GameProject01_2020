@@ -496,8 +496,16 @@ void TestingScene::Init()
 
 #pragma endregion
     
-    audioController.Stop();
+    if (audioController.Find("Menu")->isPlayed == true) 
+    {
+        audioController.Stop();
+        audioController.Find("Menu")->isPlayed = false;
+    }
+
     audioController.Play("BGM");
+    audioController.Find("BGM")->isPlayed = true;
+
+    //progress = 1;
 
 }
 void TestingScene::Clean()
@@ -505,7 +513,7 @@ void TestingScene::Clean()
     manager->Clean();
     objManager.Clean();
     levelManager.Clean();
-    audioController.Stop();
+    //audioController.Stop();
 }
 void TestingScene::Draw()
 {
@@ -525,11 +533,11 @@ void TestingScene::Update()
     //        for (int j = 0; j < objManager.VectorSize(); j++)
     //        {
     //            if (i == j) { continue; } // Always Collide with itself
-
+    //
     //            if (Collision::AABB(objManager[i]->GetComponent<BoxCollider2D>(), objManager[j]->GetComponent<BoxCollider2D>())
     //                && objManager[i]->GetComponent<BoxCollider2D>().GetTag() == BoxCollider2D::CHARACTER_COLLISION)
     //            {
-
+    //
     //                if (Collision::IsOnGround(*objManager[i], *objManager[j]) && !isGroundCheck) {
     //                    isGroundCheck = true;
     //                    objManager[i]->GetComponent<BoxCollider2D>().SetIsGround(true);

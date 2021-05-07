@@ -18,6 +18,7 @@ namespace Srand
 
 		std::vector<Scene*> m_sceneVector;
 		int m_currentLevelIndex = 0;
+		int m_maxLevelIndex = 0;
 		unsigned int m_vectorIndex = 0;
 
 		SceneManager();
@@ -45,5 +46,12 @@ namespace Srand
 
 		std::vector<Scene*>::iterator begin() { return m_sceneVector.begin(); }
 		std::vector<Scene*>::iterator end() { return m_sceneVector.end(); }
+
+		inline void SetMaxIndex(int i) 
+		{ 
+			if(m_maxLevelIndex <= i)
+			m_maxLevelIndex = i; 
+		}
+		inline int GetMaxIndex() { return m_maxLevelIndex; }
 	};
 }

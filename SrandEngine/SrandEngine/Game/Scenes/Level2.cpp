@@ -237,8 +237,16 @@ void Level2::Init()
 
 #pragma endregion
 
-    audioController.Stop();
+    if (audioController.Find("Menu")->isPlayed == true)
+    {
+        audioController.Stop();
+        audioController.Find("Menu")->isPlayed = false;
+    }
+
     audioController.Play("BGM");
+    audioController.Find("BGM")->isPlayed = true;
+
+    //progress = 2;
 }
 
 void Level2::Clean()
@@ -246,7 +254,7 @@ void Level2::Clean()
     manager->Clean();
     objManager.Clean();
     levelManager.Clean();
-    audioController.Stop();
+    //audioController.Stop();
 }
 
 void Level2::Draw()

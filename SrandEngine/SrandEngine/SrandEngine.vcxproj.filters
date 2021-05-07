@@ -243,6 +243,7 @@
     <ClInclude Include="Entity\UI_Box.h">
       <Filter>SrandEngine\Entity</Filter>
     </ClInclude>
+    <ClInclude Include="Source\GUI_Selector.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="imgui\imgui.cpp">
@@ -348,6 +349,7 @@
     <ClCompile Include="Source\GUI_Text.cpp">
       <Filter>SrandEngine\Graphic User Interface</Filter>
     </ClCompile>
+    <ClCompile Include="Source\GUI_Selector.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="SrandEngine.rc" />

@@ -243,8 +243,14 @@ void Setting::Init()
     gui_arr.PushGUI(tempgui);
 #pragma endregion
 
-    audioController.Stop();
+    if (audioController.Find("BGM")->isPlayed == true)
+    {
+        audioController.Stop();
+        audioController.Find("BGM")->isPlayed = false;
+    }
+
     audioController.Play("Menu");
+    audioController.Find("Menu")->isPlayed = true;
 }
 
 void Setting::Clean()
@@ -252,7 +258,7 @@ void Setting::Clean()
     manager->Clean();
     objManager.Clean();
     levelManager.Clean();
-    audioController.Stop();
+    //audioController.Stop();
     gui_arr.Clear();
 }
 

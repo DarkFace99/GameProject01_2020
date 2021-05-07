@@ -28,6 +28,9 @@ namespace Srand
 
         AudioSource* audio = Find(name);
 
+        if (audio->isPlayed)
+            return;
+
         sound = m_engine->play2D((AUDIO_FILE_PATH + audio->filePath).c_str(), audio->isLoopable, false, true);
         if (sound == nullptr) 
         {

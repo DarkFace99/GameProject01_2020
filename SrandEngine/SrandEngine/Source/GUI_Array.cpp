@@ -33,6 +33,9 @@ void Srand::GUI_Array::OnDraw()
 }
 void Srand::GUI_Array::OnUpdate()
 {
+	if (selector != nullptr) { selector->Move(); }
+	
+
 	if (m_activate && m_inControl)
 	{
 		bool isButton = m_interactable[m_index]->HasComponent<GUI_Button>();
