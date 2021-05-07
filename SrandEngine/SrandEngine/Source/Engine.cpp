@@ -124,6 +124,7 @@ namespace Srand
         AssetManager::get().LoadMesh("UI_SLOT_LEVEL_MESH", 25, 25, 2, 2);
         AssetManager::get().LoadMesh("UI_SLOT_SELECT_MESH", 25, 25, 19, 3);
         AssetManager::get().LoadMesh("TITLE_MESH", 20, 16, 20, 7);
+        AssetManager::get().LoadMesh("SELECTOR_MESH", 3);
 
         /* Texture */
         AssetManager::get().LoadTexture("BG_TEX", "Background.png");
@@ -140,6 +141,8 @@ namespace Srand
         AssetManager::get().LoadTexture("MENU_ASSET_TEX", "NEW_ASSETS/ART_BENNY/UI/ASSETS/menu_ui.png");
         AssetManager::get().LoadTexture("SETTING_ASSET_TEX", "NEW_ASSETS/ART_BENNY/UI/ASSETS/setting_ui_old.png");
         AssetManager::get().LoadTexture("TITLE_TEX", "NEW_ASSETS/ART_BENNY/TITLE/TITLE.png");
+        AssetManager::get().LoadTexture("SELECTOR_TEX", "NEW_ASSETS/ART_BENNY/LEVEL_COMPONENT/ASSETS/balls_Sheet.png");
+        
 
         /* Audio */
         audioController.AddAudioSource(new AudioSource("BGM", volMusic, true, "The Happy Man.mp3", SoundType::MUSIC));

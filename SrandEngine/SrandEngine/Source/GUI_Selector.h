@@ -1,6 +1,7 @@
 #pragma once
 
 #include "GUI.h"
+#include "ECS/Animator.h"
 
 namespace Srand
 {
@@ -20,6 +21,7 @@ namespace Srand
 		void Move();
 		
 		void SetOffset(float x, float y);
+		void SetPercentRange(float percent);
 
 	private:
 		std::string name = "";
@@ -29,6 +31,8 @@ namespace Srand
 
 		float xOffset, yOffset;
 		bool offsetEnable = false;
+
+		float percentRange = 0;
 		
 		/*int steps = 60;
 		int stepsCount = 0;
@@ -36,5 +40,6 @@ namespace Srand
 
 		Transform* origin = nullptr;
 		Transform* destination = nullptr;
+		Animator* animator = nullptr;
 	};
 }
