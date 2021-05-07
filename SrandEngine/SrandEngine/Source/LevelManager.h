@@ -472,10 +472,12 @@ namespace Srand
 					useAbility = false; 
 					
 				}
+				if (selector != nullptr) { 
+					selector->IsActive(useAbility); 
+					selector->SetPercentRange(magnitude / benny->GetRadius());
+				}
+
 			}
-			if (selector != nullptr) { selector->IsActive(useAbility); }
-			
-			
 			//if (input.IsKeyPressed(SR_KEY_4)) {			// Cancel
 			//	ClearActivation();
 			//	useAbility = false;

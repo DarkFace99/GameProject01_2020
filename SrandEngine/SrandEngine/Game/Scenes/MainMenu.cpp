@@ -414,9 +414,13 @@ void MainMenu::Init()
     tempgui->GetComponent<Transform>().scale = Vector2D_float(8 * RATIO, 8 * RATIO);
 
     tempgui->AddComponent<SpriteRenderer>(SpriteRenderer::GUI_LAYER, "B_MESH", "B_TEX", 1.0f, &camera, false);
+    tempgui->AddComponent<Animator>(3, 100);
+    tempgui->GetComponent<Animator>().SetState("WHITE", 0, 0);
+    tempgui->GetComponent<Animator>().SetState("YELLOW", 1, 1);
+    tempgui->GetComponent<Animator>().SetState("RED", 2, 2);
+
     tempgui->AddComponent<GUI_Selector>();
     levelManager.SetSelector(&tempgui->GetComponent<GUI_Selector>());
-
     gui_arr.SetSelector(&tempgui->GetComponent<GUI_Selector>());
     gui_arr.PushGUI(tempgui);
     
