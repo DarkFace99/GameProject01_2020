@@ -98,7 +98,7 @@ namespace Srand
         AssetManager::get().LoadMesh("TILESET_MESH", 8, 8);
         AssetManager::get().LoadMesh("BENNY_ANIM_MESH", 18);
         AssetManager::get().LoadMesh("MACHO_ANIM_MESH", 20);
-        AssetManager::get().LoadMesh("CHERRY_ANIM_MESH", 18);
+        AssetManager::get().LoadMesh("CHERRY_ANIM_MESH", 25);
         AssetManager::get().LoadMesh("PEAR_ANIM_MESH", 19);
         AssetManager::get().LoadMesh("BARTER_ANIM_MESH");
         AssetManager::get().LoadMesh("NPC_ANIM_MESH", 2);

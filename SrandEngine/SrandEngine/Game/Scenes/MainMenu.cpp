@@ -241,7 +241,7 @@ void MainMenu::Init()
     gameObject->AddComponent<SpriteRenderer>(SpriteRenderer::CHARACTER_LAYER, "CHERRY_ANIM_MESH", "CHERRY_ANIM_TEX", 1.0f, &camera, false);
     gameObject->AddComponent<RigidBody>(2.0f);
     // anim_set
-    gameObject->AddComponent<Animator>(18, 80);
+    gameObject->AddComponent<Animator>(25, 80);
     gameObject->GetComponent<Animator>().SetState("CHERRY_OUT", 0, 0);
     gameObject->GetComponent<Animator>().SetState("CHERRY_IDLE", 1, 6);
     gameObject->GetComponent<Animator>().SetState("CHERRY_RUN", 7, 15);
