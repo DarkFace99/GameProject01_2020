@@ -68,7 +68,7 @@ namespace Srand
 		bool m_inControl = true;
 		bool isUpPressed = false;
 		bool isDownPressed = false;
-		bool isSpacePressed = false;
+		bool isSpacePressed = true;
 		GUI_Selector* selector = nullptr;
 
 		WindowsInput input;
