@@ -307,7 +307,10 @@ namespace Srand
 						macho->Chosen(false);
 						macho->SetActive(true);
 						benny->SetActive(false);
-						selector->SetDestination(machoTransform);
+						if (selector) { 
+							selector->SetDestination(machoTransform); 
+							selector->SetOffset(0, 50);
+						}
 					}
 					else if (inRange_Tag[cc_At] == CC::ccTag::CHERRY) {
 						controlled_Tag = CC::ccTag::CHERRY;
@@ -315,29 +318,37 @@ namespace Srand
 						cherry->Chosen(false);
 						cherry->SetActive(true);
 						benny->SetActive(false);
-						selector->SetDestination(cherryTransform);
-						selector->SetOffset(0, 50);
+						if (selector) {
+							selector->SetDestination(cherryTransform);
+							selector->SetOffset(0, 50);
+						}
 					}
 					else if (inRange_Tag[cc_At] == CC::ccTag::PEAR) {
 						controlled_Tag = CC::ccTag::PEAR;
 						controlled_Transform = pearTransform;
 						pear->Chosen(false);
 						pear->SetActive(true);
-						selector->SetDestination(pearTransform);
+						if (selector) {
+							selector->SetDestination(pearTransform);
+							selector->SetOffset(0, 50);
+						}
 					}
 					else if (inRange_Tag[cc_At] == CC::ccTag::BARTER) {
 						controlled_Tag = CC::ccTag::BARTER;
 						controlled_Transform = barterTransform;
 						barter->Chosen(false);
 						barter->SetActive(true);
-						selector->SetDestination(barterTransform);
-						
+						if (selector) {
+							selector->SetDestination(barterTransform);
+							selector->SetOffset(0, 50);
+						}
 					}if (inRange_Tag[cc_At] == CC::ccTag::UI_Box) {
 						controlled_Tag = CC::ccTag::UI_Box;
 						controlled_Transform = ui_BoxTransform;
-						selector->SetDestination(ui_BoxTransform);
-						selector->SetOffset(-20, 150);
-
+						if (selector) {
+							selector->SetDestination(ui_BoxTransform);
+							selector->SetOffset(-20, 420);
+						}
 						ui_Box->Chosen(false);
 						benny->SetActive(false);
 						ui_Box->SetAttach(true);
@@ -462,7 +473,8 @@ namespace Srand
 					
 				}
 			}
-			selector->IsActive(useAbility);
+			if (selector != nullptr) { selector->IsActive(useAbility); }
+			
 			
 			//if (input.IsKeyPressed(SR_KEY_4)) {			// Cancel
 			//	ClearActivation();

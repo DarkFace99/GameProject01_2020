@@ -32,7 +32,7 @@ void Srand::GUI_Selector::SetOffset(float x, float y) {
 void Srand::GUI_Selector::Move() {
 	if (activate) {
 		
-		renderer->SetAlpha(0.8f);
+		renderer->SetAlpha(1.0f);
 		float chaseX;
 		float chaseY;
 		if (offsetEnable) {
