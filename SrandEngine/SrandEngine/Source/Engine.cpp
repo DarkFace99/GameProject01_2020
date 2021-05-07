@@ -207,7 +207,7 @@ namespace Srand
 #pragma endregion
 
         //For Testing SceneManager Only
-        currentScene = sceneManager[9];
+        currentScene = sceneManager[0];
         //currentScene->SetProgress(levelProgress);
         sceneManager.SetMaxIndex(levelProgress);
         sce = dynamic_cast<LevelSelect*>(sceneManager.Search("LevelSelect"));

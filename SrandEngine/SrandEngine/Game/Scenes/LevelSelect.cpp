@@ -7,8 +7,9 @@ LevelSelect::~LevelSelect()
 {
     Clean();
 }
-
+int index = 0;
 void GoTo_MenuL() { Engine::get().GoToScene(0); }
+void GoTo_Level() { Engine::get().GoToScene(3 + index); }
 
 void LevelSelect::Init()
 {
@@ -180,6 +181,7 @@ void LevelSelect::Init()
 
             tempgui->AddComponent<GUI_Button>("Button");
             tempgui->GetComponent<GUI_Button>().SelectedOffset(4, 22);
+            tempgui->GetComponent<GUI_Button>().m_function = GoTo_Level;
         }
         else {
             tempgui = new GameObject();
@@ -414,4 +416,5 @@ void LevelSelect::Update()
 {
     manager->Update();
     gui_arr.OnUpdate();
+    index = gui_arr.Index();
 }

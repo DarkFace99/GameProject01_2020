@@ -8,12 +8,12 @@ class LevelSelect : public Srand::Scene
 private:
 	EntityManager* manager = nullptr;
 	GUI_Array gui_arr;
-
 	// for testing
 	int progress;
 	WindowsInput input;
 
 public:
+	
 	LevelSelect();
 	~LevelSelect();
 
