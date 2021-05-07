@@ -70,6 +70,9 @@ namespace Srand
 		float yLine_Min;
 		float yLine_Max;*/
 
+		CC::ccTag lastCC_Control = CC::ccTag::DEFAULT;;
+		bool lastUI_Control = false;
+
 		CC::ccTag controlled_Tag = CC::ccTag::DEFAULT;
 		Transform* controlled_Transform = nullptr;
 
@@ -139,6 +142,9 @@ namespace Srand
 			selector = nullptr;
 
 			isUI_BoxPresent = false;
+
+			lastCC_Control = CC::ccTag::DEFAULT;;
+			lastUI_Control = false;
 		}
 
 		inline int VectorSize() { return cc_List.size(); }
@@ -287,47 +293,61 @@ namespace Srand
 					if (inRange_Tag.empty()) {
 						cc_At = 0; // reset
 						choosingStage = false;
-						selector->IsChoosing(choosingStage);
 					}
 					else {
 						choosingStage = true;
-						selector->IsChoosing(choosingStage);
 						//selector->SetDestination(&inRange_List[cc_At]->GetComponent<Transform>());
 					}
 				}
 				else if(choosingStage && (input.IsKeyReleased(SR_KEY_Z))){
-
+					
 					if (inRange_Tag[cc_At] == CC::ccTag::MACHO) {
 						controlled_Tag = CC::ccTag::MACHO;
 						controlled_Transform = machoTransform;
+						macho->Chosen(false);
 						macho->SetActive(true);
 						benny->SetActive(false);
+						selector->SetDestination(machoTransform);
 					}
 					else if (inRange_Tag[cc_At] == CC::ccTag::CHERRY) {
 						controlled_Tag = CC::ccTag::CHERRY;
 						controlled_Transform = cherryTransform;
+						cherry->Chosen(false);
 						cherry->SetActive(true);
 						benny->SetActive(false);
+						selector->SetDestination(cherryTransform);
+						selector->SetOffset(0, 50);
 					}
 					else if (inRange_Tag[cc_At] == CC::ccTag::PEAR) {
 						controlled_Tag = CC::ccTag::PEAR;
 						controlled_Transform = pearTransform;
+						pear->Chosen(false);
 						pear->SetActive(true);
+						selector->SetDestination(pearTransform);
 					}
 					else if (inRange_Tag[cc_At] == CC::ccTag::BARTER) {
 						controlled_Tag = CC::ccTag::BARTER;
 						controlled_Transform = barterTransform;
+						barter->Chosen(false);
 						barter->SetActive(true);
+						selector->SetDestination(barterTransform);
+						
 					}if (inRange_Tag[cc_At] == CC::ccTag::UI_Box) {
 						controlled_Tag = CC::ccTag::UI_Box;
 						controlled_Transform = ui_BoxTransform;
+						selector->SetDestination(ui_BoxTransform);
+						selector->SetOffset(-20, 150);
+
+						ui_Box->Chosen(false);
 						benny->SetActive(false);
 						ui_Box->SetAttach(true);
 					}
+					lastUI_Control = false;
+					lastCC_Control = CC::ccTag::DEFAULT;
 
 					useAbility = true;
+					
 					choosingStage = false;
-					selector->IsChoosing(choosingStage);
 					SR_SYSTEM_TRACE("Done_Choosing");
 					AudioController::get().Play("Activate");
 				}
@@ -335,38 +355,65 @@ namespace Srand
 				if (choosingStage && inRange_Tag.empty()) {
 					cc_At = 0; // reset
 					choosingStage = false;
-					selector->IsChoosing(choosingStage);
+					
 				}
 
 				if (choosingStage) {
 					
-					/*-------debug-------*/
-					//SR_SYSTEM_TRACE("inRange_Size: {0}", inRange_Tag.size());
-					if (inRange_Tag[cc_At] == CC::ccTag::MACHO) {
-						SR_SYSTEM_TRACE("Choose: MACHO");
-					}
-					else if (inRange_Tag[cc_At] == CC::ccTag::CHERRY) {
-						SR_SYSTEM_TRACE("Choose: CHERRY");
-					}
-					else if (inRange_Tag[cc_At] == CC::ccTag::PEAR) {
-						SR_SYSTEM_TRACE("Choose: PEAR");
-					}
-					else if (inRange_Tag[cc_At] == CC::ccTag::BARTER) {
-						SR_SYSTEM_TRACE("Choose: BARTER");
-					}
-					else if (inRange_Tag[cc_At] == CC::ccTag::UI_Box) {
-						SR_SYSTEM_TRACE("Choose: UI_Box");
-					}
-					
 					if (input.IsKeyPressed(SR_KEY_X) && delay) { delay = false; }
 					else if (isSwitchCC_Down && !input.IsKeyPressed(SR_KEY_X)) { isSwitchCC_Down = false; }
 					else if (input.IsKeyPressed(SR_KEY_X) && !isSwitchCC_Down) { 
+						
 						cc_At++; 
 						cc_At = cc_At % inRange_Tag.size(); // mod incase if the cc_At exceeds Tag size or Tag size decrease
 						isSwitchCC_Down = true;
 						//selector->SetDestination(&inRange_List[cc_At]->GetComponent<Transform>());
 					}
-					selector->SetDestination(&inRange_List[cc_At]->GetComponent<Transform>());
+					//selector->SetDestination(&inRange_List[cc_At]->GetComponent<Transform>());
+
+					if (inRange_Tag[cc_At] != lastCC_Control) {
+						if (lastUI_Control) {
+							lastUI_Control = false;
+							ui_Box->Chosen(false);
+						}
+						else {
+							if (lastCC_Control == CC::ccTag::MACHO) {
+								macho->Chosen(false);
+							}
+							else if (lastCC_Control == CC::ccTag::CHERRY) {
+								cherry->Chosen(false);
+							}
+							else if (lastCC_Control == CC::ccTag::PEAR) {
+								pear->Chosen(false);
+							}
+							else if (lastCC_Control == CC::ccTag::BARTER) {
+								barter->Chosen(false);
+							}
+						}
+					}
+
+					if (inRange_Tag[cc_At] == CC::ccTag::MACHO) {
+						macho->Chosen(true);
+						lastCC_Control = CC::ccTag::MACHO;
+					}
+					else if (inRange_Tag[cc_At] == CC::ccTag::CHERRY) {
+						cherry->Chosen(true);
+						lastCC_Control = CC::ccTag::CHERRY;
+					}
+					else if (inRange_Tag[cc_At] == CC::ccTag::PEAR) {
+						pear->Chosen(true);
+						lastCC_Control = CC::ccTag::PEAR;
+					}
+					else if (inRange_Tag[cc_At] == CC::ccTag::BARTER) {
+						pear->Chosen(true);
+						lastCC_Control = CC::ccTag::BARTER;
+					}
+					else if (inRange_Tag[cc_At] == CC::ccTag::UI_Box) {
+						ui_Box->Chosen(true);
+						lastUI_Control = true;
+						lastCC_Control = CC::ccTag::DEFAULT;
+					}
+	
 				}
 				
 			}
@@ -412,9 +459,11 @@ namespace Srand
 
 					cc_At = 0; // reset
 					useAbility = false; 
+					
 				}
 			}
-
+			selector->IsActive(useAbility);
+			
 			//if (input.IsKeyPressed(SR_KEY_4)) {			// Cancel
 			//	ClearActivation();
 			//	useAbility = false;

@@ -39,6 +39,7 @@ public:						// Not sure if this the best way to implement it.
 	//Transform* GetTransform(){ return transform; }
 
 	void SetActive(bool state) { isActive = state; }
+	void Chosen(bool state) { isChosen = state; }
 
 	void Input_Movement(bool canJump) {	// basic movement
 
@@ -103,6 +104,7 @@ protected:
 	SpriteRenderer* renderer = nullptr;
 
 	bool isActive = false;
+	bool isChosen = false;
 	ccTag tag = ccTag::DEFAULT;
 	WindowsInput input;
 	ObjManager& objManager = ObjManager::get();

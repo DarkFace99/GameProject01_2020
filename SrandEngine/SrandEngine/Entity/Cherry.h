@@ -66,6 +66,9 @@ public:
 				}
 			}
 		}
+		else if (isChosen) {
+			animator->PlayState("CHERRY_IDLE");
+		}
 		else {
 			animator->PlayState("CHERRY_OUT");
 		}
