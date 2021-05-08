@@ -32,8 +32,6 @@ void NonSaveSettings()
     WindowProperties::get().SetFullScreen(isFullScreen);
     AudioController::get().SetMusicVolume(volMusic);
     AudioController::get().SetMusicVolume(volEffect);
-    sliderM->GetComponent<GUI_Slider>().currentStep = (int)volEffect * 10;
-    sliderS->GetComponent<GUI_Slider>().currentStep = (int)volEffect * 10;
 }
 
 void DefaultSetting()
@@ -68,6 +66,8 @@ void Setting::Init()
 	manager = &EntityManager::get();
 	std::vector<glm::vec4> tile_info;
 	GameObject* tempgui = nullptr;
+
+    NonSaveSettings();
 
     /* BACKGROUND */
     {
@@ -284,12 +284,12 @@ void Setting::Init()
     gui_arr.PushGUI(tempgui);
 
     //pin2 
-    int pointM = sliderM->GetComponent<GUI_Slider>().currentStep;
+    sliderM->GetComponent<GUI_Slider>().currentStep = (int)volMusic * 10;
     for (int i = 0; i < 10; i++) {
         tempgui = new GameObject();
         tempgui->GetComponent<Transform>().position = Vector2D_float((((0.69*i+16.75) * _tileSize) + _midPointX) * RATIO, ((10.32 * _tileSize) + _midPointY) * RATIO);
         tempgui->GetComponent<Transform>().scale = Vector2D_float(0.75 * 16 * RATIO, 1 * 16 * RATIO);
-        if (i < pointM) {
+        if (i < (int)volMusic * 10) {
             tempgui->AddComponent<SpriteRenderer>(SpriteRenderer::GUI_LAYER, "UI_KEY_MESH", "SETTING_ASSET_TEX", 1.0f, &camera, false);
         }
         else { tempgui->AddComponent<SpriteRenderer>(SpriteRenderer::GUI_LAYER, "UI_KEY_MESH", "SETTING_ASSET_TEX", 0.0f, &camera, false); }
@@ -319,13 +319,13 @@ void Setting::Init()
     gui_arr.PushGUI(tempgui);
 
     //pin3
-    int pointS = sliderS->GetComponent<GUI_Slider>().currentStep;
+    sliderS->GetComponent<GUI_Slider>().currentStep = (int)volEffect * 10;
     for (int i = 0; i < 10; i++) {
         tempgui = new GameObject();
         tempgui->GetComponent<Transform>().position = Vector2D_float((((0.69 * i + 16.75) * _tileSize) + _midPointX) * RATIO, ((8.90 * _tileSize) + _midPointY) * RATIO);
         tempgui->GetComponent<Transform>().scale = Vector2D_float(0.75 * 16 * RATIO, 1 * 16 * RATIO);
 
-        if (i < pointS) {
+        if (i < (int)volEffect * 10) {
             tempgui->AddComponent<SpriteRenderer>(SpriteRenderer::GUI_LAYER, "UI_KEY_MESH", "SETTING_ASSET_TEX", 1.0f, &camera, false);
         }
         else { tempgui->AddComponent<SpriteRenderer>(SpriteRenderer::GUI_LAYER, "UI_KEY_MESH", "SETTING_ASSET_TEX", 0.0f, &camera, false); }
@@ -364,6 +364,7 @@ void Setting::Init()
 
     tempgui->AddComponent<GUI_Button>("Default");
     tempgui->GetComponent<GUI_Button>().SelectedOffset(6, 0);
+
     gui_arr.PushGUI(tempgui);
 
     // Back

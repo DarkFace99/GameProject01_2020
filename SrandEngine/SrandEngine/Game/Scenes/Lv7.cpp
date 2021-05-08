@@ -1,15 +1,15 @@
-#include "Lv1.h"
+#include "Lv7.h"
 
-Lv1::Lv1()
-    : Scene("Lv1")
+Lv7::Lv7()
+    : Scene("Lv7")
 {}
 
-Lv1::~Lv1()
+Lv7::~Lv7()
 {
     Clean();
 }
 
-void Lv1::Init()
+void Lv7::Init()
 {
     manager = &EntityManager::get();
     std::vector<glm::vec4> tile_info;
@@ -49,11 +49,11 @@ void Lv1::Init()
         -1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,
         -1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,
         -1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,
-        -1,-1,-1,-1,-1,-1,-1,-1,-1,-1,41,42,42,42,42,43,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,
-        -1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,
-        10,10,10,10,10,10,10,11,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,
-        18,18,18,18,18,18,18,19,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,
-        18,18,18,18,18,18,18,18,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10
+        -1,-1,-1,-1,-1,-1,-1,-1,-1,-1,9,10,42,42,42,42,42,42,42,42,42,-1,-1,-1,-1,-1,-1,-1,-1,-1,
+        -1,-1,-1,-1,-1,-1,-1,-1,-1,-1,17,19,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,
+        -1,-1,-1,-1,-1,-1,-1,-1,-1,-1,17,19,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,
+        -1,-1,-1,-1,-1,-1,-1,-1,-1,-1,17,19,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,
+        10,10,10,10,10,10,10,10,10,10,18,18,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10
 
     };
 
@@ -127,7 +127,7 @@ void Lv1::Init()
         gameObject = new GameObject();
         manager->AddEntity(gameObject);
 
-        gameObject->GetComponent<Transform>().position = Vector2D_float(((13 * _tileSize) + _midPointX) * RATIO, ((5.5 * _tileSize) + _midPointY) * RATIO);
+        gameObject->GetComponent<Transform>().position = Vector2D_float(((16 * _tileSize) + _midPointX) * RATIO, ((1.5 * _tileSize) + _midPointY) * RATIO);
         gameObject->GetComponent<Transform>().scale = Vector2D_float(32.0f * RATIO, 16.0f * RATIO);
 
         gameObject->AddComponent<SpriteRenderer>(SpriteRenderer::ASSET_LAYER, "BUTTON_MESH", "LEVEL_ASSET_TEX", 1.0f, &camera, false);
@@ -265,7 +265,7 @@ void Lv1::Init()
     {
         gameObject = new GameObject();
         manager->AddEntity(gameObject);
-        gameObject->GetComponent<Transform>().position = Vector2D_float(((3 * _tileSize) + _midPointX) * RATIO, ((3.75 * _tileSize) + _midPointY) * RATIO);
+        gameObject->GetComponent<Transform>().position = Vector2D_float(((3 * _tileSize) + _midPointX) * RATIO, ((1.75 * _tileSize) + _midPointY) * RATIO);
         gameObject->GetComponent<Transform>().scale = Vector2D_float(24.0f * RATIO, 24.0f * RATIO);
         gameObject->AddComponent<SpriteRenderer>(SpriteRenderer::CHARACTER_LAYER, "BENNY_ANIM_MESH", "BENNY_ANIM_TEX", 1.0f, &camera, false);
         gameObject->AddComponent<RigidBody>(2.0f);
@@ -284,23 +284,25 @@ void Lv1::Init()
         objManager.PushObject(gameObject);
     }
 
-    // Macho (last due to the Carry())
+    // Pear
     {
         gameObject = new GameObject();
         manager->AddEntity(gameObject);
-        gameObject->GetComponent<Transform>().position = Vector2D_float(((13 * _tileSize) + _midPointX) * RATIO, ((1.75 * _tileSize) + _midPointY) * RATIO);
+        gameObject->GetComponent<Transform>().position = Vector2D_float(((14 * _tileSize) + _midPointX) * RATIO, ((1.75 * _tileSize) + _midPointY) * RATIO);
         gameObject->GetComponent<Transform>().scale = Vector2D_float(24.0f * RATIO, 24.0f * RATIO);
-        gameObject->AddComponent<SpriteRenderer>(SpriteRenderer::CHARACTER_LAYER, "MACHO_ANIM_MESH", "MACHO_ANIM_TEX", 1.0f, &camera, false);
+        gameObject->AddComponent<SpriteRenderer>(SpriteRenderer::CHARACTER_LAYER, "PEAR_ANIM_MESH", "PEAR_ANIM_TEX", 1.0f, &camera, false);
         gameObject->AddComponent<RigidBody>(2.0f);
         // anim_set
-        gameObject->AddComponent<Animator>(21, 80);
-        gameObject->GetComponent<Animator>().SetState("MACHO_OUT", 0, 0);
-        gameObject->GetComponent<Animator>().SetState("MACHO_IDLE", 1, 12);
-        gameObject->GetComponent<Animator>().SetState("MACHO_RUN", 13, 19);
+        gameObject->AddComponent<Animator>(20, 80);
+        gameObject->GetComponent<Animator>().SetState("PEAR_OUT", 0, 0);
+        gameObject->GetComponent<Animator>().SetState("PEAR_IDLE", 1, 6);
+        gameObject->GetComponent<Animator>().SetState("PEAR_RUN", 7, 16);
+        gameObject->GetComponent<Animator>().SetState("PEAR_JUMP", 17, 17);
+        gameObject->GetComponent<Animator>().SetState("PEAR_FALL", 18, 18);
         gameObject->AddComponent<BoxCollider2D>(BoxCollider2D::CHARACTER_COLLISION, gameObject->GetComponent<Transform>().scale.x - 20, gameObject->GetComponent<Transform>().scale.y,
             false /* overlap */, true /* movable *//*, "BENNY_ANIM_MESH", &camera*/);
 
-        gameObject->AddComponent<Macho>(); // test CC mechanics
+        gameObject->AddComponent<Pear>(); // test CC mechanics
         objManager.PushObject(gameObject);
         levelManager.AddObject(gameObject);
 
@@ -355,19 +357,19 @@ void Lv1::Init()
     audioController.Find("BGM")->isPlayed = true;
 
 }
-void Lv1::Clean()
+void Lv7::Clean()
 {
     manager->Clean();
     objManager.Clean();
     levelManager.Clean();
     gui_arr.Clear();
 }
-void Lv1::Draw()
+void Lv7::Draw()
 {
     manager->Draw();
     gui_arr.OnDraw();
 }
-void Lv1::Update()
+void Lv7::Update()
 {
     manager->Update();
     levelManager.CheckGoal();
