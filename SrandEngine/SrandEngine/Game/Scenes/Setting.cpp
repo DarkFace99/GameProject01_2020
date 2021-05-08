@@ -40,6 +40,13 @@ void DefaultSetting()
     AudioController::get().SetAllVolume(1.0f);
 }
 
+void LoadSettings() 
+{
+    isFullScreen = WindowProperties::get().GetFullScreenStatus();
+    volMusic = AudioController::get().Find("BGM")->volume;
+    volEffect = AudioController::get().Find("Activate")->volume;
+}
+
 void Increase_MU() {
     SR_TRACE("Slider_MU: +");
     sliderM->GetComponent<GUI_Slider>().ChangeStep(1);
@@ -67,7 +74,7 @@ void Setting::Init()
 	std::vector<glm::vec4> tile_info;
 	GameObject* tempgui = nullptr;
 
-    NonSaveSettings();
+    LoadSettings();
 
     /* BACKGROUND */
     {
@@ -412,4 +419,5 @@ void Setting::Update()
 {
     manager->Update();
     gui_arr.OnUpdate();
+    LoadSettings();
 }
