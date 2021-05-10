@@ -131,11 +131,11 @@ namespace Srand
 		void NextScene();
 		void GoToScene(int);
 	
-	protected:
-		int nextScene_Num = 0; // Engine.cpp line.138
-
 		void LoadSave(bool& fullscreen, float& volM, float& volE, int& proc);
 		void WriteSave();
+
+	protected:
+		int nextScene_Num = 0; // Engine.cpp line.138
 	};
 
 

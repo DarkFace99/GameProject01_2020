@@ -85,11 +85,19 @@ public:
 		if (rigidBody->GetVelocityX() > 0) { renderer->SetFlip(false); }
 		else if (rigidBody->GetVelocityX() < 0) { renderer->SetFlip(true); }
 
-		if (rigidBody->GetVelocityX() != 0) {
-			animator->PlayState("MACHO_RUN");
+		if (isActive) {
+			if (rigidBody->GetVelocityX() != 0) {
+				animator->PlayState("MACHO_RUN");
+			}
+			else {
+				animator->PlayState("MACHO_IDLE");
+			}
+		}
+		else if (isChosen) {
+			animator->PlayState("MACHO_IDLE");
 		}
 		else {
-			animator->PlayState("MACHO_IDLE");
+			animator->PlayState("MACHO_OUT");
 		}
 	}
 

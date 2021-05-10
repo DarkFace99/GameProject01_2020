@@ -62,6 +62,14 @@ namespace Srand
             sound->setIsPaused(pause);
         }
     }
+    void AudioController::UnPause()
+    {
+        if (pause)
+        {
+            pause = false;
+            sound->setIsPaused(pause);
+        }
+    }
     void AudioController::Stop()
     {
         if (sound == nullptr)
@@ -93,6 +101,45 @@ namespace Srand
                     src.second->volume = 1.0f;
 
                 //SR_SYSTEM_TRACE("Vol: {0}", src.second->volume);
+            }
+        }
+    }
+
+    void AudioController::SetAllVolume(float vol)
+    {
+        for (auto& src : m_soundSource) 
+        {
+            src.second->volume = vol;
+        }
+    }
+
+    void AudioController::SetMusicVolume(float vol)
+    {
+        for (auto& src : m_soundSource)
+        {
+            if (src.second->type == SoundType::MUSIC)
+            {
+                src.second->volume = vol;
+                //SR_SYSTEM_TRACE("Vol: {0}", src.second->volume);
+            }
+            else
+            {
+                continue;
+            }
+        }
+    }
+    void AudioController::SetEffectVolume(float vol)
+    {
+        for (auto& src : m_soundSource)
+        {
+            if (src.second->type == SoundType::EFFECT)
+            {
+                src.second->volume = vol;
+                //SR_SYSTEM_TRACE("Vol: {0}", src.second->volume);
+            }
+            else 
+            {
+                continue;
             }
         }
     }

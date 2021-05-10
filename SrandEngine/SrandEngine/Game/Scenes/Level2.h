@@ -7,7 +7,7 @@ class Level2 : public Srand::Scene
 {
 private:
 	EntityManager* manager = nullptr;
-
+	GUI_Array gui_arr;
 public:
 	Level2();
 	~Level2();

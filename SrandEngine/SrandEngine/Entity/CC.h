@@ -46,9 +46,13 @@ public:						// Not sure if this the best way to implement it.
 
 		if (boxCollider2D->GetIsGround()) { rigidBody->SetVelocityY(0.0f); }
 
-		if (input.IsKeyPressed(SR_KEY_UP) && canJump && boxCollider2D->GetIsGround()) {
+		if (input.IsKeyPressed(SR_KEY_UP) && !isUpPressed && canJump && boxCollider2D->GetIsGround()) {
+			isUpPressed = true;
 			rigidBody->SetVelocityY(10.0f);
 			audioController.Play("Char_jump");
+		}
+		else if (input.IsKeyReleased(SR_KEY_UP) && isUpPressed) {
+			isUpPressed = false;
 		}
 
 		if (input.IsKeyPressed(SR_KEY_LEFT) && input.IsKeyPressed(SR_KEY_RIGHT)) {} // do nothing
@@ -110,6 +114,7 @@ protected:
 	ObjManager& objManager = ObjManager::get();
 	AudioController& audioController = AudioController::get();
 
+	bool isUpPressed = false;
 	bool isOut = false;
 
 	// screen boundary

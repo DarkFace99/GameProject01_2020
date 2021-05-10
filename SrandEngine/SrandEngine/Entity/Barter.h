@@ -32,9 +32,28 @@ public:
 				SetActive(false);
 			}
 			rigidBody->Update_Gravity();
+			AnimationController();
 			Collision_Check();
 			Execute();
 			Boundary();
+		}
+	}
+
+	void CC::AnimationController() override {
+		// Flip
+		if (rigidBody->GetVelocityX() > 0) { renderer->SetFlip(false); }
+		else if (rigidBody->GetVelocityX() < 0) { renderer->SetFlip(true); }
+
+		if (isActive) {
+			if (boxCollider2D->GetIsGround()) {	// on ground
+				animator->PlayState("BARTER_IDLE");
+			}
+		}
+		else if (isChosen) {
+			animator->PlayState("BARTER_IDLE");
+		}
+		else {
+			animator->PlayState("BARTER_OUT");
 		}
 	}
 
@@ -43,7 +62,7 @@ public:
 		BennyCollider = &benny->GetComponent<BoxCollider2D>();
 	}
 
-	void CC::AnimationController() override {}
+	
 
 private:
 	Transform* BennyTransform = nullptr;

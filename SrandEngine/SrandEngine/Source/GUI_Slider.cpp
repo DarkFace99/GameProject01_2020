@@ -11,7 +11,7 @@ Srand::GUI_Slider::GUI_Slider(std::string name)
 }
 Srand::GUI_Slider::~GUI_Slider()
 {
-	step.clear();
+	//steps.clear();
 }
 
 bool Srand::GUI_Slider::Init()
@@ -76,5 +76,18 @@ void Srand::GUI_Slider::AdjustStep() {
 		//m_index = Abs((m_index + 1) % VectorSize());
 		isLeftPressed = false;
 		//SR_TRACE("Index: {0}", m_index);
+	}
+}
+
+void Srand::GUI_Slider::ChangeStep(int num){
+	if (num == 0 && currentStep != 0) { // decrement
+		currentStep--;
+		if (currentStep < 0) { currentStep == 0; }
+		steps[currentStep]->GetComponent<SpriteRenderer>().SetAlpha(0.0f);
+	}
+	else if(num == 1 && currentStep != steps.size()){ // increment
+		steps[currentStep]->GetComponent<SpriteRenderer>().SetAlpha(1.0f);
+		currentStep++;
+		if (currentStep > steps.size()) { currentStep == steps.size(); }
 	}
 }

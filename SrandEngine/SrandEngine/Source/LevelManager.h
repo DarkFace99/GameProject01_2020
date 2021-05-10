@@ -242,7 +242,9 @@ namespace Srand
 			int closestCC = -1;
 			
 			for (int i = 0; i < cc_Tag.size()-1; i++) { // exclude Benny
-				closestMag = benny->GetRadius(); //reset closestMag
+				if (benny) {
+					closestMag = benny->GetRadius();
+				} //reset closestMag
 				for (int j = 0; j < cc_Tag.size(); j++) {
 
 					if (cc_Tag[j] == CC::ccTag::MACHO && macho->GetIsOut()) { continue; }
@@ -266,10 +268,12 @@ namespace Srand
 						}
 					}
 				}
-				if (closestMag < benny->GetRadius()) {
-					inRange_List.push_back(cc_List[closestCC]);
-					inRange_Tag.push_back(cc_Tag[closestCC]);
-					prevMag = closestMag;
+				if (benny) {
+					if (closestMag < benny->GetRadius()) {
+						inRange_List.push_back(cc_List[closestCC]);
+						inRange_Tag.push_back(cc_Tag[closestCC]);
+						prevMag = closestMag;
+					}
 				}
 			}
 			//SR_SYSTEM_TRACE("inRange: {0}\n---------------------\n", inRange.size());
@@ -381,8 +385,9 @@ namespace Srand
 						//selector->SetDestination(&inRange_List[cc_At]->GetComponent<Transform>());
 					}
 					//selector->SetDestination(&inRange_List[cc_At]->GetComponent<Transform>());
-
-					if (inRange_Tag[cc_At] != lastCC_Control) {
+					
+					cc_At = cc_At % inRange_Tag.size();
+					if (inRange_Tag[cc_At] != lastCC_Control) { // problem
 						if (lastUI_Control) {
 							lastUI_Control = false;
 							ui_Box->Chosen(false);
@@ -416,7 +421,7 @@ namespace Srand
 						lastCC_Control = CC::ccTag::PEAR;
 					}
 					else if (inRange_Tag[cc_At] == CC::ccTag::BARTER) {
-						pear->Chosen(true);
+						barter->Chosen(true);
 						lastCC_Control = CC::ccTag::BARTER;
 					}
 					else if (inRange_Tag[cc_At] == CC::ccTag::UI_Box) {
