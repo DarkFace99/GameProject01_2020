@@ -40,6 +40,9 @@ public:						// Not sure if this the best way to implement it.
 
 	void SetActive(bool state) { isActive = state; }
 	void Chosen(bool state) { isChosen = state; }
+	void InRange(bool state) { 
+		isInRange = state; 
+	}
 
 	void Input_Movement(bool canJump) {	// basic movement
 
@@ -98,6 +101,8 @@ public:						// Not sure if this the best way to implement it.
 	bool GetIsOut() { return isOut; }
 	bool GetIsActive() { return isActive; }
 
+	
+
 	virtual void AnimationController() = 0;
 
 protected:
@@ -109,6 +114,8 @@ protected:
 
 	bool isActive = false;
 	bool isChosen = false;
+	bool isInRange = false;
+
 	ccTag tag = ccTag::DEFAULT;
 	WindowsInput input;
 	ObjManager& objManager = ObjManager::get();

@@ -46,7 +46,7 @@ public:
 		// Flip
 		if (rigidBody->GetVelocityX() > 0) { renderer->SetFlip(false); }
 		else if (rigidBody->GetVelocityX() < 0) { renderer->SetFlip(true); }
-
+		
 		// Animation
 		if (isActive) {
 			if (boxCollider2D->GetIsGround()) {	// on ground
@@ -69,6 +69,9 @@ public:
 		else if (isChosen) {
 			animator->PlayState("CHERRY_IDLE");
 		}
+		else if (isInRange) {
+			animator->PlayState("CHERRY_IN");
+		}
 		else {
 			animator->PlayState("CHERRY_OUT");
 		}
@@ -88,5 +91,4 @@ private:
 	float rMultiplier = 1.5;
 	float rOld;
 	float rCal; 
-	bool isInRange = false;
 };

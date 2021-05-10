@@ -96,6 +96,9 @@ public:
 		else if (isChosen) {
 			animator->PlayState("MACHO_IDLE");
 		}
+		else if (isInRange) {
+			animator->PlayState("MACHO_IN");
+		}
 		else {
 			animator->PlayState("MACHO_OUT");
 		}
