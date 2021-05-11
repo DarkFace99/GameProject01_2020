@@ -86,11 +86,17 @@ public:
 		else if (rigidBody->GetVelocityX() < 0) { renderer->SetFlip(true); }
 
 		if (isActive) {
-			if (rigidBody->GetVelocityX() != 0) {
-				animator->PlayState("MACHO_RUN");
+			if (boxCollider2D->GetIsGround()) {	// on ground}
+				if (rigidBody->GetVelocityX() != 0) {
+					animator->PlayState("MACHO_RUN");
+				}
+				else {
+					animator->PlayState("MACHO_IDLE");
+				}
 			}
-			else {
-				animator->PlayState("MACHO_IDLE");
+			else
+			{
+				animator->PlayState("MACHO_FALL");
 			}
 		}
 		else if (isChosen) {

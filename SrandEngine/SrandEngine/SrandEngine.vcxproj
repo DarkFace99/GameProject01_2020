@@ -38,6 +38,7 @@
     <ClInclude Include="Entity\Cherry.h" />
     <ClInclude Include="Entity\Door.h" />
     <ClInclude Include="Entity\Elevator.h" />
+    <ClInclude Include="Entity\Goal.h" />
     <ClInclude Include="Entity\Macho.h" />
     <ClInclude Include="Entity\NPC.h" />
     <ClInclude Include="Game\Scenes\Level2.h" />
