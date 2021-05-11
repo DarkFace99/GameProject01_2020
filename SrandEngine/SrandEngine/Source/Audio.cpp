@@ -132,6 +132,8 @@ namespace Srand
         {
             src.second->volume = vol;
         }
+        sound->setVolume(vol);
+        bgmSound->setVolume(vol);
     }
 
     void AudioController::SetMusicVolume(float vol)
@@ -148,6 +150,7 @@ namespace Srand
                 continue;
             }
         }
+        bgmSound->setVolume(vol);
     }
     void AudioController::SetEffectVolume(float vol)
     {
@@ -163,6 +166,7 @@ namespace Srand
                 continue;
             }
         }
+        sound->setVolume(vol);
     }
 
     std::pair<float, float> AudioController::GetVolume()

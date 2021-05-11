@@ -82,12 +82,29 @@ void Srand::GUI_Slider::AdjustStep() {
 void Srand::GUI_Slider::ChangeStep(int num){
 	if (num == 0 && currentStep != 0) { // decrement
 		currentStep--;
-		if (currentStep < 0) { currentStep == 0; }
+		if (currentStep < 0) { currentStep = 0; }
 		steps[currentStep]->GetComponent<SpriteRenderer>().SetAlpha(0.0f);
 	}
 	else if(num == 1 && currentStep != steps.size()){ // increment
 		steps[currentStep]->GetComponent<SpriteRenderer>().SetAlpha(1.0f);
 		currentStep++;
-		if (currentStep > steps.size()) { currentStep == steps.size(); }
+		if (currentStep > steps.size()) { currentStep = steps.size(); }
+	}
+}
+
+void Srand::GUI_Slider::JumpStep(int num)
+{
+	currentStep = num;
+
+	for (int i = 0; i < steps.size(); i++)
+	{
+		if (i < num) 
+		{
+			steps[i]->GetComponent<SpriteRenderer>().SetAlpha(1.0f);
+		}
+		else if (i >= num)
+		{
+			steps[i]->GetComponent<SpriteRenderer>().SetAlpha(0.0f);
+		}
 	}
 }

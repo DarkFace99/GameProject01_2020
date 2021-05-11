@@ -25,6 +25,7 @@ namespace Srand
 		int currentStep = 0;
 
 		void ChangeStep(int num);
+		void JumpStep(int num);
 
 	private:
 		std::string name = "";

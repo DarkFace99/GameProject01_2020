@@ -12,32 +12,49 @@ GameObject* buttonF = nullptr;
 GameObject* sliderM = nullptr;
 GameObject* sliderS = nullptr;
 
-void GoTo_MenuS() { Engine::get().GoToScene(0); }
-
 //place_holder
 bool isFullScreen = false;
 float volMusic = 1.0f, volEffect = 1.0f;
 int temp; //IGNORED
 
-void ToggleFullScreen() {
-    isFullScreen = !isFullScreen;
-    buttonF->GetComponent<GUI_Button>().SetAttach(isFullScreen);
-    WindowProperties::get().SetFullScreen(isFullScreen);
-}
+bool isSaved = false;
 
-void NonSaveSettings() 
+void NonSaveSettings()
 {
     Engine::get().LoadSave(isFullScreen, volMusic, volEffect, temp);
 
     WindowProperties::get().SetFullScreen(isFullScreen);
     AudioController::get().SetMusicVolume(volMusic);
-    AudioController::get().SetMusicVolume(volEffect);
+    AudioController::get().SetEffectVolume(volEffect);
 }
 
-void DefaultSetting()
+void GoTo_MenuS() 
 {
-    WindowProperties::get().SetFullScreen(false);
-    AudioController::get().SetAllVolume(1.0f);
+    if (isSaved == false) 
+    {
+        NonSaveSettings();
+    }
+
+    Engine::get().GoToScene(0); 
+}
+
+void SaveSettings() 
+{
+    if (isSaved == true)
+        return;
+    else 
+    {
+        isSaved = true;
+
+        Engine::get().WriteSave();
+    }
+}
+
+void ToggleFullScreen() {
+    isFullScreen = !isFullScreen;
+    buttonF->GetComponent<GUI_Button>().SetAttach(isFullScreen);
+    WindowProperties::get().SetFullScreen(isFullScreen);
+    isSaved = false;
 }
 
 void LoadSettings() 
@@ -47,25 +64,39 @@ void LoadSettings()
     volEffect = AudioController::get().Find("Activate")->volume;
 }
 
+void DefaultSetting()
+{
+    WindowProperties::get().SetFullScreen(false);
+    AudioController::get().SetAllVolume(1.0f);
+
+    LoadSettings();
+    sliderM->GetComponent<GUI_Slider>().JumpStep(10);
+    sliderS->GetComponent<GUI_Slider>().JumpStep(10);
+}
+
 void Increase_MU() {
     SR_TRACE("Slider_MU: +");
     sliderM->GetComponent<GUI_Slider>().ChangeStep(1);
     AudioController::get().ChangeVolume(1, SoundType::MUSIC);
+    isSaved = false;
 }
 void Decrease_MU() {
     SR_TRACE("Slider_MU: -");
     sliderM->GetComponent<GUI_Slider>().ChangeStep(0);
     AudioController::get().ChangeVolume(0, SoundType::MUSIC);
+    isSaved = false;
 }
 void Increase_SF() {
     SR_TRACE("Slider_SF: +");
     sliderS->GetComponent<GUI_Slider>().ChangeStep(1);
     AudioController::get().ChangeVolume(1, SoundType::EFFECT);
+    isSaved = false;
 }
 void Decrease_SF() {
     SR_TRACE("Slider_SF: -");
     sliderS->GetComponent<GUI_Slider>().ChangeStep(0);
     AudioController::get().ChangeVolume(0, SoundType::EFFECT);
+    isSaved = false;
 }
 
 void Setting::Init()
@@ -75,10 +106,6 @@ void Setting::Init()
 	GameObject* tempgui = nullptr;
 
     LoadSettings();
-
-    SR_TRACE("IsfullScreen: {0}", isFullScreen);
-    SR_TRACE("VolMusic: {0}", volMusic);
-    SR_TRACE("VolEffect: {0}", volEffect);
 
     /* BACKGROUND */
     {
@@ -118,7 +145,7 @@ void Setting::Init()
         {
             switch (tileMAP[y][x])
             {
-            default: printf("empty");
+            default: //printf("empty");
                 break;
             case 9: tile_info.push_back(glm::vec4(x, 15 - y, 1, 6));
                 break;
@@ -360,7 +387,7 @@ void Setting::Init()
 
     tempgui->AddComponent<GUI_Button>("CONFIRM");
     tempgui->GetComponent<GUI_Button>().Conceal();
-    //stempgui->GetComponent<GUI_Button>().m_function;
+    tempgui->GetComponent<GUI_Button>().m_function = SaveSettings;
     gui_arr.PushGUI(tempgui);
     
     //default
@@ -375,7 +402,7 @@ void Setting::Init()
 
     tempgui->AddComponent<GUI_Button>("Default");
     tempgui->GetComponent<GUI_Button>().SelectedOffset(6, 0);
-
+    tempgui->GetComponent<GUI_Button>().m_function = DefaultSetting;
     gui_arr.PushGUI(tempgui);
 
     // Back
