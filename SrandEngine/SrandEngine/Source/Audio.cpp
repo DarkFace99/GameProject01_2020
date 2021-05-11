@@ -118,6 +118,12 @@ namespace Srand
                 }
             }
         }
+
+        if (type == SoundType::EFFECT)
+        {
+            Play("Activate");
+        }
+
     }
 
     void AudioController::SetAllVolume(float vol)
