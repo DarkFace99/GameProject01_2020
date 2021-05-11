@@ -114,7 +114,7 @@ namespace Srand
                 if (bgmSound != nullptr && type == SoundType::MUSIC)
                 {
                     bgmSound->setVolume(src.second->volume);
-                    SR_TRACE("HERE!!!!!!!!!!!");
+                    //SR_TRACE("HERE!!!!!!!!!!!");
                 }
             }
         }
