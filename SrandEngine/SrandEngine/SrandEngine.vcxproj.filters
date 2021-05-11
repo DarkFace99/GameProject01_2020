@@ -248,6 +248,7 @@
     <ClInclude Include="Game\Scenes\Lv4.h" />
     <ClInclude Include="Game\Scenes\Lv7.h" />
     <ClInclude Include="Game\Scenes\Lv10.h" />
+    <ClInclude Include="Entity\Goal.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="imgui\imgui.cpp">

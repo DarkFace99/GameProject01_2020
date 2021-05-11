@@ -52,6 +52,9 @@ public:
 		else if (isChosen) {
 			animator->PlayState("BARTER_IDLE");
 		}
+		else if (isInRange) {
+			animator->PlayState("BARTER_IN");
+		}
 		else {
 			animator->PlayState("BARTER_OUT");
 		}

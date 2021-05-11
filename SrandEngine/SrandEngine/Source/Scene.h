@@ -18,6 +18,7 @@
 #include "Entity/Cherry.h"
 #include "Entity/Pear.h"
 #include "Entity/Barter.h"
+#include "Entity/Goal.h"
 
 #include "Source/Audio.h"
 

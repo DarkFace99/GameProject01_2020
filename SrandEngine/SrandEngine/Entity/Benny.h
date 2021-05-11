@@ -107,7 +107,7 @@ public:
 			animator->PlayState("BENNY_IDLE");
 		}
 		else {
-			animator->PlayState("BENNY_OUT");
+			animator->PlayState("BENNY_IN");
 		}
 	}
 

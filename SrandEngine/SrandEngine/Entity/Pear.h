@@ -53,6 +53,9 @@ public:
 		else if (isChosen) {
 			animator->PlayState("PEAR_IDLE");
 		}
+		else if (isInRange) {
+			animator->PlayState("PEAR_IN");
+		}
 		else {
 			animator->PlayState("PEAR_OUT");
 		}

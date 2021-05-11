@@ -9,6 +9,7 @@
 #include "Entity/Pear.h"
 #include "Entity/Barter.h"
 #include "Entity/UI_Box.h"
+#include "Entity/Goal.h"
 
 #include "Source/GUI_Selector.h"
 
@@ -34,6 +35,7 @@ namespace Srand
 
 		GameObject* goalObj = nullptr;
 		BoxCollider2D* goalCollider = nullptr;
+		Goal* goal = nullptr;
 		
 		bool isSwitchCC_Down = false;
 		bool isCancel = false;
@@ -132,6 +134,7 @@ namespace Srand
 
 			goalCollider = nullptr;
 			goalObj = nullptr;
+			goal = nullptr;
 			isLevelClear = false;
 			cc_Count = 0;
 			npc_Count = 0;
@@ -244,35 +247,40 @@ namespace Srand
 			for (int i = 0; i < cc_Tag.size()-1; i++) { // exclude Benny
 				if (benny) {
 					closestMag = benny->GetRadius();
-				} //reset closestMag
-				for (int j = 0; j < cc_Tag.size(); j++) {
+				
+					for (int j = 0; j < cc_Tag.size(); j++) {
 
-					if (cc_Tag[j] == CC::ccTag::MACHO && macho->GetIsOut()) { continue; }
-					else if (cc_Tag[j] == CC::ccTag::CHERRY && cherry->GetIsOut()) { continue; }
-					else if (cc_Tag[j] == CC::ccTag::PEAR && pear->GetIsOut()) { continue; }
-					else if (cc_Tag[j] == CC::ccTag::BARTER && barter->GetIsOut()) { continue; }
+						if (cc_Tag[j] == CC::ccTag::MACHO && macho->GetIsOut()) { continue; }
+						else if (cc_Tag[j] == CC::ccTag::CHERRY && cherry->GetIsOut()) { continue; }
+						else if (cc_Tag[j] == CC::ccTag::PEAR && pear->GetIsOut()) { continue; }
+						else if (cc_Tag[j] == CC::ccTag::BARTER && barter->GetIsOut()) { continue; }
 
-					if (cc_Tag[j] != CC::ccTag::BENNY) {
+						if (cc_Tag[j] != CC::ccTag::BENNY) {
 
-						if (cc_Tag[j] == CC::ccTag::MACHO) { deltaVect = bennyTransform->position - machoTransform->position; }
-						else if (cc_Tag[j] == CC::ccTag::CHERRY) { deltaVect = bennyTransform->position - cherryTransform->position; }
-						else if (cc_Tag[j] == CC::ccTag::PEAR) { deltaVect = bennyTransform->position - pearTransform->position; }
-						else if (cc_Tag[j] == CC::ccTag::BARTER) { deltaVect = bennyTransform->position - barterTransform->position; }
-						else if (cc_Tag[j] == CC::ccTag::UI_Box) { deltaVect = bennyTransform->position - ui_BoxTransform->position; }
+							if (cc_Tag[j] == CC::ccTag::MACHO) { deltaVect = bennyTransform->position - machoTransform->position; }
+							else if (cc_Tag[j] == CC::ccTag::CHERRY) { deltaVect = bennyTransform->position - cherryTransform->position; }
+							else if (cc_Tag[j] == CC::ccTag::PEAR) { deltaVect = bennyTransform->position - pearTransform->position; }
+							else if (cc_Tag[j] == CC::ccTag::BARTER) { deltaVect = bennyTransform->position - barterTransform->position; }
+							else if (cc_Tag[j] == CC::ccTag::UI_Box) { deltaVect = bennyTransform->position - ui_BoxTransform->position; }
 
-						magnitude = sqrt(pow(deltaVect.x, 2) + pow(deltaVect.y, 2));
+							magnitude = sqrt(pow(deltaVect.x, 2) + pow(deltaVect.y, 2));
 
-						if (prevMag < magnitude && magnitude < closestMag) {
-							closestMag = magnitude;
-							closestCC = j;
+							if (prevMag < magnitude && magnitude < closestMag) {
+								closestMag = magnitude;
+								closestCC = j;
+							}
 						}
 					}
-				}
-				if (benny) {
+				
 					if (closestMag < benny->GetRadius()) {
 						inRange_List.push_back(cc_List[closestCC]);
 						inRange_Tag.push_back(cc_Tag[closestCC]);
 						prevMag = closestMag;
+
+						if (cc_Tag[closestCC] == CC::ccTag::MACHO) { macho->InRange(true); }
+						else if (cc_Tag[closestCC] == CC::ccTag::CHERRY) { cherry->InRange(true); }
+						else if (cc_Tag[closestCC] == CC::ccTag::PEAR) { pear->InRange(true); }
+						else if (cc_Tag[closestCC] == CC::ccTag::BARTER) { barter->InRange(true); }
 					}
 				}
 			}
@@ -282,11 +290,28 @@ namespace Srand
 		void ClearInRange() {
 			inRange_List.clear();
 			inRange_Tag.clear();
+			if (macho) {
+				macho->Chosen(false);
+				macho->InRange(false);
+			}
+			if (cherry) {
+				cherry->Chosen(false);
+				cherry->InRange(false);
+			}
+			if (pear) {
+				pear->Chosen(false);
+				pear->InRange(false);
+			}
+			if (barter) {
+				barter->Chosen(false);
+				barter->InRange(false);
+			}
 		}
 
 		void AbilityControl() {
 			//SR_SYSTEM_TRACE("cc_At: {0}", cc_At);
 			if (!useAbility) {
+				ClearInRange();
 				CheckInRange();
 
 				// ActivateAbility
@@ -490,60 +515,70 @@ namespace Srand
 			//	useAbility = false;
 			//}
 
-			ClearInRange();
+			//ClearInRange();
 		}
 
 		void SetGoal(GameObject& gameobj) {
 			goalObj = &gameobj;
 			goalCollider = &gameobj.GetComponent<BoxCollider2D>();
+			goal = &gameobj.GetComponent<Goal>();
 		}
 
 		void CheckGoal() {
 			if (npc_Count <= 0 && !isLevelClear) {
-				bool cc_Out = false;
-				for (int i = 0; i < cc_List.size(); i++) {
-					if (Collision::AABB(*goalCollider, cc_List[i]->GetComponent<BoxCollider2D>())) {
-						if (cc_Tag[i] == CC::ccTag::MACHO && !macho->GetIsOut()) {
-							macho->OutOfLevel();
-							cc_Out = true;
-							cc_Count--;
-						}
-						else if (cc_Tag[i] == CC::ccTag::CHERRY && !cherry->GetIsOut()) {
-							cherry->OutOfLevel();
-							cc_Out = true;
-							cc_Count--;
-						}
-						else if (cc_Tag[i] == CC::ccTag::PEAR && !pear->GetIsOut()) {
-							pear->OutOfLevel();
-							cc_Out = true;
-							cc_Count--;
-						}
-						else if (cc_Tag[i] == CC::ccTag::BARTER && !barter->GetIsOut()) {
-							barter->OutOfLevel();
-							cc_Out = true;
-							cc_Count--;
-						}
-						else if (cc_Tag[i] == CC::ccTag::BENNY && cc_Count == 1 /* last one */) {
-							benny->OutOfLevel();
-							cc_Count--;
-							isLevelClear = true;
-							Engine::get().NextScene();
-							break;
-						}
-
-						
-						if (cc_Out) {
-							if (macho != nullptr) {
-								if (!(cc_Tag[i] != CC::ccTag::MACHO && macho->GetIsActive()))
-									isCancel = true;
+				if (cc_Count > 1) {
+					SR_SYSTEM_TRACE("CC");
+					goal->CheckCCActivate();
+					bool cc_Out = false;
+					for (int i = 0; i < cc_List.size(); i++) {
+						if (Collision::AABB(*goalCollider, cc_List[i]->GetComponent<BoxCollider2D>())) {
+							if (cc_Tag[i] == CC::ccTag::MACHO && !macho->GetIsOut()) {
+								macho->OutOfLevel();
+								cc_Out = true;
+								cc_Count--;
 							}
-							else { isCancel = true; }
-						}
-					}
+							else if (cc_Tag[i] == CC::ccTag::CHERRY && !cherry->GetIsOut()) {
+								cherry->OutOfLevel();
+								cc_Out = true;
+								cc_Count--;
+							}
+							else if (cc_Tag[i] == CC::ccTag::PEAR && !pear->GetIsOut()) {
+								pear->OutOfLevel();
+								cc_Out = true;
+								cc_Count--;
+							}
+							else if (cc_Tag[i] == CC::ccTag::BARTER && !barter->GetIsOut()) {
+								barter->OutOfLevel();
+								cc_Out = true;
+								cc_Count--;
+							}
 
+							if (cc_Out) {
+								if (macho != nullptr) {
+									if (!(cc_Tag[i] != CC::ccTag::MACHO && macho->GetIsActive()))
+										isCancel = true;
+								}
+								else { isCancel = true; }
+							}
+						}
+
+					}
+				}
+				else if (cc_Count == 1) {
+					SR_SYSTEM_TRACE("Benny");
+					goal->CheckBennyActive();
+					if (Collision::AABB(*goalCollider, bennyObj->GetComponent<BoxCollider2D>())){
+						benny->OutOfLevel();
+						cc_Count--;
+						isLevelClear = true;
+						Engine::get().NextScene();
+					}
+				}
+				else {
+					SR_SYSTEM_TRACE("Goal: NOT CHECKING");
 				}
 			}
-			if (isLevelClear) { SR_SYSTEM_TRACE("-----------------LEVEL_CLEAR----------------"); }
+			
 		}
 
 

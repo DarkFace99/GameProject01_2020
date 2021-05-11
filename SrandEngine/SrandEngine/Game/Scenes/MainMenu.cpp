@@ -218,7 +218,7 @@ void MainMenu::Init()
     gameObject->AddComponent<RigidBody>(2.0f);
     // anim_set
     gameObject->AddComponent<Animator>(18, 80);
-    gameObject->GetComponent<Animator>().SetState("BENNY_OUT", 0, 0);
+    gameObject->GetComponent<Animator>().SetState("BENNY_IN", 0, 0);
     gameObject->GetComponent<Animator>().SetState("BENNY_IDLE", 1, 6);
     gameObject->GetComponent<Animator>().SetState("BENNY_RUN", 7, 15);
     gameObject->GetComponent<Animator>().SetState("BENNY_JUMP", 16, 16);
@@ -242,11 +242,12 @@ void MainMenu::Init()
     gameObject->AddComponent<RigidBody>(2.0f);
     // anim_set
     gameObject->AddComponent<Animator>(25, 80);
-    gameObject->GetComponent<Animator>().SetState("CHERRY_OUT", 0, 0);
+    gameObject->GetComponent<Animator>().SetState("CHERRY_IN", 0, 0);
     gameObject->GetComponent<Animator>().SetState("CHERRY_IDLE", 1, 6);
     gameObject->GetComponent<Animator>().SetState("CHERRY_RUN", 7, 15);
     gameObject->GetComponent<Animator>().SetState("CHERRY_JUMP", 16, 16);
     gameObject->GetComponent<Animator>().SetState("CHERRY_FALL", 17, 17);
+    gameObject->GetComponent<Animator>().SetState("CHERRY_OUT", 24, 24);
     gameObject->AddComponent<BoxCollider2D>(BoxCollider2D::CHARACTER_COLLISION, gameObject->GetComponent<Transform>().scale.x - 20, gameObject->GetComponent<Transform>().scale.y - 5,
         false /* overlap */, true /* movable *//*, "BENNY_ANIM_MESH", &camera*/);
 
