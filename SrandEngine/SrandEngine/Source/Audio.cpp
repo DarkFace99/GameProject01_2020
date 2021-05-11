@@ -31,13 +31,26 @@ namespace Srand
         if (audio->isPlayed)
             return;
 
-        sound = m_engine->play2D((AUDIO_FILE_PATH + audio->filePath).c_str(), audio->isLoopable, false, true);
-        if (sound == nullptr) 
+        if (audio->type == SoundType::MUSIC) 
         {
-            SR_SYSTEM_ERROR("Error: Cannot find {0}", AUDIO_FILE_PATH + audio->filePath);
-            return;
+            bgmSound = m_engine->play2D((AUDIO_FILE_PATH + audio->filePath).c_str(), audio->isLoopable, false, true);
+            if (bgmSound == nullptr)
+            {
+                SR_SYSTEM_ERROR("Error: Cannot find {0}", AUDIO_FILE_PATH + audio->filePath);
+                return;
+            }
+            bgmSound->setVolume(audio->volume);
         }
-        sound->setVolume(audio->volume);
+        else 
+        {
+            sound = m_engine->play2D((AUDIO_FILE_PATH + audio->filePath).c_str(), audio->isLoopable, false, true);
+            if (sound == nullptr)
+            {
+                SR_SYSTEM_ERROR("Error: Cannot find {0}", AUDIO_FILE_PATH + audio->filePath);
+                return;
+            }
+            sound->setVolume(audio->volume);
+        }
     }
     void AudioController::Play(std::string name, float volume, bool isLoopable, std::string filePath)
     {
@@ -87,8 +100,6 @@ namespace Srand
         {
             if (src.second->type == type) 
             {
-                //float volAmount = src.second->volume * (0.1f);
-
                 if(mode == 1)
                     src.second->volume += 0.1f;
                 else
@@ -100,7 +111,11 @@ namespace Srand
                 if (src.second->volume > 1)
                     src.second->volume = 1.0f;
 
-                //SR_SYSTEM_TRACE("Vol: {0}", src.second->volume);
+                if (bgmSound != nullptr && type == SoundType::MUSIC)
+                {
+                    bgmSound->setVolume(src.second->volume);
+                    //SR_TRACE("HERE!!!!!!!!!!!");
+                }
             }
         }
     }

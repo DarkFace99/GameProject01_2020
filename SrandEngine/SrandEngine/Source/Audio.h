@@ -43,6 +43,7 @@ namespace Srand
 		static AudioController* s_instance;
 		ISoundEngine* m_engine = nullptr;
 		ISound* sound = nullptr;
+		ISound* bgmSound = nullptr;
 		std::unordered_map<std::string, AudioSource*> m_soundSource;
 
 		int size = 0;

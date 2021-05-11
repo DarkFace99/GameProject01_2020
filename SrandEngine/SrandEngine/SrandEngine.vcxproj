@@ -224,12 +224,14 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(SolutionDir)Dependency\GLW\include;$(SolutionDir)Dependency\GLEW\include;$(SolutionDir)Dependency\GLM;$(SolutionDir)SrandEngine\imgui;$(SolutionDir)SrandEngine;$(SolutionDir)Dependency\irrKlang\include;$(SolutionDir)Dependency\pthread\Pre-built.2\include;$(SolutionDir)SrandEngine\spdLog\include</AdditionalIncludeDirectories>
-      <UndefinePreprocessorDefinitions>DEBUG = 1</UndefinePreprocessorDefinitions>
-      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <UndefinePreprocessorDefinitions>
+      </UndefinePreprocessorDefinitions>
+      <DebugInformationFormat>None</DebugInformationFormat>
       <SupportJustMyCode>true</SupportJustMyCode>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

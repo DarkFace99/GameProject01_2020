@@ -76,6 +76,10 @@ void Setting::Init()
 
     LoadSettings();
 
+    SR_TRACE("IsfullScreen: {0}", isFullScreen);
+    SR_TRACE("VolMusic: {0}", volMusic);
+    SR_TRACE("VolEffect: {0}", volEffect);
+
     /* BACKGROUND */
     {
         gameObject = new GameObject();
@@ -291,12 +295,12 @@ void Setting::Init()
     gui_arr.PushGUI(tempgui);
 
     //pin2 
-    sliderM->GetComponent<GUI_Slider>().currentStep = (int)volMusic * 10;
+    sliderM->GetComponent<GUI_Slider>().currentStep = (int)(volMusic * 10);
     for (int i = 0; i < 10; i++) {
         tempgui = new GameObject();
         tempgui->GetComponent<Transform>().position = Vector2D_float((((0.69*i+16.75) * _tileSize) + _midPointX) * RATIO, ((10.32 * _tileSize) + _midPointY) * RATIO);
         tempgui->GetComponent<Transform>().scale = Vector2D_float(0.75 * 16 * RATIO, 1 * 16 * RATIO);
-        if (i < (int)volMusic * 10) {
+        if (i < (int)(volMusic * 10)) {
             tempgui->AddComponent<SpriteRenderer>(SpriteRenderer::GUI_LAYER, "UI_KEY_MESH", "SETTING_ASSET_TEX", 1.0f, &camera, false);
         }
         else { tempgui->AddComponent<SpriteRenderer>(SpriteRenderer::GUI_LAYER, "UI_KEY_MESH", "SETTING_ASSET_TEX", 0.0f, &camera, false); }
@@ -326,13 +330,13 @@ void Setting::Init()
     gui_arr.PushGUI(tempgui);
 
     //pin3
-    sliderS->GetComponent<GUI_Slider>().currentStep = (int)volEffect * 10;
+    sliderS->GetComponent<GUI_Slider>().currentStep = (int)(volEffect * 10);
     for (int i = 0; i < 10; i++) {
         tempgui = new GameObject();
         tempgui->GetComponent<Transform>().position = Vector2D_float((((0.69 * i + 16.75) * _tileSize) + _midPointX) * RATIO, ((8.90 * _tileSize) + _midPointY) * RATIO);
         tempgui->GetComponent<Transform>().scale = Vector2D_float(0.75 * 16 * RATIO, 1 * 16 * RATIO);
 
-        if (i < (int)volEffect * 10) {
+        if (i < (int)(volEffect * 10)) {
             tempgui->AddComponent<SpriteRenderer>(SpriteRenderer::GUI_LAYER, "UI_KEY_MESH", "SETTING_ASSET_TEX", 1.0f, &camera, false);
         }
         else { tempgui->AddComponent<SpriteRenderer>(SpriteRenderer::GUI_LAYER, "UI_KEY_MESH", "SETTING_ASSET_TEX", 0.0f, &camera, false); }
