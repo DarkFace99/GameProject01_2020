@@ -171,13 +171,13 @@ namespace Srand
         sceneManager.PushScene(new MainMenu());
         sceneManager.PushScene(new Setting());
         sceneManager.PushScene(new LevelSelect());
-        sceneManager.PushScene(new TestingScene());
-        sceneManager.PushScene(new Level2());
-        sceneManager.PushScene(new Level3());
         sceneManager.PushScene(new Lv1());
+        sceneManager.PushScene(new TestingScene()); // lv_2
         sceneManager.PushScene(new Lv4());
         sceneManager.PushScene(new Lv7());
+        //sceneManager.PushScene(new Level2()); 
         sceneManager.PushScene(new Lv10());
+        sceneManager.PushScene(new Level3()); // lv_11
 
 #pragma endregion
 

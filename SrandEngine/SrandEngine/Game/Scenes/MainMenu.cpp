@@ -227,10 +227,6 @@ void MainMenu::Init()
         false /* overlap */, true /* movable *//*, "BENNY_ANIM_MESH", &camera*/);
 
     gameObject->AddComponent<Benny>(); // test CC mechanics
-   // gameObject->GetComponent<Benny>().SetActive(false);
-
-    //player = gameObject; // check collision
-    //benny = player;
     levelManager.AddObject(gameObject);
     objManager.PushObject(gameObject);
 

@@ -366,7 +366,7 @@ void TestingScene::Init()
         gameObject->AddComponent<RigidBody>(2.0f);
         // anim_set
         gameObject->AddComponent<Animator>(18, 80);
-        gameObject->GetComponent<Animator>().SetState("BENNY_OUT", 0, 0);
+        gameObject->GetComponent<Animator>().SetState("BENNY_IN", 0, 0);
         gameObject->GetComponent<Animator>().SetState("BENNY_IDLE", 1, 6);
         gameObject->GetComponent<Animator>().SetState("BENNY_RUN", 7, 15);
         gameObject->GetComponent<Animator>().SetState("BENNY_JUMP", 16, 16);
@@ -379,78 +379,6 @@ void TestingScene::Init()
         objManager.PushObject(gameObject);
     }
 
-    
-
-    // Cherry
-    {
-        // Cherry
-        gameObject = new GameObject();
-        manager->AddEntity(gameObject);
-        gameObject->GetComponent<Transform>().position = Vector2D_float(((24 * _tileSize) + _midPointX) * RATIO, ((1.75 * _tileSize) + _midPointY) * RATIO);
-        gameObject->GetComponent<Transform>().scale = Vector2D_float(24.0f * RATIO, 24.0f * RATIO);
-        gameObject->AddComponent<SpriteRenderer>(SpriteRenderer::CHARACTER_LAYER, "CHERRY_ANIM_MESH", "CHERRY_ANIM_TEX", 1.0f, &camera, false);
-        gameObject->AddComponent<RigidBody>(2.0f);
-        // anim_set
-        gameObject->AddComponent<Animator>(25, 80);
-        gameObject->GetComponent<Animator>().SetState("CHERRY_OUT", 0, 0);
-        gameObject->GetComponent<Animator>().SetState("CHERRY_IDLE", 1, 6);
-        gameObject->GetComponent<Animator>().SetState("CHERRY_RUN", 7, 15);
-        gameObject->GetComponent<Animator>().SetState("CHERRY_JUMP", 16, 16);
-        gameObject->GetComponent<Animator>().SetState("CHERRY_FALL", 17, 17);
-        gameObject->AddComponent<BoxCollider2D>(BoxCollider2D::CHARACTER_COLLISION, gameObject->GetComponent<Transform>().scale.x - 20, gameObject->GetComponent<Transform>().scale.y - 5,
-            false /* overlap */, true /* movable *//*, "BENNY_ANIM_MESH", &camera*/);
-
-        gameObject->AddComponent<Cherry>(); // test CC mechanics
-        //gameObject->GetComponent<Cherry>().SetActive(false);
-
-        objManager.PushObject(gameObject);
-        levelManager.AddObject(gameObject);
-    }
-    // Pear
-    {
-        gameObject = new GameObject();
-        manager->AddEntity(gameObject);
-        gameObject->GetComponent<Transform>().position = Vector2D_float(((16 * _tileSize) + _midPointX) * RATIO, ((1.75 * _tileSize) + _midPointY) * RATIO);
-        gameObject->GetComponent<Transform>().scale = Vector2D_float(24.0f * RATIO, 24.0f * RATIO);
-        gameObject->AddComponent<SpriteRenderer>(SpriteRenderer::CHARACTER_LAYER, "PEAR_ANIM_MESH", "PEAR_ANIM_TEX", 1.0f, &camera, false);
-        gameObject->AddComponent<RigidBody>(2.0f);
-        // anim_set
-        gameObject->AddComponent<Animator>(20, 80);
-        gameObject->GetComponent<Animator>().SetState("PEAR_OUT", 0, 0);
-        gameObject->GetComponent<Animator>().SetState("PEAR_IDLE", 1, 6);
-        gameObject->GetComponent<Animator>().SetState("PEAR_RUN", 7, 16);
-        gameObject->GetComponent<Animator>().SetState("PEAR_JUMP", 17, 17);
-        gameObject->GetComponent<Animator>().SetState("PEAR_FALL", 18, 18);
-        gameObject->AddComponent<BoxCollider2D>(BoxCollider2D::CHARACTER_COLLISION, gameObject->GetComponent<Transform>().scale.x - 20, gameObject->GetComponent<Transform>().scale.y,
-            false /* overlap */, true /* movable *//*, "BENNY_ANIM_MESH", &camera*/);
-
-        gameObject->AddComponent<Pear>(); // test CC mechanics
-        objManager.PushObject(gameObject);
-        levelManager.AddObject(gameObject);
-
-    }
-
-    // Barter
-    {
-        gameObject = new GameObject();
-        manager->AddEntity(gameObject);
-        gameObject->GetComponent<Transform>().position = Vector2D_float(((22 * _tileSize) + _midPointX) * RATIO, ((10.75 * _tileSize) + _midPointY) * RATIO);
-        gameObject->GetComponent<Transform>().scale = Vector2D_float(24.0f * RATIO, 24.0f * RATIO);
-        gameObject->AddComponent<SpriteRenderer>(SpriteRenderer::CHARACTER_LAYER, "BARTER_ANIM_MESH", "BARTER_ANIM_TEX", 1.0f, &camera, false);
-        gameObject->AddComponent<RigidBody>(2.0f);
-        // anim_set
-        gameObject->AddComponent<Animator>(11, 80);
-        gameObject->GetComponent<Animator>().SetState("BARTER_OUT", 0, 0);
-        gameObject->GetComponent<Animator>().SetState("BARTER_IDLE", 1, 9);
-        gameObject->AddComponent<BoxCollider2D>(BoxCollider2D::CHARACTER_COLLISION, gameObject->GetComponent<Transform>().scale.x - 20, gameObject->GetComponent<Transform>().scale.y,
-            false /* overlap */, true /* movable *//*, "BENNY_ANIM_MESH", &camera*/);
-
-        gameObject->AddComponent<Barter>(); // test CC mechanics
-        objManager.PushObject(gameObject);
-        levelManager.AddObject(gameObject);
-
-    }
-
     // Macho (last due to the Carry())
     {
         gameObject = new GameObject();
@@ -461,10 +389,11 @@ void TestingScene::Init()
         gameObject->AddComponent<RigidBody>(2.0f);
         // anim_set
         gameObject->AddComponent<Animator>(21, 80);
-        gameObject->GetComponent<Animator>().SetState("MACHO_OUT", 0, 0);
+        gameObject->GetComponent<Animator>().SetState("MACHO_IN", 0, 0);
         gameObject->GetComponent<Animator>().SetState("MACHO_IDLE", 1, 12);
         gameObject->GetComponent<Animator>().SetState("MACHO_RUN", 13, 18);
         gameObject->GetComponent<Animator>().SetState("MACHO_FALL", 19, 19);
+        gameObject->GetComponent<Animator>().SetState("MACHO_OUT", 20, 20);
         gameObject->AddComponent<BoxCollider2D>(BoxCollider2D::CHARACTER_COLLISION, gameObject->GetComponent<Transform>().scale.x - 20, gameObject->GetComponent<Transform>().scale.y,
             false /* overlap */, true /* movable *//*, "BENNY_ANIM_MESH", &camera*/);
 
@@ -497,7 +426,7 @@ void TestingScene::Init()
 
         gameObject->AddComponent<BoxCollider2D>(BoxCollider2D::GOAL_COLLISION, gameObject->GetComponent<Transform>().scale.x/4, gameObject->GetComponent<Transform>().scale.y*2,
            true /* overlap */, false /* movable */, "BENNY_ANIM_MESH" /* any mesh is fine as long as 1:1 */, &camera);
-        gameObject->GetComponent<BoxCollider2D>().SetOffset(1 * 16 * RATIO, 1 * 16 * RATIO);
+        gameObject->GetComponent<BoxCollider2D>().SetOffset(1.5 * 16 * RATIO, 1 * 16 * RATIO);
         gameObject->AddComponent<Goal>(11,4);
 
         objManager.PushObject(gameObject);

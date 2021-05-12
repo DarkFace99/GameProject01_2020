@@ -527,8 +527,8 @@ namespace Srand
 		void CheckGoal() {
 			if (npc_Count <= 0 && !isLevelClear) {
 				if (cc_Count > 1) {
-					SR_SYSTEM_TRACE("CC");
-					goal->CheckCCActivate();
+					//SR_SYSTEM_TRACE("CC");
+					if (goal) { goal->CheckCCActivate(); }
 					bool cc_Out = false;
 					for (int i = 0; i < cc_List.size(); i++) {
 						if (Collision::AABB(*goalCollider, cc_List[i]->GetComponent<BoxCollider2D>())) {
@@ -565,8 +565,8 @@ namespace Srand
 					}
 				}
 				else if (cc_Count == 1) {
-					SR_SYSTEM_TRACE("Benny");
-					goal->CheckBennyActive();
+					//SR_SYSTEM_TRACE("Benny");
+					if (goal) { goal->CheckBennyActive(); }
 					if (Collision::AABB(*goalCollider, bennyObj->GetComponent<BoxCollider2D>())){
 						benny->OutOfLevel();
 						cc_Count--;
