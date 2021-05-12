@@ -9,6 +9,10 @@ private:
 	EntityManager* manager = nullptr;
 	GUI_Array gui_arr;
 
+	/*float saved_volM = 1.0f;
+	float saved_volE = 1.0f;
+	bool saved_isFull = false;*/
+
 public:
 	Setting();
 	~Setting();
