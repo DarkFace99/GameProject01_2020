@@ -406,11 +406,12 @@ namespace Srand
         }*/
         if (key == SR_KEY_R && action == GLFW_REPEAT) 
         {
-            frameCount = 0;
+            //frameCount = 0;
             frameCount++;
 
             if (frameCount > 60)
             {
+                currentScene->Clean();
                 currentScene->Init();
                 frameCount = 0;
             }
