@@ -366,17 +366,30 @@ namespace Srand
         if (key == SR_KEY_N && action == GLFW_PRESS) {
             Engine::get().NextScene();
         }
-        /*if (key == SR_KEY_M && action == GLFW_PRESS) {
-            Engine::get().GoToScene(0);
-        }*/
-
-        if (key == SR_KEY_M && action == GLFW_REPEAT) 
+        else if (key == SR_KEY_ESCAPE && action == GLFW_PRESS)
         {
+            Engine::get().GoToScene(0);
+        }
+
+        /*if (key == SR_KEY_M && action == GLFW_REPEAT) 
+        {
+            frameCount = 0;
             frameCount++;
 
             if (frameCount > 60) 
             {
                 Engine::get().GoToScene(0);
+                frameCount = 0;
+            }
+        }*/
+        if (key == SR_KEY_R && action == GLFW_REPEAT) 
+        {
+            frameCount = 0;
+            frameCount++;
+
+            if (frameCount > 60)
+            {
+                currentScene->Init();
                 frameCount = 0;
             }
         }
