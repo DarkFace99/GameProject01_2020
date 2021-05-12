@@ -171,13 +171,13 @@ namespace Srand
         sceneManager.PushScene(new MainMenu());
         sceneManager.PushScene(new Setting());
         sceneManager.PushScene(new LevelSelect());
-        sceneManager.PushScene(new TestingScene());
-        sceneManager.PushScene(new Level2());
-        sceneManager.PushScene(new Level3());
         sceneManager.PushScene(new Lv1());
+        sceneManager.PushScene(new TestingScene()); // lv_2
         sceneManager.PushScene(new Lv4());
         sceneManager.PushScene(new Lv7());
+        //sceneManager.PushScene(new Level2()); 
         sceneManager.PushScene(new Lv10());
+        sceneManager.PushScene(new Level3()); // lv_11
 
 #pragma endregion
 
@@ -366,17 +366,30 @@ namespace Srand
         if (key == SR_KEY_N && action == GLFW_PRESS) {
             Engine::get().NextScene();
         }
-        /*if (key == SR_KEY_M && action == GLFW_PRESS) {
-            Engine::get().GoToScene(0);
-        }*/
-
-        if (key == SR_KEY_M && action == GLFW_REPEAT) 
+        else if (key == SR_KEY_ESCAPE && action == GLFW_PRESS)
         {
+            Engine::get().GoToScene(0);
+        }
+
+        /*if (key == SR_KEY_M && action == GLFW_REPEAT) 
+        {
+            frameCount = 0;
             frameCount++;
 
             if (frameCount > 60) 
             {
                 Engine::get().GoToScene(0);
+                frameCount = 0;
+            }
+        }*/
+        if (key == SR_KEY_R && action == GLFW_REPEAT) 
+        {
+            frameCount = 0;
+            frameCount++;
+
+            if (frameCount > 60)
+            {
+                currentScene->Init();
                 frameCount = 0;
             }
         }
