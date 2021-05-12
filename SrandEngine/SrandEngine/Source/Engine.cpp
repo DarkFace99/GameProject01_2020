@@ -294,6 +294,28 @@ namespace Srand
         }
     }
 
+    void Engine::PlayMenu()
+    {
+        if (audioController.Find("BGM")->isPlayed == true)
+        {
+            audioController.Stop();
+            audioController.Find("BGM")->isPlayed = false;
+        }
+
+        audioController.Play("Menu");
+        audioController.Find("Menu")->isPlayed = true;
+    }
+    void Engine::PlayBGM()
+    {
+        if (audioController.Find("Menu")->isPlayed == true)
+        {
+            audioController.Stop();
+            audioController.Find("Menu")->isPlayed = false;
+        }
+        audioController.Play("BGM");
+        audioController.Find("BGM")->isPlayed = true;
+    }
+
     void Engine::Draw() {   
         //For Testing SceneManager Only
         currentScene->Draw();

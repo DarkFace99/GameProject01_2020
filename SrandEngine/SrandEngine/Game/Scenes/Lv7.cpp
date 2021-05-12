@@ -381,13 +381,7 @@ void Lv7::Init()
     gui_arr.SetControl(false);
 #pragma endregion
 
-    if (audioController.Find("Menu")->isPlayed == true)
-    {
-        audioController.Stop();
-        audioController.Find("Menu")->isPlayed = false;
-    }
-    audioController.Play("BGM");
-    audioController.Find("BGM")->isPlayed = true;
+    Engine::get().PlayBGM();
 
 }
 void Lv7::Clean()

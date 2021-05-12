@@ -387,14 +387,7 @@ void LevelSelect::Init()
 
 #pragma endregion
 
-    if (audioController.Find("BGM")->isPlayed == true)
-    {
-        audioController.Stop();
-        audioController.Find("BGM")->isPlayed = false;
-    }
-
-    audioController.Play("Menu");
-    audioController.Find("Menu")->isPlayed = true;
+    Engine::get().PlayMenu();
 }
 
 void LevelSelect::Clean()

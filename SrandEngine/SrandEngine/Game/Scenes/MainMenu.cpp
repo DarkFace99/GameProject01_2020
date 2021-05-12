@@ -436,14 +436,7 @@ void MainMenu::Init()
     gui_arr.PushGUI(tempgui);
     gui_arr.SetControl(false);
 
-    if (audioController.Find("BGM")->isPlayed == true) 
-    {
-        audioController.Stop();
-        audioController.Find("BGM")->isPlayed = false;
-    }
-    
-    audioController.Play("Menu");
-    audioController.Find("Menu")->isPlayed = true;
+    Engine::get().PlayMenu();
 }
 
 void MainMenu::Clean()

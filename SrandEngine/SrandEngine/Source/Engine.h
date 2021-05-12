@@ -134,6 +134,9 @@ namespace Srand
 		void LoadSave(bool& fullscreen, float& volM, float& volE, int& proc);
 		void WriteSave();
 
+		void PlayMenu();
+		void PlayBGM();
+
 	protected:
 		int nextScene_Num = 0; // Engine.cpp line.138
 	};
