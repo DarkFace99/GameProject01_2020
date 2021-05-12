@@ -461,16 +461,7 @@ void TestingScene::Init()
 
 #pragma endregion
     
-    if (audioController.Find("Menu")->isPlayed == true) 
-    {
-        audioController.Stop();
-        audioController.Find("Menu")->isPlayed = false;
-    }
-
-    audioController.Play("BGM");
-    audioController.Find("BGM")->isPlayed = true;
-
-    //progress = 1;
+    Engine::get().PlayBGM();
 
 }
 void TestingScene::Clean()
