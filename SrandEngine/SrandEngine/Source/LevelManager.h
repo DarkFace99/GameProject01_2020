@@ -162,7 +162,7 @@ namespace Srand
 
 			for (int i = 0; i < cc_List.size(); i++) {		// find Benny first
 				if (cc_List[i]->HasComponent<Benny>()) {
-					SR_SYSTEM_TRACE("Level: Found Benny");
+					//SR_SYSTEM_TRACE("Level: Found Benny");
 					bennyObj = cc_List[i];
 
 					bennyTransform = &bennyObj->GetComponent<Transform>();
@@ -181,7 +181,7 @@ namespace Srand
 					cc_Tag.push_back(macho->GetTag());
 					isMachoFound = true;
 					cc_Count++;
-					SR_SYSTEM_TRACE("Level: Found Macho");
+					//SR_SYSTEM_TRACE("Level: Found Macho");
 				}
 				else if (cc_List[i]->HasComponent<Cherry>()) {
 					cherryObj = cc_List[i];
@@ -191,7 +191,7 @@ namespace Srand
 					cherry = &cherryObj->GetComponent<Cherry>();
 					cc_Tag.push_back(cherry->GetTag());
 					cc_Count++;
-					SR_SYSTEM_TRACE("Level: Found Cherry");
+					//SR_SYSTEM_TRACE("Level: Found Cherry");
 				}
 				else if (cc_List[i]->HasComponent<Pear>()) {
 					pearObj = cc_List[i];
@@ -200,7 +200,7 @@ namespace Srand
 					pear = &pearObj->GetComponent<Pear>();
 					cc_Tag.push_back(pear->GetTag());
 					cc_Count++;
-					SR_SYSTEM_TRACE("Level: Found Pear");
+					//SR_SYSTEM_TRACE("Level: Found Pear");
 				}
 				else if (cc_List[i]->HasComponent<Barter>()) {
 					barterObj = cc_List[i];
@@ -210,7 +210,7 @@ namespace Srand
 					barter = &barterObj->GetComponent<Barter>();
 					cc_Tag.push_back(barter->GetTag());
 					cc_Count++;
-					SR_SYSTEM_TRACE("Level: Found Barter");
+					//SR_SYSTEM_TRACE("Level: Found Barter");
 				}
 				else if (cc_List[i]->HasComponent<UI_Box>()) { // UI_Box
 					ui_BoxObj = cc_List[i];
@@ -219,7 +219,7 @@ namespace Srand
 					ui_BoxTransform = &ui_BoxObj->GetComponent<Transform>();
 					ui_Box = &ui_BoxObj->GetComponent<UI_Box>();;
 					cc_Tag.push_back(CC::ccTag::UI_Box);
-					SR_SYSTEM_TRACE("Level: Found UI_Box");
+					//SR_SYSTEM_TRACE("Level: Found UI_Box");
 				}
 			}
 			if (isMachoFound) { macho->CopyCC_List(cc_List); }
@@ -388,7 +388,7 @@ namespace Srand
 					useAbility = true;
 					
 					choosingStage = false;
-					SR_SYSTEM_TRACE("Done_Choosing");
+					//SR_SYSTEM_TRACE("Done_Choosing");
 					AudioController::get().Play("Activate");
 				}
 
@@ -472,7 +472,7 @@ namespace Srand
 				
 				if (isCancel) {
 					isCancel = false;
-					SR_SYSTEM_TRACE("CANCEL---CANCEL---CANCEL");
+					//SR_SYSTEM_TRACE("CANCEL---CANCEL---CANCEL");
 
 					AudioController::get().Play("Deactivate");
 
@@ -575,7 +575,7 @@ namespace Srand
 					}
 				}
 				else {
-					SR_SYSTEM_TRACE("Goal: NOT CHECKING");
+					//SR_SYSTEM_TRACE("Goal: NOT CHECKING");
 				}
 			}
 			

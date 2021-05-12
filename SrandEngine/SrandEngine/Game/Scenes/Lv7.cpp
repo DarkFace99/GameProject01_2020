@@ -207,7 +207,7 @@ void Lv7::Init()
 
         objManager.PushObject(gameObject);
 
-        // 1
+        // 2
         gameObject = new GameObject();
         manager->AddEntity(gameObject);
 

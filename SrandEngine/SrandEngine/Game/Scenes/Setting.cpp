@@ -75,25 +75,25 @@ void DefaultSetting()
 }
 
 void Increase_MU() {
-    SR_TRACE("Slider_MU: +");
+    //SR_TRACE("Slider_MU: +");
     sliderM->GetComponent<GUI_Slider>().ChangeStep(1);
     AudioController::get().ChangeVolume(1, SoundType::MUSIC);
     isSaved = false;
 }
 void Decrease_MU() {
-    SR_TRACE("Slider_MU: -");
+    //SR_TRACE("Slider_MU: -");
     sliderM->GetComponent<GUI_Slider>().ChangeStep(0);
     AudioController::get().ChangeVolume(0, SoundType::MUSIC);
     isSaved = false;
 }
 void Increase_SF() {
-    SR_TRACE("Slider_SF: +");
+    //SR_TRACE("Slider_SF: +");
     sliderS->GetComponent<GUI_Slider>().ChangeStep(1);
     AudioController::get().ChangeVolume(1, SoundType::EFFECT);
     isSaved = false;
 }
 void Decrease_SF() {
-    SR_TRACE("Slider_SF: -");
+    //SR_TRACE("Slider_SF: -");
     sliderS->GetComponent<GUI_Slider>().ChangeStep(0);
     AudioController::get().ChangeVolume(0, SoundType::EFFECT);
     isSaved = false;
