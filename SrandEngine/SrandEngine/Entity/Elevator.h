@@ -21,6 +21,7 @@ private:
 	float ground_elevation = 0.0f;
 
 	int activeValue = 0;
+	bool isInverse = false;
 
 	std::vector<GameObject*> connectedButtons;
 
@@ -58,12 +59,13 @@ public:
 		}
 		else
 		{
-			connectedButtons.push_back(_gameObj);
+			connectedButtons.push_back(_gameObj); 
 		}
 	}
 	void Elevated() 
 	{
-		activeValue = 0;
+		if (isInverse) { activeValue = 1; }
+		else { activeValue = 0; }
 
 		for (int i = 0; i < connectedButtons.size(); i++)
 		{
@@ -95,6 +97,11 @@ public:
 			transform->Translate(Vector2D_float(0.0f, -1.0f));
 			if (transform->position.y <= ground_elevation) { transform->SetPosition(ground_height); }
 		}
+	}
+
+	void SetInverse() {
+		isInverse = true;
+		transform->SetPosition(max_height);
 	}
 
 };
