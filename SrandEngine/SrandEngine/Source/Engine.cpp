@@ -349,7 +349,7 @@ namespace Srand
     void Engine::Event() {
         // input
         glfwPollEvents();
-        if (windowsInput.IsKeyPressed(SR_KEY_ESCAPE)) { Quit(); }
+        //if (windowsInput.IsKeyPressed(SR_KEY_ESCAPE)) { Quit(); }
     }
 
     void Engine::Clean() {
