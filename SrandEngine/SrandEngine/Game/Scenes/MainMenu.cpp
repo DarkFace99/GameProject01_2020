@@ -212,7 +212,7 @@ void MainMenu::Init()
 
     gameObject = new GameObject();
     manager->AddEntity(gameObject);
-    gameObject->GetComponent<Transform>().position = Vector2D_float(((8 * _tileSize) + _midPointX) * RATIO, ((2.5 * _tileSize) + _midPointY) * RATIO);
+    gameObject->GetComponent<Transform>().position = Vector2D_float(((8 * _tileSize) + _midPointX) * RATIO, ((1.75 * _tileSize) + _midPointY) * RATIO);
     gameObject->GetComponent<Transform>().scale = Vector2D_float(24.0f * RATIO, 24.0f * RATIO);
     gameObject->AddComponent<SpriteRenderer>(SpriteRenderer::CHARACTER_LAYER, "BENNY_ANIM_MESH", "BENNY_ANIM_TEX", 1.0f, &camera, false);
     gameObject->AddComponent<RigidBody>(2.0f);
@@ -232,7 +232,7 @@ void MainMenu::Init()
 
     gameObject = new GameObject();
     manager->AddEntity(gameObject);
-    gameObject->GetComponent<Transform>().position = Vector2D_float(((28.5 * _tileSize) + _midPointX) * RATIO, ((5 * _tileSize) + _midPointY) * RATIO);
+    gameObject->GetComponent<Transform>().position = Vector2D_float(((28.5 * _tileSize) + _midPointX) * RATIO, ((4.75 * _tileSize) + _midPointY) * RATIO);
     gameObject->GetComponent<Transform>().scale = Vector2D_float(24.0f * RATIO, 24.0f * RATIO);
     gameObject->AddComponent<SpriteRenderer>(SpriteRenderer::CHARACTER_LAYER, "CHERRY_ANIM_MESH", "CHERRY_ANIM_TEX", 1.0f, &camera, false);
     gameObject->AddComponent<RigidBody>(2.0f);
@@ -408,13 +408,13 @@ void MainMenu::Init()
 
     tempgui = new GameObject();
     //tempgui->GetComponent<Transform>().position = Vector2D_float(((6.5 * _tileSize) + _midPointX) * RATIO, (((13.95 - (i * 3)) * _tileSize) + _midPointY) * RATIO);
-    tempgui->GetComponent<Transform>().scale = Vector2D_float(8 * RATIO, 8 * RATIO);
+    tempgui->GetComponent<Transform>().scale = Vector2D_float(16 * RATIO, 16 * RATIO);
 
     tempgui->AddComponent<SpriteRenderer>(SpriteRenderer::GUI_LAYER, "SELECTOR_MESH", "SELECTOR_TEX", 1.0f, &camera, false);
     tempgui->AddComponent<Animator>(3, 100);
-    tempgui->GetComponent<Animator>().SetState("WHITE", 0, 0);
+    tempgui->GetComponent<Animator>().SetState("WHITE", 2, 2);
     tempgui->GetComponent<Animator>().SetState("YELLOW", 1, 1);
-    tempgui->GetComponent<Animator>().SetState("RED", 2, 2);
+    tempgui->GetComponent<Animator>().SetState("RED", 0, 0);
 
     tempgui->AddComponent<GUI_Selector>();
     levelManager.SetSelector(&tempgui->GetComponent<GUI_Selector>());

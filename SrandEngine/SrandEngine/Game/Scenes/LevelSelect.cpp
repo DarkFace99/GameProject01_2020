@@ -100,7 +100,7 @@ void LevelSelect::Init()
         {
             switch (tileMAP[y][x])
             {
-            default: printf("empty");
+            default: //printf("empty");
                 break;
             case 9: tile_info.push_back(glm::vec4(x, 15 - y, 1, 6));
                 break;
