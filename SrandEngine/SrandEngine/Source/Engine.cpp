@@ -19,7 +19,10 @@
 #include "Game/Scenes/Lv5.h"
 #include "Game/Scenes/Lv6.h"
 #include "Game/Scenes/Lv7.h"
+#include "Game/Scenes/Lv8.h"
+#include "Game/Scenes/Lv9.h"
 #include "Game/Scenes/Lv10.h"
+#include "Game/Scenes/Lv12.h"
 
 #include "Source/Audio.h"
 
@@ -181,8 +184,11 @@ namespace Srand
         sceneManager.PushScene(new Lv5());
         sceneManager.PushScene(new Lv6());
         sceneManager.PushScene(new Lv7());
+        sceneManager.PushScene(new Lv8());
+        sceneManager.PushScene(new Lv9());
         sceneManager.PushScene(new Lv10());
         sceneManager.PushScene(new Level3()); // lv_11
+        sceneManager.PushScene(new Lv12());
 
          //sceneManager.PushScene(new Level2()); 
 

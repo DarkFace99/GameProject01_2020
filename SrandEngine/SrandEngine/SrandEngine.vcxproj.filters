@@ -252,6 +252,9 @@
     <ClInclude Include="Game\Scenes\Lv5.h" />
     <ClInclude Include="Game\Scenes\Lv3.h" />
     <ClInclude Include="Game\Scenes\Lv6.h" />
+    <ClInclude Include="Game\Scenes\Lv8.h" />
+    <ClInclude Include="Game\Scenes\Lv9.h" />
+    <ClInclude Include="Game\Scenes\Lv12.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="imgui\imgui.cpp">
@@ -365,6 +368,9 @@
     <ClCompile Include="Game\Scenes\Lv5.cpp" />
     <ClCompile Include="Game\Scenes\Lv3.cpp" />
     <ClCompile Include="Game\Scenes\Lv6.cpp" />
+    <ClCompile Include="Game\Scenes\Lv8.cpp" />
+    <ClCompile Include="Game\Scenes\Lv9.cpp" />
+    <ClCompile Include="Game\Scenes\Lv12.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="SrandEngine.rc" />

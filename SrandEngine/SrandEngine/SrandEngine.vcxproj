@@ -41,6 +41,7 @@
     <ClInclude Include="Entity\Goal.h" />
     <ClInclude Include="Entity\Macho.h" />
     <ClInclude Include="Entity\NPC.h" />
+    <ClInclude Include="Game\Scenes\Lv12.h" />
     <ClInclude Include="Game\Scenes\Lv3.h" />
     <ClInclude Include="Game\Scenes\Level2.h" />
     <ClInclude Include="Game\Scenes\Level3.h" />
@@ -51,6 +52,8 @@
     <ClInclude Include="Game\Scenes\Lv5.h" />
     <ClInclude Include="Game\Scenes\Lv6.h" />
     <ClInclude Include="Game\Scenes\Lv7.h" />
+    <ClInclude Include="Game\Scenes\Lv8.h" />
+    <ClInclude Include="Game\Scenes\Lv9.h" />
     <ClInclude Include="Game\Scenes\MainMenu.h" />
     <ClInclude Include="Game\Scenes\Setting.h" />
     <ClInclude Include="Game\Scenes\testing_scene.h" />
@@ -98,11 +101,14 @@
     <ClCompile Include="Game\Scenes\LevelSelect.cpp" />
     <ClCompile Include="Game\Scenes\Lv1.cpp" />
     <ClCompile Include="Game\Scenes\Lv10.cpp" />
+    <ClCompile Include="Game\Scenes\Lv12.cpp" />
     <ClCompile Include="Game\Scenes\Lv3.cpp" />
     <ClCompile Include="Game\Scenes\Lv4.cpp" />
     <ClCompile Include="Game\Scenes\Lv5.cpp" />
     <ClCompile Include="Game\Scenes\Lv6.cpp" />
     <ClCompile Include="Game\Scenes\Lv7.cpp" />
+    <ClCompile Include="Game\Scenes\Lv8.cpp" />
+    <ClCompile Include="Game\Scenes\Lv9.cpp" />
     <ClCompile Include="Game\Scenes\MainMenu.cpp" />
     <ClCompile Include="Game\Scenes\Setting.cpp" />
     <ClCompile Include="Game\Scenes\testing_scene.cpp" />
