@@ -302,25 +302,25 @@ void EndLevel::Init()
 
     /* Character */
 
-    //// NPC
-    //{
-    //    gameObject = new GameObject();
-    //    manager->AddEntity(gameObject);
-    //    gameObject->GetComponent<Transform>().position = Vector2D_float(((2 * _tileSize) + _midPointX) * RATIO, ((1.75 * _tileSize) + _midPointY) * RATIO);
-    //    gameObject->GetComponent<Transform>().scale = Vector2D_float(24.0f * RATIO, 24.0f * RATIO);
-    //    gameObject->AddComponent<SpriteRenderer>(SpriteRenderer::ASSET_LAYER, "NPC_ANIM_MESH", "NPC_ANIM_TEX", 1.0f, &camera, false);
-    //    // anim_set
-    //    gameObject->AddComponent<Animator>(2, 100);
-    //    gameObject->GetComponent<Animator>().SetState("NPC_SAD", 0, 0);
-    //    gameObject->GetComponent<Animator>().SetState("NPC_HAPPY", 1, 1);
-    //    gameObject->GetComponent<Animator>().PlayState("NPC_SAD");
+    // NPC
+    {
+        gameObject = new GameObject();
+        manager->AddEntity(gameObject);
+        gameObject->GetComponent<Transform>().position = Vector2D_float(((2 * _tileSize) + _midPointX) * RATIO, ((2.75 * _tileSize) + _midPointY) * RATIO);
+        gameObject->GetComponent<Transform>().scale = Vector2D_float(24.0f * RATIO, 24.0f * RATIO);
+        gameObject->AddComponent<SpriteRenderer>(SpriteRenderer::ASSET_LAYER, "NPC_ANIM_MESH", "NPC_ANIM_TEX", 1.0f, &camera, false);
+        // anim_set
+        gameObject->AddComponent<Animator>(2, 100);
+        gameObject->GetComponent<Animator>().SetState("NPC_SAD", 0, 0);
+        gameObject->GetComponent<Animator>().SetState("NPC_HAPPY", 1, 1);
+        gameObject->GetComponent<Animator>().PlayState("NPC_SAD");
 
-    //    gameObject->AddComponent<BoxCollider2D>(BoxCollider2D::ASSET_COLLISION, gameObject->GetComponent<Transform>().scale.x - 20, gameObject->GetComponent<Transform>().scale.y,
-    //        true /* overlap */, false /* movable *//*, "BENNY_ANIM_MESH", &camera*/);
-    //    gameObject->AddComponent<NPC>();
+        gameObject->AddComponent<BoxCollider2D>(BoxCollider2D::ASSET_COLLISION, gameObject->GetComponent<Transform>().scale.x - 20, gameObject->GetComponent<Transform>().scale.y,
+            true /* overlap */, false /* movable *//*, "BENNY_ANIM_MESH", &camera*/);
+        gameObject->AddComponent<NPC>();
 
-    //    objManager.PushObject(gameObject);
-    //}
+        objManager.PushObject(gameObject);
+    }
 
     // Benny
     {
