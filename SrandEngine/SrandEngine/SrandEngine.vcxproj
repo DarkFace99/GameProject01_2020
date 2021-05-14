@@ -246,13 +246,14 @@
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)Dependency\GLW\lib-vc2019;$(SolutionDir)Dependency\GLEW\lib;$(SolutionDir)Dependency\SOIL\lib;$(SolutionDir)Dependency\GLM;$(SolutionDir)Dependency\irrKlang\lib\Win32-visualStudio;$(SolutionDir)Dependency\pthread\Pre-built.2\lib\x86;%(AdditionalLibraryDirectories);$(SolutionDir)Dependency\irrKlang\lib</AdditionalLibraryDirectories>
       <AdditionalDependencies>glfw3.lib;opengl32.lib;User32.lib;Gdi32.lib;Shell32.lib;glew32.lib;glew32s.lib;SOIL.lib;irrKlang.lib</AdditionalDependencies>
       <IgnoreSpecificDefaultLibraries>msvcrt.lib</IgnoreSpecificDefaultLibraries>
+      <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">

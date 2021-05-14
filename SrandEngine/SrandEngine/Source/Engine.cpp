@@ -49,6 +49,10 @@ namespace Srand
 
     int frameCount = 0;
 
+    GameObject* restartText = nullptr;
+
+    Camera tempCam;
+
     Engine::Engine() {
         running = false;
     }
@@ -137,6 +141,8 @@ namespace Srand
         AssetManager::get().LoadMesh("TITLE_MESH", 20, 16, 20, 7);
         AssetManager::get().LoadMesh("SELECTOR_MESH", 3);
 
+        AssetManager::get().LoadMesh("RESTART_MESH", 4);
+
         /* Texture */
         AssetManager::get().LoadTexture("BG_TEX", "Background.png");
         AssetManager::get().LoadTexture("B_TEX", "blank.png");
@@ -153,6 +159,7 @@ namespace Srand
         AssetManager::get().LoadTexture("SETTING_ASSET_TEX", "NEW_ASSETS/ART_BENNY/UI/ASSETS/setting_ui.png");
         AssetManager::get().LoadTexture("TITLE_TEX", "NEW_ASSETS/ART_BENNY/TITLE/TITLE.png");
         AssetManager::get().LoadTexture("SELECTOR_TEX", "NEW_ASSETS/ART_BENNY/LEVEL_COMPONENT/ASSETS/balls_Sheet.png");
+        AssetManager::get().LoadTexture("RESTART_TEX", "NEW_ASSETS/ART_BENNY/LEVEL_COMPONENT/ASSETS/restart_Sheet.png");
         
 
         /* Audio */
@@ -196,26 +203,17 @@ namespace Srand
 
 #pragma region GUI_LOADING
 
-        //tempgui = new GameObject();
-        ////EntityManager::get().AddEntity(tempgui);
+        restartText = new GameObject();
 
-        //tempgui->GetComponent<Transform>().scale = Vector2D_float(32.0f * RATIO, 16.0f * RATIO);
+        restartText->GetComponent<Transform>().position = Vector2D_float(500, 300);
+        restartText->GetComponent<Transform>().scale = Vector2D_float(160.0f * RATIO, 80.0f * RATIO);
 
-        //tempgui->AddComponent<SpriteRenderer>(SpriteRenderer::GUI_LAYER, "B_MESH", "B_TEX", 1.0f, &tempCam, false);
-        //tempgui->AddComponent<GUI_Button>("TestButton1");
+        restartText->AddComponent<SpriteRenderer>(SpriteRenderer::GUI_LAYER, "RESTART_MESH", "RESTART_TEX", 0.0f, &tempCam, false);
+        restartText->AddComponent<Animator>(4, 500);
+        restartText->GetComponent<Animator>().SetState("Play", 0, 3);
+        restartText->GetComponent<Animator>().SetState("Stop", 0, 0);
 
-        //gui_arr.PushGUI(tempgui);
-
-        //tempgui = new GameObject();
-        ////EntityManager::get().AddEntity(tempgui);
-
-        //tempgui->AddComponent<Transform>(0, 100);
-        //tempgui->GetComponent<Transform>().scale = Vector2D_float(32.0f * RATIO, 16.0f * RATIO);
-
-        //tempgui->AddComponent<SpriteRenderer>(SpriteRenderer::GUI_LAYER, "B_MESH", "B_TEX", 1.0f, &tempCam, false);
-        //tempgui->AddComponent<GUI_Button>("TestButton2");
-
-        //gui_arr.PushGUI(tempgui);
+        restartText->AddComponent<GUI_Text>("Restart_UI");
 
 #pragma endregion
 
@@ -332,7 +330,7 @@ namespace Srand
     void Engine::Draw() {   
         //For Testing SceneManager Only
         currentScene->Draw();
-        /*gui_arr.OnDraw();*/
+        restartText->Draw();
 
         //user_interface.UpdateUserInterface();
 
@@ -346,7 +344,8 @@ namespace Srand
         //For Testing SceneManager Only
         currentScene->Update();
 
-        /*gui_arr.OnUpdate();*/
+        restartText->Update();
+        //restartText->GetComponent<Animator>().PlayState("Stop");
 
         //WindowProperties::get().Update();
         glfwSetKeyCallback(WindowProperties::get(), window_key_callback);
@@ -406,6 +405,12 @@ namespace Srand
             Engine::get().GoToScene(0);
         }
 
+        if (key == SR_KEY_R && action == GLFW_RELEASE) 
+        {
+            restartText->GetComponent<SpriteRenderer>().SetAlpha(0.0f);
+            restartText->GetComponent<Animator>().PlayState("Stop");
+        }
+
         /*if (key == SR_KEY_M && action == GLFW_REPEAT) 
         {
             frameCount = 0;
@@ -419,7 +424,8 @@ namespace Srand
         }*/
         if (key == SR_KEY_R && action == GLFW_REPEAT) 
         {
-            //frameCount = 0;
+            restartText->GetComponent<SpriteRenderer>().SetAlpha(1.0f);
+            restartText->GetComponent<Animator>().PlayState("Play");
             frameCount++;
 
             if (frameCount > 60)

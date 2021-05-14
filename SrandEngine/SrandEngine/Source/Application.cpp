@@ -9,6 +9,8 @@
 
 int main(int argc, char** argv) {
 
+	FreeConsole();
+
 	HANDLE mutex = CreateMutex(NULL, TRUE, L"BENNY: Everyone is Happy");
 	if (GetLastError() == ERROR_ALREADY_EXISTS) 
 	{
