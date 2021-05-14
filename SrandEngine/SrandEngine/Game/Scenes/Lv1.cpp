@@ -257,6 +257,27 @@ void Lv1::Init()
     }
 
 #pragma endregion
+    // tutor
+    gameObject = new GameObject();
+    manager->AddEntity(gameObject);
+
+    gameObject->GetComponent<Transform>().position = Vector2D_float(((15 * _tileSize) + _midPointX) * RATIO, ((14 * _tileSize) + _midPointY) * RATIO);
+    gameObject->GetComponent<Transform>().scale = Vector2D_float(6*16.0f * RATIO, 4*16.0f * RATIO);
+
+    gameObject->AddComponent<SpriteRenderer>(SpriteRenderer::ASSET_LAYER, "TUTORIAL_MESH", "TUTORIAL_TEX", 1.0f, &camera, false);
+    gameObject->AddComponent<Animator>(12, 1000);
+    gameObject->GetComponent<Animator>().SetState("PLAY", 3, 5);
+    gameObject->GetComponent<Animator>().PlayState("PLAY");
+
+    // c
+    gameObject = new GameObject();
+    manager->AddEntity(gameObject);
+    gameObject->GetComponent<Transform>().position = Vector2D_float(((15 * _tileSize) + _midPointX) * RATIO, ((11 * _tileSize) + _midPointY) * RATIO);
+    gameObject->GetComponent<Transform>().scale = Vector2D_float(1.2 * 16 * RATIO, 1.2 * 16 * RATIO);
+    gameObject->AddComponent<SpriteRenderer>("UI_KEY_MESH", "MENU_ASSET_TEX", 1.0f, &camera, false);
+    gameObject->AddComponent<TileSelector>(25, 25);
+    gameObject->GetComponent<TileSelector>().SetTile(15, 21);
+        
 
 #pragma region CharacterAssets 
 

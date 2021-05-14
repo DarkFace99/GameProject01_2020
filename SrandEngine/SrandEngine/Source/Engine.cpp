@@ -23,6 +23,7 @@
 #include "Game/Scenes/Lv9.h"
 #include "Game/Scenes/Lv10.h"
 #include "Game/Scenes/Lv12.h"
+#include "Game/Scenes/EndLevel.h"
 
 #include "Source/Audio.h"
 
@@ -122,6 +123,7 @@ namespace Srand
         AssetManager::get().LoadMesh("2x2_MESH", 14, 14, 2, 2);
         AssetManager::get().LoadMesh("ELEVATOR_STAND_MESH", 14, 14, 2, 1);
         AssetManager::get().LoadMesh("BUTTON_MESH", 14, 14, 2, 1);
+        AssetManager::get().LoadMesh("SPACE_MESH", 14, 14, 5, 2);
 
         AssetManager::get().LoadMesh("UI_BUTTON_MESH", 25, 25, 7, 2);
         AssetManager::get().LoadMesh("UI_OUTLINE_MESH", 25, 25, 8, 3);
@@ -142,6 +144,7 @@ namespace Srand
         AssetManager::get().LoadMesh("SELECTOR_MESH", 3);
 
         AssetManager::get().LoadMesh("RESTART_MESH", 4);
+        AssetManager::get().LoadMesh("TUTORIAL_MESH", 12);
 
         /* Texture */
         AssetManager::get().LoadTexture("BG_TEX", "Background.png");
@@ -160,6 +163,7 @@ namespace Srand
         AssetManager::get().LoadTexture("TITLE_TEX", "NEW_ASSETS/ART_BENNY/TITLE/TITLE.png");
         AssetManager::get().LoadTexture("SELECTOR_TEX", "NEW_ASSETS/ART_BENNY/LEVEL_COMPONENT/ASSETS/balls_Sheet.png");
         AssetManager::get().LoadTexture("RESTART_TEX", "NEW_ASSETS/ART_BENNY/LEVEL_COMPONENT/ASSETS/restart_Sheet.png");
+        AssetManager::get().LoadTexture("TUTORIAL_TEX", "NEW_ASSETS/ART_BENNY/LEVEL_COMPONENT/ASSETS/Tutorial_Sheet.png");
         
 
         /* Audio */
@@ -196,6 +200,8 @@ namespace Srand
         sceneManager.PushScene(new Lv10());
         sceneManager.PushScene(new Level3()); // lv_11
         sceneManager.PushScene(new Lv12());
+        sceneManager.PushScene(new EndLevel());
+
 
          //sceneManager.PushScene(new Level2()); 
 

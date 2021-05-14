@@ -402,6 +402,18 @@ void MainMenu::Init()
         stored->GetComponent<UI_Box>().SetRender(false);
     }
 
+    tempgui = new GameObject();
+    tempgui->GetComponent<Transform>().position = Vector2D_float(((12 * _tileSize) + _midPointX) * RATIO, (((15 * _tileSize) + _midPointY) * RATIO));
+    tempgui->GetComponent<Transform>().scale = Vector2D_float(5 * 16 * RATIO, 2 * 16 * RATIO);
+
+    tempgui->AddComponent<SpriteRenderer>(SpriteRenderer::GUI_LAYER, "SPACE_MESH", "LEVEL_ASSET_TEX", 1.0f, &camera, false);
+    tempgui->AddComponent<TileSelector>(14, 14);
+    tempgui->GetComponent<TileSelector>().SetTile(9, 0);
+
+    gui_arr.PushGUI(tempgui);
+    stored->GetComponent<UI_Box>().Add(tempgui);
+    stored->GetComponent<UI_Box>().SetRender(false);
+
 #pragma endregion
 
     // selector
