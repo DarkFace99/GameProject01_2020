@@ -276,13 +276,13 @@ void Level3::Init()
 
     tempgui = new GameObject();
     //tempgui->GetComponent<Transform>().position = Vector2D_float(((6.5 * _tileSize) + _midPointX) * RATIO, (((13.95 - (i * 3)) * _tileSize) + _midPointY) * RATIO);
-    tempgui->GetComponent<Transform>().scale = Vector2D_float(8 * RATIO, 8 * RATIO);
+    tempgui->GetComponent<Transform>().scale = Vector2D_float(16 * RATIO, 16 * RATIO);
 
     tempgui->AddComponent<SpriteRenderer>(SpriteRenderer::GUI_LAYER, "SELECTOR_MESH", "SELECTOR_TEX", 1.0f, &camera, false);
     tempgui->AddComponent<Animator>(3, 100);
-    tempgui->GetComponent<Animator>().SetState("WHITE", 0, 0);
+    tempgui->GetComponent<Animator>().SetState("WHITE", 2, 2);
     tempgui->GetComponent<Animator>().SetState("YELLOW", 1, 1);
-    tempgui->GetComponent<Animator>().SetState("RED", 2, 2);
+    tempgui->GetComponent<Animator>().SetState("RED", 0, 0);
 
     tempgui->AddComponent<GUI_Selector>();
     levelManager.SetSelector(&tempgui->GetComponent<GUI_Selector>());
