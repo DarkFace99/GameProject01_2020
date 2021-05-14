@@ -4,6 +4,7 @@
 
 #include "GameObject.h"
 #include "Component.h"
+#include "RigidBody.h"
 #include "Source/AssetManager.h"
 #include "Source/Camera.h"
 
@@ -15,8 +16,11 @@ public:
 		COLLISION_START = 0,
 		TILE_COLLISION,
 		CHARACTER_COLLISION,
+		DOOR_COLLISION,
+		ELEVATOR_COLLISION,
 		ASSET_COLLISION,
 		BUTTON_COLLISION,
+		GOAL_COLLISION,
 		COLLISION_END
 	};
 
@@ -25,6 +29,7 @@ private:
 	float width, height;
 	CollisionTag tag = COLLISION_START;
 	Transform* transform = nullptr;
+	RigidBody* rigidBody = nullptr;
 
 	bool allowOverlap = false;
 	bool movable = false;
@@ -38,7 +43,7 @@ private:
 
 	bool isGround;
 	
-	glm::vec2 modifyPosition;
+	Vector2D_float modifyPosition;
 
 public:
 	BoxCollider2D(CollisionTag tag, float width, float height, bool overlap = false, bool movable = false, std::string meshID = "", Camera* camera = nullptr)
@@ -55,6 +60,9 @@ public:
 	int GetTag() { return tag; }
 	bool GetOverlap() { return allowOverlap; }
 
+	float GetWidth() { return width; }
+	float GetHeight() { return height; }
+
 	void SetOffset(float offsetX, float offsetY) {
 		BoxCollider2D::offsetX = offsetX;
 		BoxCollider2D::offsetY = offsetY;
@@ -66,12 +74,12 @@ public:
 			mesh = AssetManager::get().GetMesh(meshID);
 		}
 
-		modifyPosition = glm::vec2(transform->position.x + offsetX, transform->position.y + offsetY);
+		modifyPosition = Vector2D_float(transform->position.x + offsetX, transform->position.y + offsetY);
 		return true;
 	}
 
 	void Update() override final {
-		modifyPosition = glm::vec2(transform->position.x + offsetX, transform->position.y + offsetY);
+		modifyPosition = Vector2D_float(transform->position.x + offsetX, transform->position.y + offsetY);
 	}
 
 	void Draw() override final {

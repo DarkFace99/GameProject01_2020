@@ -1,28 +1,30 @@
 #pragma once
 
-#include <iostream>
-#include <map>
+#include <srpch.h>
 #include "ecspch.h"
 
 #include "EntityManager.h"
+#include "Source/Scene.h"
 
 namespace Srand 
 {
+	class Scene;
+
 	class SceneManager 
 	{
 	private:
 		static SceneManager* s_instance;
-		int m_currentLevel;
 		EntityManager* manager = nullptr;
+
+		std::vector<Scene*> m_sceneVector;
+		int m_currentLevelIndex = 0;
+		int m_maxLevelIndex = 0;
+		unsigned int m_vectorIndex = 0;
 
 		SceneManager();
 
 	public:
-		std::vector<GameObject*> objManager;
-		GameObject* npc;
-		GameObject* player;
-
-		virtual ~SceneManager() = default;
+		virtual ~SceneManager();
 		static SceneManager& get() 
 		{
 			if (!s_instance) 
@@ -32,13 +34,24 @@ namespace Srand
 			return *s_instance;
 		}
 
-		void Init();
-		void Clean();
+		void PushScene(Scene* sce);
+		void PopScene(Scene* sce);
+		Scene* Search(Scene* sce);
+		Scene* Search(const std::string name);
 
-		void Draw();
-		void Update();
+		void Clear();
 
-		void SceneCheck();
+		inline int VectorSize() { return m_sceneVector.size(); }
+		Scene* operator[](int i) { return m_sceneVector[i]; }
 
+		std::vector<Scene*>::iterator begin() { return m_sceneVector.begin(); }
+		std::vector<Scene*>::iterator end() { return m_sceneVector.end(); }
+
+		inline void SetMaxIndex(int i) 
+		{ 
+			if(m_maxLevelIndex <= i)
+			m_maxLevelIndex = i; 
+		}
+		inline int GetMaxIndex() { return m_maxLevelIndex; }
 	};
 }

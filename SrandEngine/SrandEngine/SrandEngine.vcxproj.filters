@@ -4,12 +4,6 @@
     <Filter Include="Game">
       <UniqueIdentifier>{8ab40bc7-1778-4d2a-bd66-0376288f7d03}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Game\Header File">
-      <UniqueIdentifier>{91522728-915a-4643-afdc-49b2f0fdbd2f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Source FIle">
-      <UniqueIdentifier>{ca40bbc0-2e05-43b0-a5e1-ee9b95494a41}</UniqueIdentifier>
-    </Filter>
     <Filter Include="imgui">
       <UniqueIdentifier>{b3d3c500-3fad-486c-9251-51996df51398}</UniqueIdentifier>
     </Filter>
@@ -30,6 +24,39 @@
     </Filter>
     <Filter Include="SrandEngine\Manager">
       <UniqueIdentifier>{3da84be1-4d4f-45d6-a771-e709ece098d5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SrandEngine\Input System">
+      <UniqueIdentifier>{8f30e34c-d750-478a-abd6-8a4e29ba6aae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SrandEngine\Scene">
+      <UniqueIdentifier>{785de32e-eea5-44ce-8780-f794dd5d8e62}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\GameScene">
+      <UniqueIdentifier>{36426191-e851-4e70-8d30-fff73d89abfb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SrandEngine\Audio">
+      <UniqueIdentifier>{705efcb6-e1d9-4925-a7e2-1e102ca79243}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\GameScene\Level1">
+      <UniqueIdentifier>{2191fbe3-dae9-4753-989d-5d8aebf0d3e1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\GameScene\Level2">
+      <UniqueIdentifier>{52eda947-ac7e-4ca8-bcf6-cc0ca81536fe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\GameScene\Level3">
+      <UniqueIdentifier>{7e2ecfd8-394f-4f56-a2f4-bcd8a9b94ae7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SrandEngine\Graphic User Interface">
+      <UniqueIdentifier>{7fcfb8a4-1c30-4cd0-a8ba-c771485161c2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\GameScene\MainMenu">
+      <UniqueIdentifier>{078269e5-d099-4423-b3fd-7227d4bef677}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\GameScene\Setting">
+      <UniqueIdentifier>{28649b5e-3248-484e-98d0-fc556af2db93}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SrandEngine\Window">
+      <UniqueIdentifier>{b847e2e2-2bbe-4179-adf5-91948e7c80dc}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -64,9 +91,6 @@
       <Filter>SrandEngine</Filter>
     </ClInclude>
     <ClInclude Include="Source\Camera.h">
-      <Filter>SrandEngine</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Input.h">
       <Filter>SrandEngine</Filter>
     </ClInclude>
     <ClInclude Include="Source\Engine.h">
@@ -133,6 +157,105 @@
     <ClInclude Include="Log.h">
       <Filter>SrandEngine</Filter>
     </ClInclude>
+    <ClInclude Include="srpch.h">
+      <Filter>SrandEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Input.h">
+      <Filter>SrandEngine\Input System</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\KeyCode.h">
+      <Filter>SrandEngine\Input System</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\MouseButtonCode.h">
+      <Filter>SrandEngine\Input System</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\WindowsInput.h">
+      <Filter>SrandEngine\Input System</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Scene.h">
+      <Filter>SrandEngine\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Audio.h">
+      <Filter>SrandEngine\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity\Barter.h">
+      <Filter>SrandEngine\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity\Benny.h">
+      <Filter>SrandEngine\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity\CC.h">
+      <Filter>SrandEngine\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity\Cherry.h">
+      <Filter>SrandEngine\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity\Macho.h">
+      <Filter>SrandEngine\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity\Pear.h">
+      <Filter>SrandEngine\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Scenes\testing_scene.h">
+      <Filter>Game\GameScene\Level1</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Scenes\Level2.h">
+      <Filter>Game\GameScene\Level2</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\LevelManager.h">
+      <Filter>SrandEngine\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ObjectManager.h">
+      <Filter>SrandEngine\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Scenes\Level3.h">
+      <Filter>Game\GameScene\Level3</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="Source\GUI_Button.h">
+      <Filter>SrandEngine\Graphic User Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GUI_Array.h">
+      <Filter>SrandEngine\Graphic User Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GUI.h">
+      <Filter>SrandEngine\Graphic User Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GUI_Slider.h">
+      <Filter>SrandEngine\Graphic User Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GUI_Manager.h">
+      <Filter>SrandEngine\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Scenes\MainMenu.h">
+      <Filter>Game\GameScene\MainMenu</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Scenes\Setting.h">
+      <Filter>Game\GameScene\Setting</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\WindowProperties.h">
+      <Filter>SrandEngine\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Scenes\LevelSelect.h" />
+    <ClInclude Include="Source\GUI_Text.h">
+      <Filter>SrandEngine\Graphic User Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity\UI_Box.h">
+      <Filter>SrandEngine\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GUI_Selector.h" />
+    <ClInclude Include="Game\Scenes\Lv1.h" />
+    <ClInclude Include="Game\Scenes\Lv4.h" />
+    <ClInclude Include="Game\Scenes\Lv7.h" />
+    <ClInclude Include="Game\Scenes\Lv10.h" />
+    <ClInclude Include="Entity\Goal.h" />
+    <ClInclude Include="Game\Scenes\Lv5.h" />
+    <ClInclude Include="Game\Scenes\Lv3.h" />
+    <ClInclude Include="Game\Scenes\Lv6.h" />
+    <ClInclude Include="Game\Scenes\Lv8.h" />
+    <ClInclude Include="Game\Scenes\Lv9.h" />
+    <ClInclude Include="Game\Scenes\Lv12.h" />
+    <ClInclude Include="Game\Scenes\EndLevel.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="imgui\imgui.cpp">
@@ -189,8 +312,73 @@
     <ClCompile Include="Log.cpp">
       <Filter>SrandEngine</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Input.cpp">
-      <Filter>SrandEngine</Filter>
+    <ClCompile Include="Source\WindowsInput.cpp">
+      <Filter>SrandEngine\Input System</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Scene.cpp">
+      <Filter>SrandEngine\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Audio.cpp">
+      <Filter>SrandEngine\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Scenes\testing_scene.cpp">
+      <Filter>Game\GameScene\Level1</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Scenes\Level2.cpp">
+      <Filter>Game\GameScene\Level2</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\LevelManager.cpp">
+      <Filter>SrandEngine\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ObjectManager.cpp">
+      <Filter>SrandEngine\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Scenes\Level3.cpp">
+      <Filter>Game\GameScene\Level3</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GUI_Array.cpp">
+      <Filter>SrandEngine\Graphic User Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GUI.cpp">
+      <Filter>SrandEngine\Graphic User Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GUI_Button.cpp">
+      <Filter>SrandEngine\Graphic User Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GUI_Slider.cpp">
+      <Filter>SrandEngine\Graphic User Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Scenes\MainMenu.cpp">
+      <Filter>Game\GameScene\MainMenu</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Scenes\Setting.cpp">
+      <Filter>Game\GameScene\Setting</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\WindowProperties.cpp">
+      <Filter>SrandEngine\Window</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Scenes\LevelSelect.cpp" />
+    <ClCompile Include="Source\GUI_Text.cpp">
+      <Filter>SrandEngine\Graphic User Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GUI_Selector.cpp" />
+    <ClCompile Include="Game\Scenes\Lv1.cpp" />
+    <ClCompile Include="Game\Scenes\Lv4.cpp" />
+    <ClCompile Include="Game\Scenes\Lv7.cpp" />
+    <ClCompile Include="Game\Scenes\Lv10.cpp" />
+    <ClCompile Include="Game\Scenes\Lv5.cpp" />
+    <ClCompile Include="Game\Scenes\Lv3.cpp" />
+    <ClCompile Include="Game\Scenes\Lv6.cpp" />
+    <ClCompile Include="Game\Scenes\Lv8.cpp" />
+    <ClCompile Include="Game\Scenes\Lv9.cpp" />
+    <ClCompile Include="Game\Scenes\Lv12.cpp" />
+    <ClCompile Include="Game\Scenes\EndLevel.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="SrandEngine.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Assets\icon.ico" />
+    <Image Include="Assets\icon.png" />
   </ItemGroup>
 </Project>

@@ -10,8 +10,10 @@ namespace Srand
 		for (int i = SpriteRenderer::LAYER_START; i < SpriteRenderer::LAYER_END; i++) { // loop through each layer
 			for (auto& gameObject : gameObjects)
 			{
-				if (gameObject->GetComponent<SpriteRenderer>().GetTag() == i) {
-					gameObject->Draw();
+				if (gameObject->HasComponent<SpriteRenderer>()) {
+					if (gameObject->GetComponent<SpriteRenderer>().GetTag() == i) {
+						gameObject->Draw();
+					}
 				}
 			}
 		}
@@ -26,7 +28,8 @@ namespace Srand
 	}
 	void EntityManager::Clean()
 	{
-		// Clean when changing scene  
+		// Clean when changing scene
+		gameObjects.clear();
 	}
 
 	void EntityManager::AddEntity(GameObject* _gameObj)
@@ -38,7 +41,12 @@ namespace Srand
 	}
 	void EntityManager::DestroyEntity(GameObject* _gameObj)
 	{
-
+		std::unique_ptr<GameObject> uniquePtr{ _gameObj };
+		auto it = std::find(gameObjects.begin(), gameObjects.end(), uniquePtr);
+		if (it != gameObjects.end())
+		{
+			gameObjects.erase(it);
+		}
 	}
 
 	GameObject* EntityManager::CloneEntity(GameObject* _gameObj)

@@ -3,6 +3,7 @@
 #include "Source/SceneManager.h"
 
 #include "ecspch.h"
+#include "Source/LevelManager.h"
 
 using namespace Srand;
 
@@ -33,6 +34,7 @@ public:
 		spriteRenderer = &gameObject->GetComponent<SpriteRenderer>();
 		collider = &gameObject->GetComponent<BoxCollider2D>();
 		animator = &gameObject->GetComponent<Animator>();
+		LevelManager::get().AddNPC();
 		return true;
 	}
 	void Update() 
@@ -49,13 +51,15 @@ public:
 
 	void CheckCollideActivate() 
 	{
-		for (int i = 0; i < SceneManager::get().objManager.size(); i++) {
-			if (SceneManager::get().objManager[i]->GetComponent<BoxCollider2D>().GetTag() == BoxCollider2D::CHARACTER_COLLISION)
+		for (int i = 0; i < ObjManager::get().VectorSize() - 1; i++) {
+			if (ObjManager::get()[i]->GetComponent<BoxCollider2D>().GetTag() == BoxCollider2D::CHARACTER_COLLISION)
 			{
-				if (Collision::AABB(*collider, SceneManager::get().objManager[i]->GetComponent<BoxCollider2D>())) {
+				if (Collision::AABB(*collider, ObjManager::get()[i]->GetComponent<BoxCollider2D>())) {
 					//std::cout << "Collide with button" << std::endl;
 					animator->PlayState("NPC_HAPPY");
+					AudioController::get().Play("NPC_rescue");
 					isCollide = true;
+					LevelManager::get().NpcFound();
 					/*spriteRenderer->SetAlpha(0.0f);*/
 				}
 			}

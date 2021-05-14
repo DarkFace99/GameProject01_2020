@@ -28,12 +28,13 @@ namespace Srand
 
 	Texture* AssetManager::GetTexture(std::string id) {
 		// check if id exists in container, then return according to the result
-		if (textures.count(id) <= 0) { std::cout << "AssestManager: Cannot find texture " << id << std::endl; }
+		if (textures.count(id) <= 0) { SR_SYSTEM_ERROR("AssestManager: Cannot find texture [{0}]", id);
+		}
 		else { /*std::cout << "AssestManager: Get texture " << id << std::endl;*/ }
 		return (textures.count(id) > 0) ? textures[id] : nullptr;
 	}
 
-	void AssetManager::LoadTexture(std::string id, const char* filename) {
+	void AssetManager::LoadTexture(std::string id, std::string filename) {
 
 		Texture* aTex = new Texture();
 
@@ -41,10 +42,10 @@ namespace Srand
 		int			texWidth, texHeight, channels;
 
 		/* load texture using SOIL */
-		pData = SOIL_load_image(filename, &texWidth, &texHeight, &channels, SOIL_LOAD_AUTO);
+		pData = SOIL_load_image((ASSET_FILE_PATH + filename).c_str(), &texWidth, &texHeight, &channels, SOIL_LOAD_AUTO);
 
 		if (pData == nullptr) {
-			std::cout << "texture: Cannot find texture [" << filename << "]" << std::endl;
+			SR_SYSTEM_ERROR("texture: Cannot find texture [{0}]", filename);
 			delete aTex;
 			return;
 		}
@@ -67,16 +68,19 @@ namespace Srand
 		if (aTex) {
 			if (textures.count(id) <= 0) {
 				textures[id] = aTex;
-				std::cout << "texture: [" << filename << "] loaded!" << std::endl;
+				//std::cout << "texture: [" << filename << "] loaded!" << std::endl;
+				SR_SYSTEM_TRACE("texture:	[ {0} ] Created!", id);
 			}
 			else {
 				delete aTex;
-				std::cout << "texture: //Error// id [" << id << "] was already used!" << std::endl;
+				//std::cout << "texture: //Error// id [" << id << "] was already used!" << std::endl;
+				SR_SYSTEM_ERROR("texture: //Error// id [ {0} ] was already used!", id);
 			}
 		}
 		else {
 			delete aTex;
-			std::cout << "texture: //Error// [" << filename << "] load failed!!" << std::endl;
+			//std::cout << "texture: //Error// [" << filename << "] load failed!!" << std::endl;
+			SR_SYSTEM_ERROR("texture: //Error// id [ {0} ] create failed!!", id);
 		}
 
 	}
@@ -142,16 +146,19 @@ namespace Srand
 		if (aMesh) {
 			if (meshes.count(id) <= 0) {
 				meshes[id] = aMesh;
-				std::cout << "mesh: [" << id << "] Created!" << std::endl;
+				//std::cout << "mesh: [" << id << "] Created!" << std::endl;
+				SR_SYSTEM_TRACE("mesh:		[ {0} ] Created!", id);
 			}
 			else {
 				delete aMesh;
-				std::cout << "mesh: //Error// id [" << id << "] was already used!" << std::endl;
+				//std::cout << "mesh: //Error// id [" << id << "] was already used!" << std::endl;
+				SR_SYSTEM_ERROR("mesh: //Error// id [ {0} ] was already used!", id);
 			}
 		}
 		else {
 			delete aMesh;
-			std::cout << "mesh: //Error// [" << id << "] create failed!!" << std::endl;
+			//std::cout << "mesh: //Error// [" << id << "] create failed!!" << std::endl;
+			SR_SYSTEM_ERROR("mesh: //Error// id [ {0} ] create failed!!", id);
 		}
 	}
 }
