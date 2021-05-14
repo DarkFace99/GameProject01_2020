@@ -199,19 +199,20 @@ void LevelSelect::Init()
     }
 
     // num
-    for (int i = 0; i < progress; i++) {
+    for (int i = 0; i < 12; i++) {
+        if (i < progress) {
+            tempgui = new GameObject();
+            tempgui->GetComponent<Transform>().position = Vector2D_float(((((i * 2 % 12) + 10.5) * _tileSize) + _midPointX) * RATIO, (((i < 6 ? 8 : 6) * _tileSize) + _midPointY) * RATIO);
+            tempgui->GetComponent<Transform>().scale = Vector2D_float(2 * 16 * RATIO, 2 * 16 * RATIO);
 
-        tempgui = new GameObject();
-        tempgui->GetComponent<Transform>().position = Vector2D_float(((((i * 2 % 12) + 10.5) * _tileSize) + _midPointX) * RATIO, (((i < 6 ? 8 : 6) * _tileSize) + _midPointY) * RATIO);
-        tempgui->GetComponent<Transform>().scale = Vector2D_float(2 * 16 * RATIO, 2 * 16 * RATIO);
+            tempgui->AddComponent<SpriteRenderer>(SpriteRenderer::GUI_LAYER, "UI_SLOT_LEVEL_MESH", "LEVEL_SELECT_ASSET_TEX", 1.0f, &camera, false);
+            tempgui->AddComponent<TileSelector>(25, 25);
+            tempgui->GetComponent<TileSelector>().SetTile((i * 2 % 16) + 1, (i < 8 ? 17 : 15));
 
-        tempgui->AddComponent<SpriteRenderer>(SpriteRenderer::GUI_LAYER, "UI_SLOT_LEVEL_MESH", "LEVEL_SELECT_ASSET_TEX", 1.0f, &camera, false);
-        tempgui->AddComponent<TileSelector>(25, 25);
-        tempgui->GetComponent<TileSelector>().SetTile((i * 2 % 16) + 1, (i < 8 ? 17 : 15));
+            tempgui->AddComponent<GUI_Text>("Number");
 
-        tempgui->AddComponent<GUI_Text>("Number");
-
-        gui_arr.PushGUI(tempgui);
+            gui_arr.PushGUI(tempgui);
+        }
     }
 
     // Back

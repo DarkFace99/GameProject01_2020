@@ -123,6 +123,9 @@ bool Collision::CC_AABB(GameObject& objA, GameObject& objB) {	// A is main Obj
 		if (((colA.allowOverlap || colB.allowOverlap) == false) && (colA.movable != colB.movable)) {
 			CC_Collision_Push(rigA, colA, colB, transformB);
 		}
+		if (colA.iscarried) {
+			if (colB.GetTag() == BoxCollider2D::TILE_COLLISION) { colA.isHardCollide = true; }
+		}
 		//IsOnGround(objA, objB);
 	}
 
@@ -184,7 +187,7 @@ void Collision::CC_Collision_Push(RigidBody& rigA, BoxCollider2D& colA, BoxColli
 	// hotspot var
 	std::vector<int> collideSpot;
 	int hPerSide = 5;				// for each side (more than 1)
-	float percent_Offset = 12;			// where the first point willl be scaling from corner (less than 100)
+	float percent_Offset = 15;			// where the first point willl be scaling from corner (less than 100)
 	
 	float firstOffset_X = colA.width * percent_Offset / 100.0f;
 	float firstOffset_Y = colA.height * percent_Offset / 100.0f;
@@ -193,7 +196,7 @@ void Collision::CC_Collision_Push(RigidBody& rigA, BoxCollider2D& colA, BoxColli
 	
 	bool checkX = !((colB.GetTag() == BoxCollider2D::DOOR_COLLISION) && (transformB.rotationAngle < 45.0f));
 	bool checkY = !((colB.GetTag() == BoxCollider2D::DOOR_COLLISION) && (transformB.rotationAngle > 45.0f));
-
+	bool elevator = (colB.GetTag() == BoxCollider2D::ELEVATOR_COLLISION);
 	/*if (colB.GetTag() == BoxCollider2D::DOOR_COLLISION) {
 		SR_SYSTEM_TRACE("checkX: {0}", checkX);
 		SR_SYSTEM_TRACE("checkY: {0}", checkY);
@@ -284,16 +287,19 @@ void Collision::CC_Collision_Push(RigidBody& rigA, BoxCollider2D& colA, BoxColli
 	switch (maxSide) {
 		case 1: // right
 			/*printf("right\n");*/
+			if (elevator) { break; }
 			vecPush = colB.modifyPosition.x + (((colA.width + colB.width) / 2.0f) * -1 ) - (colA.modifyPosition.x + rigA.GetVelocityX());
 			rigA.SetVelocityX(rigA.GetVelocityX() + vecPush);
 			break;
 		case 2: // left
 			/*printf("left\n");*/
+			if (elevator) { break; }
 			vecPush = colB.modifyPosition.x + (((colA.width + colB.width) / 2.0f) * 1) - (colA.modifyPosition.x + rigA.GetVelocityX());
 			rigA.SetVelocityX(rigA.GetVelocityX() + vecPush);
 			break;
 		case 3:	// top
 			/*printf("top\n");*/
+			if (elevator) { break; }
 			vecPush = colB.modifyPosition.y + (((colA.height + colB.height) / 2.0f) * -1) - (colA.modifyPosition.y + rigA.GetVelocityY());
 			rigA.SetVelocityY(rigA.GetVelocityY() + vecPush);
 			break;
@@ -304,6 +310,7 @@ void Collision::CC_Collision_Push(RigidBody& rigA, BoxCollider2D& colA, BoxColli
 			colA.SetIsGround(true);
 			break;
 	}
+	
 	
 }
 

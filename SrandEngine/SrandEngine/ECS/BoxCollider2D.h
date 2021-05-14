@@ -23,7 +23,8 @@ public:
 		GOAL_COLLISION,
 		COLLISION_END
 	};
-
+	bool isHardCollide = false;
+	bool iscarried = false;
 private:
 	friend class Collision;
 	float width, height;
@@ -79,6 +80,7 @@ public:
 	}
 
 	void Update() override final {
+		isHardCollide = false;
 		modifyPosition = Vector2D_float(transform->position.x + offsetX, transform->position.y + offsetY);
 	}
 
