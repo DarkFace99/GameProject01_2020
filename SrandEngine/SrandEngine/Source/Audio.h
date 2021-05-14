@@ -52,7 +52,7 @@ namespace Srand
 
 		AudioController() 
 		{
-			m_engine = createIrrKlangDevice();
+			m_engine = createIrrKlangDevice(ESOD_AUTO_DETECT, ESEO_MULTI_THREADED | ESEO_LOAD_PLUGINS | ESEO_USE_3D_BUFFERS | ESEO_PRINT_DEBUG_INFO_TO_DEBUGGER);
 		}
 
 	public:
