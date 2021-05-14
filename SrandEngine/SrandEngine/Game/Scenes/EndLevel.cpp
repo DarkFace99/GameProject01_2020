@@ -1,15 +1,15 @@
-#include "Lv10.h"
+#include "EndLevel.h"
 
-Lv10::Lv10()
-    : Scene("Lv10")
+EndLevel::EndLevel()
+    : Scene("EndLevel")
 {}
 
-Lv10::~Lv10()
+EndLevel::~EndLevel()
 {
     Clean();
 }
 
-void Lv10::Init()
+void EndLevel::Init()
 {
     manager = &EntityManager::get();
     std::vector<glm::vec4> tile_info;
@@ -120,132 +120,132 @@ void Lv10::Init()
 
     ///* Level Asset */
 
-    // BUTTON
-    {
-        // 1
-        gameObject = new GameObject();
-        manager->AddEntity(gameObject);
+    //// BUTTON
+    //{
+    //    // 1
+    //    gameObject = new GameObject();
+    //    manager->AddEntity(gameObject);
 
-        gameObject->GetComponent<Transform>().position = Vector2D_float(((10* _tileSize) + _midPointX) * RATIO, ((2.5 * _tileSize) + _midPointY) * RATIO);
-        gameObject->GetComponent<Transform>().scale = Vector2D_float(32.0f * RATIO, 16.0f * RATIO);
+    //    gameObject->GetComponent<Transform>().position = Vector2D_float(((10 * _tileSize) + _midPointX) * RATIO, ((2.5 * _tileSize) + _midPointY) * RATIO);
+    //    gameObject->GetComponent<Transform>().scale = Vector2D_float(32.0f * RATIO, 16.0f * RATIO);
 
-        gameObject->AddComponent<SpriteRenderer>(SpriteRenderer::ASSET_LAYER, "BUTTON_MESH", "LEVEL_ASSET_TEX", 1.0f, &camera, false);
-        gameObject->AddComponent<TileSelector>(14, 14);
-        gameObject->GetComponent<TileSelector>().SetTile(1, 3);
+    //    gameObject->AddComponent<SpriteRenderer>(SpriteRenderer::ASSET_LAYER, "BUTTON_MESH", "LEVEL_ASSET_TEX", 1.0f, &camera, false);
+    //    gameObject->AddComponent<TileSelector>(14, 14);
+    //    gameObject->GetComponent<TileSelector>().SetTile(1, 3);
 
-        gameObject->AddComponent<BoxCollider2D>(BoxCollider2D::ASSET_COLLISION, gameObject->GetComponent<Transform>().scale.x, gameObject->GetComponent<Transform>().scale.y / 2.0f,
-            true, false/*, "BUTTON_MESH", &camera*/);
-        gameObject->GetComponent<BoxCollider2D>().SetOffset(0.0f, -8);
-        gameObject->AddComponent<Button>(1, 1);
+    //    gameObject->AddComponent<BoxCollider2D>(BoxCollider2D::ASSET_COLLISION, gameObject->GetComponent<Transform>().scale.x, gameObject->GetComponent<Transform>().scale.y / 2.0f,
+    //        true, false/*, "BUTTON_MESH", &camera*/);
+    //    gameObject->GetComponent<BoxCollider2D>().SetOffset(0.0f, -8);
+    //    gameObject->AddComponent<Button>(1, 1);
 
-        button1 = gameObject;
-        objManager.PushObject(gameObject);
+    //    button1 = gameObject;
+    //    objManager.PushObject(gameObject);
 
-        // 2
-        gameObject = new GameObject();
-        manager->AddEntity(gameObject);
+    //    // 2
+    //    gameObject = new GameObject();
+    //    manager->AddEntity(gameObject);
 
-        gameObject->GetComponent<Transform>().position = Vector2D_float(((13 * _tileSize) + _midPointX) * RATIO, ((2.5 * _tileSize) + _midPointY) * RATIO);
-        gameObject->GetComponent<Transform>().scale = Vector2D_float(32.0f * RATIO, 16.0f * RATIO);
+    //    gameObject->GetComponent<Transform>().position = Vector2D_float(((13 * _tileSize) + _midPointX) * RATIO, ((2.5 * _tileSize) + _midPointY) * RATIO);
+    //    gameObject->GetComponent<Transform>().scale = Vector2D_float(32.0f * RATIO, 16.0f * RATIO);
 
-        gameObject->AddComponent<SpriteRenderer>(SpriteRenderer::ASSET_LAYER, "BUTTON_MESH", "LEVEL_ASSET_TEX", 1.0f, &camera, false);
-        gameObject->AddComponent<TileSelector>(14, 14);
-        gameObject->GetComponent<TileSelector>().SetTile(4, 3);
+    //    gameObject->AddComponent<SpriteRenderer>(SpriteRenderer::ASSET_LAYER, "BUTTON_MESH", "LEVEL_ASSET_TEX", 1.0f, &camera, false);
+    //    gameObject->AddComponent<TileSelector>(14, 14);
+    //    gameObject->GetComponent<TileSelector>().SetTile(4, 3);
 
-        gameObject->AddComponent<BoxCollider2D>(BoxCollider2D::ASSET_COLLISION, gameObject->GetComponent<Transform>().scale.x, gameObject->GetComponent<Transform>().scale.y / 2.0f,
-            true, false/*, "BUTTON_MESH", &camera*/);
-        gameObject->GetComponent<BoxCollider2D>().SetOffset(0.0f, -8);
-        gameObject->AddComponent<Button>(4, 1);
+    //    gameObject->AddComponent<BoxCollider2D>(BoxCollider2D::ASSET_COLLISION, gameObject->GetComponent<Transform>().scale.x, gameObject->GetComponent<Transform>().scale.y / 2.0f,
+    //        true, false/*, "BUTTON_MESH", &camera*/);
+    //    gameObject->GetComponent<BoxCollider2D>().SetOffset(0.0f, -8);
+    //    gameObject->AddComponent<Button>(4, 1);
 
-        button2 = gameObject;
-        objManager.PushObject(gameObject);
+    //    button2 = gameObject;
+    //    objManager.PushObject(gameObject);
 
-        // 3
-        gameObject = new GameObject();
-        manager->AddEntity(gameObject);
+    //    // 3
+    //    gameObject = new GameObject();
+    //    manager->AddEntity(gameObject);
 
-        gameObject->GetComponent<Transform>().position = Vector2D_float(((21 * _tileSize) + _midPointX) * RATIO, ((2.5 * _tileSize) + _midPointY) * RATIO);
-        gameObject->GetComponent<Transform>().scale = Vector2D_float(32.0f * RATIO, 16.0f * RATIO);
+    //    gameObject->GetComponent<Transform>().position = Vector2D_float(((21 * _tileSize) + _midPointX) * RATIO, ((2.5 * _tileSize) + _midPointY) * RATIO);
+    //    gameObject->GetComponent<Transform>().scale = Vector2D_float(32.0f * RATIO, 16.0f * RATIO);
 
-        gameObject->AddComponent<SpriteRenderer>(SpriteRenderer::ASSET_LAYER, "BUTTON_MESH", "LEVEL_ASSET_TEX", 1.0f, &camera, false);
-        gameObject->AddComponent<TileSelector>(14, 14);
-        gameObject->GetComponent<TileSelector>().SetTile(7, 3);
+    //    gameObject->AddComponent<SpriteRenderer>(SpriteRenderer::ASSET_LAYER, "BUTTON_MESH", "LEVEL_ASSET_TEX", 1.0f, &camera, false);
+    //    gameObject->AddComponent<TileSelector>(14, 14);
+    //    gameObject->GetComponent<TileSelector>().SetTile(7, 3);
 
-        gameObject->AddComponent<BoxCollider2D>(BoxCollider2D::ASSET_COLLISION, gameObject->GetComponent<Transform>().scale.x, gameObject->GetComponent<Transform>().scale.y / 2.0f,
-            true, false/*, "BUTTON_MESH", &camera*/);
-        gameObject->GetComponent<BoxCollider2D>().SetOffset(0.0f, -8);
-        gameObject->AddComponent<Button>(7, 1);
+    //    gameObject->AddComponent<BoxCollider2D>(BoxCollider2D::ASSET_COLLISION, gameObject->GetComponent<Transform>().scale.x, gameObject->GetComponent<Transform>().scale.y / 2.0f,
+    //        true, false/*, "BUTTON_MESH", &camera*/);
+    //    gameObject->GetComponent<BoxCollider2D>().SetOffset(0.0f, -8);
+    //    gameObject->AddComponent<Button>(7, 1);
 
-        button3 = gameObject;
-        objManager.PushObject(gameObject);
-    }
+    //    button3 = gameObject;
+    //    objManager.PushObject(gameObject);
+    //}
 
-    // DOOR_STAND
-    {
-        // 1
-        gameObject = new GameObject();
-        manager->AddEntity(gameObject);
+    //// DOOR_STAND
+    //{
+    //    // 1
+    //    gameObject = new GameObject();
+    //    manager->AddEntity(gameObject);
 
-        gameObject->GetComponent<Transform>().position = Vector2D_float(((15 * _tileSize) + _midPointX) * RATIO, ((1.5 * _tileSize) + _midPointY) * RATIO);
-        gameObject->GetComponent<Transform>().scale = Vector2D_float(16.0f * RATIO, 16.0f * RATIO);
+    //    gameObject->GetComponent<Transform>().position = Vector2D_float(((15 * _tileSize) + _midPointX) * RATIO, ((1.5 * _tileSize) + _midPointY) * RATIO);
+    //    gameObject->GetComponent<Transform>().scale = Vector2D_float(16.0f * RATIO, 16.0f * RATIO);
 
-        gameObject->AddComponent<SpriteRenderer>(SpriteRenderer::ASSET_LAYER, "1x1_MESH", "LEVEL_ASSET_TEX", 1.0f, &camera, false);
-        gameObject->AddComponent<TileSelector>(14, 14);
-        gameObject->GetComponent<TileSelector>().SetTile(1, 7);
+    //    gameObject->AddComponent<SpriteRenderer>(SpriteRenderer::ASSET_LAYER, "1x1_MESH", "LEVEL_ASSET_TEX", 1.0f, &camera, false);
+    //    gameObject->AddComponent<TileSelector>(14, 14);
+    //    gameObject->GetComponent<TileSelector>().SetTile(1, 7);
 
 
-        // 2
-        gameObject = new GameObject();
-        manager->AddEntity(gameObject);
+    //    // 2
+    //    gameObject = new GameObject();
+    //    manager->AddEntity(gameObject);
 
-        gameObject->GetComponent<Transform>().position = Vector2D_float(((19 * _tileSize) + _midPointX) * RATIO, ((1.5 * _tileSize) + _midPointY) * RATIO);
-        gameObject->GetComponent<Transform>().scale = Vector2D_float(16.0f * RATIO, 16.0f * RATIO);
+    //    gameObject->GetComponent<Transform>().position = Vector2D_float(((19 * _tileSize) + _midPointX) * RATIO, ((1.5 * _tileSize) + _midPointY) * RATIO);
+    //    gameObject->GetComponent<Transform>().scale = Vector2D_float(16.0f * RATIO, 16.0f * RATIO);
 
-        gameObject->AddComponent<SpriteRenderer>(SpriteRenderer::ASSET_LAYER, "1x1_MESH", "LEVEL_ASSET_TEX", 1.0f, &camera, false);
-        gameObject->AddComponent<TileSelector>(14, 14);
-        gameObject->GetComponent<TileSelector>().SetTile(3, 7);
-    }
+    //    gameObject->AddComponent<SpriteRenderer>(SpriteRenderer::ASSET_LAYER, "1x1_MESH", "LEVEL_ASSET_TEX", 1.0f, &camera, false);
+    //    gameObject->AddComponent<TileSelector>(14, 14);
+    //    gameObject->GetComponent<TileSelector>().SetTile(3, 7);
+    //}
 
-    // DOOR
-    {
-        // 1
-        gameObject = new GameObject();
-        manager->AddEntity(gameObject);
+    //// DOOR
+    //{
+    //    // 1
+    //    gameObject = new GameObject();
+    //    manager->AddEntity(gameObject);
 
-        gameObject->GetComponent<Transform>().position = Vector2D_float(((15 * _tileSize) + _midPointX) * RATIO, ((4 * _tileSize) + _midPointY) * RATIO);
-        gameObject->GetComponent<Transform>().scale = Vector2D_float(16.0f * RATIO, 64.0f * RATIO);
+    //    gameObject->GetComponent<Transform>().position = Vector2D_float(((15 * _tileSize) + _midPointX) * RATIO, ((4 * _tileSize) + _midPointY) * RATIO);
+    //    gameObject->GetComponent<Transform>().scale = Vector2D_float(16.0f * RATIO, 64.0f * RATIO);
 
-        gameObject->AddComponent<SpriteRenderer>(SpriteRenderer::ASSET_LAYER, "DOOR_MESH", "LEVEL_ASSET_TEX", 1.0f, &camera, false);
-        gameObject->AddComponent<TileSelector>(14, 14);
-        gameObject->GetComponent<TileSelector>().SetTile(1, 9);
+    //    gameObject->AddComponent<SpriteRenderer>(SpriteRenderer::ASSET_LAYER, "DOOR_MESH", "LEVEL_ASSET_TEX", 1.0f, &camera, false);
+    //    gameObject->AddComponent<TileSelector>(14, 14);
+    //    gameObject->GetComponent<TileSelector>().SetTile(1, 9);
 
-        gameObject->AddComponent<BoxCollider2D>(BoxCollider2D::DOOR_COLLISION, gameObject->GetComponent<Transform>().scale.x, gameObject->GetComponent<Transform>().scale.y,
-            false, false/*, "DOOR_MESH", &camera*/);
-        gameObject->AddComponent<Door>();
-        gameObject->GetComponent<Door>().AddConnectedButtons(button1);
-        gameObject->GetComponent<Door>().AddConnectedButtons(button3);
+    //    gameObject->AddComponent<BoxCollider2D>(BoxCollider2D::DOOR_COLLISION, gameObject->GetComponent<Transform>().scale.x, gameObject->GetComponent<Transform>().scale.y,
+    //        false, false/*, "DOOR_MESH", &camera*/);
+    //    gameObject->AddComponent<Door>();
+    //    gameObject->GetComponent<Door>().AddConnectedButtons(button1);
+    //    gameObject->GetComponent<Door>().AddConnectedButtons(button3);
 
-        objManager.PushObject(gameObject);
+    //    objManager.PushObject(gameObject);
 
-        // 2
-        gameObject = new GameObject();
-        manager->AddEntity(gameObject);
+    //    // 2
+    //    gameObject = new GameObject();
+    //    manager->AddEntity(gameObject);
 
-        gameObject->GetComponent<Transform>().position = Vector2D_float(((19 * _tileSize) + _midPointX) * RATIO, ((4 * _tileSize) + _midPointY) * RATIO);
-        gameObject->GetComponent<Transform>().scale = Vector2D_float(16.0f * RATIO, 64.0f * RATIO);
+    //    gameObject->GetComponent<Transform>().position = Vector2D_float(((19 * _tileSize) + _midPointX) * RATIO, ((4 * _tileSize) + _midPointY) * RATIO);
+    //    gameObject->GetComponent<Transform>().scale = Vector2D_float(16.0f * RATIO, 64.0f * RATIO);
 
-        gameObject->AddComponent<SpriteRenderer>(SpriteRenderer::ASSET_LAYER, "DOOR_MESH", "LEVEL_ASSET_TEX", 1.0f, &camera, false);
-        gameObject->AddComponent<TileSelector>(14, 14);
-        gameObject->GetComponent<TileSelector>().SetTile(3, 9);
+    //    gameObject->AddComponent<SpriteRenderer>(SpriteRenderer::ASSET_LAYER, "DOOR_MESH", "LEVEL_ASSET_TEX", 1.0f, &camera, false);
+    //    gameObject->AddComponent<TileSelector>(14, 14);
+    //    gameObject->GetComponent<TileSelector>().SetTile(3, 9);
 
-        gameObject->AddComponent<BoxCollider2D>(BoxCollider2D::DOOR_COLLISION, gameObject->GetComponent<Transform>().scale.x, gameObject->GetComponent<Transform>().scale.y,
-            false, false/*, "DOOR_MESH", &camera*/);
-        gameObject->AddComponent<Door>();
-        gameObject->GetComponent<Door>().AddConnectedButtons(button2);
-        gameObject->GetComponent<Door>().AddConnectedButtons(button3);
+    //    gameObject->AddComponent<BoxCollider2D>(BoxCollider2D::DOOR_COLLISION, gameObject->GetComponent<Transform>().scale.x, gameObject->GetComponent<Transform>().scale.y,
+    //        false, false/*, "DOOR_MESH", &camera*/);
+    //    gameObject->AddComponent<Door>();
+    //    gameObject->GetComponent<Door>().AddConnectedButtons(button2);
+    //    gameObject->GetComponent<Door>().AddConnectedButtons(button3);
 
-        objManager.PushObject(gameObject);
-    }
+    //    objManager.PushObject(gameObject);
+    //}
 
     //// ELEVATOR
     //{
@@ -286,17 +286,17 @@ void Lv10::Init()
 
 #pragma endregion
 
-    // tutor
-    gameObject = new GameObject();
-    manager->AddEntity(gameObject);
+    //// tutor
+    //gameObject = new GameObject();
+    //manager->AddEntity(gameObject);
 
-    gameObject->GetComponent<Transform>().position = Vector2D_float(((15 * _tileSize) + _midPointX) * RATIO, ((14 * _tileSize) + _midPointY) * RATIO);
-    gameObject->GetComponent<Transform>().scale = Vector2D_float(6 * 16.0f * RATIO, 4 * 16.0f * RATIO);
+    //gameObject->GetComponent<Transform>().position = Vector2D_float(((15 * _tileSize) + _midPointX) * RATIO, ((14 * _tileSize) + _midPointY) * RATIO);
+    //gameObject->GetComponent<Transform>().scale = Vector2D_float(6 * 16.0f * RATIO, 4 * 16.0f * RATIO);
 
-    gameObject->AddComponent<SpriteRenderer>(SpriteRenderer::ASSET_LAYER, "TUTORIAL_MESH", "TUTORIAL_TEX", 1.0f, &camera, false);
-    gameObject->AddComponent<Animator>(12, 1000);
-    gameObject->GetComponent<Animator>().SetState("PLAY", 6, 8);
-    gameObject->GetComponent<Animator>().PlayState("PLAY");
+    //gameObject->AddComponent<SpriteRenderer>(SpriteRenderer::ASSET_LAYER, "TUTORIAL_MESH", "TUTORIAL_TEX", 1.0f, &camera, false);
+    //gameObject->AddComponent<Animator>(12, 1000);
+    //gameObject->GetComponent<Animator>().SetState("PLAY", 6, 8);
+    //gameObject->GetComponent<Animator>().PlayState("PLAY");
 
 #pragma region CharacterAssets 
 
@@ -326,7 +326,7 @@ void Lv10::Init()
     {
         gameObject = new GameObject();
         manager->AddEntity(gameObject);
-        gameObject->GetComponent<Transform>().position = Vector2D_float(((3 * _tileSize) + _midPointX) * RATIO, ((2.75 * _tileSize) + _midPointY) * RATIO);
+        gameObject->GetComponent<Transform>().position = Vector2D_float(((2.5 * _tileSize) + _midPointX) * RATIO, ((2.75 * _tileSize) + _midPointY) * RATIO);
         gameObject->GetComponent<Transform>().scale = Vector2D_float(24.0f * RATIO, 24.0f * RATIO);
         gameObject->AddComponent<SpriteRenderer>(SpriteRenderer::CHARACTER_LAYER, "BENNY_ANIM_MESH", "BENNY_ANIM_TEX", 1.0f, &camera, false);
         gameObject->AddComponent<RigidBody>(2.0f);
@@ -344,6 +344,72 @@ void Lv10::Init()
         objManager.PushObject(gameObject);
     }
 
+    // Macho (last due to the Carry())
+    {
+        gameObject = new GameObject();
+        manager->AddEntity(gameObject);
+        gameObject->GetComponent<Transform>().position = Vector2D_float(((7 * _tileSize) + _midPointX) * RATIO, ((2.75 * _tileSize) + _midPointY) * RATIO);
+        gameObject->GetComponent<Transform>().scale = Vector2D_float(24.0f * RATIO, 24.0f * RATIO);
+        gameObject->AddComponent<SpriteRenderer>(SpriteRenderer::CHARACTER_LAYER, "MACHO_ANIM_MESH", "MACHO_ANIM_TEX", 1.0f, &camera, false);
+        gameObject->AddComponent<RigidBody>(2.0f);
+        // anim_set
+        gameObject->AddComponent<Animator>(21, 80);
+        gameObject->GetComponent<Animator>().SetState("MACHO_RUN", 13, 18);
+        gameObject->GetComponent<Animator>().PlayState("MACHO_RUN");
+        gameObject->AddComponent<BoxCollider2D>(BoxCollider2D::CHARACTER_COLLISION, gameObject->GetComponent<Transform>().scale.x - 20, gameObject->GetComponent<Transform>().scale.y,
+            false /* overlap */, true /* movable *//*, "BENNY_ANIM_MESH", &camera*/);
+
+        gameObject->AddComponent<Macho>(); // test CC mechanics
+        objManager.PushObject(gameObject);
+        levelManager.AddObject(gameObject);
+
+        macho = &gameObject->GetComponent<Transform>();
+    }
+
+    // Cherry
+    gameObject = new GameObject();
+    manager->AddEntity(gameObject);
+    gameObject->GetComponent<Transform>().position = Vector2D_float(((2 * _tileSize) + _midPointX) * RATIO, ((2.75 * _tileSize) + _midPointY) * RATIO);
+    gameObject->GetComponent<Transform>().scale = Vector2D_float(24.0f * RATIO, 24.0f * RATIO);
+    gameObject->AddComponent<SpriteRenderer>(SpriteRenderer::CHARACTER_LAYER, "CHERRY_ANIM_MESH", "CHERRY_ANIM_TEX", 1.0f, &camera, false);
+    gameObject->AddComponent<RigidBody>(2.0f);
+    // anim_set
+    gameObject->AddComponent<Animator>(25, 80);
+    gameObject->GetComponent<Animator>().SetState("CHERRY_RUN", 7, 15);
+    gameObject->GetComponent<Animator>().PlayState("CHERRY_RUN");
+    gameObject->AddComponent<BoxCollider2D>(BoxCollider2D::CHARACTER_COLLISION, gameObject->GetComponent<Transform>().scale.x - 20, gameObject->GetComponent<Transform>().scale.y - 5,
+        false /* overlap */, true /* movable *//*, "BENNY_ANIM_MESH", &camera*/);
+
+    gameObject->AddComponent<Cherry>(); // test CC mechanics
+    //gameObject->GetComponent<Cherry>().SetActive(false);
+
+    objManager.PushObject(gameObject);
+    levelManager.AddObject(gameObject);
+
+    cherry = &gameObject->GetComponent<Transform>();
+
+    // Pear
+    {
+        gameObject = new GameObject();
+        manager->AddEntity(gameObject);
+        gameObject->GetComponent<Transform>().position = Vector2D_float(((4 * _tileSize) + _midPointX) * RATIO, ((2.75 * _tileSize) + _midPointY) * RATIO);
+        gameObject->GetComponent<Transform>().scale = Vector2D_float(24.0f * RATIO, 24.0f * RATIO);
+        gameObject->AddComponent<SpriteRenderer>(SpriteRenderer::CHARACTER_LAYER, "PEAR_ANIM_MESH", "PEAR_ANIM_TEX", 1.0f, &camera, false);
+        gameObject->AddComponent<RigidBody>(2.0f);
+        // anim_set
+        gameObject->AddComponent<Animator>(20, 80);
+        gameObject->GetComponent<Animator>().SetState("PEAR_RUN", 7, 16);
+        gameObject->GetComponent<Animator>().PlayState("PEAR_RUN");
+        gameObject->AddComponent<BoxCollider2D>(BoxCollider2D::CHARACTER_COLLISION, gameObject->GetComponent<Transform>().scale.x - 20, gameObject->GetComponent<Transform>().scale.y,
+            false /* overlap */, true /* movable *//*, "BENNY_ANIM_MESH", &camera*/);
+
+        gameObject->AddComponent<Pear>(); // test CC mechanics
+        objManager.PushObject(gameObject);
+        levelManager.AddObject(gameObject);
+
+        pear = &gameObject->GetComponent<Transform>();
+    }
+
     // Barter
     {
         gameObject = new GameObject();
@@ -354,9 +420,8 @@ void Lv10::Init()
         gameObject->AddComponent<RigidBody>(2.0f);
         // anim_set
         gameObject->AddComponent<Animator>(11, 80);
-        gameObject->GetComponent<Animator>().SetState("BARTER_IN", 0, 0);
         gameObject->GetComponent<Animator>().SetState("BARTER_IDLE", 1, 9);
-        gameObject->GetComponent<Animator>().SetState("BARTER_OUT", 10, 10);
+        gameObject->GetComponent<Animator>().PlayState("BARTER_IDLE");
         gameObject->AddComponent<BoxCollider2D>(BoxCollider2D::CHARACTER_COLLISION, gameObject->GetComponent<Transform>().scale.x - 20, gameObject->GetComponent<Transform>().scale.y,
             false /* overlap */, true /* movable *//*, "BENNY_ANIM_MESH", &camera*/);
 
@@ -364,6 +429,7 @@ void Lv10::Init()
         objManager.PushObject(gameObject);
         levelManager.AddObject(gameObject);
 
+        barter = &gameObject->GetComponent<Transform>();
     }
 
     // Goal
@@ -414,22 +480,26 @@ void Lv10::Init()
     Engine::get().PlayBGM();
 
 }
-void Lv10::Clean()
+void EndLevel::Clean()
 {
     manager->Clean();
     objManager.Clean();
     levelManager.Clean();
     gui_arr.Clear();
 }
-void Lv10::Draw()
+void EndLevel::Draw()
 {
     manager->Draw();
     gui_arr.OnDraw();
 }
-void Lv10::Update()
+void EndLevel::Update()
 {
+    macho->Translate(Vector2D_float(1.3f, 0.0f));
+    cherry->Translate(Vector2D_float(2.2f, 0.0f));
+    pear->Translate(Vector2D_float(3.5f, 0.0f));
+    barter->SetPosition(Vector2D_float(macho->position.x, macho->position.y + 5 * 16.0f));
     manager->Update();
     levelManager.CheckGoal();
-    levelManager.AbilityControl();
+    //levelManager.AbilityControl();
     gui_arr.OnUpdate();
 }
