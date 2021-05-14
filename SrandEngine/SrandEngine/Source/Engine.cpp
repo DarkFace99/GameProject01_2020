@@ -122,6 +122,7 @@ namespace Srand
         AssetManager::get().LoadMesh("2x2_MESH", 14, 14, 2, 2);
         AssetManager::get().LoadMesh("ELEVATOR_STAND_MESH", 14, 14, 2, 1);
         AssetManager::get().LoadMesh("BUTTON_MESH", 14, 14, 2, 1);
+        AssetManager::get().LoadMesh("SPACE_MESH", 14, 14, 5, 2);
 
         AssetManager::get().LoadMesh("UI_BUTTON_MESH", 25, 25, 7, 2);
         AssetManager::get().LoadMesh("UI_OUTLINE_MESH", 25, 25, 8, 3);
