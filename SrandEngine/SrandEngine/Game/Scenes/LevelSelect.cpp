@@ -229,6 +229,8 @@ void LevelSelect::Init()
     tempgui->GetComponent<GUI_Button>().m_function = GoTo_MenuL;
     gui_arr.PushGUI(tempgui);
 
+    gui_arr.levelSelect = true;
+
     {
         //// button2
         //tempgui = new GameObject();

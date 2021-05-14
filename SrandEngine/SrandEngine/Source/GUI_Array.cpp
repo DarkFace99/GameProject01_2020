@@ -46,7 +46,7 @@ void Srand::GUI_Array::OnUpdate()
 		if (isButton) { m_interactable[m_index]->GetComponent<GUI_Button>().OnSelect(); }
 		else { m_interactable[m_index]->GetComponent<GUI_Slider>().OnSelect(); }
 
-		if (m_overrideFunc == nullptr)
+		if (!levelSelect)
 		{
 			if (input.IsKeyPressed(SR_KEY_UP) && !isUpPressed)
 			{
@@ -81,7 +81,77 @@ void Srand::GUI_Array::OnUpdate()
 		}
 		else 
 		{
-			//m_overrideFunc(); 
+			if (input.IsKeyPressed(SR_KEY_LEFT) && !isLeftPressed)
+			{
+				if (isButton) { m_interactable[m_index]->GetComponent<GUI_Button>().DeSelect(); }
+				else { m_interactable[m_index]->GetComponent<GUI_Slider>().DeSelect(); }
+				m_index = Abs((m_index - 1) % m_interactable.size());
+				isLeftPressed = true;
+				SR_TRACE("Index: {0}", m_index);
+			}
+			else if (input.IsKeyPressed(SR_KEY_RIGHT) && !isRightPressed)
+			{
+				if (isButton) { m_interactable[m_index]->GetComponent<GUI_Button>().DeSelect(); }
+				else { m_interactable[m_index]->GetComponent<GUI_Slider>().DeSelect(); }
+				m_index = Abs((m_index + 1) % m_interactable.size());
+				isRightPressed = true;
+				SR_TRACE("Index: {0}", m_index);
+			}
+			else if (input.IsKeyReleased(SR_KEY_LEFT) && isLeftPressed)
+			{
+				//m_index = Abs((m_index - 1) % VectorSize());
+				isLeftPressed = false;
+				//SR_TRACE("Index: {0}", m_index);
+			}
+			else if (input.IsKeyReleased(SR_KEY_RIGHT) && isRightPressed)
+			{
+				//m_index = Abs((m_index + 1) % VectorSize());
+				isRightPressed = false;
+				//SR_TRACE("Index: {0}", m_index);
+			}
+			else if (input.IsKeyPressed(SR_KEY_UP) && !isUpPressed)
+			{
+				if (isButton) { m_interactable[m_index]->GetComponent<GUI_Button>().DeSelect(); }
+				else { m_interactable[m_index]->GetComponent<GUI_Slider>().DeSelect(); }
+				if (m_index - 6 < 0) 
+				{
+					
+				}
+				else 
+				{
+					m_index = Abs((m_index - 6) % m_interactable.size());
+				}
+				isUpPressed = true;
+				SR_TRACE("Index: {0}", m_index);
+			}
+			else if (input.IsKeyPressed(SR_KEY_DOWN) && !isDownPressed)
+			{
+				if (isButton) { m_interactable[m_index]->GetComponent<GUI_Button>().DeSelect(); }
+				else { m_interactable[m_index]->GetComponent<GUI_Slider>().DeSelect(); }
+				if(m_index + 6 > 11)
+				{
+					
+				}
+				else 
+				{
+					m_index = Abs((m_index + 6) % m_interactable.size());
+				}
+				isDownPressed = true;
+				SR_TRACE("Index: {0}", m_index);
+			}
+			else if (input.IsKeyReleased(SR_KEY_UP) && isUpPressed)
+			{
+				//m_index = Abs((m_index - 1) % VectorSize());
+				isUpPressed = false;
+				//SR_TRACE("Index: {0}", m_index);
+			}
+			else if (input.IsKeyReleased(SR_KEY_DOWN) && isDownPressed)
+			{
+				//m_index = Abs((m_index + 1) % VectorSize());
+				isDownPressed = false;
+				//SR_TRACE("Index: {0}", m_index);
+			}
+			else if (input.IsKeyPressed(SR_KEY_Z)) {} // delay for next scene
 		}
 
 		/* Activate key */

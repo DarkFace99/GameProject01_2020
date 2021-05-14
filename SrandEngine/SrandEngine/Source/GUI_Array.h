@@ -58,6 +58,8 @@ namespace Srand
 
 		void SetSelector(GUI_Selector* selector){ this->selector = selector; }
 
+		bool levelSelect = false;
+
 	private:
 		std::vector<GameObject*> m_vector;	
 		std::string name;
@@ -66,6 +68,8 @@ namespace Srand
 
 		bool m_activate;
 		bool m_inControl = true;
+		bool isLeftPressed = false;
+		bool isRightPressed = false;
 		bool isUpPressed = false;
 		bool isDownPressed = false;
 		bool isSpacePressed = true;
