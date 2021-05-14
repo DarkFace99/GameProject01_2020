@@ -145,7 +145,7 @@ void Lv3::Init()
         gameObject = new GameObject();
         manager->AddEntity(gameObject);
 
-        gameObject->GetComponent<Transform>().position = Vector2D_float(((14 * _tileSize) + _midPointX) * RATIO, ((6.5 * _tileSize) + _midPointY) * RATIO);
+        gameObject->GetComponent<Transform>().position = Vector2D_float(((13.5 * _tileSize) + _midPointX) * RATIO, ((6.5 * _tileSize) + _midPointY) * RATIO);
         gameObject->GetComponent<Transform>().scale = Vector2D_float(32.0f * RATIO, 16.0f * RATIO);
 
         gameObject->AddComponent<SpriteRenderer>(SpriteRenderer::ASSET_LAYER, "BUTTON_MESH", "LEVEL_ASSET_TEX", 1.0f, &camera, false);
@@ -164,7 +164,7 @@ void Lv3::Init()
         gameObject = new GameObject();
         manager->AddEntity(gameObject);
 
-        gameObject->GetComponent<Transform>().position = Vector2D_float(((14 * _tileSize) + _midPointX) * RATIO, ((11.5 * _tileSize) + _midPointY) * RATIO);
+        gameObject->GetComponent<Transform>().position = Vector2D_float(((13.5 * _tileSize) + _midPointX) * RATIO, ((11.5 * _tileSize) + _midPointY) * RATIO);
         gameObject->GetComponent<Transform>().scale = Vector2D_float(32.0f * RATIO, 16.0f * RATIO);
 
         gameObject->AddComponent<SpriteRenderer>(SpriteRenderer::ASSET_LAYER, "BUTTON_MESH", "LEVEL_ASSET_TEX", 1.0f, &camera, false);

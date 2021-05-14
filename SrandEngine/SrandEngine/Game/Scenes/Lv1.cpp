@@ -194,7 +194,6 @@ void Lv1::Init()
 
         gameObject->AddComponent<BoxCollider2D>(BoxCollider2D::DOOR_COLLISION, gameObject->GetComponent<Transform>().scale.x, gameObject->GetComponent<Transform>().scale.y,
             false, false/*, "DOOR_MESH", &camera*/);
-        gameObject->AddComponent<Door>();
         gameObject->AddComponent<Door>(false);
         gameObject->GetComponent<Door>().AddConnectedButtons(button2);
 
@@ -214,7 +213,6 @@ void Lv1::Init()
 
         gameObject->AddComponent<BoxCollider2D>(BoxCollider2D::DOOR_COLLISION, gameObject->GetComponent<Transform>().scale.x, gameObject->GetComponent<Transform>().scale.y,
             false, false/*, "DOOR_MESH", &camera*/);
-        gameObject->AddComponent<Door>();
         gameObject->AddComponent<Door>(false);
         gameObject->GetComponent<Door>().AddConnectedButtons(button2);
 
