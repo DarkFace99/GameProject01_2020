@@ -76,6 +76,7 @@ public:
 		}
 
 		if (input.IsKeyPressed(SR_KEY_DOWN) && isPickUp) {
+			targetRigidBody->SetVelocityY(0.0f);
 			isPickUp = false;
 		}
 
