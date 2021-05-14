@@ -42,7 +42,8 @@ public:
 	void cc_Carry() {
 		targetTransform->SetPosition(Vector2D_float(transform->position.x, transform->position.y + (boxCollider2D->GetHeight() / 2) + (targetCollider->GetHeight() / 2)));
 		targetRenderer->SetFlip(renderer->GetFlip());
-		if (targetAnimator != nullptr)targetAnimator->PlayState("IDLE");
+		targetRigidBody->SetVelocityY(0.0f);
+		//if (targetAnimator != nullptr)targetAnimator->PlayState("IDLE");
 
 		if (!isActive) { isPickUp = false; }
 	}

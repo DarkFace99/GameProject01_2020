@@ -14,7 +14,9 @@
 #include "Game/Scenes/Level3.h"
 
 #include "Game/Scenes/Lv1.h"
+#include "Game/Scenes/Lv3.h"
 #include "Game/Scenes/Lv4.h"
+#include "Game/Scenes/Lv5.h"
 #include "Game/Scenes/Lv7.h"
 #include "Game/Scenes/Lv10.h"
 
@@ -173,11 +175,14 @@ namespace Srand
         sceneManager.PushScene(new LevelSelect());
         sceneManager.PushScene(new Lv1());
         sceneManager.PushScene(new TestingScene()); // lv_2
+        sceneManager.PushScene(new Lv3());
         sceneManager.PushScene(new Lv4());
+        sceneManager.PushScene(new Lv5());
         sceneManager.PushScene(new Lv7());
-        //sceneManager.PushScene(new Level2()); 
         sceneManager.PushScene(new Lv10());
         sceneManager.PushScene(new Level3()); // lv_11
+
+         //sceneManager.PushScene(new Level2()); 
 
 #pragma endregion
 

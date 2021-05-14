@@ -41,6 +41,7 @@
     <ClInclude Include="Entity\Goal.h" />
     <ClInclude Include="Entity\Macho.h" />
     <ClInclude Include="Entity\NPC.h" />
+    <ClInclude Include="Game\Scenes\Lv3.h" />
     <ClInclude Include="Game\Scenes\Level2.h" />
     <ClInclude Include="Game\Scenes\Level3.h" />
     <ClInclude Include="Game\Scenes\LevelSelect.h" />
@@ -96,6 +97,7 @@
     <ClCompile Include="Game\Scenes\LevelSelect.cpp" />
     <ClCompile Include="Game\Scenes\Lv1.cpp" />
     <ClCompile Include="Game\Scenes\Lv10.cpp" />
+    <ClCompile Include="Game\Scenes\Lv3.cpp" />
     <ClCompile Include="Game\Scenes\Lv4.cpp" />
     <ClCompile Include="Game\Scenes\Lv5.cpp" />
     <ClCompile Include="Game\Scenes\Lv7.cpp" />
