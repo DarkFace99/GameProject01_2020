@@ -13,8 +13,8 @@ public:
 		targetAnimator = nullptr;
 		targetRigidBody = nullptr;
 		cc_CopyList.clear(); 
-		isPickUp = false;
-		isPickUp_Down = false;
+		/*isPickUp = false;
+		isPickUp_Down = false;*/
 	}
 
 	bool Init() override final {
@@ -43,9 +43,18 @@ public:
 		targetTransform->SetPosition(Vector2D_float(transform->position.x, transform->position.y + (boxCollider2D->GetHeight() / 2) + (targetCollider->GetHeight() / 2)));
 		targetRenderer->SetFlip(renderer->GetFlip());
 		targetRigidBody->SetVelocityY(0.0f);
+		targetCollider->iscarried = true;
 		//if (targetAnimator != nullptr)targetAnimator->PlayState("IDLE");
-
-		if (!isActive) { isPickUp = false; }
+		if(targetCollider->isHardCollide) { 
+			targetTransform->SetPosition(Vector2D_float(transform->position.x, transform->position.y));
+			targetRigidBody->SetVelocityY(0.0f);
+			isPickUp = false; 
+			targetCollider->iscarried = false;
+		}
+		if (!isActive) { 
+			isPickUp = false; 
+			targetCollider->iscarried = false;
+		}
 	}
 
 	void ThrowAbility() {
@@ -72,11 +81,13 @@ public:
 				if (renderer->GetFlip()) { targetRigidBody->SetVelocityX(-throwForceX); }
 				else { targetRigidBody->SetVelocityX(throwForceX); }
 				targetRigidBody->SetVelocityY(throwForceY);
+				targetCollider->iscarried = false;
 			}
 		}
 
 		if (input.IsKeyPressed(SR_KEY_DOWN) && isPickUp) {
 			targetRigidBody->SetVelocityY(0.0f);
+			targetCollider->iscarried = false;
 			isPickUp = false;
 		}
 
